@@ -11,16 +11,16 @@ let package = Package(
     products: [
         .library(
             name: "PolyPodCoreSwift",
-            targets: ["PolyPodCoreSwift"]),
+            targets: ["PolyPodCoreSwift"])
     ],
     dependencies: [
-        .package(path: "../flatbuffers_shared/flatbuffers/swift"),
+        .package(url: "https://github.com/polypoly-eu/MessagePack.swift", from: "4.0.0")
     ],
     targets: [
         .target(
             name: "PolyPodCoreSwift",
             dependencies: [
-                .product(name: "FlatBuffers", package: "swift"),
+                .product(name: "MessagePack", package: "MessagePack.swift"),
                 "PolyPodCore"
             ]
         ),
@@ -28,6 +28,6 @@ let package = Package(
                       path: "PolyPodCore.xcframework"),
         .testTarget(
             name: "PolyPodCoreSwiftTests",
-            dependencies: ["PolyPodCoreSwift"]),
+            dependencies: ["PolyPodCoreSwift"])
     ]
 )

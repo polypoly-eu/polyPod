@@ -1,4 +1,4 @@
-import { podSpec } from "@polypoly-eu/pod-api";
+import { podSpec } from "@polypoly-eu/api";
 import "../../dist/pod.js";
 
 describe("pod.js satisfies spec", () => {

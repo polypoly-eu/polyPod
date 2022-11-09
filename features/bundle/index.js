@@ -18,7 +18,7 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         destination: targetArchive,
         cwd: sourceDir,
     }).catch((error) => {
-        console.error(error.stack);
+        console.error(`Failed to package ${archiveName}:`, error.stack);
         process.exit(1);
     });
 }
@@ -28,11 +28,22 @@ function writeOrder(features, targetDir) {
     fs.writeFileSync(path.join(targetDir, "order"), order.join("\n"));
 }
 
-const features = require("./package.json").polyPodFeatures;
+function writeCategoriesOrder(categories, targetDir) {
+    fs.writeFileSync(
+        path.join(targetDir, "categories.json"),
+        JSON.stringify(categories)
+    );
+}
 
+const config = require("./package.json");
+const features = config.polyPodFeatures;
+const categories = config.polyPodCategories;
 const targetDir = path.join(__dirname, "dist");
+
 if (fs.existsSync(targetDir)) fs.rmSync(targetDir, { recursive: true });
 fs.mkdirSync(targetDir);
 
 for (let feature of features) packageFeature(feature, targetDir);
 writeOrder(features, targetDir);
+
+if (categories) writeCategoriesOrder(categories, targetDir);

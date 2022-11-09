@@ -1,5 +1,6 @@
 {
   "include": ["src/**/*.ts"],
+  "exclude": ["src/bubblewrap/benchmarks/*.ts"],
   "compilerOptions": {
     "lib": [
       "es6",

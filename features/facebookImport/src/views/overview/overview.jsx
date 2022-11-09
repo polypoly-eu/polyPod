@@ -8,11 +8,11 @@ import {
 } from "@polypoly-eu/poly-look";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
-import { subAnalyses } from "../../model/analysis";
+import { specificAnalyses } from "../../model/analysis";
 
 import "./overview.css";
 
@@ -27,7 +27,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
-            subAnalyses,
+            specificAnalyses,
         });
     }, [account]);
 

@@ -21,10 +21,12 @@ const charts = {
 };
 
 /**
- *
+ * It renders a chart of the type specified in the props, and it renders it in the div with the class
+ * name specified in the props
+ * @callback PolyChart
  * @param {Object} props - The props for the selected chart
  * @param {string} props.type - The type of the chart (e. "vertical-bar-chart")
- * @returns jsx-div with svg-chart attached
+ * @returns {JSX.Element} JSX div with svg-chart attached
  */
 export const PolyChart = (props) => {
   const chartRef = useRef();

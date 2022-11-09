@@ -1,0 +1,29 @@
+name: Lint swift
+
+on:
+  push:
+    paths:
+      - .github/workflows/swiftlint.yaml
+      - "platform/ios/**/*.swift"
+      - "platform/ios/.swiftlint.yml"
+      - "platform/core/**/*.swift"
+
+  pull_request:
+    types: [assigned, opened, synchronize, ready_for_review, reopened]
+    paths:
+      - .github/workflows/swiftlint.yaml
+      - "platform/ios/**/*.swift"
+      - "platform/ios/.swiftlint.yml"
+      - "platform/core/**/*.swift"
+
+jobs:
+  swiftlint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/realm/swiftlint:5.5-0.48.0
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Runs swiftlint
+        working-directory: platform/ios
+        run: swiftlint lint --config .swiftlint.yml --reporter github-actions-logging --strict

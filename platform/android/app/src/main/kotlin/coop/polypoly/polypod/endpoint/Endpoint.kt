@@ -26,9 +26,9 @@ class Endpoint(
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    val endpointNetwork = Network(context)
+    private val endpointNetwork = Network(context)
 
-    private fun endpointInfofromId(endpointId: String): EndpointInfo? {
+    private fun endpointInfoFromId(endpointId: String): EndpointInfo? {
         val endpointsPath = "config-assets/endpoints.json"
         val endpointsJsonString = context.assets.readFile(endpointsPath)
         val endpointInfoJsonType = object : HashMap<String, EndpointInfo>() {}
@@ -37,11 +37,50 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
-    open fun setEndpointObserver(newObserver: EndpointObserver) {
+    suspend fun uploadError(
+        endpointId: String,
+        errorMsg: String
+    ) {
+        if (errorMsg.isEmpty()) {
+            logger.error(
+                "uploadError: No payload found."
+            )
+            throw PodApiError().endpointError()
+        }
+
+        val endpoint = Endpoint(context)
+
+        val endpointInfo = endpoint.endpointInfoFromId(endpointId)
+        if (endpointInfo == null) {
+            logger.error(
+                "uploadError: No endpoint found under that endpointId"
+            )
+            throw PodApiError().endpointError()
+        }
+
+        val jsonString = "{ \"error\": \"$errorMsg\" }"
+        val payload = Gson().toJson(jsonString)
+
+        try {
+            endpointNetwork
+                .httpPost(
+                    endpointInfo.url,
+                    payload,
+                    "application/json; charset=utf-8",
+                    endpointInfo.auth,
+                    endpointInfo.allowInsecure
+                )
+        } catch (e: PodApiError) {
+            logger.error("uploadError - Failed: $e")
+            throw PodApiError().endpointError()
+        }
+    }
+
+    fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }
 
-    open suspend fun send(
+    suspend fun send(
         endpointId: String,
         body: String,
         contentType: String?,
@@ -50,10 +89,10 @@ class Endpoint(
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
                 logger.error("endpoint.send: User denied request")
-                throw PodApiError("")
+                throw PodApiError().userDeniedPermission()
             }
             val endpointInfo =
-                endpointInfofromId(endpointId)
+                endpointInfoFromId(endpointId)
             if (endpointInfo == null) {
                 logger.error(
                     "endpoint.send: No endpoint found under that endpointId"
@@ -75,7 +114,7 @@ class Endpoint(
         }
     }
 
-    open suspend fun get(
+    suspend fun get(
         endpointId: String,
         contentType: String?,
         authToken: String?
@@ -84,10 +123,10 @@ class Endpoint(
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
                     logger.error("endpoint.get: User denied request")
-                    throw PodApiError().endpointError()
+                    throw PodApiError().userDeniedPermission()
                 }
                 val endpointInfo =
-                    endpointInfofromId(endpointId)
+                    endpointInfoFromId(endpointId)
                 if (endpointInfo == null) {
                     logger.error(
                         "endpoint.get: No endpoint found under that endpointId"

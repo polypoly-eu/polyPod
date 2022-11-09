@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct NavigationBar<Content: View>: View {
-    var leading: Content? = nil
-    var center: Content? = nil
-    var trailing: Content? = nil
+    var leading: Content?
+    var center: Content?
+    var trailing: Content?
     
     var body: some View {
         ZStack {

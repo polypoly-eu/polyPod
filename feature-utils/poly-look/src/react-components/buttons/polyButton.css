@@ -1,16 +1,12 @@
 .poly-button {
   font-family: var(--theme-font-medium);
   font-size: 18px;
-  background-color: var(--theme-secondary-color);
   padding: 4px 12px;
   height: 48px;
-  max-width: var(--max-width);
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--theme-primary-color);
-  border-radius: 4px;
+  border-radius: var(--pl-radius-1x);
   box-sizing: border-box;
   border: none;
 }
@@ -18,10 +14,40 @@
 .poly-button:active {
   opacity: 0.88;
 }
+
 .poly-button:disabled {
   opacity: 0.38;
 }
-.poly-button.centered {
-  margin: 0 auto;
+
+.poly-button.filled {
+  background-color: var(--pl-button-color-fill-primary);
+  color: var(--pl-button-color-text-primary);
+}
+
+.poly-button.outline {
+  border: 1px solid var(--pl-button-color-border-secondary);
+  color: var(--pl-button-color-text-secondary);
+  background-color: var(--pl-button-color-fill-secondary);
+}
+
+.poly-button.small {
+  padding: var(--pl-small-button-spacing-padding-vert)
+    var(--pl-small-button-spacing-padding-hor);
+}
+
+.poly-button .icon {
+  display: inherit;
+}
+
+.poly-button .icon-left {
+  margin-right: var(--pl-small-button-spacing-gap);
+}
+
+.poly-button .icon-right {
+  margin-left: var(--pl-small-button-spacing-gap);
+}
+
+.poly-button.large {
   width: 100%;
 }
+

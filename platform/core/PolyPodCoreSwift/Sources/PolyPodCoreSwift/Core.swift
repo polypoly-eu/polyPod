@@ -1,34 +1,29 @@
 import PolyPodCore
 import Foundation
-import FlatBuffers
+import MessagePack
 
-/// Possible errors that can be thrown by PolyPodCoreSwift
-public enum PolyPodCoreError: Error {
-    /// Internal Rust Core failure with error code and message
-    case internalCoreFailure(context: String, failure: Failure)
-    /// Rust Core returned an invalid result type for a given operation
-    case invalidResult(context: String, result:String)
-    /// Rust Core returned an invalid failure content
-    case invalidFailure(context: String)
-    
-    var localizedDescription: String {
-        switch self {
-        case let .internalCoreFailure(context, failure):
-            return "\(context) -> internal Core Failure: \(failure.code) \(String(describing: failure.message))"
-        case let .invalidResult(context, result):
-            return "\(context) -> received invalid result type \(result)"
-        case let .invalidFailure(context):
-            return "\(context) -> recevied failure result type without failure content"
-        }
+typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
+
+public struct BootstrapArgs: Encodable {
+    public init(
+        languageCode: String,
+        fsRoot: String,
+        updateNotificationId: Int
+    ) {
+        self.languageCode = languageCode
+        self.fsRoot = fsRoot
+        self.updateNotificationId = updateNotificationId
     }
+    
+    let languageCode: String
+    let fsRoot: String
+    let updateNotificationId: Int
 }
 
-/// Swift wrapper around the Rust Core. Encapsulates specific Pointer and Flabuffer operations.
+/// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
-    
-    // MARK: - Private config
-    private var languageCode: UnsafePointer<CChar>!
+    public var log: CoreLog?
     
     private init() {}
     
@@ -36,56 +31,80 @@ public final class Core {
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API
-    public func bootstrap(languageCode: String) -> Result<Void, Error> {
-        // Force unwrap should be safe
-        self.languageCode = NSString(string: languageCode).utf8String!
-        
-        return processCoreResponse(core_bootstrap(languageCode)) { byteBuffer in
-            let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
-            if let failure = response.failure {
-                throw PolyPodCoreError.internalCoreFailure(context: "Failed to bootstrap core", failure: failure)
-            }
-        }
+    public func bootstrap(args: BootstrapArgs) -> Result<Void, Error> {
+        return handleCoreResponse(
+            core_bootstrap(
+                args.pack().toByteBuffer,
+                BridgeToPlatform.make()
+            ), 
+            { _ in }
+        )
     }
     
-    /// Parse the FeatureManifest from the given json
-    /// - Parameter json: Raw JSON to parse the FeatureManifest from
-    /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
-    public func parseFeatureManifest(json: String) -> Result<FeatureManifest, Error> {
-        processCoreResponse(parse_feature_manifest_from_json(json)) { byteBuffer in
-            let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
-            switch response.resultType {
-            case .featuremanifest:
-                return response.result(type: FeatureManifest.self)
-            case .failure:
-                if let failure = response.result(type: Failure.self) {
-                    throw PolyPodCoreError.internalCoreFailure(
-                        context: "Failed to load Feature Manifest",
-                        failure: failure
-                    )
-                } else {
-                    throw PolyPodCoreError.invalidFailure(context: "Failed to load Feature Manifest")
-                }
-            default:
-                throw PolyPodCoreError.invalidResult(
-                    context: "Failed to load Feature Manifest",
-                    result: "\(response.resultType)"
-                )
-            }
-        }
+    public func executeRequest<T: MessagePackDecodable>(_ request: CoreRequest) -> Result<T, Error> {
+        let bytes = request.pack().toByteBuffer;
+        defer { bytes.data.deallocate() }
+        return handleCoreResponse(execute_request(bytes), T.init(from:))
     }
     
-    // MARK: - Private utils
-    
-    private func processCoreResponse<T>(_ responseByteBuffer: CByteBuffer,
-                                        flatbufferMapping: (ByteBuffer) throws -> T) -> Result<T, Error> {
-        defer {
-            free_bytes(responseByteBuffer.data)
-        }
-        return Result {
-            try flatbufferMapping(
-                ByteBuffer(assumingMemoryBound: responseByteBuffer.data, capacity: Int(responseByteBuffer.length))
+    public func executeRequest(_ request: CoreRequest) -> Result<Void, Error> {
+        let bytes = request.pack().toByteBuffer;
+        defer { bytes.data.deallocate() }
+        return handleCoreResponse(execute_request(bytes), { _ in })
+    }
+
+    // MARK: - Internal API
+
+    func handleCoreResponse<T>(
+        _ byte_response: CByteBuffer,
+        _ map: (MessagePackValue) throws -> T
+    ) -> Result<T, Error> {
+        Result {
+            defer {
+                free_bytes(byte_response.data)
+            }
+            
+            let buffer = UnsafeBufferPointer(
+                start: byte_response.data,
+                count: Int(byte_response.length)
             )
+            let data = Data(buffer: buffer)
+            
+            let responseObject: CoreResponseObject = try MessagePack.unpackFirst(data).getDictionary()
+            
+            if let responseObject = responseObject["Ok"] {
+                return try map(responseObject)
+            } else if let failure = responseObject["Err"] {
+                throw try CoreFailure(from: failure)
+            }
+            
+            throw DecodingError.invalidResponse(info: "\(String(describing: responseObject))")
         }
+    }
+}
+
+extension BridgeToPlatform {
+    static func make() -> Self {
+        BridgeToPlatform(free_bytes: {
+            $0?.deallocate()
+        }, perform_request: { in_bytes in
+            do {
+                let request = try unpackBytes(bytes: in_bytes)
+                    .flatMap { value in
+                        Result { try PlatformRequest(from: value) }
+                    }
+                    .get()
+                
+                return Core
+                    .handle(request: request)
+                    .pack()
+                    .toByteBuffer
+            } catch {
+                return Result<String, CoreFailure>
+                    .failure(error as! CoreFailure)
+                    .pack()
+                    .toByteBuffer
+            }
+        })
     }
 }

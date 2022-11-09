@@ -3,34 +3,26 @@ import { Component } from "react";
 class Story extends Component {
     constructor({ account, mode }) {
         super();
-        this._analyses = account.analyses;
-        this._neededAnalyses = [];
-        this._mode = mode || Story.MODES.SUMMARY;
+        this.analyses = account.analyses;
+        this.neededAnalyses = [];
+        this.mode = mode || Story.MODES.SUMMARY;
     }
 
     get label() {
         return Story.LABELS.NONE;
     }
 
-    get analyses() {
-        return this._analyses;
-    }
-
-    get mode() {
-        return this._mode;
-    }
-
     setDetailsMode() {
-        this._mode = Story.MODES.DETAILS;
+        this.mode = Story.MODES.DETAILS;
     }
 
     setSummaryMode() {
-        this._mode = Story.MODES.SUMMARY;
+        this.mode = Story.MODES.SUMMARY;
     }
 
     get active() {
-        if (!this._neededAnalyses) return true;
-        for (const analysisKey of this._neededAnalyses) {
+        if (!this.neededAnalyses) return true;
+        for (const analysisKey of this.neededAnalyses) {
             if (this.analyses?.[analysisKey] === undefined) return false;
         }
         return true;

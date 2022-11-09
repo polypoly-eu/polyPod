@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 
 import {
-    ImporterProvider,
-    ImporterContext,
-} from "./context/importer-context.jsx";
+    FacebookProvider,
+    FacebookContext,
+} from "./context/facebook-context.jsx";
 import {
     INITIAL_HISTORY_STATE,
     PolyImportContext,
@@ -21,7 +21,7 @@ import {
 } from "@polypoly-eu/poly-look";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
-import i18n from "./i18n.js";
+import i18n from "!silly-i18n";
 
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
@@ -33,7 +33,7 @@ import "./styles.css";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp } =
-        useContext(ImporterContext);
+        useContext(FacebookContext);
 
     const { files } = useContext(PolyImportContext);
 
@@ -107,16 +107,16 @@ const FacebookImporterApp = () => {
 
     return (
         <Router history={history}>
-            <ImporterProvider>
+            <FacebookProvider>
                 <PolyImportProvider
-                    parentContext={ImporterContext}
+                    parentContext={FacebookContext}
                     dataImporters={dataImporters}
                     DataAccount={FacebookAccount}
                 >
                     <div className="poly-nav-bar-separator-overlay" />
                     <FacebookImporter />
                 </PolyImportProvider>
-            </ImporterProvider>
+            </FacebookProvider>
         </Router>
     );
 };

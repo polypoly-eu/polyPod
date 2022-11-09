@@ -1,20 +1,26 @@
 import {
     Pod,
-    PolyLifecycle,
     PolyIn,
     PolyOut,
     PolyNav,
-    EncodingOptions,
     ExternalFile,
     Stats,
     Matcher,
     Info,
     Entry,
     Endpoint,
-} from "@polypoly-eu/pod-api";
-import { DataFactory, Quad } from "rdf-js";
+    NamedNode,
+    BlankNode,
+    Literal,
+    Variable,
+    DefaultGraph,
+    Quad as polyQuad,
+    DataFactory,
+    Triplestore,
+    SPARQLQueryResult,
+} from "@polypoly-eu/api";
+import { Quad } from "rdf-js";
 import { RequestListener } from "http";
-import * as RDF from "@polypoly-eu/rdf";
 import {
     ResponsePort,
     liftServer,
@@ -38,30 +44,23 @@ import {
 
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
-    add(...quads: Quad[]): ValueBackendSpec<void>;
-    delete(...quads: Quad[]): ValueBackendSpec<void>;
-    has(...quads: Quad[]): ValueBackendSpec<boolean>;
+    add(quad: Quad): ValueBackendSpec<void>;
+    delete(quad: Quad): ValueBackendSpec<void>;
+    has(quad: Quad): ValueBackendSpec<boolean>;
+}>;
+
+type TriplestoreBackend = ObjectBackendSpec<{
+    query(query: string): ValueBackendSpec<SPARQLQueryResult>;
+    update(query: string): ValueBackendSpec<void>;
 }>;
 
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
-    readFile(
-        path: string,
-        options?: EncodingOptions
-    ): ValueBackendSpec<string | Uint8Array>;
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): ValueBackendSpec<void>;
+    readFile(path: string): ValueBackendSpec<Uint8Array>;
+    writeFile(path: string, content: string): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
-    importArchive(url: string): ValueBackendSpec<string>;
+    importArchive(url: string, destUrl?: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
-}>;
-
-type PolyLifecycleBackend = ObjectBackendSpec<{
-    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueBackendSpec<void>;
 }>;
 
 type PolyNavBackend = ObjectBackendSpec<{
@@ -93,82 +92,26 @@ type EndpointBackend = ObjectBackendSpec<{
 type PodBackend = ObjectBackendSpec<{
     polyIn(): PolyInBackend;
     polyOut(): PolyOutBackend;
-    polyLifecycle(): PolyLifecycleBackend;
     polyNav(): PolyNavBackend;
     info(): InfoBackend;
     endpoint(): EndpointBackend;
+    triplestore(): TriplestoreBackend;
 }>;
 
-class FileStats implements Stats {
-    static of(stats: Stats): FileStats {
-        if (
-            stats.getSize !== undefined &&
-            stats.getName !== undefined &&
-            stats.getTime !== undefined &&
-            stats.getId !== undefined
-        ) {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                stats.getTime(),
-                stats.getSize(),
-                stats.getName(),
-                stats.getId()
-            );
-        } else {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                "",
-                0,
-                "",
-                ""
-            );
-        }
-    }
-
-    constructor(
-        readonly file: boolean,
-        readonly directory: boolean,
-        readonly time: string,
-        readonly size: number,
-        readonly name: string,
-        readonly id: string
-    ) {}
-    isFile(): boolean {
-        return this.file;
-    }
-    isDirectory(): boolean {
-        return this.directory;
-    }
-    getTime(): string {
-        return this.time;
-    }
-    getSize(): number {
-        return this.size;
-    }
-    getName(): string {
-        return this.name;
-    }
-    getId(): string {
-        return this.id;
-    }
-}
-
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/remote-pod.FileStats": FileStats,
-    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
-    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
-    "@polypoly-eu/rdf.Literal": RDF.Literal,
-    "@polypoly-eu/rdf.Variable": RDF.Variable,
-    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
-    "@polypoly-eu/rdf.Quad": RDF.Quad,
+    "@polypoly-eu/rdf.NamedNode": NamedNode,
+    "@polypoly-eu/rdf.BlankNode": BlankNode,
+    "@polypoly-eu/rdf.Literal": Literal,
+    "@polypoly-eu/rdf.Variable": Variable,
+    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph,
+    "@polypoly-eu/rdf.Quad": polyQuad,
 };
+
+export const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
 
 function bubblewrapPort(
     rawPort: Port<Uint8Array, Uint8Array>
 ): Port<Uint8Array, Uint8Array> {
-    const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
         (buf) => podBubblewrap.decode(buf),
@@ -187,17 +130,26 @@ export class RemoteClientPod implements Pod {
 
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = RDF.dataFactory
+        public readonly dataFactory: DataFactory = new DataFactory(false)
     ) {
         this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }
 
     get polyIn(): PolyIn {
         return {
-            add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            add: (quad) => this.rpcClient.polyIn().add(quad)(),
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
-            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
-            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
+            delete: (quad) => this.rpcClient.polyIn().delete(quad)(),
+            has: (quad) => this.rpcClient.polyIn().has(quad)(),
+        };
+    }
+
+    get triplestore(): Triplestore {
+        return {
+            query: (query: string) =>
+                this.rpcClient.triplestore().query(query)(),
+            update: (query: string) =>
+                this.rpcClient.triplestore().update(query)(),
         };
     }
 
@@ -205,15 +157,8 @@ export class RemoteClientPod implements Pod {
         const { rpcClient } = this;
 
         return new (class implements PolyOut {
-            readFile(path: string, options: EncodingOptions): Promise<string>;
-            readFile(path: string): Promise<Uint8Array>;
-            readFile(
-                path: string,
-                options?: EncodingOptions
-            ): Promise<string | Uint8Array> {
-                if (options)
-                    return rpcClient.polyOut().readFile(path, options)();
-                else if (typeof fetch === "undefined")
+            readFile(path: string): Promise<Uint8Array> {
+                if (typeof fetch === "undefined")
                     return rpcClient.polyOut().readFile(path)();
                 else
                     return new Promise<Uint8Array>((resolve, reject) => {
@@ -232,30 +177,18 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().stat(path)();
             }
 
-            writeFile(
-                path: string,
-                content: string,
-                options: EncodingOptions
-            ): Promise<void> {
-                return rpcClient.polyOut().writeFile(path, content, options)();
+            writeFile(path: string, content: string): Promise<void> {
+                return rpcClient.polyOut().writeFile(path, content)();
             }
 
-            importArchive(url: string): Promise<string> {
-                return rpcClient.polyOut().importArchive(url)();
+            importArchive(url: string, destUrl?: string): Promise<string> {
+                return rpcClient.polyOut().importArchive(url, destUrl)();
             }
 
             removeArchive(fileId: string): Promise<void> {
                 return rpcClient.polyOut().removeArchive(fileId)();
             }
         })();
-    }
-
-    get polyLifecycle(): PolyLifecycle {
-        return {
-            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
-            startFeature: (id, background) =>
-                this.rpcClient.polyLifecycle().startFeature(id, background)(),
-        };
     }
 
     get polyNav(): PolyNav {
@@ -300,18 +233,6 @@ export class RemoteClientPod implements Pod {
     }
 }
 
-// TODO move to pod-api?
-// TODO should this throw instead?
-class DummyPolyLifecycle implements PolyLifecycle {
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return {};
-    }
-
-    async startFeature(): Promise<void> {
-        return;
-    }
-}
-
 export class RemoteServerPod implements ServerOf<PodBackend> {
     constructor(private readonly pod: Pod) {}
 
@@ -329,12 +250,9 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         const { bubblewrapMiddlewarePort } = await import(
             "../port-authority/middleware"
         );
-        const [middleware, port] = bubblewrapMiddlewarePort(
-            Bubblewrap.create(podBubblewrapClasses),
-            {
-                limit: "10mb",
-            }
-        );
+        const [middleware, port] = bubblewrapMiddlewarePort(podBubblewrap, {
+            limit: "10mb",
+        });
         this.listen(port);
         return middleware;
     }
@@ -346,18 +264,12 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         // the only difference is that `fetch` needs to return a slightly modified response
 
         return {
-            readFile: (path, options?) => {
-                if (options === undefined) return polyOut.readFile(path);
-                else return polyOut.readFile(path, options);
-            },
+            readFile: (path) => polyOut.readFile(path),
             readDir: (path) => polyOut.readDir(path),
-            stat: async (path) => {
-                const stats = await polyOut.stat(path);
-                return FileStats.of(stats);
-            },
-            writeFile: (path, content, options) =>
-                polyOut.writeFile(path, content, options),
-            importArchive: (url) => polyOut.importArchive(url),
+            stat: (path) => polyOut.stat(path),
+            writeFile: (path, content) => polyOut.writeFile(path, content),
+            importArchive: (url, destUrl) =>
+                polyOut.importArchive(url, destUrl),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };
     }
@@ -366,10 +278,8 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         return this.pod.polyIn;
     }
 
-    polyLifecycle(): ServerOf<PolyLifecycleBackend> {
-        if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
-
-        return new DummyPolyLifecycle();
+    triplestore(): ServerOf<TriplestoreBackend> {
+        return this.pod.triplestore;
     }
 
     polyNav(): ServerOf<PolyNavBackend> {

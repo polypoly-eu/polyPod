@@ -21,6 +21,7 @@ const barLabelLeftMargin = 3;
 const defaultBarWidth = 16;
 const defaultBarColor = "blue";
 const defaultBarValueColor = "white";
+const defaultBarLabelColor = "black";
 const fontSizeAboveBar = "14px";
 const fontSizeInBar = "12px";
 
@@ -38,6 +39,7 @@ const fontSizeInBar = "12px";
  * @param {string|callback} [barColor] - The color of the bar (callbacks receive event and data)
  * @param {string} [barWidth] - barWidth is actually bar height since it is a horizontal bar chart but for all intents and purposes it is the bar's width
  * @param {string} [barValueColor] - The color the values are shown in (default = no values shown)
+ * @param {string} [barLabelColor] - The color the labels are shown in (default = "black")
  */
 
 class ScaleContainer {
@@ -55,6 +57,7 @@ export class HorizontalBarChart extends Chart {
     groups,
     barColor,
     barValueColor,
+    barLabelColor,
     width = 400,
     height = 400,
   }) {
@@ -63,6 +66,7 @@ export class HorizontalBarChart extends Chart {
     this._barColor = barColor || defaultBarColor;
     this._barWidth = barWidth || defaultBarWidth;
     this._barValueColor = barValueColor || defaultBarValueColor;
+    this._barLabelColor = barLabelColor || defaultBarLabelColor;
     this._xScale = d3.scaleLinear().range([0, this.chartWidth]);
     this._yScales = this._getYscales(groups);
   }
@@ -197,7 +201,7 @@ export class HorizontalBarChart extends Chart {
       .transition()
       .delay(1000)
       .duration(500)
-      .attr("fill", this._groups ? this._barValueColor : "black");
+      .attr("fill", this._barLabelColor);
   }
 
   _addEnteringGroupLabels(groupLabels) {
@@ -218,7 +222,7 @@ export class HorizontalBarChart extends Chart {
       .transition()
       .delay(1000)
       .duration(500)
-      .attr("fill", "black");
+      .attr("fill", this._barLabelColor);
   }
 
   _addEnteringBarValues(barGroups) {

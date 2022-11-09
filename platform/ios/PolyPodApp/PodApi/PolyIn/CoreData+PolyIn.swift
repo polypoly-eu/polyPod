@@ -1,7 +1,5 @@
-// Please remove this line and the empty one after it
-
-import Foundation
 import CoreData
+import Foundation
 
 extension CoreDataStack: PolyIn {
     func addQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void) {
@@ -19,7 +17,7 @@ extension CoreDataStack: PolyIn {
             }
         }
     }
-    
+
     func matchQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void) {
         let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
         perform { managedContext in
@@ -28,11 +26,11 @@ extension CoreDataStack: PolyIn {
                 let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                 fetchRequest.predicate = predicate
                 var quads = try managedContext.fetch(fetchRequest)
-                
+
                 if let filterOperation = filterOperation {
                     quads = quads.filter(filterOperation)
                 }
-                
+
                 let result = extendedData(from: quads)
                 completionHandler(result, nil)
             } catch {
@@ -40,22 +38,22 @@ extension CoreDataStack: PolyIn {
             }
         }
     }
-    
+
     func deleteQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void) {
         perform { managedContext in
             for quad in quads {
                 let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: quad)
-                
+
                 do {
                     let managedContext = try managedContext.get()
                     let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                     fetchRequest.predicate = predicate
                     var quads = try managedContext.fetch(fetchRequest)
-                    
+
                     if let filterOperation = filterOperation {
                         quads = quads.filter(filterOperation)
                     }
-                    
+
                     for quad in quads {
                         managedContext.delete(quad)
                     }
@@ -66,7 +64,7 @@ extension CoreDataStack: PolyIn {
             completionHandler(nil)
         }
     }
-    
+
     func hasQuads(quads: [ExtendedData], completionHandler: @escaping (Bool) -> Void) {
         perform { managedContext in
             for quad in quads {
@@ -76,7 +74,7 @@ extension CoreDataStack: PolyIn {
                     let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                     fetchRequest.predicate = predicate
                     var quads = try managedContext.fetch(fetchRequest)
-                    
+
                     if let filterOperation = filterOperation {
                         quads = quads.filter(filterOperation)
                     }
@@ -93,10 +91,10 @@ extension CoreDataStack: PolyIn {
     }
 }
 
-fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
+private func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
     var formatItems: [String] = []
     var arguments: [Any] = []
-    
+
     if let subjectsMatcher = matcher.properties["subject"] as? ExtendedData {
         formatItems.append("subject.termType == %@ && subject.value == %@")
         arguments.append(subjectsMatcher.properties["termType"] as! String)
@@ -107,7 +105,7 @@ fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate,
         arguments.append(predicatesMatcher.properties["termType"] as! String)
         arguments.append(predicatesMatcher.properties["value"] as! String)
     }
-    var filterOperation: ((Quad) -> Bool)? = nil
+    var filterOperation: ((Quad) -> Bool)?
     if let objectsMatcher = matcher.properties["object"] as? ExtendedData {
         let termType = objectsMatcher.properties["termType"] as! String
         if termType == "Literal" {
@@ -117,31 +115,33 @@ fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate,
             let value = datatype.properties["value"] as! String
             filterOperation = { (quad: Quad) -> Bool in
                 let literal = quad.object as! Literal
-                if literal.language == language && literal.datatype.termType == termType && literal.datatype.value == value {
-                    return true
+                if literal.language == language &&
+                    literal.datatype.termType == termType &&
+                    literal.datatype.value == value {
+                        return true
                 }
                 return false
-                
+
             }
         }
         formatItems.append("object.termType == %@ && object.value == %@")
         arguments.append(termType)
         arguments.append(objectsMatcher.properties["value"] as! String)
     }
-    
-    var format:String = ""
+
+    var format: String = ""
     for (i, formatItem) in formatItems.enumerated() {
         if i != 0 {
             format += " && "
         }
         format += formatItem
     }
-    
+
     // Passing an empty matcher selects all elements
-    if format == "" {
+    if format.isEmpty {
         return (NSPredicate(value: true), filterOperation)
     }
-    
+
     let predicate = NSPredicate(format: format, argumentArray: arguments)
     return (predicate, filterOperation)
 }
@@ -149,14 +149,14 @@ fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate,
 @discardableResult
 private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
     let entityName = extendedData.classname.replacingOccurrences(of: "@polypoly-eu/rdf.", with: "")
-    
+
     guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext) else {
         assert(false)
         return nil
     }
-    
+
     let node = NSManagedObject(entity: entity, insertInto: managedContext)
-    
+
     for (key, value) in extendedData.properties {
         if let childExtendedData = value as? ExtendedData {
             let childNode = createNode(for: childExtendedData, in: managedContext)
@@ -169,13 +169,13 @@ private func createNode(for extendedData: ExtendedData, in managedContext: NSMan
             node.setValue(value, forKeyPath: key)
         }
     }
-    
+
     return node
 }
 
-fileprivate func extendedData(from quads: [Quad]) -> [ExtendedData] {
+private func extendedData(from quads: [Quad]) -> [ExtendedData] {
     var result: [ExtendedData] = []
-    
+
     for (index, quad) in quads.enumerated() {
         var isDuplicate = false
         for otherIndex in index+1..<quads.count {
@@ -190,11 +190,11 @@ fileprivate func extendedData(from quads: [Quad]) -> [ExtendedData] {
             result.append(extendedData)
         }
     }
-    
+
     return result
 }
 
-fileprivate func createExtendedData(
+private func createExtendedData(
     for managedObject: NSManagedObject,
     from sourceRelationship: NSManagedObject? = nil
 ) -> ExtendedData {
@@ -213,7 +213,7 @@ fileprivate func createExtendedData(
             // wouldn't work for transitive inverse relationships, however.
             if value != sourceRelationship {
                 properties[relationship] =
-                createExtendedData(for: value, from: managedObject)
+                    createExtendedData(for: value, from: managedObject)
             }
         }
     }

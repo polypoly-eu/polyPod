@@ -1,6 +1,6 @@
 # polyExplorer
 
-A feature that lets you browse through companies and how they use and share
+A Feature that lets you browse through companies and how they use and share
 personal data.
 
 ## Building
@@ -25,7 +25,7 @@ This is a web-based application. `npm run build` will create the SPA in the
 ## Updating company data
 
 polyExplorer takes its data from [the polyPedia database]. For development on
-the feature, you can ignore this, but if you want to pull in the latest changes
+the Feature, you can ignore this, but if you want to pull in the latest changes
 from polyPedia, or overwrite data coming from it, the process is like this:
 
 ### Updating to a newer version of polyPedia

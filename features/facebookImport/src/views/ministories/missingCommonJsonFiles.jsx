@@ -6,7 +6,7 @@ import ReportStory from "./reportStory.jsx";
 class MissingCommonJSONFilesReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.missingCommonFileNames];
+        this.neededReports = [analysisKeys.missingCommonFileNames];
     }
     get title() {
         return "Missing common JSON files";

@@ -7,10 +7,16 @@ export interface Manifest {
     readonly description: string;
     readonly thumbnail: string;
     readonly primaryColor: string;
+    readonly borderColor: string;
     readonly links: Record<string, string>;
     readonly translations: Record<string, Partial<Manifest>>;
 }
 
+/**
+ * It takes a decoder and an input, and returns the output of the decoder
+ * @param {DecodeFrom} input - The manifest to be parsed.
+ * @param decoder - Decoder.Decoder<DecodeFrom, EncodeTo>
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const decodeWith = <EncodeTo = any, DecodeFrom = unknown>(
     input: DecodeFrom,
@@ -23,7 +29,7 @@ const decodeWith = <EncodeTo = any, DecodeFrom = unknown>(
         })
     );
 
-// define a decoder for error inputs (i.e. relative paths)
+/* It's a decoder that parses a string to a URL. Fails on error inputs (i.e. relative paths) */
 const relativeDecoder = pipe(
     Decoder.string,
     Decoder.parse((input) => {
@@ -38,17 +44,23 @@ const relativeDecoder = pipe(
     })
 );
 
-// define a decoder representing a manifest
+/* It is a type alias for a decoder that would decode a manifest */
 const manifestDecoder = Decoder.type({
     name: Decoder.string,
     description: Decoder.string,
     thumbnail: relativeDecoder,
     primaryColor: Decoder.string,
+    borderColor: Decoder.string,
     links: Decoder.record(Decoder.string),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     translations: Decoder.record(Decoder.partial<any>({})),
 });
 
+/**
+ * It reads the manifest that is passed as a json format and returns it as a Manifest object.
+ * @param packageManifest - The manifest of the package.
+ * @returns A `Manifest` object.
+ */
 export async function readManifest(
     packageManifest: Record<string, unknown>
 ): Promise<Manifest> {
@@ -61,5 +73,6 @@ export async function readManifest(
         primaryColor: manifest.primaryColor,
         links: manifest.links,
         translations: manifest.translations,
+        borderColor: manifest.borderColor,
     };
 }

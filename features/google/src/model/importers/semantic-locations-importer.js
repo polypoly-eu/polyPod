@@ -1,8 +1,7 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
-
-const semanticLocationsRegex =
-    /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/;
+import { matchRegex } from "./utils/lang-constants";
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
@@ -12,11 +11,17 @@ async function readFullPathJSONFile(entry) {
 }
 
 /**
+ * If the duration object has a startTimestamp property, return a new Date object initialized with the
+ * value of that property. Otherwise, if the duration object has a startTimestampMs property, return a
+ * new Date object initialized with the value of that property. Otherwise, throw an error.
+ *
  * We saw until now two different formats for timestamps:
  * - milliseconds: 1394270917000
  * - standard date: "2022-01-19T14:28:16.967Z"
+ * @param duration - The duration object from the API response.
+ * @returns A function that takes a duration object and returns a date object.
  */
-function extractTimestampFromDuration(duration) {
+function extractStartTimestampFromDuration(duration) {
     if ("startTimestamp" in duration) return new Date(duration.startTimestamp);
     if ("startTimestampMs" in duration)
         return new Date(duration.startTimestampMs);
@@ -25,28 +30,43 @@ function extractTimestampFromDuration(duration) {
     );
 }
 
+function extractEndTimestampFromDuration(duration) {
+    if ("endTimestamp" in duration) return new Date(duration.endTimestamp);
+    if ("endTimestampMs" in duration) return new Date(duration.endTimestampMs);
+    throw new Error(
+        "No start timestamp found in keys: " + Object.keys(duration).toString()
+    );
+}
+
 function createPlaceVisit(jsonData) {
     return new PlaceVisit({
-        timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
+        timestamp: new Date(
+            extractStartTimestampFromDuration(jsonData.duration)
+        ),
+        endTimestamp: new Date(
+            extractEndTimestampFromDuration(jsonData.duration)
+        ),
         locationName: jsonData.location.name,
     });
 }
 
 function createActivitySegment(jsonData) {
     return new ActivitySegment({
-        timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
+        timestamp: new Date(
+            extractStartTimestampFromDuration(jsonData.duration)
+        ),
         activityType: jsonData.activityType,
     });
 }
 
 /**
  * Extract from the given file entry the list of timeline objects grouped by their type.
- * We saw two types of timeline objects:
+ * It reads the JSON file and returns an object with two types of timeline objects:
  *  - Place Visits
  *  - Activity Segments
  *
- * @param {*} fileEntry
- * @returns
+ * @param fileEntry - The file entry of the JSON file to be parsed.
+ * @returns {{placeVisits:Array.<Object>, activitySegments:Array.<Object>}} - An object with two properties: placeVisits and activitySegments.
  */
 async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
     const jsonContent = await readFullPathJSONFile(fileEntry);
@@ -68,9 +88,9 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 
 export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         const semanticLocationEntries = entries.filter(({ path }) =>
-            semanticLocationsRegex.test(path)
+            matchRegex(path, this.constructor.name)
         );
 
         const timelineObjectsByType = await Promise.all(
@@ -78,7 +98,6 @@ export default class SemanticLocationsImporter {
                 parseTimelineObjectsByTypeFromEntry(entry)
             )
         );
-
         let allPlaceVisits = [];
         let allActivitySegments = [];
         timelineObjectsByType.forEach(({ placeVisits, activitySegments }) => {

@@ -1,0 +1,25 @@
+{
+    "name": "netflix-data-importer-preview",
+    "version": "0.0.1",
+    "description": "Generated from poly-cli; substitute for your own here",
+    "main": "src/index.jsx",
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "rollup --watch -c"
+    },
+    "devDependencies": {
+        "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+        "rollup": "*",
+        "@rollup/plugin-json": "*",
+        "@rollup/plugin-node-resolve": "*"
+    },
+    "dependencies": {
+        "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+        "@polypoly-eu/podjs": "file:../../platform/podjs",
+        "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+        "react": "*",
+        "react-dom": "*"
+    },
+    "author": "polypoly poly-cli",
+    "license": "MIT"
+}

@@ -14,3 +14,5 @@ export default class AccountSessionActivitiesImporter extends DirectKeyDataImpor
         );
     }
 }
+
+AccountSessionActivitiesImporter.STORAGE_KEY = "accountSessionActivities";

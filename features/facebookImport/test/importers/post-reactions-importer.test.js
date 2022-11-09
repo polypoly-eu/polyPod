@@ -5,7 +5,7 @@ import {
     DATASET_EXPECTED_VALUES,
     zipFileWithPostReactions,
 } from "../datasets/post-reactions-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import { runPostReactionsImporter } from "../utils/data-importing";
 import {

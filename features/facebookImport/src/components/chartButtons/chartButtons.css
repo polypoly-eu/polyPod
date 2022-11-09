@@ -6,7 +6,7 @@
     border-radius: 16px;
     background-color: var(--background-dark);
     color: var(--text-light);
-    font-size: 14px;
+    font-size: var(--font-size-m);
 }
 
 .chart-button.selected {

@@ -1,0 +1,7 @@
+.source-info-container {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: calc(var(--gdu) * -4);
+}

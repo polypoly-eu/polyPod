@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { L12n } from "@polypoly-eu/silly-i18n";
 import { Chart } from "../../chart";
 
 const edgePadding = 5;
@@ -14,8 +14,10 @@ const defaultBubbleColor = "blue";
 const defaultStrokeColor = "#f7fafc";
 const defaultTextColor = "white";
 const defaultOpacity = 1;
+
+const l12n = new L12n();
 const defaultText = (d) =>
-  d.r > smallBubblesRadius ? Math.round(d.value) : "";
+  d.r > smallBubblesRadius ? l12n.t(Math.round(d.value)) : "";
 const defaultOnClickFunction = () => {};
 
 const nodeLabelBoxPaddingX = 4,
@@ -120,11 +122,8 @@ const bubbleFontSize = (d) => {
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
- *
  * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
- *
- * Adding svg icons to a data point will load the svg instead of a bubble
- *
+ * Adding svg icons to a data point will load the svg instead of a bubble.
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to

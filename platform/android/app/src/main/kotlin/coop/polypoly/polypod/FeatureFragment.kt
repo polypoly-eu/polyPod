@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -17,17 +18,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coop.polypoly.polypod.features.Feature
+import coop.polypoly.core.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.launch
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
-private fun luminance(color: Int): Double =
+fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
         Color.green(color) * 0.7152 +
         Color.blue(color) * 0.0722
@@ -64,7 +67,7 @@ private enum class ForegroundResources(
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
-            if (luminance(color) > 80) DARK else LIGHT
+            if (luminance(color) > 100) DARK else LIGHT
     }
 }
 
@@ -85,20 +88,15 @@ open class FeatureFragment : Fragment() {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val args: FeatureFragmentArgs by navArgs()
-
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
+
     // Public for test purposes
     lateinit var featureContainer: FeatureContainer
+    private val args: FeatureFragmentArgs by navArgs()
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
-            .setPositiveButton(
-                context?.getString(R.string.button_feature_error_close)
-            ) { _, _ ->
-                close()
-            }
             .create()
     }
 
@@ -112,15 +110,15 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (view.findViewById(R.id.feature_title) as TextView).text =
-            args.featureName
-        logger.debug(
-            "Inside FeatureFragment, feature to load: '{}'",
-            args.featureName
-        )
-        feature =
-            FeatureStorage().loadFeature(requireContext(), args.featureFile)
 
+        FeatureStorage.featureForId(args.featureId)?.let {
+            (view.findViewById(R.id.feature_title) as TextView).text = it.name
+            logger.debug(
+                "Inside FeatureFragment, feature to load: '{}'",
+                it.name
+            )
+            feature = it
+        }
         setupFeature(view)
     }
 
@@ -151,23 +149,45 @@ open class FeatureFragment : Fragment() {
                 foregroundResources.icons.getValue(actionButton.action)
             )
             buttonView.setOnClickListener {
-                if (actionButton == ActionButton.CLOSE)
+                if (actionButton == ActionButton.CLOSE) {
                     navigateBack()
-                else
+                } else {
                     featureContainer.triggerNavAction(actionButton.action.id)
+                }
             }
         }
     }
 
     @Suppress("unused")
     private fun handleError(error: String) {
+        if (errorDialog.isShowing || context == null) return
+
         val featureErrorMessage = context?.getString(
             R.string.message_feature_error,
             feature.name,
             error
         )
-        if (errorDialog.isShowing) return
         errorDialog.setMessage(featureErrorMessage)
+        errorDialog.setButton(
+            Dialog.BUTTON_POSITIVE,
+            context?.getString(R.string.button_feature_allow_report)
+        ) { _, _ ->
+            lifecycleScope.launch {
+                close()
+
+                featureContainer.api.endpoint.uploadError(
+                    "polyApiErrorReport",
+                    featureErrorMessage!!
+                )
+            }
+        }
+        errorDialog.setButton(
+            Dialog.BUTTON_NEGATIVE,
+            context?.getString(R.string.button_feature_deny_report)
+        ) { _, _ ->
+            close()
+        }
+
         errorDialog.show()
     }
 
@@ -196,8 +216,9 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        if (!featureContainer.triggerNavAction("back"))
+        if (!featureContainer.triggerNavAction("back")) {
             close()
+        }
     }
 
     private fun close() {
@@ -227,8 +248,9 @@ open class FeatureFragment : Fragment() {
     }
 
     private suspend fun pickFile(type: String?): ExternalFile? {
-        if (pickFileResult?.isActive == true)
+        if (pickFileResult?.isActive == true) {
             return null
+        }
         pickFileResult = CompletableDeferred()
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -243,8 +265,8 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        var url: String = ""
-        var name: String = ""
+        var url = ""
+        var name = ""
         var size: Long = 0
         (pickFileResult?.await())?.let {
             it.let { returnUri ->
@@ -261,7 +283,9 @@ open class FeatureFragment : Fragment() {
                 }
             }
         }
-        return ExternalFile(url = url, name = name, size = size)
+        return if (size > 0) {
+            ExternalFile(url = url, name = name, size = size)
+        } else null
     }
 
     override fun onActivityResult(
@@ -270,8 +294,9 @@ open class FeatureFragment : Fragment() {
         data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_FILE_REQUEST_CODE)
+        if (requestCode == PICK_FILE_REQUEST_CODE) {
             handlePickFileResult(resultCode, data)
+        }
     }
 
     private fun handlePickFileResult(resultCode: Int, data: Intent?) {

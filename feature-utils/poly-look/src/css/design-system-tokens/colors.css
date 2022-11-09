@@ -1,0 +1,23 @@
+/* Component tokens */
+
+:root {
+  /* TextField */
+  --pl-field-color-text: var(--theme-primary-color);
+  --pl-color-field-error: var(--color-red-600);
+
+  --pl-field-color-fill-enabled: var(--color-white);
+  --pl-field-color-border-enabled: var(--color-gray-400);
+
+  --pl-field-color-fill-focused: var(--color-white);
+  --pl-field-color-border-focused: var(--theme-secondary-color);
+  --pl-field-trailing-icon-color: var(--theme-secondary-color);
+
+  --pl-field-color-fill-error: var(--color-white);
+  --pl-field-color-border-error: var(--pl-color-field-error);
+  --pl-field-color-text-error: var(--pl-color-field-error);
+  --pl-field-trailing-icon-color-error: var(--pl-color-field-error);
+
+  --pl-field-color-fill-disabled: var(--color-gray-50);
+  --pl-field-color-border-disabled: var(--color-gray-400);
+  --pl-field-color-text-disabled: var(--color-gray-600);
+}

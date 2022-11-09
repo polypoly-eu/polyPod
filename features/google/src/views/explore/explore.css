@@ -1,0 +1,27 @@
+.explore-view {
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    width: 100%;
+    position: absolute;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.card > label {
+    width: 90px;
+    min-width: 82px;
+    height: 32px;
+    border-radius: 25px 0 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--theme-primary-color);
+    background-color: var(--theme-info-button-color);
+    padding: 0px calc(var(--gdu) * 3);
+    margin-left: auto;
+    margin-right: calc(var(--gdu) * -4);
+    font-size: var(--font-size-m);
+}

@@ -2,7 +2,7 @@ import React, { useState, useContext, useMemo } from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./receivingCompanies.css";

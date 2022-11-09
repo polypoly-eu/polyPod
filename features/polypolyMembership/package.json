@@ -1,0 +1,28 @@
+{
+    "name": "polypoly-membership-feature",
+    "version": "0.0.1",
+    "description": "Generated from poly-cli; substitute for your own here",
+    "main": "src/polypolyMembership.jsx",
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "rollup --watch -c",
+        "test": "echo \"🚨: No tests run\""
+    },
+    "devDependencies": {
+        "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+        "@rollup/plugin-json": "*",
+        "@rollup/plugin-node-resolve": "*",
+        "rollup": "*",
+        "@rollup/plugin-replace": "*"
+    },
+    "dependencies": {
+        "@polypoly-eu/podjs": "file:../../platform/podjs",
+        "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+        "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+        "react": "*",
+        "react-dom": "*",
+        "react-router-dom": "^6.4.0"
+    },
+    "author": "polypoly poly-cli",
+    "license": "MIT"
+}

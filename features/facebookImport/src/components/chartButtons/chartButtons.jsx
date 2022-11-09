@@ -4,7 +4,7 @@ import "./chartButtons.css";
 
 const ChartButtons = ({ buttonsContent, activeButton, onButtonsClick }) => {
     return (
-        <>
+        <div>
             {buttonsContent.map(({ id, translation }) => {
                 return (
                     <button
@@ -20,7 +20,7 @@ const ChartButtons = ({ buttonsContent, activeButton, onButtonsClick }) => {
                     </button>
                 );
             })}
-        </>
+        </div>
     );
 };
 

@@ -9,42 +9,82 @@ import androidx.fragment.app.FragmentActivity
 
 class Authentication {
     companion object {
+        var isAuthenticated = false
+
         private const val desiredLockScreenType =
             BiometricManager.Authenticators.BIOMETRIC_WEAK or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
-        fun shouldShowBiometricsPrompt(context: Context): Boolean {
+        fun shouldShowAuthOnboarding(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.getBiometricCheck(context) &&
-                !Preferences.getBiometricEnabled(context) &&
+                !Preferences.hasUserConfiguredAuthentication(context) &&
+                !Preferences.isSecurityDoNotAskAgainEnabled(context) &&
+                !Preferences.isBiometricEnabled(context) &&
                 !Preferences.isFirstRun(context)
+        }
+
+        fun canAuthenticate(context: Context): Boolean {
+            return biometricsAvailable(context) &&
+                Preferences.isBiometricEnabled(context) &&
+                Preferences.hasUserConfiguredAuthentication(context)
         }
 
         fun setUp(
             activity: FragmentActivity,
+            showAuthTexts: Boolean = false,
+            newBiometricState: Boolean = false,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, true) { success ->
-                if (success)
-                    setupComplete()
+            authenticate(
+                activity,
+                showAuthTexts,
+                newBiometricState
+            ) { success ->
+                if (success) {
+                    Preferences.setBiometricEnabled(
+                        activity,
+                        newBiometricState
+                    )
+                    if (newBiometricState) {
+                        Preferences.setUserConfiguredAuthentication(
+                            activity.applicationContext,
+                            true
+                        )
+                    }
+                }
+                setupComplete()
             }
         }
 
         fun authenticate(
             activity: FragmentActivity,
-            force: Boolean = false,
+            showAuthTexts: Boolean = false,
+            newBiometricState: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
+            val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!force && !Preferences.getBiometricEnabled(activity))
+                (!newBiometricState && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return
             }
 
+            val title =
+                if (showAuthTexts)
+                    activity.getString(R.string.auth_prompt_title)
+                else
+                    activity.getString(R.string.re_auth_prompt_title)
+
+            val subtitle =
+                if (showAuthTexts)
+                    activity.getString(R.string.auth_prompt_subtitle)
+                else
+                    activity.getString(R.string.re_auth_prompt_subtitle)
+
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(activity.getString(R.string.auth_prompt_title))
-                .setSubtitle(activity.getString(R.string.auth_prompt_subtitle))
+                .setTitle(title)
+                .setSubtitle(subtitle)
                 .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
@@ -70,11 +110,20 @@ class Authentication {
             result: BiometricPrompt.AuthenticationResult
         ) {
             super.onAuthenticationSucceeded(result)
+
+            val title =
+                if (Preferences.isBiometricEnabled(context))
+                    context.getString(R.string.re_auth_prompt_success)
+                else
+                    context.getString(R.string.auth_prompt_success)
+
             Toast.makeText(
                 context,
-                context.getString(R.string.auth_prompt_success),
+                title,
                 Toast.LENGTH_SHORT
             ).show()
+            isAuthenticated = true
+
             authComplete(true)
         }
 

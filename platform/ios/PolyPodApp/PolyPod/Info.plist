@@ -28,15 +28,6 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Needs location for life tracker</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Needs location for life tracker</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>jost_light.ttf</string>

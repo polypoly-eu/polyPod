@@ -1,3 +1,3 @@
 # polyPinion
 
-polyPinion is a feature for general questionnaires.
+polyPinion is a Feature for general questionnaires.

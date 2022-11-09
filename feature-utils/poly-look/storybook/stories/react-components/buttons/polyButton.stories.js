@@ -1,38 +1,38 @@
 import React from "react";
-import { withDesign } from "storybook-addon-designs";
 import { PolyButton } from "../../../../src/react-components/buttons/";
-
-import "../../../../src/css/index.js";
-import "../fontFamily.css";
 
 export default {
   title: "Visuals/Atoms/Button/PolyButton",
   component: PolyButton,
-  decorators: [withDesign],
   argTypes: {
     onClick: { action: "clicked" },
-    theme: {
-      options: ["dark", "light"],
+    type: {
+      options: ["filled", "outline"],
       control: { type: "radio" },
     },
     className: {
       type: "string",
     },
+    size: {
+      control: { type: "radio" },
+      options: ["small", "large"],
+    },
     centered: { type: "boolean" },
   },
 };
 
-const Template = (args) => (
-  <div className={`poly-theme poly-theme-${args.theme || "dark"}`}>
-    <PolyButton {...args} />
-  </div>
+const InlineSVG = () => (
+  <svg viewBox="0 0 100 100">
+    <path d="M 10 10 H 90 V 90 H 10 L 10 10" fill="currentColor" />
+  </svg>
 );
+const Template = (args) => <PolyButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   label: "Button",
   disabled: false,
-  theme: "dark",
+  type: "filled",
 };
 Default.parameters = {
   design: {
@@ -40,9 +40,18 @@ Default.parameters = {
     url: "https://www.figma.com/file/qIrr4QJrmYGqVQHQoCECux/polyPod-design-system?node-id=2891%3A2856",
   },
 };
+
 export const Disabled = Template.bind({});
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 Disabled.parameters = { ...Default.parameters };
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  ...Default.args,
+  iconLeft: <InlineSVG />,
+  iconRight: <InlineSVG />,
+};
+WithIcon.parameters = { ...Default.parameters };

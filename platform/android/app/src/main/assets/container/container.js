@@ -2,7 +2,7 @@
 // port1 - bootstrap's end of a channel with the Feature
 // port2 - Feature's end of a channel with the bootstrap
 //
-// Pod <-> innerPort <-> outerPort <-> boostrap <-> port1 <-> port2 <-> Feature
+// Pod <-> innerPort <-> outerPort <-> bootstrap <-> port1 <-> port2 <-> Feature
 const { port1, port2 } = new MessageChannel();
 let outerPort;
 
@@ -23,8 +23,7 @@ function initMessaging() {
         }
         outerPort = event.ports[0];
         outerPort.onmessage = (event) => {
-            // console.log(`Data coming from Pod to the Feature`);
-            // console.dir(event.data);
+            // Data coming from the pod to the feature
             const bytes = Uint8Array.from(atob(event.data), (c) =>
                 c.charCodeAt(0)
             );

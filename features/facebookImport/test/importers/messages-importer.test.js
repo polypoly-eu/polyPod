@@ -10,7 +10,7 @@ import {
     zipFileWithMessageThreads,
     zipFileWithThreeFileErrors,
 } from "../datasets/messages-data.js";
-import { ZipFileMock } from "../mocks/zipfile-mock.js";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runMessagesImporter } from "../utils/data-importing.js";
 import {
     expectError,

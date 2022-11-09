@@ -1,5 +1,5 @@
-import { PolyImportContext } from "@polypoly-eu/poly-look";
-import React, { useContext } from "react";
+import { Screen } from "@polypoly-eu/poly-look";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import Story from "../../views/ministories/story.jsx";
 
@@ -7,18 +7,14 @@ import "./details.css";
 
 const ExploreDetails = () => {
     const history = useHistory();
-    const { account } = useContext(PolyImportContext);
 
-    const { ActiveStoryClass } = history.location.state;
-    const activeStory = new ActiveStoryClass({
-        account,
-        mode: Story.MODES.DETAILS,
-    });
+    const { activeStory } = history.location.state;
+    activeStory.mode = Story.MODES.DETAILS;
     return (
-        <div className="details-view">
+        <Screen className="details-view" layout="poly-standard-layout">
             <h1>{activeStory.title}</h1>
             {activeStory.render()}
-        </div>
+        </Screen>
     );
 };
 

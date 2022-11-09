@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { ImporterContext } from "../context/importer-context.jsx";
+import { FacebookContext } from "../context/facebook-context.jsx";
 
 const RouteButton = ({
     route,
@@ -10,7 +10,7 @@ const RouteButton = ({
     onClick = () => {},
 }) => {
     const { handleBack, changeNavigationState, navigationState } =
-        useContext(ImporterContext);
+        useContext(FacebookContext);
     const history = useHistory();
 
     let changedNavigationState = navigationState;

@@ -64,13 +64,18 @@ async function main() {
         return exitCode;
     }
 
-    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx,.mjs", "."];
 
     if (
         (!existsSync("node_modules") &&
-            ["lint", "lintfix", "clean", "build", "offlineInstall"].includes(
-                command
-            )) ||
+            [
+                "lint",
+                "lintfix",
+                "clean",
+                "build",
+                "offlineInstall",
+                "doc",
+            ].includes(command)) ||
         ["install", "installAndBuild"].includes(command)
     ) {
         await runCommand("root-install", "👷👷‍♀️", async () => {

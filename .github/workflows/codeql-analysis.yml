@@ -44,20 +44,23 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         queries: security-extended
         languages: ${{ matrix.language }}
 
-    - if: matrix.language == 'java' 
+    - if: matrix.language == 'java'
       name: Build Android
       run: |
+        ./build.js
         cd platform/android
         ./gradlew compileDebugJavaWithJavac
+      env:
+        POLYPOD_BUILD_PLATFORMS: android
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2

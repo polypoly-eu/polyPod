@@ -1,79 +1,86 @@
-name: Test pushes and PRs
+# For historical reasons, this workflow covers a bit too much, and should be
+# broken up - the Android parts potentially merged with android-test.yml.
+
+name: Lint and test JavaScript code and run Android unit tests
 on:
-    push:
-    pull_request:
-        types: [assigned, opened, ready_for_review]
+  push:
+  pull_request:
+    types: [opened]
 
 jobs:
-    test:
-        name: Run tests.
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
-              with:
-                  node-version: 16
-                  cache: "npm"
-                  cache-dependency-path: "**/package-lock.json"
-            - name: Cache JS deps
-              uses: actions/cache@v2
-              id: cache
-              with:
-                  path: |
-                    **/node_modules
-                    ~/.cache
-                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
-            - name: Checks paths to rebuild Android
-              uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
-              id: changes
-              with:
-                  filters: |
-                      android:
-                      - 'feature-utils/**'
-                      - 'features/**'
-                      - 'platform/android/**'
-                      - 'platform/core/**'
-                      - 'platform/feature-api/**'
-                      js:
-                      - '**/*.js'
-                      - '**/*.jsx'
-                      - '**/*.ts'
-                      - '**/*.tsx'
-                      - '**/*.?js'
-                      - '.editorconfig'
-                      - '.eslintrc.cjs'
-                      apiAndFeatures:
-                      - 'build/**'
-                      - 'dev-utils/dummy-server'
-                      - 'features/**'
-                      - 'feature-utils/**'
-                      - 'platform/feature-api/**'
-                      - 'platform/podjs/**'
-                      swift:
-                      - 'platform/ios/**'
-            - name: Lint core and features
-              if: steps.changes.outputs.js == 'true'
-              run: ./build.js lint
-            - name: Install JS packages
-              if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true')
-              run: ./build.js offlineInstall
-            - name: Lint Swift
-              if: steps.changes.outputs.swift == 'true'
-              working-directory: platform/ios
-              run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
-            - name: Build core and features
-              if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
-              run: ./build.js build
-            - name: Test core and features
-              if: steps.changes.outputs.apiAndFeatures == 'true'
-              run: xvfb-run --auto-servernum ./build.js test
-            - uses: actions/setup-java@v2
-              if: steps.changes.outputs.android == 'true'
-              with:
-                  java-version: 11
-                  distribution: 'temurin'
-                  cache: 'gradle'
-            - name: Test android
-              if: steps.changes.outputs.android == 'true'
-              working-directory: platform/android
-              run: ./gradlew test
+  test:
+    name: Run tests.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - name: Cache JS deps
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', 'build/packages.json') }}-${{ hashFiles('package-lock.json', 'build/packages.json') }}
+      - name: Checks paths to trigger the rest of the steps
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 #v2.11.1
+        id: changes
+        with:
+          filters: |
+            android:
+            - 'feature-utils/**'
+            - 'features/**'
+            - 'platform/android/**'
+            - 'platform/core/**'
+            - 'platform/feature-api/**'
+            js:
+            - '**/*.js'
+            - '**/*.jsx'
+            - '**/*.ts'
+            - '**/*.tsx'
+            - '**/*.?js'
+            - '.editorconfig'
+            - '.eslintrc.cjs'
+            apiAndFeatures:
+            - 'build/**'
+            - 'dev-utils/dummy-server'
+            - 'features/**'
+            - 'feature-utils/**'
+            - 'platform/feature-api/**'
+            - 'platform/podjs/**'
+            swift:
+            - 'platform/ios/**'
+      - name: Lint platform and features
+        if: steps.changes.outputs.js == 'true'
+        run: ./build.js lint
+      - name: Install JS packages
+        if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true' || steps.changes.outputs.android == 'true')
+        run: ./build.js offlineInstall
+      - name: Build platform and features
+        if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
+        run: ./build.js build
+        env:
+          POLYPOD_BUILD_PLATFORMS: android
+      - name: Test platform and features
+        if: steps.changes.outputs.apiAndFeatures == 'true'
+        run: xvfb-run --auto-servernum ./build.js test
+      - uses: actions/setup-java@v3
+        if: steps.changes.outputs.android == 'true'
+        with:
+          java-version: 11
+          distribution: "temurin"
+          cache: "gradle"
+      - name: Setup Gradle Dependencies Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle') }}
+      - name: Test android
+        if: steps.changes.outputs.android == 'true'
+        working-directory: platform/android
+        run: ./gradlew test

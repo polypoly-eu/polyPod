@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FilterChips, LineLegend, PolyChart } from "@polypoly-eu/poly-look";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import "./messengerMauChart.css";
 

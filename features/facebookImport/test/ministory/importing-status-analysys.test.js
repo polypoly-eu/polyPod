@@ -1,4 +1,4 @@
-import DataImportingStatusAnalysis from "../../src/model/analyses/report/importing-status-analysis";
+import { DataImportingStatusAnalysis } from "@polypoly-eu/poly-analysis";
 import { NUMBER_OF_IMPORTERS } from "../../src/model/importer";
 import DataImportingStatusReport from "../../src/views/ministories/dataImportingStatus";
 import { runAnalysisForExport } from "../utils/analyses-execution";

@@ -1,0 +1,94 @@
+.report-view,
+.report-details {
+    background-color: var(--theme-primary-color);
+    color: var(--theme-secondary-color);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: calc(var(--gdu) * 4);
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+}
+
+.report-view .report-view-title,
+.report-details h1 {
+    text-align: center;
+    font-weight: 500;
+    margin: calc(var(--gdu) * 2) auto calc(var(--gdu) * 5) auto;
+    font-size: var(--font-size-xl);
+    line-height: 120%;
+    font-family: "Jost Medium";
+}
+
+.report-view .report-view-title {
+    max-width: var(--max-width);
+    margin: calc(var(--gdu) * 4) auto calc(var(--gdu) * 8) auto;
+    line-height: 28.8px;
+}
+
+.report-view p {
+    margin: auto;
+    max-width: var(--max-width);
+    font-size: 18px;
+}
+
+.report-view .button-area::before {
+    content: "";
+    height: 60px;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    left: 0;
+    background: linear-gradient(#ffffff00 0%, --theme-primary-color);
+}
+
+.report-view .button-area {
+    display: block;
+    background-color: var(--theme-primary-color);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: calc(var(--gdu) * 3) calc(var(--gdu) * 7) calc(var(--gdu) * 8) calc(var(--gdu) * 7);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.report-view .view-details,
+.report-view .send-later,
+.report-view .send {
+    font-family: "Jost Medium";
+    font-size: 18px;
+    margin-top: calc(var(--gdu) * 3);
+    text-align: center;
+}
+
+.report-view .view-details {
+    color: var(--theme-secondary-color);
+    text-decoration: underline;
+}
+
+.report-view .send-later,
+.report-view .send {
+    width: 100%;
+    height: 51px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.report-view .send-later {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--theme-secondary-color) !important;
+    background: transparent;
+    color: var(--theme-secondary-color) !important;
+}
+
+.report-view .send {
+    background-color: var(--theme-secondary-color);
+    color: var(--theme-primary-color);
+}

@@ -1,4 +1,4 @@
-import i18n from "../i18n";
+import i18n from "!silly-i18n";
 
 const defaultFormat = i18n.t("common:time.format");
 
@@ -9,15 +9,17 @@ const defaultDisplayOptions = {
 };
 
 /**
- * Formats time to a string
- * @param {number || string || object} time - Time as a number (seconds), string (UTC) or a Date object
- * @param {string = i18n-format} format
- * @param {object} options
- * @param {string} options.weekday - Weekday representation
- * @param {string = "numeric"} options.day - Day representation
- * @param {string = "long"} options.months - Months representation
- * @param {string = "numeric"} options.year - Year representation
- * @returns string
+ * Formats time to a string.
+ * @callback formatTime
+ * @param {number|string|object} time - The time to be formatted.
+ * Time as a number (representing seconds since epoch), string (UTC, in the format "YYYY-MM-DD") or a Date object.
+ * @param {string} [format] - The format of the date in i18n-format
+ * @param {object} [options]
+ * @param {string} [options.weekday] - Weekday representation
+ * @param {string} [options.day] - Day representation, defaults to "numeric"
+ * @param {string} [options.months] - Months representation, defaults to "long"
+ * @param {string} [options.year] - Year representation, defaults to "numeric"
+ * @returns A string representing the date and time in the format specified by the format parameter.
  */
 export const formatTime = (
     time,

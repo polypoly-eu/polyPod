@@ -1,61 +1,42 @@
-import React, { useContext, useState } from "react";
-import { PolyImportContext } from "@polypoly-eu/poly-look";
-import { GoogleContext } from "../../context/google-context.jsx";
-import { useHistory } from "react-router-dom";
-import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
+import React, { useState } from "react";
+import { Screen, ProgressBar } from "@polypoly-eu/poly-look";
+import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
+
+import "./import.css";
+
+const importSections = ["request", "download", "import", "explore"];
+
+const importSteps = {
+    beginning: "beginning",
+    request: "request",
+    download: "download",
+    import: "import",
+    explore: "explore",
+};
 
 const ImportView = () => {
-    const { pod, runWithLoadingScreen, setGlobalError } =
-        useContext(GoogleContext);
-    const { files, refreshFiles, handleRemoveFile } =
-        useContext(PolyImportContext);
+    const [importStatus, setImportStatus] = useState(importSteps.beginning);
 
-    const [selectedFile, setSelectedFile] = useState(null);
-
-    const history = useHistory();
-
-    const handleSelectFile = async () => {
-        const { polyNav } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
-            } catch (error) {
-                setGlobalError(new FileSelectionError(error));
-            }
-        });
-    };
-
-    const handleImportFile = async () => {
-        if (!selectedFile) return;
-        const { polyOut } = pod;
-        if (files?.[0]?.id) handleRemoveFile(files[0].id);
-        runWithLoadingScreen(async function () {
-            try {
-                await polyOut.importArchive(selectedFile.url);
-                refreshFiles();
-                setSelectedFile(null);
-            } catch (error) {
-                setGlobalError(new FileImportError(error));
-            }
-        });
-    };
+    function updateImportStatus(status) {
+        setImportStatus(status);
+    }
 
     return (
-        <div className="import-view">
-            <button className="btn secondary" onClick={handleSelectFile}>
-                Select File
-            </button>
-            <button className="btn secondary" onClick={handleImportFile}>
-                Import File
-            </button>
-            <button
-                onClick={() => {
-                    files.length > 0 ? history.push("/") : null;
-                }}
-            >
-                Explore
-            </button>
-        </div>
+        <Screen
+            className="import-view poly-theme-light"
+            layout="poly-standard-layout"
+        >
+            <ProgressBar
+                onUpdateImportStatus={updateImportStatus}
+                importSections={importSections}
+            />
+            <ImportExplanationExpandable
+                importSteps={importSteps}
+                importSections={importSections}
+                importStatus={importStatus}
+                onUpdateImportStatus={updateImportStatus}
+            />
+        </Screen>
     );
 };
 

@@ -1,38 +1,28 @@
 import {
     Pod,
     PolyOut,
-    PolyLifecycle,
     PolyIn,
     PolyNav,
     ExternalFile,
     Endpoint,
-    EncodingOptions,
     Entry,
     Matcher,
     Stats,
     Info,
-} from "@polypoly-eu/pod-api";
+    SPARQLQueryResult,
+    Triplestore,
+} from "@polypoly-eu/api";
 import { DataFactory, Quad } from "rdf-js";
 
 class AsyncPolyOut implements PolyOut {
     constructor(private readonly promise: Promise<PolyOut>) {}
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-    readFile(path: string): Promise<Uint8Array>;
-    async readFile(
-        path: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array> {
-        if (options) return (await this.promise).readFile(path, options);
-        else return (await this.promise).readFile(path);
+    async readFile(path: string): Promise<Uint8Array> {
+        return (await this.promise).readFile(path);
     }
 
-    async writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): Promise<void> {
-        return (await this.promise).writeFile(path, content, options);
+    async writeFile(path: string, content: string): Promise<void> {
+        return (await this.promise).writeFile(path, content);
     }
     async stat(path: string): Promise<Stats> {
         return (await this.promise).stat(path);
@@ -41,12 +31,24 @@ class AsyncPolyOut implements PolyOut {
         return (await this.promise).readDir(path);
     }
 
-    async importArchive(url: string): Promise<string> {
-        return (await this.promise).importArchive(url);
+    async importArchive(url: string, destUrl?: string): Promise<string> {
+        return (await this.promise).importArchive(url, destUrl);
     }
 
     async removeArchive(fileId: string): Promise<void> {
         return (await this.promise).removeArchive(fileId);
+    }
+}
+
+class AsyncTriplestore implements Triplestore {
+    constructor(private readonly promise: Promise<Triplestore>) {}
+
+    async query(query: string): Promise<SPARQLQueryResult> {
+        return (await this.promise).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        return (await this.promise).update(query);
     }
 }
 
@@ -57,16 +59,16 @@ class AsyncPolyIn implements PolyIn {
         return (await this.promise).match(matcher);
     }
 
-    async add(...quads: Quad[]): Promise<void> {
-        return (await this.promise).add(...quads);
+    async add(quad: Quad): Promise<void> {
+        return (await this.promise).add(quad);
     }
 
-    async delete(...quads: Quad[]): Promise<void> {
-        return (await this.promise).delete(...quads);
+    async delete(quad: Quad): Promise<void> {
+        return (await this.promise).delete(quad);
     }
 
-    async has(...quads: Quad[]): Promise<boolean> {
-        return (await this.promise).has(...quads);
+    async has(quad: Quad): Promise<boolean> {
+        return (await this.promise).has(quad);
     }
 }
 
@@ -128,31 +130,13 @@ class AsyncEndpoint implements Endpoint {
     }
 }
 
-class AsyncPolyLifecycle implements PolyLifecycle {
-    constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
-
-    private async force(): Promise<PolyLifecycle> {
-        const lifecycle = await this.promise;
-        if (lifecycle) return lifecycle;
-        throw new Error("Lifecycle is not implemented");
-    }
-
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return (await this.force()).listFeatures();
-    }
-
-    async startFeature(id: string, background: boolean): Promise<void> {
-        return (await this.force()).startFeature(id, background);
-    }
-}
-
 export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
     readonly info: Info;
     readonly endpoint: Endpoint;
-    readonly polyLifecycle: PolyLifecycle;
+    readonly triplestore: Triplestore;
 
     constructor(
         private readonly promise: Promise<Pod>,
@@ -163,8 +147,8 @@ export class AsyncPod implements Pod {
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
-        this.polyLifecycle = new AsyncPolyLifecycle(
-            promise.then((pod) => pod.polyLifecycle)
+        this.triplestore = new AsyncTriplestore(
+            promise.then((pod) => pod.triplestore)
         );
     }
 }

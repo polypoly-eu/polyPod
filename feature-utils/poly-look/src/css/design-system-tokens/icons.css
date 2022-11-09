@@ -1,0 +1,11 @@
+:root {
+  /* Library tokens */
+
+  --pl-icon-small: 16px;
+  --pl-icon-medium: 24px;
+
+  /* Component tokens */
+
+  /* Text field */
+  --pl-field-icon-size: var(--pl-icon-medium);
+}

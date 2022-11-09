@@ -7,20 +7,23 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-} from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
-import { dataFactory } from "@polypoly-eu/rdf";
+    Stats,
+    Entry,
+    SPARQLQueryResult,
+    Triplestore,
+} from "@polypoly-eu/api";
+import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
-import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
-import endpointsJson from "../../../../polyPod-config/endpoints.json";
+import endpointsJson from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
+import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
+import oxigraphWasmModule from "oxigraph/web_bg.wasm";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
-const OBJECT_STORE_POLY_IN = "poly-in";
+const OBJECT_STORE_QUADS = "quads";
 const OBJECT_STORE_POLY_OUT = "poly-out";
-const QUAD_KEYS = ["subject", "predicate", "object"];
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
@@ -29,6 +32,10 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
+/**
+ * It opens a IndexedDB database, creates object stores and indexes for PolyIn and PolyOut storage.
+ * @returns An IDBDatabase object.
+ */
 async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         const name = `${DB_PREFIX}${document.location.pathname}`;
@@ -36,14 +43,11 @@ async function openDatabase(): Promise<IDBDatabase> {
 
         request.onupgradeneeded = () => {
             const db = request.result;
-            const polyInStore = db.createObjectStore(OBJECT_STORE_POLY_IN, {
-                keyPath: QUAD_KEYS,
+            db.createObjectStore(OBJECT_STORE_QUADS);
+            const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
+                autoIncrement: true,
             });
-            for (let mask = 1; mask < (1 << QUAD_KEYS.length) - 1; mask++) {
-                const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
-                polyInStore.createIndex(keyPath.join("-"), keyPath);
-            }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+            polyOutStore.createIndex("id", "id");
         };
 
         request.onsuccess = () => resolve(request.result);
@@ -51,103 +55,121 @@ async function openDatabase(): Promise<IDBDatabase> {
     });
 }
 
-class IDBPolyIn implements PolyIn {
+const oxigraphStore = (async () => {
+    type wasmModule = () => Promise<WebAssembly.Module>;
+    const data = (
+        await Promise.all([
+            initOxigraph((oxigraphWasmModule as unknown as wasmModule)()),
+            openDatabase().then(
+                (db) =>
+                    new Promise((resolve, reject) => {
+                        const objectStores = [OBJECT_STORE_QUADS];
+                        const tx = db.transaction(objectStores, "readonly");
+                        const store = tx.objectStore(OBJECT_STORE_QUADS);
+                        const request = store.get(0);
+                        request.onsuccess = () => resolve(request.result);
+                        tx.onerror = tx.onabort = () => reject(request.error);
+                    })
+            ),
+        ])
+    )[1] as string;
+    const store = new oxigraph.Store();
+    if (data) store.load(data, "application/n-quads", undefined, undefined);
+    return store;
+})();
+
+let pendingWrite: Promise<void> | null = null;
+
+async function writeOxigraphStore(store: oxigraph.Store): Promise<void> {
+    return (pendingWrite ||= (async (): Promise<void> => {
+        try {
+            const db = await openDatabase();
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction([OBJECT_STORE_QUADS], "readwrite");
+                const data = store.dump("application/n-quads", undefined);
+                tx.objectStore(OBJECT_STORE_QUADS).put(data, 0);
+                tx.oncomplete = () => resolve(undefined);
+                tx.onerror = tx.onabort = () => reject(tx.error);
+            });
+        } finally {
+            pendingWrite = null;
+        }
+    })());
+}
+
+/**
+ * It implements the `PolyIn` interface by storing quads using Oxigraph
+ * and syncing the storage to IndexedDB
+ * @class IDBPolyIn
+ */
+class BrowserPolyIn implements PolyIn {
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const index = [];
-            const query = [];
-            for (const key of QUAD_KEYS) {
-                const value = matcher[key as keyof Matcher];
-                if (value) {
-                    index.push(key);
-                    query.push(RDFString.termToString(value));
-                }
-            }
-
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            const request =
-                index.length > 0
-                    ? (index.length < QUAD_KEYS.length
-                          ? store.index(index.join("-"))
-                          : store
-                      ).getAll(query)
-                    : store.getAll();
-
-            request.onsuccess = () =>
-                resolve(
-                    request.result.map((quad: RDFString.IStringQuad) =>
-                        RDFString.stringQuadToQuad(quad)
-                    )
-                );
-
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-    }
-
-    private checkQuad(quad: RDF.Quad): void {
-        if (!quad.graph.equals(dataFactory.defaultGraph()))
-            throw new Error("Only default graph allowed");
-    }
-
-    async add(...quads: RDF.Quad[]): Promise<void> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) {
-                this.checkQuad(quad);
-                store.put(RDFString.quadToStringQuad(quad));
-            }
-            tx.oncomplete = () => resolve();
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-    }
-
-    private serializeKeys(quad: RDF.Quad): string[] {
-        this.checkQuad(quad);
-        return QUAD_KEYS.map((key) =>
-            RDFString.termToString(quad[key as keyof RDF.Quad] as RDF.Term)
+        return (await oxigraphStore).match(
+            matcher.subject,
+            matcher.predicate,
+            matcher.object,
+            matcher.graph
         );
     }
 
-    async delete(...quads: RDF.Quad[]): Promise<void> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) store.delete(this.serializeKeys(quad));
-            tx.oncomplete = () => resolve();
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
+    private checkQuad(quad: RDF.Quad): void {
+        if (quad.graph.termType != "DefaultGraph")
+            throw new Error("Only default graph allowed");
     }
 
-    async has(...quads: RDF.Quad[]): Promise<boolean> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            const lookupQuad = (i: number): void => {
-                if (i >= quads.length) resolve(false);
-                else {
-                    const request = store.count(this.serializeKeys(quads[i]));
-                    request.onsuccess = () =>
-                        request.result > 0 ? resolve(true) : lookupQuad(i + 1);
-                }
-            };
-            lookupQuad(0);
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
+    async add(quad: RDF.Quad): Promise<void> {
+        const store = await oxigraphStore;
+        this.checkQuad(quad);
+        store.add(quad);
+        await writeOxigraphStore(store);
+    }
+
+    async delete(quad: RDF.Quad): Promise<void> {
+        const store = await oxigraphStore;
+        this.checkQuad(quad);
+        store.delete(quad);
+        await writeOxigraphStore(store);
+    }
+
+    async has(quad: RDF.Quad): Promise<boolean> {
+        const store = await oxigraphStore;
+        this.checkQuad(quad);
+        return store.has(quad);
     }
 }
 
-// Since pickFile and importArchive work with local URLs that have the actual
-// archive file name as their last component, and since the current BrowserPod
-// implementation works with data URLs which don't, we employ a little workaround.
+class BrowserTriplestore implements Triplestore {
+    async query(query: string): Promise<SPARQLQueryResult> {
+        return (await oxigraphStore).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        const store = await oxigraphStore;
+        store.update(query);
+        await writeOxigraphStore(store);
+    }
+}
+
+/**
+ * @class FileUrl takes a URL and splits it into a path and a file name in a FileUrl format
+ * Since pickFile and importArchive work with local URLs that have the actual
+ * archive file name as their last component, and since the current BrowserPod
+ * implementation works with data URLs which don't, we employ a little workaround.
+ */
 class FileUrl {
     private static readonly separator = "/";
 
+    constructor(
+        readonly url: string,
+        readonly data: string,
+        readonly fileName: string
+    ) {}
+
+    /**
+     * It takes a URL and splits it into a path and a file name in a FileUrl format.
+     * @param {string} url - The full URL of the file.
+     * @returns A FileUrl object.
+     */
     static fromUrl(url: string): FileUrl {
         const [lastComponent, ...rest] = url.split(FileUrl.separator).reverse();
         return new FileUrl(
@@ -157,16 +179,16 @@ class FileUrl {
         );
     }
 
+    /**
+     * Creates a new FileUrl object from the given data and fileName
+     * @param {string} data - The base URL of the file.
+     * @param {string} fileName - The name of the file.
+     * @returns A FileUrl object.
+     */
     static fromParts(data: string, fileName: string): FileUrl {
         const url = data + FileUrl.separator + fileName;
         return new FileUrl(url, data, fileName);
     }
-
-    constructor(
-        readonly url: string,
-        readonly data: string,
-        readonly fileName: string
-    ) {}
 }
 
 interface FileInfo {
@@ -177,64 +199,18 @@ interface FileInfo {
 }
 
 /**
- * A variant of Stats that maintains compatibility with other polyPod
- * implementations by exposing value properties.
- *
- * TODO: Eliminate the need for this, either by adding the value properties to
- *       the Stats interface, or by eliminating them in all other polyPod
- *       implementations, and their usages in all features.
+ * It implements the PolyOut interface by storing files in IndexedDB
+ * @class IDBPolyOut
  */
-class CompatStats implements Stats {
-    constructor(
-        readonly id: string,
-        readonly size: number,
-        readonly time: string,
-        readonly name: string,
-        readonly directory: boolean
-    ) {}
-
-    get file(): boolean {
-        return !this.directory;
-    }
-
-    getId(): string {
-        return this.id;
-    }
-
-    getSize(): number {
-        return this.size;
-    }
-
-    getTime(): string {
-        return this.time;
-    }
-
-    getName(): string {
-        return this.name;
-    }
-
-    isFile(): boolean {
-        return this.file;
-    }
-
-    isDirectory(): boolean {
-        return this.directory;
-    }
-}
-
-interface File {
-    read(): Promise<Uint8Array>;
-    stat(): CompatStats;
-}
-
-class IDBPolyOut implements PolyOut {
-    private async getFileInfo(id: string): Promise<FileInfo> {
+class BrowserPolyOut implements PolyOut {
+    private async getFileInfos(id: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").getAll(id);
             request.onsuccess = () => {
-                if (request.result) resolve(request.result);
+                if (request.result.length > 0) resolve(request.result);
                 else reject(new Error(`File not found: ${id}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
@@ -242,12 +218,17 @@ class IDBPolyOut implements PolyOut {
     }
 
     private async getZipEntries(id: string): Promise<zip.Entry[]> {
-        const file = await this.getFileInfo(id);
-        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
-        return reader.getEntries();
+        const entries = [];
+        for (const file of await this.getFileInfos(id)) {
+            const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+            entries.push(...(await reader.getEntries()));
+        }
+        return entries;
     }
 
-    private async getFile(id: string): Promise<File> {
+    private async getFile(
+        id: string
+    ): Promise<{ read(): Promise<Uint8Array>; stat(): Stats }> {
         const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
         if (match) {
             const [, zipId, filename] = match;
@@ -262,49 +243,41 @@ class IDBPolyOut implements PolyOut {
                     return entry.getData(new zip.Uint8ArrayWriter());
                 },
                 stat() {
-                    return new CompatStats(
+                    return {
                         id,
-                        entry.uncompressedSize,
-                        entry.lastModDate.toISOString(),
-                        filename,
-                        entry.directory
-                    );
+                        size: entry.uncompressedSize,
+                        time: entry.lastModDate.toISOString(),
+                        name: filename,
+                        directory: entry.directory,
+                    };
                 },
             };
         }
 
-        const file = await this.getFileInfo(id);
+        const file = (await this.getFileInfos(id))[0];
         return {
             async read() {
                 return new Uint8Array(await file.blob.arrayBuffer());
             },
             stat() {
-                return new CompatStats(
+                return {
                     id,
-                    file.blob.size,
-                    file.time.toISOString(),
-                    file.name,
-                    false
-                );
+                    size: file.blob.size,
+                    time: file.time.toISOString(),
+                    name: file.name,
+                    directory: false,
+                };
             },
         };
     }
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-    readFile(path: string): Promise<Uint8Array>;
-    readFile(
-        id: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array | undefined> {
-        if (options) {
-            throw new Error("Not implemented: readFile with options");
-        }
-        return this.getFile(id).then((file) => file.read());
+    async readFile(id: string): Promise<Uint8Array> {
+        return (await this.getFile(id)).read();
     }
 
-    async stat(id: string): Promise<CompatStats> {
+    async stat(id: string): Promise<Stats> {
         if (id != "") return (await this.getFile(id)).stat();
-        return new CompatStats("", 0, "", "", true);
+        return { id: "", size: 0, time: "", name: "", directory: true };
     }
 
     async readDir(id: string): Promise<Entry[]> {
@@ -330,38 +303,55 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    async importArchive(url: string): Promise<string> {
+    async importArchive(url: string, destUrl?: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
+            if (destUrl && !isPolypodUri(destUrl)) {
+                reject(`${destUrl} is not a polypod:// URI`);
+            }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const fileId = "polypod://" + createUUID();
+            const id = destUrl || new PolyUri().toString();
 
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
-                id: fileId,
+            tx.objectStore(OBJECT_STORE_POLY_OUT).add({
+                id,
                 name: fileName,
                 time: new Date(),
                 blob,
             });
 
-            tx.oncomplete = () => resolve(fileId);
+            tx.oncomplete = () => resolve(id);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(fileId: string): Promise<void> {
+    async removeArchive(id: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").openCursor(id);
+
+            request.onsuccess = () => {
+                const cursor = request.result;
+                if (cursor) {
+                    cursor.delete();
+                    cursor.continue();
+                }
+            };
+
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 }
 
+/**
+ * PodJsInfo is used to return the runtime name and a version of PodJs
+ * @class PodJsInfo
+ */
 class PodJsInfo implements Info {
     async getRuntime(): Promise<string> {
         return "podjs";
@@ -372,12 +362,29 @@ class PodJsInfo implements Info {
     }
 }
 
+/**
+ * @interface NetworkResponse
+ */
 interface NetworkResponse {
     payload?: string;
     error?: string;
 }
 
+/**
+ * BrowserNetwork makes network requests using XMLHttpRequest.
+ * @class BrowserNetwork
+ */
 class BrowserNetwork {
+    /**
+     * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
+     * And returns the network response as a promise.
+     * @param {string} url - The URL to which the request is sent.
+     * @param {string} body - The body of the request.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A Promise of the Network Response of the call that was executed.
+     */
     async httpPost(
         url: string,
         body: string,
@@ -394,6 +401,15 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a GET request to the specified URL, and returns the response
+     * @param {string} url - The URL to fetch.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A promise that resolves to the NetworkResponse
+     */
     async httpGet(
         url: string,
         allowInsecure: boolean,
@@ -408,6 +424,17 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a network request of type passed and returns the response [[NetworkResponse]]
+     * @param {string} type - The HTTP method to use.
+     * @param {string} url - The URL to fetch.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
+     * @param {string} [body] - The body of the request.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns {Promise<NetworkResponse>} The promise is resolved with a NetworkResponse object.
+     */
     private async httpFetchRequest(
         type: string,
         url: string,
@@ -471,15 +498,29 @@ interface EndpointInfo {
 
 interface EndpointJSON {
     polyPediaReport: EndpointInfo;
+    polyApiErrorReport: EndpointInfo;
     demoTest: EndpointInfo;
 }
 
 type EndpointKeyId = keyof EndpointJSON;
 
+/**
+ * Given an endpointId, return the corresponding EndpointInfo object, or null if the endpointId is not
+ * found.
+ *
+ * @param {EndpointKeyId} endpointId - The endpoint ID that you want to get the endpoint info for.
+ * @returns EndpointInfo | null
+ */
 function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
-    return (endpointsJson as EndpointJSON)[endpointId] || null;
+    return (endpointsJson as unknown as EndpointJSON)[endpointId] || null;
 }
 
+/**
+ * It takes an endpoint ID and asks the user if they want to allow the feature to fetch data from that
+ * endpoint
+ * @param {string} endpointId - The endpoint ID that the feature wants to contact.
+ * @returns The return value is a boolean.
+ */
 function approveEndpointFetch(endpointId: string): boolean {
     const featureName = window.parent.currentTitle || window.manifest.name;
     return confirm(
@@ -487,13 +528,23 @@ function approveEndpointFetch(endpointId: string): boolean {
     );
 }
 
+/**
+ * It returns a string that contains the error message.
+ * @param {string} fetchType - The type of fetch that failed.
+ * @param {string} errorlog - The error message that was returned by the endpoint.
+ * @returns a promise.
+ */
 function endpointErrorMessage(fetchType: string, errorlog: string): string {
     console.error(errorlog);
     return `Endpoint failed at : ${fetchType}`;
 }
 
+/**
+ * @class BrowserEndpoint @implements [[Endpoint]]
+ */
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
+
     async send(
         endpointId: EndpointKeyId,
         payload: string,
@@ -544,20 +595,15 @@ class BrowserEndpoint implements Endpoint {
     }
 }
 
-function createUUID(): string {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        /[xy]/g,
-        function (c) {
-            const r = (Math.random() * 16) | 0,
-                v = c == "x" ? r : (r & 0x3) | 0x8;
-            return v.toString(16);
-        }
-    );
-}
-
+/**
+ * @class `BrowserPolyNavPolyNav` @implements [[PolyNav]]
+ */
 class BrowserPolyNav implements PolyNav {
     actions?: { [key: string]: () => void };
+
+    /** Creating a function that will be called when the user releases a key on the keyboard. */
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
+    /** Creating a function that will be called when the browser's history state changes. */
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ((this: Window, ev: PopStateEvent) => any) | undefined;
 
@@ -673,9 +719,10 @@ declare global {
 }
 
 /**
- * Returns the relative luminance value of a feature color.
+ * It takes a feature color and returns the relative luminance value of it.
  *
- * @param featureColor - A six digit hex color string, e.g. #000000
+ * @param {string} featureColor - the color of the feature you want to change in a six digit hex color string, e.g. #000000
+ * @returns The luminance of the feature color.
  */
 function luminance(featureColor: string): number {
     const red = parseInt(featureColor.substr(1, 2), 16);
@@ -685,6 +732,12 @@ function luminance(featureColor: string): number {
     return red * 0.2126 + green * 0.7152 + blue * 0.0722;
 }
 
+/**
+ * It determines the foreground and background colors for the navbar based on the primary color of the
+ * app.
+ * @param {Manifest} manifest
+ * @returns { fg: string; bg: string } object
+ */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
     const brightnessThreshold = 80;
@@ -695,13 +748,16 @@ function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     return { fg, bg };
 }
 
+/**
+ * Create a new iframe with a title and a background color
+ * @param {string} title - The title of the page.
+ * @returns A promise that resolves to a DOM element.
+ */
 function createNavBarFrame(title: string): HTMLElement {
     const frame = document.createElement("iframe");
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
-    frame.frameBorder = "0";
-    frame.scrolling = "no";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);
@@ -722,14 +778,20 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
+/**
+ * The @class BrowserPod @implements a [[Pod]]
+ * that uses the browser's local storage to store polyIn and polyOut data
+ */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
-    public readonly polyIn = new IDBPolyIn();
-    public readonly polyOut = new IDBPolyOut();
+    public readonly polyIn = new BrowserPolyIn();
+    public readonly polyOut = new BrowserPolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
+    public readonly triplestore = new BrowserTriplestore();
 
+    /** Creates a navigation bar for the app. */
     constructor() {
         window.addEventListener("load", async () => {
             if (!MANIFEST_DATA) {

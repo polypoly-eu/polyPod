@@ -1,5 +1,5 @@
 import React from "react";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import {
     OnOffFacebookMiniStorySummary,
@@ -11,7 +11,7 @@ import Story from "./story.jsx";
 class OnOffFacebookEventsMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [
+        this.neededAnalyses = [
             analysisKeys.companiesCount,
             analysisKeys.companiesWithAdsCount,
             analysisKeys.onOffEvents,
@@ -32,7 +32,7 @@ class OnOffFacebookEventsMinistory extends Story {
         );
     }
 
-    renderDetails() {
+    _renderDetails() {
         return (
             <OnOffFacebookMiniStoryDetails
                 displayData={

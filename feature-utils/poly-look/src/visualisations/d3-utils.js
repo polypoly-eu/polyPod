@@ -1,10 +1,8 @@
 import * as d3 from "d3";
 
 /**
- *  Wraps d3-texts on whitespaces
- *
- *  To be called like so: textSelection.call(wrapTexts)
- *
+ * Wraps d3-texts on whitespaces.
+ * To be called like so: textSelection.call(wrapTexts)
  * @param {d3-text-selection} texts
  */
 export function wrapTexts(texts) {
@@ -43,10 +41,9 @@ export function wrapTexts(texts) {
 }
 
 /**
- * Only keeps Day, Month and Yar from a date
- *
- * @param {Date} Date
- * @returns Date
+ * Returns the passed date in a %Y-%m-%d format.
+ * @param {Date} date - a js Date object.
+ * @returns {Date} - a Date in a %Y-%m-%d format.
  */
 export function trimTimeOfDate(jsDate) {
   const date = `${jsDate.getFullYear()}-${

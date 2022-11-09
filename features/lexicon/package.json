@@ -19,8 +19,7 @@
     "@prismicio/client": "^4.0.0",
     "prismic-dom": "^2.2.5",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-svelte": "^7.1.0",
-    "svelte": "^3.0.0"
+    "rollup-plugin-svelte": "^7.1.0"
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
@@ -28,6 +27,9 @@
     "sirv-cli": "^1.0.0"
   },
   "jest": {
+    "moduleNameMapper": {
+      "^!silly-i18n$": "<rootDir>/test/mocks/i18n-mock.js"
+    },
     "transform": {
       "^.+\\.js$": [
         "babel-jest",

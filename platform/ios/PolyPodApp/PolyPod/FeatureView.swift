@@ -1,22 +1,24 @@
+import PolyPodCoreSwift
 import SwiftUI
 
 struct FeatureView: View {
     @Environment(\.presentationMode)
     var presentationMode: Binding<PresentationMode>
-    
+
     let feature: Feature
     var closeAction: () -> Void = {}
-    
+
     @State var title: String = ""
     @State var activeActions: [String] = []
-    @State var queuedAction: (String, DispatchTime)? = nil
+    @State var queuedAction: (String, DispatchTime)?
     @State var filePicker = FilePicker()
-    
+
     var body: some View {
-        let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
+        let featureColor = Color(fromHex: feature.primaryColor)
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
-        
+
+        // swiftlint:disable multiple_closures_with_trailing_closure
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {
@@ -24,14 +26,15 @@ struct FeatureView: View {
                     return
                 }
                 closeAction()
-            }
-        ) {
-            let qualifier = activeActions.contains("back") ? "Back" : "Close"
-            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                .renderingMode(.original)
-        }
-        
-        let titleLabel = Text(title != "" ? title : feature.name)
+            }) {
+                let qualifier = activeActions.contains("back") ? "Back" : "Close"
+                Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                    .renderingMode(.original)
+            }.accessibilityElement()
+            .accessibilityIdentifier("feature_close_button")
+        // swiftlint:enable multiple_closures_with_trailing_closure
+
+        let titleLabel = Text(!title.isEmpty ? title : feature.name)
             .foregroundColor(
                 lightForeground
                     ? Color.PolyPod.lightForeground
@@ -40,23 +43,31 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
-        
+            .accessibilityElement()
+            .accessibilityIdentifier("feature_title_text")
+
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
+                // swiftlint:disable multiple_closures_with_trailing_closure
                 Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
-            
+
             if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }) {
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: { triggerFeatureAction("info")}) {
                     Image("NavIconInfo\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
         }
-        
+
         VStack(spacing: 0) {
             NavigationBar(
                 leading: AnyView(closeButton),
@@ -64,7 +75,7 @@ struct FeatureView: View {
                 trailing: AnyView(actionButtons)
             )
             .background(featureColor)
-            
+
             FeatureContainerView(
                 feature: feature,
                 title: $title,
@@ -74,10 +85,11 @@ struct FeatureView: View {
                 openUrlHandler: openUrl,
                 pickFileHandler: pickFile
             )
-        }
+        }.accessibilityElement()
+        .accessibilityIdentifier("feature_view")
     }
-    
-    private func handleError(_ error: String) {
+
+    private func handleError(_ errorMsg: String) {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
@@ -85,24 +97,52 @@ struct FeatureView: View {
                     "message_feature_error %@ %@",
                     comment: ""
                 ),
-                feature.name, error
+                feature.name, errorMsg
             ),
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString(
+                "button_error_report_allow",
+                comment: ""
+            ),
             style: .default,
-            handler: { (action: UIAlertAction!) in
+            handler: { _ in
+                closeAction()
+                PodApi.shared.endpoint.uploadError(
+                    errorMsg: errorMsg,
+                    endpointId: "polyApiErrorReport",
+                    completionHandler: { error in
+                        if error != nil {
+                            Log.error("Upload failed: \(error!.localizedDescription)")
+                            return
+                        }
+                        Log.debug("Error uploaded successfully")
+                    }
+                )
+            }
+        ))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString(
+                "button_error_report_deny",
+                comment: ""
+            ),
+            style: .default,
+            handler: { _ in
                 closeAction()
             }
         ))
+
+        alert.view.isAccessibilityElement = true
+        alert.view.accessibilityIdentifier = "feature_error_popup"
+
         UIApplication.shared.windows.first!.rootViewController!.present(
             alert,
             animated: true,
             completion: nil
         )
     }
-    
+
     private func openUrl(target: String) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
@@ -141,7 +181,7 @@ struct FeatureView: View {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { _ in
                                 UIApplication.shared.open(url)
                             }))
         alert.addAction(UIAlertAction(
@@ -152,11 +192,11 @@ struct FeatureView: View {
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
-    
+
     private func pickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         filePicker.pick(type: type, completion: completion)
     }
-    
+
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }

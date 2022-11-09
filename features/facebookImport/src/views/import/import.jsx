@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
-import { PolyImportContext } from "@polypoly-eu/poly-look";
-import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
+import { PolyImportContext, ProgressBar, Screen } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import { FBIMPORT_NAMESPACE } from "../../constants.js";
 
@@ -61,7 +60,7 @@ async function writeImportStatus(pod, status) {
 
 const Import = () => {
     const { pod, setGlobalError, runWithLoadingScreen } =
-        useContext(ImporterContext);
+        useContext(FacebookContext);
     const { files, handleRemoveFile, refreshFiles } =
         useContext(PolyImportContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
@@ -97,7 +96,7 @@ const Import = () => {
         runWithLoadingScreen(async function () {
             try {
                 await polyOut.importArchive(selectedFile.url);
-                refreshFiles();
+                await refreshFiles();
                 setSelectedFile(null);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
@@ -113,8 +112,11 @@ const Import = () => {
     }, [pod]);
 
     return (
-        <div className="import-view">
-            <ProgressBarComponent
+        <Screen
+            className="import-view poly-theme-light"
+            layout="poly-standard-layout"
+        >
+            <ProgressBar
                 onUpdateImportStatus={updateImportStatus}
                 importStatus={importStatus}
                 importSections={importSections}
@@ -143,7 +145,7 @@ const Import = () => {
                     }}
                 />
             ) : null}
-        </div>
+        </Screen>
     );
 };
 

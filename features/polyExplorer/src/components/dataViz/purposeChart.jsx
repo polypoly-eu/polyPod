@@ -1,6 +1,6 @@
 import React from "react";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import Scrollable from "../../components/scrollable/scrollable.jsx";
 
 import "./purposeChart.css";

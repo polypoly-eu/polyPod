@@ -5,6 +5,7 @@ import { SankeyDiagram } from "./flow-charts/sankeyDiagram/sankeyDiagram";
 import { HorizontalBarChart } from "./bar-charts/horizontalBarChart/horizontalBarChart";
 import { TreeMap } from "./treeMap/treeMap";
 import { TimeLineChart } from "./line-charts/time-line-chart/timeLineChart";
+import { mapToChartDataArray } from "./chart-utils";
 
 export {
   VerticalBarChart,
@@ -14,4 +15,5 @@ export {
   HorizontalBarChart,
   TreeMap,
   TimeLineChart,
+  mapToChartDataArray,
 };

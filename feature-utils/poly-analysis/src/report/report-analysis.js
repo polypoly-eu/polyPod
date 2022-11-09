@@ -1,4 +1,4 @@
-import RootAnalysis from "../../root-analysis.js";
+import RootAnalysis from "../analysis/root-analysis.js";
 
 export default class ReportAnalysis extends RootAnalysis {
     get isForDataReport() {

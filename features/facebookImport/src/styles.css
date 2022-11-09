@@ -47,18 +47,6 @@
     color: var(--color-text-light);
 }
 
-body {
-    margin: 0;
-}
-
-button {
-    border: none;
-}
-
-button:focus {
-    outline: 0;
-}
-
 .btn-highlighted,
 .btn-secondary {
     font-family: "Jost Medium";

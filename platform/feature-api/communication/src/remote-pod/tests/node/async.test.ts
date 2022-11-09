@@ -1,20 +1,15 @@
-import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import factory from "@rdfjs/dataset";
-import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
-import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
-import { DataFactory } from "@polypoly-eu/rdf";
+import { Pod, DefaultPod, DataFactory, podSpec } from "@polypoly-eu/api";
 
 describe("Async pod", () => {
-    const fs = new Volume().promises as unknown as FS;
-    const underlying = new DefaultPod(factory.dataset(), fs);
+    const underlying = new DefaultPod(factory.dataset(), new Volume().promises);
 
     describe("Resolved promise", () => {
         podSpec(
             new AsyncPod(Promise.resolve(underlying), new DataFactory(false)),
-            "/",
-            getHttpbinUrl()
+            "/"
         );
     });
 
@@ -23,44 +18,6 @@ describe("Async pod", () => {
             setTimeout(() => resolve(underlying), 500);
         });
 
-        podSpec(
-            new AsyncPod(delayed, new DataFactory(false)),
-            "/",
-            getHttpbinUrl()
-        );
-    });
-
-    // TODO move to api, duplicated code
-    describe("Lifecycle", () => {
-        let pod: Pod;
-        let log: Array<(string | boolean)[]>;
-
-        beforeEach(() => {
-            log = [];
-            const polyLifecycle: PolyLifecycle = {
-                startFeature: async (...args) => {
-                    log.push(args);
-                },
-                listFeatures: async () => ({
-                    "test-on": true,
-                    "test-off": false,
-                }),
-            };
-            Object.assign(underlying, { polyLifecycle });
-            pod = new AsyncPod(
-                Promise.resolve(underlying),
-                new DataFactory(false)
-            );
-        });
-
-        it("Starts feature", async () => {
-            await pod.polyLifecycle?.startFeature("hi", false);
-            await pod.polyLifecycle?.startFeature("yo", true);
-
-            expect(log).toEqual([
-                ["hi", false],
-                ["yo", true],
-            ]);
-        });
+        podSpec(new AsyncPod(delayed, new DataFactory(false)), "/");
     });
 });

@@ -19,58 +19,7 @@ open class Network(val context: Context) {
 
     data class NetworkResponse(var data: String?, var error: String?)
 
-    open suspend fun httpPost(
-        url: String,
-        body: String,
-        contentType: String?,
-        authToken: String?,
-        allowInsecure: Boolean
-    ): NetworkResponse = withContext(Dispatchers.IO) {
-        var response = NetworkResponse(data = null, error = null)
-        val connection = httpConnection(
-            "POST", url, body, contentType, authToken, allowInsecure
-        ) ?: return@withContext NetworkResponse(
-            null, "network connection failed"
-        )
-
-        try {
-            val responseCode = connection.responseCode
-            response.error = validateResponseCode(responseCode)
-            response.data =
-                connection.inputStream.bufferedReader().use { it.readText() }
-        } finally {
-            connection.disconnect()
-            return@withContext response
-        }
-        return@withContext response
-    }
-
-    open suspend fun httpGet(
-        url: String,
-        contentType: String?,
-        authToken: String?,
-        allowInsecure: Boolean
-    ): NetworkResponse = withContext(Dispatchers.IO) {
-        var response = NetworkResponse(data = null, error = null)
-        val connection = httpConnection(
-            "GET", url, null, contentType, authToken, allowInsecure
-        ) ?: return@withContext NetworkResponse(
-            null, "network connection failed"
-        )
-
-        try {
-            val responseCode = connection.responseCode
-            response.error = validateResponseCode(responseCode)
-            response.data =
-                connection.inputStream.bufferedReader().use { it.readText() }
-        } finally {
-            connection.disconnect()
-            return@withContext response
-        }
-        return@withContext response
-    }
-
-    fun validateResponseCode(responseCode: Int): String? {
+    private fun validateResponseCode(responseCode: Int): String? {
         if (responseCode < 200 || responseCode > 299) {
             logger.error(
                 "network.httpPost failed: Bad response code: $responseCode"
@@ -80,7 +29,7 @@ open class Network(val context: Context) {
         return null
     }
 
-    fun httpConnection(
+    private fun httpConnection(
         type: String,
         url: String,
         body: String?,
@@ -137,17 +86,67 @@ open class Network(val context: Context) {
                 "Content-Length",
                 encodedBody.size.toString()
             )
+            val outputStream = DataOutputStream(connection.outputStream)
             try {
-                val outputStream: DataOutputStream =
-                    DataOutputStream(connection.outputStream)
                 outputStream.write(encodedBody)
                 outputStream.flush()
             } catch (exception: Exception) {
                 logger.error("network.httpPost failed: $exception")
                 return null
+            } finally {
+                outputStream.close()
             }
         }
 
         return connection
+    }
+
+    open suspend fun httpPost(
+        url: String,
+        body: String,
+        contentType: String?,
+        authToken: String?,
+        allowInsecure: Boolean
+    ): NetworkResponse = withContext(Dispatchers.IO) {
+        var response = NetworkResponse(data = null, error = null)
+        val connection = httpConnection(
+            "POST", url, body, contentType, authToken, allowInsecure
+        ) ?: return@withContext NetworkResponse(
+            null, "network connection failed"
+        )
+
+        try {
+            val responseCode = connection.responseCode
+            response.error = validateResponseCode(responseCode)
+            response.data =
+                connection.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            connection.disconnect()
+        }
+        return@withContext response
+    }
+
+    open suspend fun httpGet(
+        url: String,
+        contentType: String?,
+        authToken: String?,
+        allowInsecure: Boolean
+    ): NetworkResponse = withContext(Dispatchers.IO) {
+        var response = NetworkResponse(data = null, error = null)
+        val connection = httpConnection(
+            "GET", url, null, contentType, authToken, allowInsecure
+        ) ?: return@withContext NetworkResponse(
+            null, "network connection failed"
+        )
+
+        try {
+            val responseCode = connection.responseCode
+            response.error = validateResponseCode(responseCode)
+            response.data =
+                connection.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            connection.disconnect()
+        }
+        return@withContext response
     }
 }

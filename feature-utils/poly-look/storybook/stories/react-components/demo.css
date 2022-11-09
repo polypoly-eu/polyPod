@@ -8,3 +8,29 @@
   padding: 16px;
   box-sizing: border-box;
 }
+
+.theme-holder {
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  bottom: 0;
+  overflow: auto;
+  box-sizing: border-box;
+  background-color: var(--pl-screen-color-fill);
+}
+
+.holder-left {
+  left: 0;
+  right: 50vh;
+}
+.holder-right {
+  left: 50vw;
+  right: 0;
+}
+
+.single-holder {
+  left: 0;
+  width: 100%;
+}

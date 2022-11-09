@@ -7,11 +7,11 @@ A Swift wrapper around PolyPodCore Rust library. Encapsulates specific Pointer a
 - Rust Core has to be built and exported as xcframework:
     - Run below command from the current directory:
 
-             make -C .. build_ios_xcframework
+             make -C .. ios_bindings
 
     - Or run this command from `core` directory:
 
-             make build_ios_xcframework
+             make ios_bindings
 
 - Open `Package.swift` and build/test the package.
     

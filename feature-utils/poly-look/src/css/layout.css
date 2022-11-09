@@ -4,5 +4,21 @@
 */
 
 .poly-standard-layout > * {
-  margin-bottom: 24px;
+  margin-bottom: calc(var(--gdu) * 6);
+}
+
+.poly-standard-layout > :first-child {
+  margin-top: calc(var(--gdu) * 6);
+}
+
+.poly-standard-layout h1 {
+  font-family: var(--jost-medium);
+  font-size: var(--font-size-xl);
+}
+
+.feature-container {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
 }

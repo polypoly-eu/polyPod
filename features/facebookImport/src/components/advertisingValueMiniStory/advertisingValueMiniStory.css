@@ -1,5 +1,5 @@
 .advertising-value-mini-story ul {
-    font-size: 14px;
+    font-size: var(--font-size-m);
     list-style-type: disc;
     list-style-position: outside;
     padding-left: 25px;
@@ -8,7 +8,7 @@
 }
 .advertising-value-mini-story .summary {
     margin-bottom: 36px;
-    font-size: 20px;
+    font-size: var(--font-size-l);
 }
 .advertising-value-mini-story ul li p {
     font-family: "Jost Bold";
@@ -34,7 +34,7 @@
 .detail-view .items {
     font-family: "Jost Medium";
     color: var(--color-gray-50);
-    font-size: 20px;
+    font-size: var(--font-size-l);
 }
 
 .detail-view .source {

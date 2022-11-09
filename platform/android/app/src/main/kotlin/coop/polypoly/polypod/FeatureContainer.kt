@@ -24,9 +24,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
+import coop.polypoly.core.Feature
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.endpoint.EndpointObserver
-import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -35,9 +35,10 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import coop.polypoly.polypod.triplestore.Triplestore
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
-import java.util.zip.ZipFile
+import java.io.File
 
 @SuppressLint("SetJavaScriptEnabled")
 class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
@@ -50,7 +51,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     // Public for test purposes
     val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    // Reassignable for test purposes
+    // Re-assignable for test purposes
     var api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
@@ -58,7 +59,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             webView = webView
         ),
         Info(),
-        Endpoint(context)
+        Endpoint(context),
+        Triplestore()
     )
 
     var feature: Feature? = null
@@ -69,6 +71,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
 
     var errorHandler: ((String) -> Unit)? = null
+
+    // It appears WebMessagePort keeps weak references to message callbacks,
+    // which causes them to be garbage collected after a while, causing a
+    // communication breakdown between platform and feature.
+    // Therefore, this is a field.
+    var postOfficeMessageCallback: WebMessagePort.WebMessageCallback? = null
 
     init {
         webView.layoutParams =
@@ -90,7 +98,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
-        WebView.setWebContentsDebuggingEnabled(true)
+        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
+
+        checkWebViewVersion()
+
         addView(webView)
     }
 
@@ -126,11 +137,41 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .show()
     }
 
+    /**
+     * WebView uses Chrome under the hood
+     * An at least Chrome version 53 is required.
+     * Here, we check what Chrome version the user has installed,
+     * and show them a warning if it's lower or equals than 53 (android API 24).
+     */
+    private fun checkWebViewVersion() {
+        // userAgentString holds all the info of User device, its format e.g.:
+        // """Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+        // AppleWebKit/535.19 (KHTML, like Gecko)
+        // Chrome/18.0.1025.133 Mobile Safari/535.19"""
+        val userAgentString = webView.settings.userAgentString
+
+        val regex = """(Chrome)/(?<major>\d+)[\d.]""".toRegex()
+        val matchResult = regex.find(userAgentString)
+        val (_, chromeVersion) = matchResult!!.destructured
+
+        if (chromeVersion.toInt() <= 53) {
+            val message = context.getString(
+                R.string.webview_alert_message,
+                chromeVersion
+            )
+
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.webview_alert_title))
+                .setMessage(message)
+                .show()
+        }
+    }
+
     private suspend fun approveEndpointFetch(
         endpointId: String?,
         completion: suspend (Boolean) -> String?
     ): String? {
-        var fetchApproval: CompletableDeferred<Boolean?>? =
+        val fetchApproval: CompletableDeferred<Boolean?> =
             CompletableDeferred()
         val featureName = feature?.name ?: throw PodApiError().endpointError()
         val message = context?.getString(
@@ -142,13 +183,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         AlertDialog.Builder(context)
             .setMessage(message)
             .setPositiveButton(confirmLabel) { _, _ ->
-                fetchApproval?.complete(true)
+                fetchApproval.complete(true)
             }
             .setNegativeButton(rejectLabel) { _, _ ->
-                fetchApproval?.complete(false)
+                fetchApproval.complete(false)
             }
             .show()
-        (fetchApproval?.await())?.let {
+        (fetchApproval.await())?.let {
             return completion(it)
         }
         throw PodApiError().endpointError()
@@ -156,7 +197,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        FeatureStorage.activeFeature = feature
+        FeatureStorage.activeFeatureId = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
@@ -175,7 +216,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .setDomain(PolyOut.fsDomain)
             .addPathHandler(
                 "/features/${feature.name}/",
-                FeaturesPathHandler(context, feature.content)
+                FeaturesPathHandler(context, feature.path)
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
@@ -247,15 +288,15 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 if (consoleMessage == null) {
                     logger.warn(
                         "Unknown message from " +
-                            FeatureStorage.activeFeature?.id
+                            FeatureStorage.activeFeatureId
                     )
                     return true
                 }
                 val message = "Message from " +
-                    FeatureStorage.activeFeature?.id + ": " +
+                    FeatureStorage.activeFeatureId + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
-                when (consoleMessage?.messageLevel()) {
+                when (consoleMessage.messageLevel()) {
                     ConsoleMessage.MessageLevel.ERROR,
                     ConsoleMessage.MessageLevel.WARNING ->
                         logger.warn(message)
@@ -273,13 +314,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         val channel: Array<WebMessagePort> = view.createWebMessageChannel()
         val outerPort = channel[0]
         val innerPort = channel[1]
-        outerPort.setWebMessageCallback(
-            PostOfficeMessageCallback(
-                lifecycleScope,
-                outerPort,
-                api
-            )
+        postOfficeMessageCallback = PostOfficeMessageCallback(
+            lifecycleScope,
+            outerPort,
+            api
         )
+        outerPort.setWebMessageCallback(postOfficeMessageCallback)
         view.postWebMessage(
             WebMessage("", arrayOf(innerPort)), Uri.parse("*")
         )
@@ -308,7 +348,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private class FeaturesPathHandler(
         private val context: Context,
-        private val featureFile: ZipFile
+        private val featureDirectoryPath: String
     ) : WebViewAssetLoader.PathHandler {
         override fun handle(path: String): WebResourceResponse? {
             logger.debug(
@@ -319,7 +359,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             if (path == podApiFile) {
                 val assetPath = "container/pod.js"
                 logger.debug("$podApiFile requested - returning $assetPath")
-                if (featureFile.getEntry(podApiFile) != null) {
+                if (File(featureDirectoryPath.plus("/$podApiFile")).exists()) {
                     logger.warn(
                         "Feature contains $podApiFile - ignoring in favour of $assetPath"
                     )
@@ -328,8 +368,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     .handle(assetPath)
             }
 
-            val entry = featureFile.getEntry(path)
-            if (entry == null) {
+            val entry = File(featureDirectoryPath.plus("/$path"))
+            if (!entry.exists()) {
                 logger.debug(
                     "FeaturesPathHandler, path '{}' not found, skipping",
                     path
@@ -347,7 +387,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             return WebResourceResponse(
                 mimeType,
                 null,
-                featureFile.getInputStream(entry)
+                entry.inputStream()
             )
         }
 
@@ -374,7 +414,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         fun reportError(error: String) {
             logger.warn(
                 "Uncaught error from " +
-                    FeatureStorage.activeFeature?.id + ": " + error
+                    FeatureStorage.activeFeatureId + ": " + error
             )
             errorHandler(error)
         }
@@ -382,7 +422,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
-            var clipboard: ClipboardManager =
+            val clipboard: ClipboardManager =
                 context.getSystemService(ClipboardManager::class.java)
             val clip = ClipData.newPlainText("nativeClipboardText", text)
             clipboard.setPrimaryClip(clip)

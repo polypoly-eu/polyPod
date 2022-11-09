@@ -14,6 +14,7 @@ enum PodApiError: Error {
     case networkError(_ fetchType: String, message: String)
     case networkSecurityError(_ fetchType: String, scheme: String)
     case endpointError(_ fetchType: String)
+    case userDeniedPermission(_ fetchType: String)
 }
 
 extension PodApiError: LocalizedError {
@@ -45,6 +46,8 @@ extension PodApiError: LocalizedError {
             return "network.\(fetchType) failed, URL scheme \(scheme) is not secure (https)"
         case .endpointError(let fetchType):
             return "endpoint.\(fetchType) failed"
+        case .userDeniedPermission(let fetchType):
+            return "endpoint.\(fetchType) request wasn't allowed by user"
         }
     }
 }

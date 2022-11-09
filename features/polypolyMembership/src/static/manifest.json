@@ -1,0 +1,20 @@
+{
+  "name": "polypoly-membership",
+  "author": "polypoly poly-cli",
+  "version": "0.0.1",
+  "description": "",
+  "thumbnail": "",
+  "thumbnailColor": "#ffffff",
+  "primaryColor": "#0f1938",
+  "borderColor": "#ffffff",
+  "links": {
+    "coop-become-part": "https://polypoly-citizens.eu/en/becomepart"
+  },
+  "translations": {
+    "de": {
+      "name": "polypoly-membership auf Deutsch",
+      "author": "",
+      "description": ""
+    }
+  }
+}

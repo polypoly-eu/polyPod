@@ -20,10 +20,12 @@
 "onboarding_slide4_body_text" = "We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.";
 "settings_title" = "Settings";
 "settings_about_section" = "Info";
+"settings_auth" = "Authentication";
 "settings_version" = "Version";
 "settings_legal_section" = "Legal";
 "settings_imprint_title" = "Imprint";
 "settings_privacy_policy_title" = "Privacy Policy";
+"settings_sec_section" = "Security";
 "settings_terms_of_use_title" = "Terms of Use";
 "settings_licenses_title" = "Licenses";
 "settings_export_logs" = "Export logs";
@@ -33,19 +35,33 @@
 "message_approve_endpoint_fetch_request %@ %@" = "%@-feature wants to share data with this endpoint from your polyPod:\n\n%@\n\nAllow?";
 "message_security_warning_title" = "Security warning";
 "message_security_warning_text" = "To ensure your data is secured, we recommend using your device screen lock.";
+"button_error_report_allow" = "Send error report to polypoly";
+"button_error_report_deny" = "Cancel";
+
 "button_confirm" = "Yes";
 "button_reject" = "No";
 "button_update_notification_close" = "OK";
-"auth_prompt_set_up" = "Set up authentification";
-"auth_prompt_unlock" = "Login to your polyPod";
+
+"auth_prompt_set_up" = "Set up authentication";
+"re_auth_prompt_set_up" = "Re-authorize authentication";
+
+"auth_prompt_unlock" = "Log in to your polyPod";
+"screen_lock_inactivity_timeout_entry" = "Screen lock inactivity timeout";
+"screen_lock_inactivity_no_timeout" = "No timeout";
+"screen_lock_inactivity_timeout_duration %d" = "%d minutes";
+
+"homescreen_footer_title" = "Charmed by what we are doing? You can join too!";
+"homescreen_footer_description" = "Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct influence on the development and contribute to a sustainable, social and independent data economy for Europe.";
+"homescreen_footer_button_title" = "Count me in!";
+"homescreen_footer_button_open_url" = "https://polypoly.coop/en-de/becomepart";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
 <p>pc polypoly coop SCE mbH<br/>
  (“The polypoly Cooperative”)</p>
-<p>Reichenberger Straße 121<br/>
- 10999 Berlin<br/>
- Deutschland</p>
+<p>Uhlandstr. 86<br/>
+ 10717 Berlin<br/>
+ Germany</p>
 <h3>Register of Cooperatives:</h3>
 <p>Local Court Berlin Charlottenburg, act. sign GnR 921 B</p>
 <h3>Cooperative Association:</h3>
@@ -61,8 +77,9 @@
 <p>DE 333726820</p>
 <h3>Responsible for the content:</h3>
 <p>Thorsten Dittmar</p>
-<p>Reichenberger Straße 121</p>
-<p>10999 Berlin Deutschland</p>
+<p>Uhlandstraße 86<br/>
+ 10717 Berlin<br/>
+ Germany</p>
 ";
 
 "settings_terms_of_use_text" = '
@@ -92,7 +109,7 @@
 <h2>Acceptance of these terms</h2>
 <p>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using the Mobile Application or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access the Mobile Application and its Services.</p>
 <h2>Contacting us</h2>
-<p>If you would like to contact us to understand more about this Agreement or wish to contact us concerning any matter relating to it, you may do so by sending an email to hello@polypoly.coop or writing a letter to pc polypoly coop SCE mbH, Reichenberger Straße 121, 10999 Berlin, Deutschland</p>
+<p>If you would like to contact us to understand more about this Agreement or wish to contact us concerning any matter relating to it, you may do so by sending an email to hello@polypoly.coop or writing a letter to pc polypoly coop SCE mbH, Uhlandstr. 86, 10717 Berlin, Germany.</p>
 <p><br></p>
-<p>Last updated: 17 March 202</p></div>
+<p>Last updated: 6 July 2022</p>
 ';

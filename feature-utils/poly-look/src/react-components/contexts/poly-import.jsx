@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
-  importData,
   RefreshFilesError,
   FeatureFileStorage,
+  ZipFile,
 } from "@polypoly-eu/poly-import";
 
-//used until real storage is loaded
+// used until real storage is loaded
 const fakeStorage = {
   files: null,
   refreshFiles: async () => null,
@@ -15,6 +15,17 @@ const fakeStorage = {
 
 export const PolyImportContext = createContext();
 
+/**
+ * It takes a list of files, runs them through a list of importers, and returns an account.
+ * @const
+ * @callback PolyImportProvider
+ * @param {Object} props
+ * @param {Object} props.children
+ * @param {Object} props.parentContext
+ * @param {Object} props.dataImporters
+ * @param {Object} props.DataAccount
+ * @returns A function that returns a component.
+ */
 export const PolyImportProvider = ({
   children,
   parentContext,
@@ -32,14 +43,11 @@ export const PolyImportProvider = ({
     storage
       .refreshFiles()
       .then(async () => {
-        const resolvedFiles = [];
         if (!storage.files) {
           setFiles(null);
           return;
         }
-        for (const file of storage.files) {
-          resolvedFiles.push(await file);
-        }
+        const resolvedFiles = await Promise.all(storage.files);
         setFiles(resolvedFiles);
         setIsLoading(false);
       })
@@ -53,14 +61,10 @@ export const PolyImportProvider = ({
 
   useEffect(() => {
     if (!pod) return;
-    const storage = new FeatureFileStorage(pod);
-    storage.changeListener = async () => {
-      const resolvedFiles = [];
-      for (const file of storage.files) {
-        resolvedFiles.push(await file);
-      }
-      setFiles(Object.values(resolvedFiles));
-    };
+    const storage = new FeatureFileStorage(pod, async () => {
+      const resolvedFiles = await Promise.all(storage.files);
+      setFiles(resolvedFiles);
+    });
     setStorage(storage);
   }, [pod]);
 
@@ -72,12 +76,15 @@ export const PolyImportProvider = ({
   //on file change
   //when files changed run the importer first and create an account model first.
   //after there is an account the analyses are triggered.
-  useEffect(() => {
+  useEffect(async () => {
     if (!files?.[0]) return;
-    importData({ dataImporters, zipData: files[0], DataAccount }).then(
-      (newAccount) => {
-        setAccount(newAccount);
-      }
+    const zipFile = await ZipFile.createWithCache(files[0], pod);
+    setAccount(
+      await new DataAccount().import({
+        importers: dataImporters,
+        zipFile,
+        pod,
+      })
     );
   }, [files]);
 

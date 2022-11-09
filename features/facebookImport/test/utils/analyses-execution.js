@@ -1,5 +1,4 @@
-import { MockerPod } from "../mocks/pod-mock";
-import { importZip } from "@polypoly-eu/poly-import";
+import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
 import { dataImporters } from "../../src/model/importer";
 import {
     runAnalysis,
@@ -8,19 +7,20 @@ import {
     MinistoriesStatusReport,
 } from "@polypoly-eu/poly-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
-import { subAnalyses } from "../../src/model/analysis";
+import { specificAnalyses } from "../../src/model/analysis";
 import { ministories } from "../../src/views/ministories/ministories";
 import { reports } from "../../src/views/ministories/reports";
 
 export async function runAnalysisForExport(
     analysisClass,
     zipFile,
-    pod = new MockerPod()
+    pod = new MockPod()
 ) {
-    const facebookAccount = await importZip({
-        dataImporters,
+    const facebookAccount = new FacebookAccount();
+    await facebookAccount.import({
+        importers: dataImporters,
         zipFile,
-        DataAccount: FacebookAccount,
+        pod: new MockPod(),
     });
     const enrichedData = {
         ...zipFile.enrichedData(),
@@ -34,25 +34,25 @@ export async function runAnalysisForExport(
 export async function runAnalysisForAccount(
     analysisClass,
     facebookAccount,
-    pod = new MockerPod()
+    pod = new MockPod()
 ) {
     const enrichedData = { dataAccount: facebookAccount, pod };
     return runAnalysis(analysisClass, enrichedData);
 }
 
 export async function runAnalysesForZip(zipFile) {
-    const facebookAccount = await importZip({
-        dataImporters,
+    const facebookAccount = new FacebookAccount();
+    await facebookAccount.import({
+        importers: dataImporters,
         zipFile,
-        pod: new MockerPod(),
-        DataAccount: FacebookAccount,
+        pod: new MockPod(),
     });
     await analyzeZip({
         zipData: zipFile.enrichedFileData(),
         zipFile,
         dataAccount: facebookAccount,
-        subAnalyses,
-        pod: new MockerPod(),
+        specificAnalyses,
+        pod: new MockPod(),
     });
     return facebookAccount;
 }
@@ -68,10 +68,9 @@ export function getReportStories(facebookAccount) {
     const activeReportStories = computedReportStoriesList.filter(
         (reportStory) => reportStory.active
     );
-    const statusReport = new MinistoriesStatusReport([
-        ...computedReportStoriesList,
-        ...computedMinistories,
-    ]);
+    const statusReport = new MinistoriesStatusReport({
+        ministories: [...computedReportStoriesList, ...computedMinistories],
+    });
 
     return new ReportStories([...activeReportStories, statusReport]);
 }

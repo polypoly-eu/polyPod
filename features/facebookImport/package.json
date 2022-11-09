@@ -8,25 +8,24 @@
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
     "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
-    "test": "jest",
-    "doc": "jsdoc -r src/ -d ./docs"
+    "test": "jest --coverage",
+    "doc": "jsdoc -c jsdoc.conf.json"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
-    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/api": "file:../../platform/feature-api/api",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "identity-obj-proxy": "^3.0.0",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
-    "node-fetch": "^3.1.1",
     "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
@@ -38,7 +37,8 @@
     "verbose": false,
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
+      "^!silly-i18n$": "<rootDir>/test/mocks/i18n-mock.js"
     },
     "transform": {
       "^.+\\.(js|jsx)$": [
