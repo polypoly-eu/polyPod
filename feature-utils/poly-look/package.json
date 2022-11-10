@@ -13,7 +13,9 @@
     "test:watch": "web-test-runner --watch",
     "build": "rollup -c rollup.config.mjs",
     "build-downstream": "../../build.js --start @polypoly-eu/poly-look",
-    "doc": "jsdoc -c jsdoc.conf.json"
+    "doc": "npm run doc:jsdoc && npm run doc:storybook",
+    "doc:jsdoc": "jsdoc -c jsdoc.conf.json",
+    "doc:storybook": "cd storybook && npm ci && npm run build-storybook && mv storybook-static ../../../docs/documentation/feature-utils/poly-look-preview"
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../silly-i18n",

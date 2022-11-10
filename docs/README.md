@@ -14,11 +14,7 @@ To generate source code documentation, follow the instructions in
 
 Afterwards, you will find:
 
-### Feature API
-
-- [feature-api/api](documentation/platform/feature-api/api)
-
-### Feature utils
-
-- [poly-look](documentation/feature-utils/poly-look)
-- [silly-i18n](documentation/feature-utils/silly-i18n)
+- [Feature API](documentation/platform/feature-api/api)
+- [poly-look API](documentation/feature-utils/poly-look)
+- [poly-look component preview](documentation/feature-utils/poly-look-preview)
+- [silly-i18n API](documentation/feature-utils/silly-i18n)
