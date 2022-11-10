@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { ImporterContext } from "../context/importer-context.jsx";
+import { FacebookContext } from "../context/facebook-context.jsx";
 import { SideSwiper, SideSheet } from "@polypoly-eu/poly-look";
-import i18n from "../i18n.js";
+import i18n from "!silly-i18n";
 import popUps from "./infoPopUps";
 import "./baseInfoPopUp.css";
 
 const BaseInfoPopUp = () => {
-    const { popUp, setPopUp } = useContext(ImporterContext);
+    const { popUp, setPopUp } = useContext(FacebookContext);
     return (
         <SideSwiper
             onClose={() => setPopUp(null)}

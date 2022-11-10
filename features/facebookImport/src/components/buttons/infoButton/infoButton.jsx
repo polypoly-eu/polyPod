@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FacebookContext } from "../../../context/importer-context.jsx";
+import { FacebookContext } from "../../../context/facebook-context.jsx";
 import { IconButton } from "@polypoly-eu/poly-look";
 
 import "./infoButton.css";
