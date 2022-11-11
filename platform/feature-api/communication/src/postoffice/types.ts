@@ -12,8 +12,8 @@
  */
 
 /**
- * Interface denoting a value backend endpoint of type `T`. This interface is purely
- * virtual and no instances are generated.
+ * @interface ValueBackendSpec denoting a value backend endpoint of type `T`.
+ * This interface is purely virtual and no instances are generated.
  */
 export interface ValueBackendSpec<T> {
     endpointType: "value";
@@ -21,8 +21,9 @@ export interface ValueBackendSpec<T> {
 }
 
 /**
- * Interface denoting a method backend endpoint of type `T`. This interface is purely
- * virtual and no instances are generated.
+ * @interface ObjectBackendSpec denoting a method backend endpoint of type `T`.
+ * This interface is purely virtual and no instances are generated.
+ * It is used to define a backend endpoint.
  */
 export interface ObjectBackendSpec<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,8 +43,7 @@ export interface ObjectBackendSpec<
  * object followed by a non-empty sequence of method calls with parameters. The
  * result of this chain is the _value_ that is returned to the client.
  *
- * Example:
- *
+ * @example
  * ```
  * type SimpleEndpoint = ObjectBackendSpec<{
  *     test1(param1: string): ValueBackendSpec<number>;
@@ -58,18 +58,21 @@ export interface ObjectBackendSpec<
  * The only use of the type `SimpleEndpoint` in this example is to pass it as
  * type argument to [[ServerOf]] or [[ClientOf]]. These “meta types” compute a
  * server and client representation based on the above specification.
+ * @alias BackendSpec
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type BackendSpec = ValueBackendSpec<any> | ObjectBackendSpec<any>;
 
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
+ * @alias ForcePromise
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ForcePromise<T> = [T] extends [Promise<any>] ? T : Promise<T>;
 
 /**
  * Type union of `T` and `Promise<T>`, unless `T` is already a `Promise`.
+ * @alias MaybePromise
  */
 export type MaybePromise<T> = T | ForcePromise<T>;
 
@@ -83,8 +86,7 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * [[MaybePromise]]. [[ValueBackendSpec]]s are similarly changed to
  * [[MaybePromise]].
  *
- * Example:
- *
+ * @example
  * ```
  * type Backend = ObjectBackendSpec<{
  *     test(param: string): ValueBackendSpec<number>;
@@ -104,6 +106,8 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * Note that the inner method `nested.foo` is assumed to always return a
  * `Promise<string>`, whereas the outer method `test` may return `number` or
  * `Promise<number>`.
+ *
+ * @alias ServerOf
  */
 export type ServerOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<
     infer T
@@ -124,13 +128,14 @@ export type ServerOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<
  * arguments and returning a `Promise` of `T` (unless `T` is already a
  * `Promise`).
  *
- * Given a client for a backend endpoint specification, a call chain can be expressed
- * as follows:
- *
+ * @example <caption>Given a client for a backend endpoint specification,
+ * a call chain can be expressed as follows:</caption>
  * ```
  * const callable: Callable<number[]> = client.foo(3).bar("hi");
  * console.dir(await callable());
  * ```
+ *
+ * @alias Callable
  */
 export type Callable<T> = () => ForcePromise<T>;
 
@@ -138,9 +143,8 @@ export type Callable<T> = () => ForcePromise<T>;
  * Computes the type of the client-side proxy object for a backend endpoint
  * specification.
  *
- * This type alias recursively traverses the specification. The algorithm is
- * best illustrated with an example:
- *
+ * @example <caption>This type alias recursively traverses the specification.
+ * The algorithm is best illustrated with an example:</caption>
  * ```
  * type Backend = ObjectBackendSpec<{
  *     test(param: string): ValueBackendSpec<number>;
@@ -164,6 +168,8 @@ export type Callable<T> = () => ForcePromise<T>;
  * Ultimately, when a user calls methods on this proxy object, these calls are
  * transmitted through a protocol to a server implementation that closely
  * mirrors the shape of the proxy.
+ *
+ * @alias ClientOf
  */
 export type ClientOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<
     infer T

@@ -29,12 +29,18 @@ export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
  * The [[PolyOut]] interface. See [[PolyOut]] for the description.
  */
 export class DefaultPolyOut implements PolyOut {
+    /**
+     * It creates a new instance of the class [[DefaultPolyOut]].
+     * @param {IFs["promises"]} fs - IFs["promises"]
+     */
     constructor(public readonly fs: IFs["promises"]) {}
 
+    /** @inheritdoc */
     async readFile(path: string): Promise<Buffer> {
         return (await this.fs.readFile(path)) as Buffer;
     }
 
+    /** @inheritdoc */
     readDir(path: string): Promise<Entry[]> {
         const newFiles = this.fs.readdir(path).then((files) => {
             const objectFiles = files.map((file) => ({
@@ -48,6 +54,7 @@ export class DefaultPolyOut implements PolyOut {
         return newFiles;
     }
 
+    /** @inheritdoc */
     async stat(path: string): Promise<Stats> {
         const stats = await this.fs.stat(path);
         return {
@@ -59,16 +66,19 @@ export class DefaultPolyOut implements PolyOut {
         };
     }
 
-    writeFile(path: string, content: string): Promise<void> {
+    /** @inheritdoc */
+    async writeFile(path: string, content: string): Promise<void> {
         return this.fs.writeFile(path, content);
     }
 
+    /** @inheritdoc */
     async importArchive(url: string, destUrl?: string): Promise<string> {
         throw new Error(
             `Called with ${url} and ${destUrl}, but not implemented`
         );
     }
 
+    /** @inheritdoc */
     async removeArchive(fileId: string): Promise<void> {
         throw new Error(`Called with ${fileId}, but not implemented`);
     }
@@ -94,18 +104,32 @@ export class DefaultPolyOut implements PolyOut {
 export class DefaultPod implements Pod {
     public readonly dataFactory: RDF.DataFactory = dataFactory;
 
+    /**
+     * It creates a new [[DefaultPod]] instance.
+     * @param {RDF.DatasetCore} store - The RDF store that contains the data.
+     * @param {IFs["promises"]} fs - The filesystem to use.
+     * @param {PolyOut} polyOut - PolyOut = new DefaultPolyOut(fs)
+     */
     constructor(
         public readonly store: RDF.DatasetCore,
         public readonly fs: IFs["promises"],
         public readonly polyOut: PolyOut = new DefaultPolyOut(fs)
     ) {}
 
+    /**
+     * If the graph of the quad is not the default graph, throw an error.
+     *
+     * @param quad - The quad to be added to the store.
+     * @throws Error
+     */
     private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
             throw new Error("Only default graph allowed");
     }
+
     /**
      * The [[PolyIn]] interface. See [[PolyIn]] for the description.
+     * @returns {PolyIn} the PolyIn interface
      */
     get polyIn(): PolyIn {
         return {
@@ -135,12 +159,16 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[Triplestore]] interface. See [[Triplestore]] for the description
+     * @returns {Triplestore} the Triplestore interface
      */
     get triplestore(): Triplestore {
         return {
+            /** @inheritdoc */
             query: async (query: string) => {
                 throw new Error(`Called with ${query}, but not implemented`);
             },
+
+            /** @inheritdoc */
             update: async (query: string) => {
                 throw new Error(`Called with ${query}, but not implemented`);
             },
@@ -149,6 +177,7 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[PolyNav]] interface. See [[PolyNav]] for the description.
+     * @returns {PolyNav} the PolyNav interface
      */
     get polyNav(): PolyNav {
         return {
@@ -166,8 +195,10 @@ export class DefaultPod implements Pod {
             },
         };
     }
+
     /**
      * The [[Info]] interface. See [[Info]] for the description.
+     * @returns {Info} info of the pod
      */
     get info(): Info {
         return {
@@ -179,8 +210,10 @@ export class DefaultPod implements Pod {
             },
         };
     }
+
     /**
      * The [[Endpoint]] interface. See [[Endpoint]] for the description.
+     * @returns {Endpoint} endpoint of the pod
      */
     get endpoint(): Endpoint {
         return {

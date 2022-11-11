@@ -1,62 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=no"
             charset="UTF-8"
         />
+        <link rel="stylesheet" href="mocha.css" />
         <script src="pod.js"></script>
-        <script src="test.js"></script>
-        <style>
-            body {
-                display: flex;
-                flex-direction: column;
-                height: 100vh;
-                margin: 0;
-                overflow: hidden;
-                background: white;
-            }
-
-            body>div {
-                margin-left: 4px;
-            }
-
-            h1 {
-                margin-top: 8px;
-                margin-bottom: 4px;
-            }
-
-            div>input, .test-controls>div {
-                display: block;
-                margin: 4px;
-            }
-
-            .test-controls button {
-                margin-right: 8px;
-            }
-
-            .test-controls {
-                flex-grow: 1;
-                overflow: auto;
-            }
-        </style>
     </head>
     <body>
-        <!-- TODO: Figure out if we actually need this, otherwise remove -->
-        <div style="display: none">
-            <h1>Input</h1>
-            <input id="input.1" value="http://example.com/subject"/>
-            <input id="input.2" value="http://example.com/predicate"/>
-            <input id="input.3" value="http://example.com/object"/>
-            <input id="input.4" value="http://example.com/graph"/>
-        </div>
-
+        <div id="mocha"></div>
         <div class="test-controls">
-            <h1>Tests</h1>
+            <div>
+                <button id="runAll">runAll</button>
+                <span></span>
+            </div>
         </div>
+        <script src="chai.js"></script>
+        <script src="mocha.js"></script>
         <script>
-            testFeature.generateControls(document.querySelector(".test-controls"));
+            mocha.setup("bdd");
+            mocha.checkLeaks();
+        </script>
+        <script src="test.js"></script>
+        <script>
+            testFeature.initControls(document.querySelector(".test-controls"));
         </script>
     </body>
 </html>

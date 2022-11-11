@@ -18,7 +18,6 @@
       "template": "../../node_modules/better-docs",
       "destination": "../../docs/documentation/feature-utils/poly-look",
       "recurse": true,
-      "verbose": true,
       "readme": "README.md"
     }
 }
