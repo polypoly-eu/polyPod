@@ -12,7 +12,7 @@ export default {
     plugins: [
         genPodjs({
             build_dir: "./dist",
-            manifestPath: "./src/manifest.json",
+            manifestPath: "./src/static/manifest.json",
         }),
         copy({
             targets: [
@@ -23,9 +23,7 @@ export default {
         }),
         copy({
             targets: [
-                { src: "src/index.html", dest: "dist" },
-                { src: "src/manifest.json", dest: "dist" },
-                { src: "src/images/*", dest: "dist/images" },
+                { src: "src/static/*", dest: "dist" },
             ],
         }),
         sucrase({
