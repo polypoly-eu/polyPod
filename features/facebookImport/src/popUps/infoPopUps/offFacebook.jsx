@@ -37,9 +37,9 @@ const OffFacebookInfoPopUp = () => {
                 }}
             />
             <div className="separator separator-space"></div>
-            <h1 className="title title-space">
+            <h2 className="title title-space">
                 {i18n.t("baseInfoScreen:title2")}
-            </h1>
+            </h2>
             <p>{i18n.t("offFacebookInfoScreen:text3")}</p>
             <p>{i18n.t("offFacebookInfoScreen:text4")}</p>
             <p>{i18n.t("offFacebookInfoScreen:text5")}</p>

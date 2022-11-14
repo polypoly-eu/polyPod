@@ -29,9 +29,9 @@ const MessagesInfoPopUp = () => {
                 }}
             />
             <div className="separator separator-space"></div>
-            <h1 className="title title-space">
+            <h2 className="title title-space">
                 {i18n.t("baseInfoScreen:title2")}
-            </h1>
+            </h2>
             <p>{i18n.t("messagesInfoScreen:text3")}</p>
         </>
     );
