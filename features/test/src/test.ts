@@ -157,10 +157,15 @@ describe("polyIn", function () {
     });
 
     describe("match", function () {
-        afterEach(async function () {
+        async function clearQuads() {
             for (const quad of await polyIn.match({}))
                 await polyIn.delete(quad);
-        });
+        }
+
+        beforeEach(clearQuads);
+
+        // @ts-ignore - seems we're missing some types for Mocha
+        after(clearQuads);
 
         it("accepts empty matcher", async function () {
             await polyIn.match({});
