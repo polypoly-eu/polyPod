@@ -27,7 +27,7 @@ describe("API object", function () {
 });
 
 describe("polyIn", function () {
-    async function assertAsyncThrows(fn, errorLike) {
+    async function assertAsyncThrows(fn, errorLike): Promise<void> {
         try {
             await fn();
             throw "No error raised";
@@ -38,13 +38,13 @@ describe("polyIn", function () {
         }
     }
 
-    function findQuadIndex(quads: RDF.Quad[], quad: RDF.Quad) {
+    function findQuadIndex(quads: RDF.Quad[], quad: RDF.Quad): number {
         for (let i = 0; i < quads.length; i++)
             if (quad.equals(quads[i])) return i;
         return -1;
     }
 
-    function assertQuadsEqual(expected: RDF.Quad[], actual: RDF.Quad[]) {
+    function assertQuadsEqual(expected: RDF.Quad[], actual: RDF.Quad[]): void {
         assert.equal(expected.length, actual.length);
         for (const expectedQuad of expected) {
             const index = findQuadIndex(actual, expectedQuad);
@@ -98,7 +98,7 @@ describe("polyIn", function () {
     const quadBackupTimeout = 10000;
     let savedQuads: RDF.Quad[];
 
-    // @ts-ignore
+    // @ts-ignore - seems we're missing some types for Mocha
     before(async function () {
         this.timeout(quadBackupTimeout);
         savedQuads = await polyIn.match({});
@@ -107,7 +107,7 @@ describe("polyIn", function () {
         for (const quad of savedQuads) await polyIn.delete(quad);
     });
 
-    // @ts-ignore
+    // @ts-ignore - seems we're missing some types for Mocha
     after(async function () {
         this.timeout(quadBackupTimeout);
         if (savedQuads.length)
@@ -143,9 +143,8 @@ describe("polyIn", function () {
             );
         });
 
-        // Currently not supported
         it.skip("can be called with multiple quads", async function () {
-            // @ts-ignore
+            // @ts-ignore - the variant of add() called here doesn't exist yet
             await polyIn.add([
                 testQuads.allNamedNodes,
                 testQuads.blankNodeSubject,
