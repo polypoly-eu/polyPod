@@ -22,9 +22,7 @@ export default {
             ],
         }),
         copy({
-            targets: [
-                { src: "src/static/*", dest: "dist" },
-            ],
+            targets: [{ src: "src/static/*", dest: "dist" }],
         }),
         sucrase({
             exclude: ["node_modules/**"],

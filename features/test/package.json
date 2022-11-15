@@ -4,7 +4,8 @@
     "eslint": "eslint src --ext .ts --ext .js",
     "lint": "npm run eslint",
     "test": "cypress run",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup --watch -c"
   },
   "dependencies": {
     "@polypoly-eu/api": "file:../../platform/feature-api/api",
