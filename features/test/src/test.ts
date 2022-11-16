@@ -51,10 +51,12 @@ describe("polyIn", function () {
         assert.equal(expected.length, actual.length);
         for (const expectedQuad of expected) {
             const index = findQuadIndex(actual, expectedQuad);
-            assert.notEqual(
-                index,
-                -1,
-                `expected '${actual}' to include '${expectedQuad}'`
+            // @ts-ignore - seems we're missing some types for Chai
+            assert(
+                index !== -1,
+                `expected '${JSON.stringify(
+                    actual
+                )}' to include '${JSON.stringify(expectedQuad)}'`
             );
             actual.splice(index, 1);
         }
