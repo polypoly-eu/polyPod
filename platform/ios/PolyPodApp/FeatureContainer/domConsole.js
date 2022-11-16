@@ -7,6 +7,8 @@ function postLogMessage(message) {
 
 const console = {
     log: postLogMessage,
+    warn: postLogMessage,
+    debug: postLogMessage,
     error: postLogMessage,
     dir: postLogMessage,
 };
