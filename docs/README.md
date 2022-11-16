@@ -1,11 +1,13 @@
 # docs
 
-polyPod documentation.
-
 ## Architecture
 
 For an explanation of the overall architecture, see
 [architecture.md](architecture.md).
+
+## Roadmap
+
+For our technical roadmap, see [tech-roadmap.md](tech-roadmap.md).
 
 ## Source code documentation
 
