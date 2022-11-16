@@ -8,6 +8,15 @@
         />
         <link rel="stylesheet" href="mocha.css" />
         <style>
+            .test-controls {
+                padding: 16px;
+                border-bottom: 1px solid white;
+            }
+
+            .test-controls>span {
+                margin-left: 8px;
+            }
+
             /* Workaround for pod.js not supporting position: fixed well */
 
             #mocha {
@@ -22,13 +31,11 @@
         <script src="pod.js"></script>
     </head>
     <body>
-        <div id="mocha"></div>
         <div class="test-controls">
-            <div>
-                <button id="runAll">runAll</button>
-                <span></span>
-            </div>
+            <button id="runAll">runAll</button>
+            <span></span>
         </div>
+        <div id="mocha"></div>
         <script src="chai.js"></script>
         <script src="mocha.js"></script>
         <script>
