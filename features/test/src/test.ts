@@ -157,7 +157,7 @@ describe("polyIn", function () {
     });
 
     describe("match", function () {
-        async function clearQuads() {
+        async function clearQuads(): void {
             for (const quad of await polyIn.match({}))
                 await polyIn.delete(quad);
         }
