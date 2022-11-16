@@ -789,18 +789,19 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
+    frame.style.border = "none";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);
     const source = `
     <html>
-        <body style="background-color: ${navBarColors.bg}">
+        <body style="background-color: ${navBarColors.bg}; overflow: hidden">
             <script>
                 window.addEventListener("message", (event) => {
                     document.getElementById("title").textContent = event.data;
                 });
             </script>
-            <h1 id="title" style="color: ${navBarColors.fg}">${title}<h1>
+            <h1 id="title" style="color: ${navBarColors.fg}">${title}</h1>
         </body>
     </html>
     `;
