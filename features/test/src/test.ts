@@ -20,9 +20,6 @@ export function initControls(container: HTMLElement): void {
 
 const assert = chai.assert;
 
-// Workaround for iOS not supporting console.warn
-console.warn = console.warn || console.log;
-
 describe("API object", function () {
     it("resolves", async function () {
         assert.isDefined(await window.pod);
