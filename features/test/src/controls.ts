@@ -8,7 +8,7 @@ export function initControls(container: HTMLElement): void {
             output.textContent = failures > 0 ? "Failed" : "All OK";
             runAllButton.textContent = "Reset";
             runAllButton.addEventListener("click", function () {
-                location.reload();
+                location.href = location.href.replace(/\?.*/, "");
             });
             runAllButton.disabled = false;
         });
