@@ -4,7 +4,9 @@ export function initControls(container: HTMLElement): void {
         location.href = location.href.replace(/\?.*/, "");
     });
 
-    const runAllButton = document.getElementById("runAll") as HTMLButtonElement;
+    const runAllButton = document.getElementById(
+        "run-all"
+    ) as HTMLButtonElement;
     runAllButton.addEventListener("click", function () {
         const output = container.querySelector("span");
         output.textContent = "Running all...";

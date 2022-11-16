@@ -61,7 +61,7 @@ class FeatureTest {
         }
 
         onFeature()
-            .withElement(DriverAtoms.findElement(Locator.ID, "runAll"))
+            .withElement(DriverAtoms.findElement(Locator.ID, "run-all"))
             .perform(DriverAtoms.webClick())
 
         val successStatus = "All OK"

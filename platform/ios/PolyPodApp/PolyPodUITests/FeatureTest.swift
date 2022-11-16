@@ -12,7 +12,7 @@ class FeatureTest: XCTestCase {
     func testRunAllTestFeatureTests() {
         app.launchWithArgs(showDeveloperFeatures: true)
         app.otherElements["test_feature"].tap()
-        let runAllButton = app.webViews.buttons["runAll"]
+        let runAllButton = app.webViews.buttons["Run all"]
         XCTAssertTrue(runAllButton.waitForExistence(timeout: timeout))
         runAllButton.tap()
         XCTAssertTrue(
