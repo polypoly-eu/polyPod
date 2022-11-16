@@ -153,11 +153,11 @@ describe("polyIn", function () {
         });
 
         it.skip("can be called with multiple quads", async function () {
-            // @ts-ignore - the variant of add() called here doesn't exist yet
-            await polyIn.add([
+            await polyIn.add(
                 testQuads.allNamedNodes,
-                testQuads.blankNodeSubject,
-            ]);
+                // @ts-ignore - the n-param variant doesn't exist yet
+                testQuads.blankNodeSubject
+            );
         });
     });
 
