@@ -3,9 +3,9 @@ import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
 
 export default {
-    input: "src/test.ts",
+    input: "src/index.ts",
     output: {
-        dir: "dist",
+        file: "dist/test.js",
         format: "iife",
         name: "testFeature",
     },

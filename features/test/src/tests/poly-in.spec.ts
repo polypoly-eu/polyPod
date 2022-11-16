@@ -1,30 +1,7 @@
 import { PolyIn } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 
-export function initControls(container: HTMLElement): void {
-    const runAllButton = document.getElementById("runAll");
-    runAllButton.addEventListener("click", function () {
-        const output = container.querySelector("span");
-        output.textContent = "Running all...";
-        runAllButton.disabled = true;
-        mocha.run((failures) => {
-            output.textContent = failures > 0 ? "Failed" : "All OK";
-            runAllButton.textContent = "Reset";
-            runAllButton.addEventListener("click", function () {
-                location.reload();
-            });
-            runAllButton.disabled = false;
-        });
-    });
-}
-
 const assert = chai.assert;
-
-describe("API object", function () {
-    it("resolves", async function () {
-        assert.isDefined(await window.pod);
-    });
-});
 
 describe("polyIn", function () {
     async function assertAsyncThrows(fn): Promise<void> {
