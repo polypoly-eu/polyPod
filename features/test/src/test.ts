@@ -30,15 +30,13 @@ describe("API object", function () {
 });
 
 describe("polyIn", function () {
-    async function assertAsyncThrows(fn, errorLike): Promise<void> {
+    async function assertAsyncThrows(fn): Promise<void> {
         try {
             await fn();
-            throw "No error raised";
         } catch (e) {
-            assert.throws(() => {
-                throw e;
-            }, errorLike);
+            return;
         }
+        assert.fail(`expected '${fn}' to throw an error`);
     }
 
     function findQuadIndex(quads: RDF.Quad[], quad: RDF.Quad): number {
@@ -147,11 +145,10 @@ describe("polyIn", function () {
             await polyIn.add(testQuads.defaultGraph);
         });
 
-        // Some platforms currently don't reject quads with non-default graphs
+        // Not supported on Android
         it.skip("does not support quads with non-default graph", async function () {
-            await assertAsyncThrows(
-                () => polyIn.add(testQuads.nonDefaultGraph),
-                /^Only default graph allowed/
+            await assertAsyncThrows(() =>
+                polyIn.add(testQuads.nonDefaultGraph)
             );
         });
 
