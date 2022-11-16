@@ -9,13 +9,12 @@ leading to a number of technical issues we plan to address:
 
 ## Build system
 
-While good old `build.js` has served us well so far, we are planning to
-investigate alternative options. The main thing we are missing are incremental
-builds, but the developer experience could also be better.
-
-We are planning to publish all the packages and documentation relevant for
-Feature development separately, so that it won't be necessary to deal with the
-polyPod repository in order to build a Feature.
+1. While good old `build.js` has served us well so far, we are planning to
+   investigate alternative options. The main thing we are missing are
+   incremental builds, but the developer experience could also be better.
+2. We are planning to publish all the packages and documentation relevant for
+   Feature development separately, so that it won't be necessary to deal with
+   the polyPod repository, and its build system, in order to develop a Feature.
 
 ## Platform
 
@@ -30,8 +29,10 @@ polyPod repository in order to build a Feature.
    historical reasons, the API used to interact with the triplestore is called
    _polyIn_, whereas the API used to interact with the file system is called
    _polyOut_. Better names would be _triplestore_ and _fs_.
-4. Add SPARQL support for the polyIn/triplestore - the RDF/JS interface is too
-   cumbersome to use for non-trivial data structures.
+4. Add SPARQL support for the polyIn/triplestore API - the RDF/JS interface is
+   too cumbersome to use for non-trivial data structures.
+5. Add Feature-internal namespaces to the triplestore, allowing Features to
+   store data other Features are not meant to access.
 
 ### Core
 
@@ -45,7 +46,7 @@ into Core. The major ideas are to:
    platform-specific code as needed, not the other way around, eliminating a lot
    of similar boilerplate across platforms.
 3. Reimplement the polyOut/fs API in Core, directly interfacing with the file
-   system.
+   system on most platforms.
 4. Reimplement the polyIn/triplestore API in Core.
 5. Use Core preferences (instead of Android Preferences, iOS User Defaults etc)
    as the primary key value store.
@@ -53,7 +54,7 @@ into Core. The major ideas are to:
 ## Features
 
 1. Reduce duplication across Features, primarily by moving duplicated and
-   similar logic to Feature utils - especially UI components.
+   similar logic to feature-utils - especially UI components.
 2. Improve integration test coverage - most Features still rely on manual
    testing.
 3. Use the triplestore for most storage needs, only falling back to the file
