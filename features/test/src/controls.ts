@@ -1,10 +1,11 @@
 export function initControls(container: HTMLElement): void {
-    const runAllButton = document.getElementById("runAll");
+    const runAllButton = document.getElementById("runAll") as HTMLButtonElement;
     runAllButton.addEventListener("click", function () {
         const output = container.querySelector("span");
         output.textContent = "Running all...";
         runAllButton.disabled = true;
-        mocha.run((failures) => {
+        // @ts-ignore - seems we're missing some types for Mocha
+        mocha.run((failures: number) => {
             output.textContent = failures > 0 ? "Failed" : "All OK";
             runAllButton.textContent = "Reset";
             runAllButton.addEventListener("click", function () {
