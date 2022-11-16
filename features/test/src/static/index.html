@@ -7,6 +7,18 @@
             charset="UTF-8"
         />
         <link rel="stylesheet" href="mocha.css" />
+        <style>
+            /* Workaround for pod.js not supporting position: fixed well */
+
+            #mocha {
+                position: relative;
+            }
+
+            #mocha-stats {
+                position: absolute;
+                top: -45px;
+            }
+        </style>
         <script src="pod.js"></script>
     </head>
     <body>
