@@ -7,6 +7,9 @@
 import fc, { Arbitrary } from "fast-check";
 import * as RDF from "rdf-js";
 
+/**
+ * @interface Gens
+ */
 export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
     namedNode: Arbitrary<RDF.NamedNode>;
     blankNode: Arbitrary<RDF.BlankNode>;
@@ -18,7 +21,7 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
 }
 
 /**
- * Creates generators for RDFJS terms and quads based on a specified data factory.
+ * Creates random generators for RDFJS terms and quads based on a specified data factory.
  *
  * The generators adhere to the following rules:
  *
@@ -27,6 +30,10 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
  *   side-effecting)
  * - literals are hexadecimal strings with the datatype being left undefined or a named node
  * - variables are hexadecimal strings and are only generated if the data factory supports them
+ * 
+ * @param {RDF.DataFactory<Q>} factory - specified data factory
+ * @returns {Gens.<Q>} - A Gens object generated based on the factory
+
  */
 export function gens<Q extends RDF.BaseQuad = RDF.Quad>(
     factory: RDF.DataFactory<Q>

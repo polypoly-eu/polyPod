@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.util.concurrent.TimeUnit
 
@@ -22,7 +21,7 @@ class AppUpdateReceiver : BroadcastReceiver() {
             )
             return
         }
-        val delay = UpdateNotification(context).pushDelay.toLong()
+        val delay = UpdateNotificationData(context).pushDelay.toLong()
         val request =
             OneTimeWorkRequest.Builder(PushNotificationWorker::class.java)
                 .setInitialDelay(delay, TimeUnit.SECONDS).build()

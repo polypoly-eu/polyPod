@@ -1,0 +1,51 @@
+@startuml
+
+[External server] as ExternalServer
+
+package "polyPod" {
+        [Feature]
+
+        together {
+                package "Feature utils" as FeatureUtils {
+                        [polyLook]
+                        [polyImport]
+                        [polyAnalysis]
+                }
+                note bottom of FeatureUtils : There are more utilities than shown here
+
+                package Platform {
+                        together {
+                                interface RDF
+                                database Triplestore
+                                RDF - Triplestore
+                        }
+
+                        together {
+                                interface FS
+                                database "File system" as FileSystem
+                                FS - FileSystem
+                        }
+
+                        [User interface]
+                        database "Feature storage" as FeatureStorage
+                        [User interface] .> FeatureStorage
+
+                        [Runtime]
+                        interface Endpoint
+                }
+                note bottom of Platform : There are more interfaces and components than illustrated here
+        }
+
+        Feature .> polyLook : User interface
+        Feature .> polyImport : Data parsing
+        Feature .> polyAnalysis : Data analysis
+
+        Feature ..> RDF : Data storage / sharing
+        Feature ..> FS : Data storage
+        Feature ..> Runtime : User interface / execution environment
+        Feature ..> Endpoint : External communication
+}
+
+Endpoint -- ExternalServer
+
+@enduml

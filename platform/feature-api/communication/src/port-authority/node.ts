@@ -8,7 +8,8 @@ import { MessagePort } from "worker_threads";
 import { Handler, Port } from "./port";
 
 /**
- * Converts a Node `MessagePort` into a raw [[Port]] with unknown types.
+ * Converts a Node.js `MessagePort` into a raw [[Port]] with unknown types
+ * that can be used with the rest of the library.
  *
  * The [[SendPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
  * For typed operation, it is recommended to use [[mapPort]] with type coercions.
@@ -17,6 +18,9 @@ import { Handler, Port } from "./port";
  *
  * Note that Node `MessagePort`s constructed from `MessageChannel` use a variant of the structured clone algorithm; that
  * is, an object sent on the port will be received as a different object.
+ *
+ * @param {MessagePort} port - MessagePort
+ * @returns A Port object
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromNodeMessagePort(port: MessagePort): Port<any, any> {

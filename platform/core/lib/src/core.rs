@@ -6,6 +6,7 @@ use poly_rdf::rdf::RDFStore;
 use preferences::Preferences;
 use std::sync::MutexGuard;
 use std::sync::{Arc, Mutex};
+use update_notification::UpdateNotification;
 use user_session::UserSession;
 
 // Core is held as a singleton.
@@ -18,6 +19,7 @@ pub struct Core<'a> {
     #[allow(dead_code)]
     pub preferences: Arc<Preferences>,
     pub user_session: Mutex<UserSession<'a>>,
+    pub update_notification: Mutex<UpdateNotification>,
     #[allow(dead_code)]
     pub platform_callback: Box<dyn PlatformCallback>,
     #[cfg(feature = "poly_rdf")]

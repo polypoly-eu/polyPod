@@ -681,6 +681,7 @@ dependencies = [
  "preferences",
  "serde",
  "serde_json",
+ "update_notification",
  "user_session",
 ]
 
@@ -1038,6 +1039,9 @@ dependencies = [
  "io",
  "serde",
  "serde_json",
+ "strum",
+ "strum_macros",
+ "update_notification",
  "user_session",
 ]
 
@@ -1561,6 +1565,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "854cbdc4f7bc6ae19c820d44abdc3277ac3e1b2b93db20a636825d9322fb60e6"
 dependencies = [
  "tinyvec",
+]
+
+[[package]]
+name = "update_notification"
+version = "0.1.0"
+dependencies = [
+ "serde",
 ]
 
 [[package]]

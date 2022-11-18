@@ -4,7 +4,7 @@ Definition, spec, and default implementation of the polyPod API
 
 ## Overview
 
-This repository defines the interface between the polyPod and features. As far
+This repository defines the interface between the polyPod and Features. As far
 as reasonably possible, we try to stick to existing APIs, for example
 [RDFJS](http://rdf.js.org/) for querying and storing data.
 
@@ -13,7 +13,7 @@ lot of the usual browser APIs, but things such as data storage and external
 communication need to go through the polyPod API, i.e. an implementation of the
 `Pod` interface as specified here. The concrete polyPod implementations, such as the
 polyPod for Android, expose objects that implement the `Pod` interface to
-the feature.
+the Feature.
 
 ## Structure
 
@@ -23,7 +23,7 @@ modules:
 -   `api` contains type definitions, describing the shape of the interfaces
     -   `fs` defines the filesystem operations
     -   `fetch` defines the [Fetch]-compatible API for sending HTTP(S) requests
--   `feature` contains additional type definitions for the DOM that features can
+-   `feature` contains additional type definitions for the DOM that Features can
     expect
 -   `fs` provides a minimal filesystem interface that works across JS implementations.
 -   `default` provides a minimal reference implementation (excluding the DOM

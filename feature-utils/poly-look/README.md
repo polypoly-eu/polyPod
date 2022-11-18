@@ -1,6 +1,6 @@
 # polyLook
 
-polyLook is the visual component library for all features included in the
+polyLook is the visual component library for all Features included in the
 polyPod applications.
 
 The components are mainly based on React, although there are some LitElement
@@ -21,8 +21,8 @@ following [tutorials](https://lit.dev/docs/).
 ## State of polyLook
 
 polyLook aims to be a framework agnostic component library for polyPod
-features. At the moment, however, it mainly contains React components in actual
-use throughout several features, and prototypes for a potential
+Features. At the moment, however, it mainly contains React components in actual
+use throughout several Features, and prototypes for a potential
 approach based on Lit elements.
 
 Visualisations and charts are located in `./src/visualisations` and

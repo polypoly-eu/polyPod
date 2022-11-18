@@ -1,6 +1,5 @@
 import {
     Pod,
-    PolyLifecycle,
     PolyIn,
     PolyOut,
     PolyNav,
@@ -64,11 +63,6 @@ type PolyOutBackend = ObjectBackendSpec<{
     removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
 
-type PolyLifecycleBackend = ObjectBackendSpec<{
-    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueBackendSpec<void>;
-}>;
-
 type PolyNavBackend = ObjectBackendSpec<{
     openUrl(url: string): ValueBackendSpec<void>;
     setActiveActions(actions: string[]): ValueBackendSpec<void>;
@@ -98,13 +92,16 @@ type EndpointBackend = ObjectBackendSpec<{
 type PodBackend = ObjectBackendSpec<{
     polyIn(): PolyInBackend;
     polyOut(): PolyOutBackend;
-    polyLifecycle(): PolyLifecycleBackend;
     polyNav(): PolyNavBackend;
     info(): InfoBackend;
     endpoint(): EndpointBackend;
     triplestore(): TriplestoreBackend;
 }>;
 
+/**
+ * Creating a map of classes that can be used to create objects from JSON-LD.
+ * @const podBubblewrapClasses
+ */
 export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.NamedNode": NamedNode,
     "@polypoly-eu/rdf.BlankNode": BlankNode,
@@ -114,10 +111,23 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Quad": polyQuad,
 };
 
+/**
+ * Creating a new instance of the Bubblewrap class and assigning it to the podBubblewrap variable.
+ * @const podBubblewrap
+ */
+export const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
+
+/**
+ * It uses the `pod-bubblewrap` library to wrap a raw port passed to a port
+ * that sends and receives `Uint8Array`s, but the data is encoded and decoded
+ * on both the incoming (covariant) and outgoing (contravariant) messages.
+ *
+ * @param rawPort - The raw port that we want to wrap.
+ * @returns A function that takes a port and returns a port.
+ */
 function bubblewrapPort(
     rawPort: Port<Uint8Array, Uint8Array>
 ): Port<Uint8Array, Uint8Array> {
-    const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
         (buf) => podBubblewrap.decode(buf),
@@ -125,22 +135,41 @@ function bubblewrapPort(
     );
 }
 
+/**
+ * @class RemoteClientPod
+ * @classdesc It's a wrapper around a `ClientOf<PodBackend>`
+ * @implements the [[Pod]] interface
+ */
 export class RemoteClientPod implements Pod {
     private readonly rpcClient: ClientOf<PodBackend>;
 
+    /**
+     * It creates a [[RemoteClientPod]] object and initiates the rpc client connection to the port passed
+     * @param {RequestPort<BackendRequest, BackendResponse>} clientPort - This is the port that the client will use to communicate with the backend.
+     * @param {DataFactory} dataFactory - DataFactory = new DataFactory(false)
+     */
+    constructor(
+        private clientPort: RequestPort<BackendRequest, BackendResponse>,
+        public readonly dataFactory: DataFactory = new DataFactory(false)
+    ) {
+        this.rpcClient = backendClient<PodBackend>(client(this.clientPort));
+    }
+
+    /**
+     * It takes a raw port, wraps it in a bubblewrap port, and then lifts it into a client
+     * @param rawPort - The port that was passed to the `onConnect` callback.
+     * @returns A RemoteClientPod
+     */
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
         return new RemoteClientPod(liftClient(wrappedPort));
     }
 
-    constructor(
-        private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = new DataFactory(false)
-    ) {
-        this.rpcClient = backendClient<PodBackend>(client(clientPort));
-    }
-
+    /**
+     * `polyIn` is a function that returns a [[PolyIn]] object based on the rpc client connection of the pod.
+     * @returns {PolyIn} - A PolyIn object.
+     */
     get polyIn(): PolyIn {
         return {
             add: (quad) => this.rpcClient.polyIn().add(quad)(),
@@ -150,6 +179,10 @@ export class RemoteClientPod implements Pod {
         };
     }
 
+    /**
+     * It returns a `Triplestore` object of the pod
+     * @returns {Triplestore} - the triplestore object.
+     */
     get triplestore(): Triplestore {
         return {
             query: (query: string) =>
@@ -159,6 +192,10 @@ export class RemoteClientPod implements Pod {
         };
     }
 
+    /**
+     * It returns a new class that implements the [[PolyOut]] interface
+     * @returns A class that implements the [[PolyOut]] interface.
+     */
     get polyOut(): PolyOut {
         const { rpcClient } = this;
 
@@ -178,7 +215,6 @@ export class RemoteClientPod implements Pod {
             readDir(path: string): Promise<Entry[]> {
                 return rpcClient.polyOut().readDir(path)();
             }
-
             stat(path: string): Promise<Stats> {
                 return rpcClient.polyOut().stat(path)();
             }
@@ -197,14 +233,11 @@ export class RemoteClientPod implements Pod {
         })();
     }
 
-    get polyLifecycle(): PolyLifecycle {
-        return {
-            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
-            startFeature: (id, background) =>
-                this.rpcClient.polyLifecycle().startFeature(id, background)(),
-        };
-    }
-
+    /**
+     * It returns an object that implements the [[PolyNav]] interface
+     *
+     * @returns {PolyNav} A PolyNav object with functions that call the RPC client of the pod.
+     */
     get polyNav(): PolyNav {
         return {
             openUrl: (url: string) => this.rpcClient.polyNav().openUrl(url)(),
@@ -217,6 +250,10 @@ export class RemoteClientPod implements Pod {
         };
     }
 
+    /**
+     * It returns an [[Info]] object of the pod.
+     * @returns The `info` property.
+     */
     get info(): Info {
         return {
             getRuntime: () => this.rpcClient.info().getRuntime()(),
@@ -224,6 +261,11 @@ export class RemoteClientPod implements Pod {
         };
     }
 
+    /**
+     * `get endpoint(): Endpoint`
+     *
+     * @returns The endpoint object of the pod is being returned.
+     */
     get endpoint(): Endpoint {
         return {
             send: (
@@ -247,45 +289,56 @@ export class RemoteClientPod implements Pod {
     }
 }
 
-// TODO move to pod-api?
-// TODO should this throw instead?
-class DummyPolyLifecycle implements PolyLifecycle {
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return {};
-    }
-
-    async startFeature(): Promise<void> {
-        return;
-    }
-}
-
+/**
+ * @class RemoteServerPod @implements [[ServerOf.<[[PodBackend]]>]]
+ * It's a wrapper around a Pod that exposes the same API as a Pod,
+ * but it's a remote server
+ */
 export class RemoteServerPod implements ServerOf<PodBackend> {
+    /**
+     * It creates a new instance of the class.
+     * @param {Pod} pod - Pod
+     */
     constructor(private readonly pod: Pod) {}
 
+    /**
+     * It sets a backendServer as a handler for each incoming message to the port passed.
+     * @param port - The port that the backend server will listen on.
+     */
     listen(port: ResponsePort<BackendRequest, BackendResponse>): void {
         server(port, backendServer<PodBackend>(this));
     }
 
+    /**
+     * It sets up a listening process to the raw port passed.
+     * @param rawPort - The port that the server will listen on.
+     */
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
         this.listen(liftServer<BackendRequest, BackendResponse>(wrappedPort));
     }
 
+    /**
+     * It returns a middleware function that can be used to handle requests to the pod's bubblewrap
+     * @returns {Promise<RequestListener>} A function that takes a request and a response and returns a promise.
+     */
     async listenOnMiddleware(): Promise<RequestListener> {
         const { bubblewrapMiddlewarePort } = await import(
             "../port-authority/middleware"
         );
-        const [middleware, port] = bubblewrapMiddlewarePort(
-            Bubblewrap.create(podBubblewrapClasses),
-            {
-                limit: "10mb",
-            }
-        );
+        const [middleware, port] = bubblewrapMiddlewarePort(podBubblewrap, {
+            limit: "10mb",
+        });
         this.listen(port);
         return middleware;
     }
 
+    /**
+     * It returns a server that delegates to the pod that has been provided to the constructor,
+     * but it modifies the response of the `fetch` function
+     * @returns A server object that has the same methods as the polyOut object.
+     */
     polyOut(): ServerOf<PolyOutBackend> {
         const polyOut = this.pod.polyOut;
 
@@ -303,28 +356,43 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         };
     }
 
+    /**
+     * > The `polyIn` function returns a `ServerOf<PolyInBackend>` object
+     * @returns A ServerOf<PolyInBackend> - the polyIn instance of the pod
+     */
     polyIn(): ServerOf<PolyInBackend> {
         return this.pod.polyIn;
     }
 
+    /**
+     * Returns the triplestore backend server of the pod
+     *
+     * @returns {ServerOf.<TriplestoreBackend>} a server that implements the `TriplestoreBackend` interface
+     */
     triplestore(): ServerOf<TriplestoreBackend> {
         return this.pod.triplestore;
     }
 
-    polyLifecycle(): ServerOf<PolyLifecycleBackend> {
-        if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
-
-        return new DummyPolyLifecycle();
-    }
-
+    /**
+     * > The `polyNav()` function returns a `ServerOf<PolyNavBackend>` object
+     * @returns {ServerOf.<PolyNavBackend>} - the polyNav instance of the pod
+     */
     polyNav(): ServerOf<PolyNavBackend> {
         return this.pod.polyNav;
     }
 
+    /**
+     * It returns a `ServerOf<InfoBackend>` object
+     * @returns A ServerOf<InfoBackend> - the info of the pod
+     */
     info(): ServerOf<InfoBackend> {
         return this.pod.info;
     }
 
+    /**
+     * Return the endpoint server of the pod.
+     * @returns A ServerOf<EndpointBackend>
+     */
     endpoint(): ServerOf<EndpointBackend> {
         return this.pod.endpoint;
     }

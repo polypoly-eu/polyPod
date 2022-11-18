@@ -122,7 +122,6 @@ open class Network(val context: Context) {
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
-            return@withContext response
         }
         return@withContext response
     }
@@ -147,7 +146,6 @@ open class Network(val context: Context) {
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
-            return@withContext response
         }
         return@withContext response
     }

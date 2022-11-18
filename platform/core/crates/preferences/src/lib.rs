@@ -2,11 +2,15 @@ use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use io::key_value_store::KeyValueStore;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
+use strum::IntoEnumIterator;
+use strum_macros::EnumIter;
+use update_notification::{LastNotification, UpdateNotificationStore};
 use user_session::{TimeoutOption, TimeoutOptionStore};
 
-#[derive(Serialize)]
+#[derive(Serialize, EnumIter)]
 enum PreferenceKey {
     UserSessionTimeoutOption,
+    LastNotification,
 }
 
 pub struct Preferences {
@@ -39,6 +43,12 @@ impl Preferences {
     pub fn save(&self) {
         self.store.as_ref().save()
     }
+
+    pub fn clear(&self) {
+        for key in PreferenceKey::iter() {
+            self.store.remove(message_pack_serialize(key));
+        }
+    }
 }
 
 impl TimeoutOptionStore for Preferences {
@@ -48,5 +58,15 @@ impl TimeoutOptionStore for Preferences {
 
     fn set_timeout_option(&self, option: TimeoutOption) {
         self.write(PreferenceKey::UserSessionTimeoutOption, option)
+    }
+}
+
+impl UpdateNotificationStore for Preferences {
+    fn get_last_notification(&self) -> Option<LastNotification> {
+        self.read(PreferenceKey::LastNotification)
+    }
+
+    fn set_last_notification(&self, last_notification: LastNotification) {
+        self.write(PreferenceKey::LastNotification, last_notification);
     }
 }

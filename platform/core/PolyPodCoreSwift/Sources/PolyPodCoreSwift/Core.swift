@@ -5,18 +5,25 @@ import MessagePack
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
 public struct BootstrapArgs: Encodable {
-    public init(languageCode: String, fsRoot: String) {
+    public init(
+        languageCode: String,
+        fsRoot: String,
+        updateNotificationId: Int
+    ) {
         self.languageCode = languageCode
         self.fsRoot = fsRoot
+        self.updateNotificationId = updateNotificationId
     }
     
     let languageCode: String
     let fsRoot: String
+    let updateNotificationId: Int
 }
 
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
+    public var log: CoreLog?
     
     private init() {}
     

@@ -1,4 +1,7 @@
-name: Test pushes and PRs
+# For historical reasons, this workflow covers a bit too much, and should be
+# broken up - the Android parts potentially merged with android-test.yml.
+
+name: Lint and test JavaScript code and run Android unit tests
 on:
   push:
   pull_request:
@@ -9,23 +12,23 @@ jobs:
     name: Run tests.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
       - name: Cache JS deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: cache
         with:
           path: |
             node_modules
             **/node_modules
             ~/.cache
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', 'build/packages.json') }}-${{ hashFiles('package-lock.json', 'build/packages.json') }}
       - name: Checks paths to trigger the rest of the steps
-        uses: dorny/paths-filter@8c7f485a57f7cad3483dcc0fdf36122a0542f200 #v2.10.2
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 #v2.11.1
         id: changes
         with:
           filters: |
@@ -73,7 +76,7 @@ jobs:
           distribution: "temurin"
           cache: "gradle"
       - name: Setup Gradle Dependencies Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle') }}

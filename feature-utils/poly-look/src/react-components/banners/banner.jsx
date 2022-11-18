@@ -4,16 +4,17 @@ import { RoutingWrapper } from "../routing";
 import "./banner.css";
 
 /**
- * Banner component
- *
- * @param {String} [icon] Displays an icon next to the title if passed
- * @param {String} [title] Title of the banner
- * @param {String} [description] Text for the banner's description
- * @param {Object} [button] Content of the button. Also, displays the PolyButton at the bottom if passed.
- * @param {String} [button.route] String to route to ("back" leads back)
- * @param {Navigate} [button.navigate] React router dom navigate for the RoutingWrapper component
- * @param {String} [button.label] Text for the button's label
- * @returns jsx
+ * Banner component.
+ * @callback Banner
+ * @param {Object} props
+ * @param {string} props.icon Displays an icon next to the title if passed
+ * @param {string} props.title Title of the banner
+ * @param {string} props.description Text for the banner's description
+ * @param {Object} props.button Content of the button. Also, displays the PolyButton at the bottom if passed.
+ * @param {string} props.button.route String to route to ("back" leads back)
+ * @param {History} props.button.history React router dom history for the RoutingWrapper component
+ * @param {String} props.button.label Text for the button's label
+ * @returns {JSX.Element}
  */
 export const Banner = ({ icon, title, description, button }) => {
   return (

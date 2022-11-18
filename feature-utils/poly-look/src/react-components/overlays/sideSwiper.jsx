@@ -3,24 +3,31 @@ import React, { useEffect, useState, useRef } from "react";
 import "./sideSwiper.css";
 
 /**
+ * Callback for handling the click event to close button.
  *
+ * @callback onCloseCallback
+ * @param {React.MouseEventHandler<HTMLDivElement>} clickEvent - mouse event action.
+ */
+
+/**
+ * It takes a component and renders it in a side swiper.
  * Generic container for HTRT side sheets or any other component that
  * slides from the right of the screen and can be closed either through
  * click, right or up sweep.
  * Note that during the in/out animations, interactions are disabled.
+ * @component
  * @param {Object} props
- * @param {boolean} [props.open] - Open or close the slide;
- * defaults to false.
- * @param {callback} [props.onClose] - Called after the exit animations end.
+ * @param {Boolean} [props.open] - Open or close the slide; defaults to false.
+ * @param {onCloseCallback} props.onClose - Called after the exit animations end.
  * @param {string} [props.leftDistance] - Contents distance from the left
  * of the screen. Can be any value that is compatible with CSS calc rule;
  * defaults to 15vw.
- * @param {Array[number]} [props.backdropColor] - The backdrop color as a rgba array;
+ * @param {Array.<Number>} [props.backdropColor] - The backdrop color as a rgba array;
  * defaults to [0, 0, 0, 0.3].
  * @param {string} [props.animationDuration] - The duration of the animations.
  * Can be any value that is compatible with CSS transition-duration rule;
  * defaults to 0.6s.
- * @param {JSX.Element} [props.Component] - The component that will be animated.
+ * @param {JSX.Element} props.Component - The component that will be animated.
  * If this component can trigger the SideSwiper to close then it must have
  * an onClose callback as one of it's props.
  * If it has clickable elements, then Event.stopPropagation()
@@ -28,7 +35,6 @@ import "./sideSwiper.css";
  * If the component has vertical scroll then it must accept custom styles.
  * @returns {JSX.Element}
  */
-
 const SideSwiper = ({
   open = false,
   onClose,

@@ -1,7 +1,7 @@
-# demo feature
+# demo Feature
 
-A feature that demos various polyPod APIs, especially those not triggered
-(easily) by the currently bundled features.
+A Feature that demos various polyPod APIs, especially those not triggered
+(easily) by the currently bundled Features.
 
 This can potentially be merged with [test][../test].
 

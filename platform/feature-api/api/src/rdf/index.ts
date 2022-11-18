@@ -17,6 +17,16 @@ import * as RDF from "rdf-js";
 export abstract class Model {
     abstract termType: string;
 
+    /**
+     * It checks the `equality` of two models.
+     *
+     * If the other term is null, undefined, or of a different type, return false; otherwise, for each
+     * property of this term, if the property is a Model, compare it to the other term's property;
+     * otherwise, if the other term's property is not equal to this term's property, return false;
+     * otherwise, return true
+     * @param {RDF.Term | null} other - RDF.Term | null
+     * @returns A boolean value.
+     */
     equals(other: RDF.Term | null): boolean {
         if (
             other === null ||
@@ -37,25 +47,42 @@ export abstract class Model {
     }
 }
 
+/**
+ * @class `NamedNode`
+ * @classdesc It is a class that represents an [[RDF.NamedNode]].
+ * @implements RDF.NamedNode
+ * @extends Model
+ */
 export class NamedNode<Iri extends string = string>
     extends Model
     implements RDF.NamedNode
 {
     termType: "NamedNode" = "NamedNode";
 
+    /**
+     * A constructor function for the class NamedNode.
+     * @param {Iri} value - The value of the literal.
+     */
     constructor(public value: Iri) {
         super();
         Object.freeze(this);
     }
 }
 
+/**
+ *  BlankNode is a class that implements the [[RDF.BlankNode]] interface
+ */
 export class BlankNode extends Model implements RDF.BlankNode {
     private static nextId = 0;
-
     termType: "BlankNode" = "BlankNode";
-
     value: string;
 
+    /**
+     * It takes an optional string parameter, and if it's not null or undefined,
+     * assigns it to the value property. Otherwise, it assigns a new blank node identifier to the value
+     * property
+     * @param {string} [value] - The value of the blank node.
+     */
     constructor(value?: string) {
         super();
 
@@ -66,7 +93,15 @@ export class BlankNode extends Model implements RDF.BlankNode {
     }
 }
 
+/**
+ * @class Literal
+ * A representation of a string with an optional language tag or datatype
+ */
 export class Literal extends Model implements RDF.Literal {
+    language: string;
+    datatype: RDF.NamedNode;
+    termType: "Literal" = "Literal";
+
     static readonly langStringDatatype = new NamedNode(
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
     );
@@ -74,10 +109,19 @@ export class Literal extends Model implements RDF.Literal {
         "http://www.w3.org/2001/XMLSchema#string"
     );
 
-    language: string;
-    datatype: RDF.NamedNode;
-    termType: "Literal" = "Literal";
-
+    /**
+     * It creates a new Literal instance.
+     * If the languageOrDatatype parameter is a string, then it's either a language tag or a datatype URI.
+     * If it's a language tag, then set the language property to the language tag and the datatype property
+     * to the language string datatype.
+     * If it's a datatype URI, then set the language property to an empty string and the datatype property
+     * to a new NamedNode with the datatype URI.
+     * If the languageOrDatatype parameter is not a string, then set the language property to an empty string
+     * and the datatype property to the languageOrDatatype parameter or the string datatype if the languageOrDatatype
+     * parameter is undefined.
+     * @param {string} value - The value of the literal.
+     * @param {string | RDF.NamedNode} [languageOrDatatype] - string | RDF.NamedNode
+     */
     constructor(
         public value: string,
         languageOrDatatype?: string | RDF.NamedNode
@@ -101,28 +145,55 @@ export class Literal extends Model implements RDF.Literal {
     }
 }
 
+/**
+ * A `Variable` @class is a `Model` that has a `termType` of `"Variable"` and a `value` that is a `string`
+ * @extends `Model`
+ * @implements RDF.Variable
+ */
 export class Variable extends Model implements RDF.Variable {
     termType: "Variable" = "Variable";
 
+    /**
+     * It creates a new [[Variable]] instance with the value passed.
+     * @param {string} value - The value of the instance.
+     */
     constructor(public value: string) {
         super();
         Object.freeze(this);
     }
 }
 
+/**
+ * `DefaultGraph` is a Singleton class that implements [[RDF.DefaultGraph]] interface
+ * @extends Model
+ * @implements RDF.DefaultGraph
+ * */
 export class DefaultGraph extends Model implements RDF.DefaultGraph {
     static readonly instance: DefaultGraph = new DefaultGraph();
+    termType: "DefaultGraph" = "DefaultGraph";
+    value: "" = "";
 
     private constructor() {
         super();
         Object.freeze(this);
     }
-
-    termType: "DefaultGraph" = "DefaultGraph";
-    value: "" = "";
 }
 
+/**
+ * `Quad` is a class that implements the [[RDF.Quad]] interface
+ * @implements RDF.Quad
+ */
 export class Quad implements RDF.Quad {
+    termType: "Quad" = "Quad";
+    value: "" = "";
+
+    /**
+     * It creates a new [[Quad]] instance.
+     * @param {RDF.Quad_Subject} subject - The subject of the quad.
+     * @param {RDF.Quad_Predicate} predicate - The predicate of the quad.
+     * @param {RDF.Quad_Object} object - RDF.Quad_Object
+     * @param {RDF.Quad_Graph} graph - The graph name of the quad.
+     */
     constructor(
         public subject: RDF.Quad_Subject,
         public predicate: RDF.Quad_Predicate,
@@ -132,9 +203,7 @@ export class Quad implements RDF.Quad {
         Object.freeze(this);
     }
 
-    termType: "Quad" = "Quad";
-    value: "" = "";
-
+    /** @inheritdoc */
     equals(other: RDF.Term | null | undefined): boolean {
         // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
         return (
@@ -148,6 +217,10 @@ export class Quad implements RDF.Quad {
     }
 }
 
+/**
+ * Creating a map of the different types of nodes that can be used in a quad.
+ * @const prototypes
+ */
 const prototypes = {
     subject: [NamedNode.prototype, BlankNode.prototype, Quad.prototype],
     predicate: [NamedNode.prototype],
@@ -187,12 +260,25 @@ const prototypes = {
  * TypeScript).
  *
  * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
+ *
+ * @implements RDF.DataFactory<Quad, Quad>
  */
 export class DataFactory implements RDF.DataFactory<Quad, Quad> {
+    /**
+     * It creates a new [[DataFactory]] instance with value `strict`
+     * @param {boolean} strict - boolean
+     */
     constructor(private readonly strict: boolean) {
         Object.freeze(this);
     }
 
+    /**
+     * It returns a new BlankNode with the given value.
+     *
+     * @param {string} [value] - The value of the blank node.
+     * @throws {Error} If the strict flag is set and the `value` is not a string or undefined
+     * @returns {BlankNode} - A blank node.
+     */
     blankNode(value?: string): BlankNode {
         if (this.strict) {
             if (value !== undefined && typeof value !== "string")
@@ -202,10 +288,12 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new BlankNode(value);
     }
 
+    /** @inheritdoc */
     defaultGraph(): DefaultGraph {
         return DefaultGraph.instance;
     }
 
+    /** @inheritdoc */
     literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
         if (this.strict) {
             if (typeof value !== "string")
@@ -225,6 +313,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new Literal(value, languageOrDatatype);
     }
 
+    /** @inheritdoc */
     namedNode<Iri extends string = string>(value: Iri): NamedNode<Iri> {
         if (this.strict) {
             if (typeof value !== "string") throw new Error("Expected string");
@@ -233,6 +322,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new NamedNode(value);
     }
 
+    /** @inheritdoc */
     quad(
         subject: RDF.Quad_Subject,
         predicate: RDF.Quad_Predicate,
@@ -263,6 +353,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         );
     }
 
+    /** @inheritdoc */
     variable(value: string): Variable {
         if (this.strict) {
             if (typeof value !== "string") throw new Error("Expected string");

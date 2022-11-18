@@ -31,6 +31,7 @@ pub enum FailureCode {
     FailedToAttachJVM,
     FailedToDecode,
     FailedToEncode,
+    FailedToSetPreference,
 }
 
 impl FailureCode {
@@ -244,6 +245,13 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToAccessUserSession.value(),
             message: format!("Failed to access user_session, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_set_preference(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToSetPreference.value(),
+            message: format!("Failed to set preference: {}", message),
         }
     }
 }

@@ -1,7 +1,9 @@
 :root {
-/* Spacing units for margins, padding, grid, position (top, bottom, right, left) 
+  /* Spacing units for margins, padding, grid, position (top, bottom, right, left) 
 
-Potential use for future "Figma tokens" variables. Currently used in Banner and PolyButton component as example. */
+Potential use for future "Figma tokens" variables. Currently used in Banner, PolyButton and TextField. */
+
+  /* Library tokens */
   --pl-space-1x: 4px;
   --pl-space-2x: calc(var(--pl-space-1x) * 2);
   --pl-space-3x: calc(var(--pl-space-1x) * 3);
@@ -13,7 +15,16 @@ Potential use for future "Figma tokens" variables. Currently used in Banner and 
   --pl-space-9x: calc(var(--pl-space-1x) * 9);
   --pl-space-10x: calc(var(--pl-space-1x) * 10);
 
+  /* Component tokens */
+
+  /* Small button */
   --pl-small-button-spacing-gap: var(--pl-space-1x);
   --pl-small-button-spacing-padding-vert: var(--pl-space-2x);
   --pl-small-button-spacing-padding-hor: var(--pl-space-3x);
+
+  /* Text field */
+  --pl-field-spacing-gap:var(--pl-space-1x);
+  --pl-field-spacing-padding-vert: var(--pl-space-2x);
+  --pl-field-spacing-padding-hor: var(--pl-space-4x);
+  --pl-field-body-line-height: var(--pl-space-5x);
 }

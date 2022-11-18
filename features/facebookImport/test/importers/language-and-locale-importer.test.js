@@ -5,7 +5,7 @@ import {
     createLanguageSettingsData,
     createLocaleData,
 } from "../datasets/language-and-locale-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runLanguageAndLocaleImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,

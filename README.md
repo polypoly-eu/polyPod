@@ -1,19 +1,24 @@
 # The polyPod
 
-At the moment, the polyPod is essentially a runtime for _features_; small,
-sandboxed JavaScript applications that can be launched from the polyPod app.
+The polyPod is a personal data store and privacy-preserving runtime environment
+for privacy-conscious computations. It executes _Features_; small, sandboxed
+JavaScript applications that can be launched by the user and interact with their
+personal data.
 
-But it will be much more than that. For more information please read the
-[polyPod whitepaper][1].
+It is still under heavy development, and some aspects are missing or
+unrefined. For more on the vision please read the [polyPod whitepaper][1].
 
 ## Structure
 
 - [platform](platform): The polyPod platform
-- [features](features): polyPod features
-- [feature-utils](feature-utils): Utilities used by features
-- [assets](assets): Assets shared across the polyPod and features
+- [features](features): polyPod Features
+- [feature-utils](feature-utils): Utilities used by Features
+- [assets](assets): Assets shared across the polyPod and Features
 - [build](build): The build logic
 - [dev-utils](dev-utils): Utilities used at build time
+
+To better understand the architecture, have a look at
+[docs/architecture.md](docs/architecture.md).
 
 ## Requirements
 
@@ -31,7 +36,7 @@ The polyPod runs on several platforms. You can control which platforms to build
 for using the `POLYPOD_BUILD_PLATFORMS` environment variable.
 
 Regardless of what you set it to, even if you don't set it, _podjs_ will always
-be built - which is sufficient to run and develop features.
+be built - which is sufficient to run and develop Features.
 
 In order to build the polyPod for other platforms, set `POLYPOD_BUILD_PLATFORMS`
 to one of the following values:
@@ -53,12 +58,12 @@ In general, you just need to run:
 > if you're curious.)
 
 This will build the platform independent code, including all the bundled
-features, as well as [podjs](platform/podjs), a browser-based implementation of
+Features, as well as [podjs](platform/podjs), a browser-based implementation of
 the polyPod.
 
 After this you can build the [platform](platform)
 (e.g. [android](platform/android) or [ios](platform/ios)), or try one of the
-features (e.g. [features/example](features/example)).
+Features (e.g. [features/example](features/example)).
 
 ## Testing
 
@@ -90,6 +95,14 @@ sources for this configuration:
 
 * [`.editorconfig`](.editorconfig) for general editor configuration.
 * [`.eslintrc.cjs`](.eslintrc.cjs) for specific JS/TS linting rules.
+
+## Documentation
+
+To generate the source code documentation, run:
+
+    $ ./build.js doc
+
+For a complete overview, see [docs/README.md](docs/README.md).
 
 ## Branches
 

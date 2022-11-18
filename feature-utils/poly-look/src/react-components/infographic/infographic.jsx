@@ -3,15 +3,17 @@ import * as d3 from "d3";
 import InfographicLegend from "./infographicLegend.jsx";
 import "./infographic.css";
 
-/** Renders an image and a numbered legend that contains descriptions
- *  for different elements in the image.
+/**
+ * Renders an SVG image and replaces numbered legends that contain descriptions
+ * with different HTML elements in the image.
+ * @component
  * @param {Object} props
- * @param {Object} [props.image] - Object containing the svg we want to use and translations
- * @param {Object} [props.image.svg] - the svg that we want to render
- * @param {Object} [props.image.texts] - an object where the key corresponds to a
+ * @param {Object} props.image - Object containing the svg we want to use and translations
+ * @param {Object} props.image.svg - the svg that we want to render
+ * @param {Object} props.image.texts - an object where the key corresponds to a
  * <text ../> id found in the svg while the value is a string that will replace the text.
- * @param {Array[string]} [props.explanation] - a simple array with descriptions
- * @param {Array[Object]} [props.legend] - an array of objects that will render an
+ * @param {Array.<String>} props.explanation - a simple array with descriptions
+ * @param {Array.<Object>} [props.legend] - an array of objects that will render an
  * InfographicLegend component. Check storybook for an example that showcases different
  * combinations.
  * @returns {JSX.Element}

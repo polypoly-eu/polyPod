@@ -1,0 +1,19 @@
+{
+    "name": "Messenger Demo",
+    "author": "polypoly Cooperative",
+    "description": "Demo of the polypoly messenger app",
+    "thumbnail": "images/thumbnail.pdf",
+    "primaryColor": "#0f1938",
+    "thumbnailColor": "#475abb",
+    "borderColor": "#475abb",
+    "tileTextColor": "#ffffff",
+    "links": {},
+    "translations": {
+        "de": {
+            "name": "Messenger Demo",
+            "author": "polypoly - Die Genossenschaft",
+            "description": "Demo der polypoly Messenger App",
+            "links": {}
+        }
+    }
+}

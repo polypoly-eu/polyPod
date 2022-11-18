@@ -1,4 +1,4 @@
-name: polyPod iOS test
+name: iOS unit and integration test
 on:
     push:
         paths:
@@ -22,7 +22,7 @@ jobs:
         runs-on: macOS-12
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: 18

@@ -7,6 +7,21 @@ const emailLink = `\
 polypod-feedback@polypoly.coop\
 </a>`;
 
+/**
+ * Callback for handling the click event to close button.
+ *
+ * @callback buttonCallback
+ * @param {React.MouseEventHandler<HTMLButtonElement>} clickEvent - mouse onClick action.
+ */
+
+/**
+ * It renders a popup with an error message and instructions on how to report the error
+ * @param {Object} props
+ * @param {Error} [props.error] the error raised
+ * @param {buttonCallback} [props.onClose] Button callback.
+ * @param {String} [props.text] The text popup message.
+ * @returns A React component.
+ */
 export default function ErrorPopup({ error, onClose, text }) {
   return (
     <div className="error-popup">

@@ -16,6 +16,13 @@ export default {
         }),
         copy({
             targets: [
+                { src: "node_modules/mocha/mocha.js", dest: "dist" },
+                { src: "node_modules/mocha/mocha.css", dest: "dist" },
+                { src: "node_modules/chai/chai.js", dest: "dist" },
+            ],
+        }),
+        copy({
+            targets: [
                 { src: "src/index.html", dest: "dist" },
                 { src: "src/manifest.json", dest: "dist" },
                 { src: "src/images/*", dest: "dist/images" },

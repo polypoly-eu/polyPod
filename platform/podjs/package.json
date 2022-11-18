@@ -14,12 +14,13 @@
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts",
     "test": "jest && cypress run",
-    "docs": "typedoc"
+    "doc": "typedoc"
   },
   "dependencies": {
     "@polypoly-eu/api": "file:../feature-api/api",
     "@rollup/plugin-wasm": "^5.2.0",
     "@zip.js/zip.js": "2.3.7",
+    "endpoints-generator": "file:../utils/endpoints-generator",
     "fp-ts": "^2.8.2",
     "io-ts": "^2.2.16",
     "oxigraph": "^0.3.5",

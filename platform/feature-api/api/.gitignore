@@ -58,6 +58,5 @@ coverage
 # DynamoDB Local files
 .dynamodb/
 
-docs
 dist/
 **/*.d.ts

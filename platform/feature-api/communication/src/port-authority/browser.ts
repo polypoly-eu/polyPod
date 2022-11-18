@@ -7,16 +7,20 @@
 import { Handler, mapPort, Port, ReceivePort } from "./port";
 
 /**
- * Converts a browser `MessagePort` into a raw [[Port]].
+ * Converts a browser `MessagePort` into a raw [[Port]]
+ * that sends messages to the MessagePort and receives messages from the MessagePort.
  *
- * The type of outgoing messages is unconstrained. Incoming messages are `MessageEvent`s; the raw value can be accessed
- * using the `data` field. It is not possible to transfer objects with this [[Port]].
+ * The type of outgoing messages is unconstrained. Incoming messages are `MessageEvent`s;
+ * the raw value can be accessed using the `data` field. It is not possible to transfer objects with this [[Port]].
  *
  * The [[SendPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
  * For typed operation, it is recommended to use [[mapPort]] with type coercions.
  *
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
  * received as a different object.
+ *
+ * @param {MessagePort} port - MessagePort
+ * @returns {Port.<MessageEvent, any>} - A Port object with two methods: [[SendPort.send]] and [[ReceivePort.addHandler]].
  */
 export function fromBrowserMessagePort(
     port: MessagePort
@@ -35,6 +39,8 @@ export function fromBrowserMessagePort(
 
 /**
  * The “inner half” of an iframe portal.
+ *
+ * It resolves to a port that sends and receives JSON-serializable objects.
  *
  * It is possible to send and receive messages in an iframe using `window.parent` (from the iframe) and the iframe DOM
  * object (from the outer window). However, this becomes problematic when handling multiple clients whose requests need
@@ -58,8 +64,7 @@ export function fromBrowserMessagePort(
  * that have been exchanged. The entire protocol is abstracted using the pair of functions [[iframeInnerPort]] and
  * [[iframeOuterPort]].
  *
- * Usage example from within an iframe:
- *
+ * @example <caption> Usage example from within an iframe </caption>
  * ```html
  * <html>
  *     <head>
@@ -72,6 +77,9 @@ export function fromBrowserMessagePort(
  *     </head>
  * </html>
  * ```
+ *
+ * @param {string} secret - A string that is used to identify the message.
+ * @returns A promise that resolves to a Port that sends and receives JSON-serializable objects.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
@@ -100,17 +108,22 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
 }
 
 /**
+ * A function that takes the port as a parameter.
+ * @typedef {function(port: ReceivePort<any>): void} initFunction
+ */
+
+/**
  * The “outer half” of an iframe portal. See [[iframeInnerPort]] for details about the protocol.
  *
- * This function creates a `MessageChannel` and starts the outer port immediately. Consider a scenario where the script
- * executing inside the iframe immediately sends messages to the port. Those messages may get lost, because this
- * function may not have returned yet, so a caller may not have had the opportunity to register a handler. In any case,
- * this is a race condition. To avoid this, callers may specify an `init` function that gets called with the port before
- * it is sent to the iframe. Sending messages down that port may result in a race condition in the iframe, so it is
- * prohibited by the type.
+ * It creates a new `MessageChannel`, sends one of the ports to the iframe and starts the outer port immediately.
+ * Consider a scenario where the script executing inside the iframe immediately sends messages to the port.
+ * Those messages may get lost, because this function may not have returned yet, so a caller may not have had
+ * the opportunity to register a handler. In any case, this is a race condition. To avoid this, callers may
+ * specify an `init` function that gets called with the port before
+ * it is sent to the iframe. Sending messages down that port may result in a race condition in the iframe,
+ * so it is prohibited by the type.
  *
- * Usage example from an outer window:
- *
+ * @example <caption> Example from an outer window: </caption>
  * ```
  * const iframe = await new Promise(resolve => {
  *     const dom = document.createElement("iframe");
@@ -120,6 +133,12 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
  * const port = iframeOuterPort("", iframe);
  * port.addHandler(console.dir);
  * ```
+ * @param {string} secret - A string that is used to identify the message as a message from this
+ * library.
+ * @param {HTMLIFrameElement} iframe - HTMLIFrameElement
+ * @param {initFunction} [init] - A function that takes the port as a parameter. This is useful if you want to do
+ * something with the port before it's sent to the iframe.
+ * @returns A port that can be used to send messages to the iframe.
  */
 export function iframeOuterPort(
     secret: string,

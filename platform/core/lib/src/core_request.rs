@@ -31,6 +31,13 @@ pub struct LoadFeatureCategoriesArguments {
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct SetPreferenceArguments {
+    key: String,
+    value: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub enum CoreRequest {
     LoadFeatureCategories {
         args: LoadFeatureCategoriesArguments,
@@ -49,6 +56,16 @@ pub enum CoreRequest {
     #[cfg(feature = "poly_rdf")]
     ExecuteRdfUpdate {
         args: String,
+    },
+    HandleStartup,
+    HandleFirstRun,
+    HandleInAppNotificationSeen,
+    HandlePushNotificationSeen,
+    ShouldShowInAppNotification,
+    ShouldShowPushNotification,
+    ClearPreferences,
+    SetPreference {
+        args: SetPreferenceArguments,
     },
 }
 
@@ -72,6 +89,14 @@ pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
         CoreRequest::ExecuteRdfQuery { args } => instance.exec_rdf_query(args),
         #[cfg(feature = "poly_rdf")]
         CoreRequest::ExecuteRdfUpdate { args } => instance.exec_rdf_update(args),
+        CoreRequest::HandleStartup => instance.handle_startup(),
+        CoreRequest::HandleFirstRun => instance.handle_first_run(),
+        CoreRequest::HandleInAppNotificationSeen => instance.handle_in_app_notification_seen(),
+        CoreRequest::HandlePushNotificationSeen => instance.handle_push_notification_seen(),
+        CoreRequest::ShouldShowInAppNotification => instance.should_show_in_app_notification(),
+        CoreRequest::ShouldShowPushNotification => instance.should_show_push_notification(),
+        CoreRequest::ClearPreferences => instance.clear_preferences(),
+        CoreRequest::SetPreference { args } => instance.set_preference(args),
     }
 }
 
@@ -147,6 +172,69 @@ impl Core<'_> {
                 .update(update)
                 .map_err(|failure| failure.to_core_failure()),
         )
+    }
+
+    pub fn handle_startup(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_startup();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_first_run(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_first_run();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_in_app_notification_seen(&self) -> MessagePackBytes {
+        self.update_notification
+            .lock()
+            .unwrap()
+            .handle_in_app_seen();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_push_notification_seen(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_push_seen();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn should_show_in_app_notification(&self) -> MessagePackBytes {
+        let show = self
+            .update_notification
+            .lock()
+            .unwrap()
+            .should_show_in_app();
+        message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
+    }
+
+    pub fn should_show_push_notification(&self) -> MessagePackBytes {
+        let show = self.update_notification.lock().unwrap().should_show_push();
+        message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
+    }
+
+    pub fn clear_preferences(&self) -> MessagePackBytes {
+        self.preferences.clear();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn set_preference(&self, args: SetPreferenceArguments) -> MessagePackBytes {
+        match args.key.as_str() {
+            "lastUpdateNotificationId" => self
+                .update_notification
+                .lock()
+                .unwrap()
+                .migrate_last_id(args.value),
+            "lastUpdateNotificationState" => self
+                .update_notification
+                .lock()
+                .unwrap()
+                .migrate_last_state(args.value),
+            &_ => {
+                return message_pack_serialize(
+                    Err(CoreFailure::failed_to_set_preference(args.key)) as Result<(), CoreFailure>,
+                );
+            }
+        }
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
     }
 }
 

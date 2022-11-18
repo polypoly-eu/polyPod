@@ -24,12 +24,12 @@ fun yourDataContainers(
         ContainerType.ROW
     )
 
-    return chunked.mapIndexed { index, tiles ->
+    return chunked.mapIndexed { index, theseTiles ->
         when (val type = containersConfig[index % containersConfig.count()]) {
             ContainerType.LARGELEFT -> Container(
                 type = type,
-                tiles = tiles.mapIndexed { index, tileModel ->
-                    if (index == 0) {
+                tiles = theseTiles.mapIndexed { tileIndex, tileModel ->
+                    if (tileIndex == 0) {
                         Tile(
                             tileModel,
                             bigTileStyle,
@@ -49,7 +49,7 @@ fun yourDataContainers(
             )
             ContainerType.ROW -> Container(
                 type = type,
-                tiles = tiles.map { tileModel ->
+                tiles = theseTiles.map { tileModel ->
                     Tile(
                         tileModel,
                         smallTileStyle,
@@ -61,8 +61,8 @@ fun yourDataContainers(
             )
             ContainerType.LARGERIGHT -> Container(
                 type = type,
-                tiles = tiles.mapIndexed { index, tileModel ->
-                    if (tiles.count() < tilesPerContainer) {
+                tiles = theseTiles.mapIndexed { tileIndex, tileModel ->
+                    if (theseTiles.count() < tilesPerContainer) {
                         Tile(
                             tileModel,
                             smallTileStyle,
@@ -70,7 +70,7 @@ fun yourDataContainers(
                             TileType.SMALL
                         )
                     } else {
-                        if (index == tiles.count() - 1) {
+                        if (tileIndex == theseTiles.count() - 1) {
                             Tile(
                                 tileModel,
                                 bigTileStyle,
