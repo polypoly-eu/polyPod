@@ -6,6 +6,7 @@ const l12nt = (o) => i18n.l12n.t(o);
 
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
+import { FixedFooter } from "@polypoly-eu/poly-look";
 
 import "./messagesMiniStory.css";
 
@@ -76,13 +77,12 @@ export const MessagesMiniStoryDetails = ({
                     </>
                 )}
             />
-            <div className="messages-gradient"></div>
-            <div className="messages-info-container">
+            <FixedFooter>
                 <InfoButton infoScreen="messages-info" />
-            </div>
-            <p className="source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p>
+                <p className="source">
+                    {i18n.t("common:source.your.facebook.data")}
+                </p>
+            </FixedFooter>
         </>
     );
 };
