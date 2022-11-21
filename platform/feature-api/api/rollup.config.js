@@ -21,15 +21,16 @@ export default [
         ],
         external: ["chai", "fast-check", "chai-as-promised", "uuid"],
     },
+    // TODO: Include mock-pod.ts in dist/index*.js above
     {
         input: "src/pod-api/mock-pod.ts",
         output: [
             {
-                file: "dist/mock-pod.es.js",
+                file: "dist/pod-api/mock-pod.es.js",
                 format: "esm",
             },
             {
-                file: "dist/mock-pod.js",
+                file: "dist/pod-api/mock-pod.js",
                 format: "cjs",
             },
         ],

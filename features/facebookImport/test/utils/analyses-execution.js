@@ -1,4 +1,4 @@
-import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
+import { MockPod } from "@polypoly-eu/api/dist/pod-api/mock-pod";
 import { dataImporters } from "../../src/model/importer";
 import {
     runAnalysis,

@@ -1,27 +1,26 @@
-import { Volume } from "memfs";
-import factory from "@rdfjs/dataset";
+import { DataFactory, Pod } from "@polypoly-eu/api";
+import { MockPod } from "@polypoly-eu/api/dist/pod-api/mock-pod";
 import { AsyncPod } from "../../async";
-import { Pod, DefaultPod, DataFactory } from "@polypoly-eu/api";
 
 describe("Async pod", () => {
-    function assertValidPod(pod: Pod): void {
-        // TODO: Instead of using DefaultPod, we should use MockPod for the
-        //       underlying Pod, then verify it's being invoked as expected.
+    async function assertValidPod(pod: Pod): Promise<void> {
         expect(pod).toBeTruthy();
+        expect(await pod.info.getRuntime()).toEqual(MockPod.INFO_RUNTIME);
+        expect(await pod.info.getVersion()).toEqual(MockPod.INFO_VERSION);
     }
 
-    const underlying = new DefaultPod(factory.dataset(), new Volume().promises);
+    const underlying = new MockPod();
 
-    it("Resolved promise", async () => {
-        assertValidPod(
+    it("Works with resolved promise", async () => {
+        await assertValidPod(
             new AsyncPod(Promise.resolve(underlying), new DataFactory(false))
         );
     });
 
-    it("Delayed promise", async () => {
+    it("Works with delayed promise", async () => {
         const delayed = new Promise<Pod>((resolve) => {
             setTimeout(() => resolve(underlying), 500);
         });
-        assertValidPod(new AsyncPod(delayed, new DataFactory(false)));
+        await assertValidPod(new AsyncPod(delayed, new DataFactory(false)));
     });
 });
