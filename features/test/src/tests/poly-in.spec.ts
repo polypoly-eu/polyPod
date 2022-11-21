@@ -1,18 +1,9 @@
 import { PolyIn } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 
-const assert = chai.assert;
+import { assert, assertAsyncThrows } from "../assert";
 
 describe("polyIn", function () {
-    async function assertAsyncThrows(fn): Promise<void> {
-        try {
-            await fn();
-        } catch (e) {
-            return;
-        }
-        assert.fail(`expected '${fn}' to throw an error`);
-    }
-
     function findQuadIndex(quads: RDF.Quad[], quad: RDF.Quad): number {
         for (let i = 0; i < quads.length; i++)
             if (quad.equals(quads[i])) return i;
@@ -248,6 +239,15 @@ describe("polyIn", function () {
             for (const quad of quads) await polyIn.add(quad);
             const result = await polyIn.match({});
             assertQuadsEqual(result, quads);
+        });
+    });
+
+    describe("delete", function () {
+        it("removes previously added quad", async function () {
+            const quad = testQuads.allNamedNodes;
+            await polyIn.add(quad);
+            await polyIn.delete(quad);
+            assert.notOk(await polyIn.has(quad));
         });
     });
 });
