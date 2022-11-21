@@ -11,12 +11,12 @@ For our technical roadmap, see [tech-roadmap.md](tech-roadmap.md).
 
 ## Source code documentation
 
-To generate source code documentation, follow the instructions in
-[../README.md](../README.md).
+- [Feature API](https://polypoly-eu.github.io/polyPod/platform/feature-api/api)
+- [poly-look API](https://polypoly-eu.github.io/polyPod/feature-utils/poly-look)
+- [poly-look component preview](https://polypoly-eu.github.io/polyPod/feature-utils/poly-look-preview)
+- [silly-i18n API](https://polypoly-eu.github.io/polyPod/feature-utils/silly-i18n)
 
-Afterwards, you will find:
+### Generating the source code documentation locally
 
-- [Feature API](documentation/platform/feature-api/api)
-- [poly-look API](documentation/feature-utils/poly-look)
-- [poly-look component preview](documentation/feature-utils/poly-look-preview)
-- [silly-i18n API](documentation/feature-utils/silly-i18n)
+Follow the instructions in [../README.md](../README.md). Afterwards, you will
+find it in [../docs/documentation](../docs/documentation).
