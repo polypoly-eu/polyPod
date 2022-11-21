@@ -52,11 +52,9 @@ describe("Import ad views from export with missing ads category", () => {
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const response = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             createEnglishDatasetWithMissingAdsCategory()
-        );
-        report = response.report;
-        relatedAccounts = response.relatedAccounts;
+        ));
     });
 
     it("returns warning status", () =>
@@ -94,11 +92,9 @@ describe("Import ad view with company name with multi-byte unicode characters", 
     let relatedAccount = null;
 
     beforeAll(async () => {
-        const response = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             creatAdViewsWithCompanyWithUnicodeCharactersData()
-        );
-        report = response.report;
-        relatedAccounts = response.relatedAccounts;
+        ));
         relatedAccount = relatedAccounts.items[0];
     });
 
@@ -125,11 +121,9 @@ describe("Import incomplete ad views from export", () => {
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const response = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             createIncompleteEnglishAdViewsData()
-        );
-        report = response.report;
-        relatedAccounts = response.relatedAccounts;
+        ));
     });
 
     it("returns success status", () => expectImportSuccess(report));
