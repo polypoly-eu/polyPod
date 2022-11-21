@@ -46,7 +46,7 @@ describe("Import posts from export with one file error", () => {
         ).toBe(1);
     });
 
-    it("triggers syntax error", async () => {
+    it("second status triggers syntax error", async () => {
         expectErrorStatus(report.statuses[1], SyntaxError);
     });
 
