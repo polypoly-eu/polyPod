@@ -23,7 +23,6 @@
 .poly-side-sheet .title {
   font-size: 16px;
   text-align: center;
-  text-transform: uppercase;
   font-family: var(--jost-medium);
 }
 .poly-side-sheet .title-center {
@@ -35,4 +34,8 @@
 .poly-side-sheet .button-holder {
   margin-top: auto;
   margin-bottom: 32px;
+}
+
+.poly-side-sheet h1 {
+  text-transform: uppercase;
 }

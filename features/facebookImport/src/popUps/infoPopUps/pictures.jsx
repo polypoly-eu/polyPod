@@ -1,18 +1,18 @@
 import React from "react";
-
 import i18n from "!silly-i18n";
-import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 
 const PicturesInfoPopUp = () => {
-    const picturesInfoText = [
+    return (
         <>
             <p>{i18n.t("picturesInfoScreen:text1")}</p>
             <p>{i18n.t("picturesInfoScreen:text2")}</p>
-        </>,
-        <p>{i18n.t("picturesInfoScreen:text3")}</p>,
-    ];
-
-    return <BaseInfoPopUp infoChildren={picturesInfoText} />;
+            <div className="separator separator-space"></div>
+            <h2 className="title title-space">
+                {i18n.t("baseInfoScreen:title2")}
+            </h2>
+            <p>{i18n.t("picturesInfoScreen:text3")}</p>
+        </>
+    );
 };
 
 export default PicturesInfoPopUp;

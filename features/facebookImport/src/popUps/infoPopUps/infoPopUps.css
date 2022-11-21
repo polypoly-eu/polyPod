@@ -2,3 +2,21 @@ div .chart-description-title {
     font-family: "Jost Medium";
     font-size: 14px;
 }
+.separator.separator-space {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.title.title-space {
+    margin-bottom: 12px;
+}
+
+.full-width {
+    position: relative;
+    margin-left: -16px;
+    margin-right: -16px;
+    background-color: var(--color-gray-50);
+    display: flex;
+}
+.full-width .infographic {
+    padding: 16px;
+}

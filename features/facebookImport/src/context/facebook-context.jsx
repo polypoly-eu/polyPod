@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import i18n from "!silly-i18n";
 import { useHistory, useLocation } from "react-router-dom";
 
-import popUps from "../popUps";
-
 export const FacebookContext = React.createContext();
 
 function updatePodNavigation(pod, history, handleBack, location) {
@@ -34,7 +32,6 @@ export const FacebookProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [popUp, setPopUp] = useState(null);
-
     const history = useHistory();
     const location = useLocation();
 
@@ -44,16 +41,10 @@ export const FacebookProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    function createPopUp({ type }) {
-        setPopUp({ component: popUps[type] });
-    }
-
-    function closePopUp() {
-        setPopUp(null);
-    }
-
     function handleBack() {
-        if (popUp) return setPopUp(null);
+        if (popUp) {
+            return setPopUp(null);
+        }
         history.length > 1 && history.goBack();
     }
 
@@ -71,6 +62,10 @@ export const FacebookProvider = ({ children }) => {
         updateTitle(pod, location, popUp);
     });
 
+    useEffect(() => {
+        document.body.style.overflowY = popUp ? "hidden" : "unset";
+    }, [popUp]);
+
     return (
         <FacebookContext.Provider
             value={{
@@ -84,8 +79,7 @@ export const FacebookProvider = ({ children }) => {
                 setIsLoading,
                 runWithLoadingScreen,
                 popUp,
-                createPopUp,
-                closePopUp,
+                setPopUp,
             }}
         >
             {children}

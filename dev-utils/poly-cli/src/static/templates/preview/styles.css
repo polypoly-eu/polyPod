@@ -117,15 +117,10 @@
 
 .info-stage h3 {
     margin-top: 0;
-<<<<<<< HEAD
-    font-size: var(--font-size-m);
-    margin-bottom: var(--gdu);
-=======
     font-size: var(--font-size-l);
     font-family: var(--jost-medium);
     font-weight: 100;
     margin-bottom: calc(var(--gdu) * 2);
->>>>>>> release
 }
 
 .info-stage p {

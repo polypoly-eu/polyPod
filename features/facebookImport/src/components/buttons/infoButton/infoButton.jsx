@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { FacebookContext } from "../../../context/facebook-context.jsx";
+import { IconButton } from "@polypoly-eu/poly-look";
 
 import "./infoButton.css";
 
 const InfoButton = ({ infoScreen }) => {
-    const { createPopUp } = useContext(FacebookContext);
+    const { setPopUp } = useContext(FacebookContext);
 
-    const handleClick = () => {
-        createPopUp({ type: infoScreen });
-    };
     return (
-        <button className="info-button" onClick={handleClick}>
-            <img src="./images/question.svg"></img>
-        </button>
+        <IconButton
+            className="info-button"
+            icon="question"
+            fillDirection="left"
+            onClick={() => setPopUp(infoScreen)}
+        />
     );
 };
 
