@@ -63,7 +63,7 @@ describe("Import posts from export with two file errors", () => {
         ({ result, report } = await runPostsImporter(zipFile));
     });
 
-    it("has two error status", async () => {
+    it("has two error statuses", async () => {
         expect(
             report.statuses.filter((status) => !status.isSuccess).length
         ).toBe(2);
