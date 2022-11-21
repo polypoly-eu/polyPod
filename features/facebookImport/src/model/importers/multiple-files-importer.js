@@ -6,12 +6,10 @@ import {
 } from "./utils/importer-util";
 
 export default class MultipleFilesImporter extends Importer {
-    // eslint-disable-next-line no-unused-vars
     _isTargetPostFile() {
         return false;
     }
 
-    // eslint-disable-next-line no-unused-vars
     _processRawDataResults() {}
 
     async _extractTargetEntries(zipFile) {
