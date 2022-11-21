@@ -21,8 +21,8 @@ describe("Import searches from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runSearchesImporter(zipFile);
-        expectMissingFileError(result, SearchesImporter);
+        const { report } = await runSearchesImporter(zipFile);
+        expectMissingFileError(report, SearchesImporter);
     });
 });
 
@@ -33,24 +33,22 @@ describe("Import searches from empty export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runSearchesImporter(zipFile);
-        expectInvalidContentError(result, SearchesImporter);
+        const { report } = await runSearchesImporter(zipFile);
+        expectInvalidContentError(report, SearchesImporter);
     });
 });
 
 describe("Import searches", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithSearches();
-        ({ result, facebookAccount } = await runSearchesImporter(zipFile));
+        ({ result, report } = await runSearchesImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.searches.length).toBe(
-            DATASET_EXPECTED_VALUES.numberOfSearches
-        ));
+        expect(result.length).toBe(DATASET_EXPECTED_VALUES.numberOfSearches));
 });

@@ -63,17 +63,25 @@ export default class LanguageAndLocaleImporter {
         };
     }
 
-    async import({ zipFile, facebookAccount }) {
+    async import({ zipFile }) {
         const languageData = await this.readLanguageData(zipFile);
-        facebookAccount.preferredLanguage =
-            this.extractPreferredLanguge(languageData);
+        const preferredLanguage = this.extractPreferredLanguge(languageData);
 
-        if (!facebookAccount.preferredLanguage) {
-            return new Status({
-                name: statusTypes.warning,
-                message: "Could not extract preferredLanguage",
-            });
+        if (!preferredLanguage) {
+            return {
+                report: {
+                    status: new Status({
+                        name: statusTypes.warning,
+                        message: "Could not extract preferredLanguage",
+                    }),
+                },
+            };
         }
+
+        return {
+            result: { preferredLanguage },
+            report: { importedFileNames: [LANGUAGE_AND_LOCALE_FILE_PATH] },
+        };
     }
 }
 

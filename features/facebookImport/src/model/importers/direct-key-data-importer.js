@@ -9,17 +9,19 @@ export default class DirectKeyDataImporter extends Importer {
         this._dataStorageKey = dataStorageKey;
     }
 
-    async import({ zipFile, facebookAccount }) {
+    async import({ zipFile }) {
         const extractedData = await readJSONDataArray(
             this._dataFileName,
             this._dataKey,
             zipFile
         );
 
-        facebookAccount[this._dataStorageKey] =
-            "extractData" in this
-                ? this.extractData(extractedData)
-                : extractedData;
-        facebookAccount.addImportedFileName(this._dataFileName);
+        return {
+            result:
+                "extractData" in this
+                    ? this.extractData(extractedData)
+                    : extractedData,
+            importedFileNames: [this._dataFileName],
+        };
     }
 }

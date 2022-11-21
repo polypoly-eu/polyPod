@@ -21,8 +21,8 @@ describe("Import interacted with advertisers from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runInteractedWithAdvertisersImporter(zipFile);
-        expectMissingFileError(result, InteractedWithAdvertisersImporter);
+        const { report } = await runInteractedWithAdvertisersImporter(zipFile);
+        expectMissingFileError(report, InteractedWithAdvertisersImporter);
     });
 });
 
@@ -33,25 +33,26 @@ describe("Import interacted with advertisers from empty export with wrong data k
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runInteractedWithAdvertisersImporter(zipFile);
-        expectInvalidContentError(result, InteractedWithAdvertisersImporter);
+        const { report } = await runInteractedWithAdvertisersImporter(zipFile);
+        expectInvalidContentError(report, InteractedWithAdvertisersImporter);
     });
 });
 
 describe("Import interacted with advertisers", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithInteractedWithAdvertisers();
-        ({ result, facebookAccount } =
-            await runInteractedWithAdvertisersImporter(zipFile));
+        ({ result, report } = await runInteractedWithAdvertisersImporter(
+            zipFile
+        ));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.interactedAdvertisers.length).toBe(
+        expect(result.length).toBe(
             DATASET_EXPECTED_VALUES.totalInteractionsCount
         ));
 });

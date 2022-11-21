@@ -70,6 +70,10 @@ class FacebookAccount extends DataAccount {
         return this.messageThreadsGroup.hasMessages;
     }
 
+    set recentlyViewedAds(relatedAccounts) {
+        this.addRelatedAccounts(relatedAccounts);
+    }
+
     forEachMessageThread(callback) {
         this.messageThreadsGroup.forEachMessageThread(callback);
     }

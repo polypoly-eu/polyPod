@@ -21,34 +21,32 @@ describe("Import language from", () => {
     });
 
     it("export with missing file fails", async () => {
-        const { result } = await runLanguageAndLocaleImporter(zipFile);
+        const { report } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectMissingFileError(result, LanguageAndLocaleImporter);
+        expectMissingFileError(report, LanguageAndLocaleImporter);
     });
 
     it("export with wrong data key fails", async () => {
         const languageData = { wrong_data_key: [] };
         zipFile.addJsonEntry(LANGUAGE_AND_LOCALE_FILE_PATH, languageData);
 
-        const { result } = await runLanguageAndLocaleImporter(zipFile);
+        const { report } = await runLanguageAndLocaleImporter(zipFile);
 
-        expectInvalidContentError(result, LanguageAndLocaleImporter);
+        expectInvalidContentError(report, LanguageAndLocaleImporter);
     });
 
     it("export with no data has warning", async () => {
         const languageData = createLocaleData({});
         zipFile.addJsonEntry(LANGUAGE_AND_LOCALE_FILE_PATH, languageData);
 
-        const { result, facebookAccount } = await runLanguageAndLocaleImporter(
-            zipFile
-        );
+        const { result, report } = await runLanguageAndLocaleImporter(zipFile);
         expectImportWarning(
-            result,
+            report,
             "Could not extract preferredLanguage",
             LanguageAndLocaleImporter
         );
 
-        expect(facebookAccount.preferredLanguage).toBeUndefined();
+        expect(result?.preferredLanguage).toBeUndefined();
     });
 });
 
@@ -80,12 +78,13 @@ describe("Import language", () => {
             const zipFile = new ZipFileMock();
             zipFile.addJsonEntry(LANGUAGE_AND_LOCALE_FILE_PATH, dataset);
 
-            const { result, facebookAccount } =
-                await runLanguageAndLocaleImporter(zipFile);
+            const { result, report } = await runLanguageAndLocaleImporter(
+                zipFile
+            );
 
-            expectImportSuccess(result);
-            expect(facebookAccount.preferredLanguage.code).toBe(settingValue);
-            expect(facebookAccount.preferredLanguage.name).toBe(settingName);
+            expectImportSuccess(report);
+            expect(result.preferredLanguage.code).toBe(settingValue);
+            expect(result.preferredLanguage.name).toBe(settingName);
         }
     );
 });

@@ -14,3 +14,4 @@ export default class AdminRecordsImporter extends DirectKeyDataImporter {
         );
     }
 }
+AdminRecordsImporter.STORAGE_KEY = "adminRecords";

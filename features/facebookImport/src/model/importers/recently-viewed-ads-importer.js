@@ -44,13 +44,12 @@ export default class RecentlyViewedAdsImporter {
         this._accountsByUrl = new Map();
     }
 
-    async _readRecentlyViewedData(zipFile, facebookAccount) {
+    async _readRecentlyViewedData(zipFile) {
         const rawData = readJSONDataArray(
             RECENTLY_VIEWED_FILE_PATH,
             RECENTLY_VIEWED_DATA_KEY,
             zipFile
         );
-        facebookAccount.addImportedFileName(RECENTLY_VIEWED_FILE_PATH);
         return rawData;
     }
 
@@ -110,27 +109,33 @@ export default class RecentlyViewedAdsImporter {
         });
     }
 
-    async import({ zipFile, facebookAccount }) {
-        const rawData = await this._readRecentlyViewedData(
-            zipFile,
-            facebookAccount
-        );
+    async import({ zipFile }) {
+        const rawData = await this._readRecentlyViewedData(zipFile);
         const adsViewsData = rawData.find(
             (eachCategory) =>
                 localeForCategoyName(eachCategory.name) !== undefined
         );
 
         if (!adsViewsData) {
-            return new Status({
-                name: statusTypes.warning,
-                message: "Could not locate ads category",
-            });
+            return {
+                result: this._accountsByUrl.values(),
+                report: {
+                    importedFileNames: [RECENTLY_VIEWED_FILE_PATH],
+                    status: new Status({
+                        name: statusTypes.warning,
+                        message: "Could not locate ads category",
+                    }),
+                },
+            };
         }
 
         const currentLocale = localeForCategoyName(adsViewsData.name);
         this._extractViewedAds(adsViewsData, currentLocale);
 
-        facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
+        return {
+            result: this._accountsByUrl.values(),
+            report: { importedFileNames: [RECENTLY_VIEWED_FILE_PATH] },
+        };
     }
 }
 

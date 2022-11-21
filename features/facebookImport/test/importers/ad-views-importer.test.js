@@ -29,9 +29,9 @@ describe("Import ad views from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runRecentlyViewedAdsImporter(zipFile);
+        const { report } = await runRecentlyViewedAdsImporter(zipFile);
 
-        expectMissingFileError(result, RecentlyViewedAdsImporter);
+        expectMissingFileError(report, RecentlyViewedAdsImporter);
     });
 });
 
@@ -42,26 +42,24 @@ describe("Import ad views from export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runRecentlyViewedAdsImporter(zipFile);
-        expectInvalidContentError(result, RecentlyViewedAdsImporter);
+        const { report } = await runRecentlyViewedAdsImporter(zipFile);
+        expectInvalidContentError(report, RecentlyViewedAdsImporter);
     });
 });
 
 describe("Import ad views from export with missing ads category", () => {
-    let result = null;
+    let report = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const importingResult = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             createEnglishDatasetWithMissingAdsCategory()
-        );
-        result = importingResult.result;
-        relatedAccounts = importingResult.relatedAccounts;
+        ));
     });
 
     it("returns warning status", () =>
         expectImportWarning(
-            result,
+            report,
             "Could not locate ads category",
             RecentlyViewedAdsImporter
         ));
@@ -71,38 +69,36 @@ describe("Import ad views from export with missing ads category", () => {
 });
 
 describe("Import ad views from export with empty ads category", () => {
-    let result = null;
+    let report = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const importingResult = await runAdsImportForDataset(
+        const response = await runAdsImportForDataset(
             createEnglishDatasetWithEmptyAdsCategory()
         );
-        result = importingResult.result;
-        relatedAccounts = importingResult.relatedAccounts;
+        report = response.report;
+        relatedAccounts = response.relatedAccounts;
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(0));
 });
 
 describe("Import ad view with company name with multi-byte unicode characters", () => {
-    let result = null;
+    let report = null;
     let relatedAccounts = null;
     let relatedAccount = null;
 
     beforeAll(async () => {
-        const importingResult = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             creatAdViewsWithCompanyWithUnicodeCharactersData()
-        );
-        result = importingResult.result;
-        relatedAccounts = importingResult.relatedAccounts;
+        ));
         relatedAccount = relatedAccounts.items[0];
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has one related account", () => expect(relatedAccounts.count).toBe(1));
 
@@ -121,18 +117,16 @@ describe("Import ad view with company name with multi-byte unicode characters", 
 });
 
 describe("Import incomplete ad views from export", () => {
-    let result = null;
+    let report = null;
     let relatedAccounts = null;
 
     beforeAll(async () => {
-        const importingResult = await runAdsImportForDataset(
+        ({ report, relatedAccounts } = await runAdsImportForDataset(
             createIncompleteEnglishAdViewsData()
-        );
-        result = importingResult.result;
-        relatedAccounts = importingResult.relatedAccounts;
+        ));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has zero related accounts", () =>
         expect(relatedAccounts.count).toBe(1));

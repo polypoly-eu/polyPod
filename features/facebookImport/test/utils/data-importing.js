@@ -1,5 +1,4 @@
 import MessagesImporter from "../../src/model/importers/messages-importer.js";
-import NameImporter from "../../src/model/importers/name-importer.js";
 import PersonalDataImporter from "../../src/model/importers/personal-data-importer.js";
 import FacebookAccount from "../../src/model/entities/facebook-account.js";
 import {
@@ -25,16 +24,16 @@ import PostReactionsImporter from "../../src/model/importers/post-reactions-impo
 import CommentsImporter from "../../src/model/importers/comments-importer.js";
 import PostsImporter from "../../src/model/importers/posts-importer.js";
 import ConnectedAdvertisersAllTypesImporter from "../../src/model/importers/connected-advertisers-all-types-importer.js";
+import RelatedAccountsGroup from "../../src/model/entities/related-accounts-group.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const results = await runImporters({
+    return await runImporters({
         importerClasses,
         zipFile,
         facebookAccount,
         pod: new MockPod(),
     });
-    return { facebookAccount, results };
 }
 
 export async function runSingleImporter(importerClass, zipFile) {
@@ -69,26 +68,19 @@ export async function runSingleOutdatedImporter(importerClass, zipFile) {
 }
 
 export async function runAdInterestsImporter(zipFile) {
-    return runSingleOutdatedImporter(AdInterestsImporter, zipFile);
+    return runSingleImporter(AdInterestsImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersImporter(zipFile) {
-    return runSingleOutdatedImporter(ConnectedAdvertisersImporter, zipFile);
+    return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
-    return runSingleOutdatedImporter(
-        ConnectedAdvertisersAllTypesImporter,
-        zipFile
-    );
+    return runSingleImporter(ConnectedAdvertisersAllTypesImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
-    return runSingleOutdatedImporter(LanguageAndLocaleImporter, zipFile);
-}
-
-export async function runNameImporter(zipFile) {
-    return runSingleOutdatedImporter(NameImporter, zipFile);
+    return runSingleImporter(LanguageAndLocaleImporter, zipFile);
 }
 
 export async function runPersonalDataImporter(zipFile) {
@@ -104,38 +96,35 @@ export async function runMessagesImporter(zipFile) {
 }
 
 export async function runRecentlyViewedAdsImporter(zipFile) {
-    return runSingleOutdatedImporter(RecentlyViewedAdsImporter, zipFile);
+    return runSingleImporter(RecentlyViewedAdsImporter, zipFile);
 }
 
 export async function runOffFacebookEventsImporter(zipFile) {
-    return runSingleOutdatedImporter(OffFacebookEventsImporter, zipFile);
+    return runSingleImporter(OffFacebookEventsImporter, zipFile);
 }
 
 export async function runFriendsImporter(zipFile) {
-    return runSingleOutdatedImporter(FriendsImporter, zipFile);
+    return runSingleImporter(FriendsImporter, zipFile);
 }
 
 export async function runLikedPagesImporter(zipFile) {
-    return runSingleOutdatedImporter(LikedPagesImporter, zipFile);
+    return runSingleImporter(LikedPagesImporter, zipFile);
 }
 
 export async function runSearchesImporter(zipFile) {
-    return runSingleOutdatedImporter(SearchesImporter, zipFile);
+    return runSingleImporter(SearchesImporter, zipFile);
 }
 
 export async function runInteractedWithAdvertisersImporter(zipFile) {
-    return runSingleOutdatedImporter(
-        InteractedWithAdvertisersImporter,
-        zipFile
-    );
+    return runSingleImporter(InteractedWithAdvertisersImporter, zipFile);
 }
 
 export async function runCommentsImporter(zipFile) {
-    return runSingleOutdatedImporter(CommentsImporter, zipFile);
+    return runSingleImporter(CommentsImporter, zipFile);
 }
 
 export async function runPostReactionsImporter(zipFile) {
-    return runSingleOutdatedImporter(PostReactionsImporter, zipFile);
+    return runSingleImporter(PostReactionsImporter, zipFile);
 }
 
 export async function runPostsImporter(zipFile) {
@@ -146,14 +135,16 @@ export async function runImportForDataset(importerClass, filePath, dataset) {
     const zipFile = new ZipFileMock();
     zipFile.addJsonEntry(filePath, dataset);
 
-    return await runSingleOutdatedImporter(importerClass, zipFile);
+    return await runSingleImporter(importerClass, zipFile);
 }
 
 export async function runAdsImportForDataset(dataset) {
-    const { result, facebookAccount } = await runImportForDataset(
+    const { result, report } = await runImportForDataset(
         RecentlyViewedAdsImporter,
         RECENTLY_VIEWED_FILE_PATH,
         dataset
     );
-    return { result, relatedAccounts: facebookAccount.relatedAccounts };
+    const relatedAccounts = new RelatedAccountsGroup();
+    if (result) relatedAccounts.addAll(result);
+    return { relatedAccounts, report };
 }

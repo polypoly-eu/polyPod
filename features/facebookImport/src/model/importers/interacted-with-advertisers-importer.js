@@ -14,3 +14,5 @@ export default class InteractedWithAdvertisersImporter extends DirectKeyDataImpo
         );
     }
 }
+
+InteractedWithAdvertisersImporter.STORAGE_KEY = "interactedAdvertisers";

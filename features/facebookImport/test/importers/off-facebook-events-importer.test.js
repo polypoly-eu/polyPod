@@ -23,9 +23,9 @@ describe("Import off-facebook events from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runOffFacebookEventsImporter(zipFile);
+        const { report } = await runOffFacebookEventsImporter(zipFile);
 
-        expectMissingFileError(result, OffFacebookEventsImporter);
+        expectMissingFileError(report, OffFacebookEventsImporter);
     });
 });
 
@@ -37,38 +37,34 @@ describe("Import off-facebook events from export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runOffFacebookEventsImporter(zipFile);
-        expectInvalidContentError(result, OffFacebookEventsImporter);
+        const { report } = await runOffFacebookEventsImporter(zipFile);
+        expectInvalidContentError(report, OffFacebookEventsImporter);
     });
 });
 
 describe("Import off-facebook events", () => {
     let result = null;
-    let facebookAccount = null;
-    let offFacebookCompanies = null;
+    let report = null;
     let companyOne = null;
     let companyTwo = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithOffFacebookEvents();
-        ({ facebookAccount, result } = await runOffFacebookEventsImporter(
-            zipFile
-        ));
-        offFacebookCompanies = facebookAccount.offFacebookCompanies;
-        [companyOne, companyTwo] = offFacebookCompanies;
+        ({ report, result } = await runOffFacebookEventsImporter(zipFile));
+        [companyOne, companyTwo] = result;
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has two off-facebook companies", () =>
-        expect(facebookAccount.offFacebookCompaniesCount).toBe(
+        expect(result.length).toBe(
             DATASET_EXPECTED_VALUES.totalCompaniesCount
         ));
 
     it("has five off-facebook events", () =>
-        expect(facebookAccount.offFacebookEventsCount).toBe(
-            DATASET_EXPECTED_VALUES.totalEventsCount
-        ));
+        expect(
+            result.reduce((total, { events }) => total + events.length, 0)
+        ).toBe(DATASET_EXPECTED_VALUES.totalEventsCount));
 
     it("has correct names for off-Facebook companies", () => {
         expect(companyOne.name).toBe("companyx.com");

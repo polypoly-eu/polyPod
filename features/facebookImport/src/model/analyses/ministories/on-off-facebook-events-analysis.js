@@ -24,8 +24,10 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         dataAccount.analyses[analysisKeys.companiesCount] =
             dataAccount.offFacebookCompaniesCount;
 
-        const advertiserMatches =
-            linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
+        const advertiserMatches = linkRelatedAccountsWithOffFacebookCompanies(
+            dataAccount.relatedAccounts,
+            dataAccount.offFacebookCompanies
+        );
 
         dataAccount.analyses[analysisKeys.companiesWithAdsCount] =
             advertiserMatches.reduce(

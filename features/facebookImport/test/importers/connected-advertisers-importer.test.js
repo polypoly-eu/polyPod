@@ -22,8 +22,8 @@ describe("Import connected advertisers from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runConnectedAdvertisersImporter(zipFile);
-        expectMissingFileError(result, ConnectedAdvertisersImporter);
+        const { report } = await runConnectedAdvertisersImporter(zipFile);
+        expectMissingFileError(report, ConnectedAdvertisersImporter);
     });
 });
 
@@ -36,31 +36,29 @@ describe("Import connected advertisers from empty export with wrong data key", (
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runConnectedAdvertisersImporter(zipFile);
-        expectInvalidContentError(result, ConnectedAdvertisersImporter);
+        const { report } = await runConnectedAdvertisersImporter(zipFile);
+        expectInvalidContentError(report, ConnectedAdvertisersImporter);
     });
 });
 
 describe("Import connected advertisers", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisers();
-        ({ result, facebookAccount } = await runConnectedAdvertisersImporter(
-            zipFile
-        ));
+        ({ result, report } = await runConnectedAdvertisersImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.connectedAdvertisers.length).toBe(
+        expect(result.length).toBe(
             DATASET_EXPECTED_VALUES.numberOfConnectedAdvertisers
         ));
 
     it("has correct names in entities", () => {
-        const obtainedData = facebookAccount.connectedAdvertisers.map(
+        const obtainedData = result.map(
             (connectedAdvertiser) => connectedAdvertiser.name
         );
         expect(obtainedData).toStrictEqual(

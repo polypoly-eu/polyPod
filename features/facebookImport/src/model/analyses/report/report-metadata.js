@@ -17,10 +17,12 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
             entries.length;
 
         dataAccount.reports[analysisKeys.reportMetadata].preferedLanguage =
-            dataAccount.preferredLanguage
+            dataAccount.languageAndLocale?.preferredLanguage
                 ? {
-                      name: dataAccount.preferredLanguage.name,
-                      code: dataAccount.preferredLanguage.code,
+                      name: dataAccount.languageAndLocale?.preferredLanguage
+                          .name,
+                      code: dataAccount.languageAndLocale?.preferredLanguage
+                          .code,
                   }
                 : null;
     }

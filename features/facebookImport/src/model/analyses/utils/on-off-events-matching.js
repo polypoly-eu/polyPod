@@ -72,10 +72,13 @@ export function matchAccountsByName(
  *
  * We compare those values directly and also by removing a url domain, if present.
  */
-export function linkRelatedAccountsWithOffFacebookCompanies(facebookAccount) {
+export function linkRelatedAccountsWithOffFacebookCompanies(
+    relatedAccounts,
+    offFacebookCompaniesRef
+) {
     const matches = [];
-    const onFacebookAdvertisers = facebookAccount.relatedAccounts.advertisers();
-    const offFacebookCompanies = [...facebookAccount.offFacebookCompanies];
+    const onFacebookAdvertisers = relatedAccounts.advertisers();
+    const offFacebookCompanies = [...offFacebookCompaniesRef];
 
     onFacebookAdvertisers.forEach((onFacebookAdvertiser) => {
         const matchingOffFacebookCompanies = offFacebookCompanies.filter(
@@ -92,4 +95,31 @@ export function linkRelatedAccountsWithOffFacebookCompanies(facebookAccount) {
         }
     });
     return matches;
+}
+
+export function offFacebookEventsCount(offFacebookCompanies) {
+    return offFacebookCompanies.reduce((total, company) => {
+        if (company?.events) {
+            return total + company.events.length;
+        }
+        return total;
+    }, 0);
+}
+
+export function offFacebookEventsLatestTimestamp(offFacebookCompanies) {
+    let latestTimestamp = 0;
+    forEachOffFacebookEvent(offFacebookCompanies, (event) => {
+        if (event.timestamp > latestTimestamp) {
+            latestTimestamp = event.timestamp;
+        }
+    });
+    return latestTimestamp;
+}
+
+export function forEachOffFacebookEvent(offFacebookCompanies, callback) {
+    for (const offFacebookCompany of offFacebookCompanies) {
+        for (const offFacebookEvent of offFacebookCompany?.events || []) {
+            callback(offFacebookEvent);
+        }
+    }
 }
