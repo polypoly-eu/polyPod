@@ -39,7 +39,7 @@ describe("Import message from export with three file errors", () => {
         ({ report, result } = await runMessagesImporter(zipFile));
     });
 
-    it("has two error status", async () => {
+    it("contains three statuses", async () => {
         expect(report.statuses.length).toBe(3);
     });
 
