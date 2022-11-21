@@ -7,7 +7,7 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ dataAccount }) {
-        let messagesCount = dataAccount.messages?.messagesCount || 0;
+        let messagesCount = dataAccount.messages?.messagesCount ?? 0;
         let messagesThreadsData = [];
         const usernames = new Set();
 
