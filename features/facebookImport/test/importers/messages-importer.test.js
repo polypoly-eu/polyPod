@@ -43,7 +43,7 @@ describe("Import message from export with three file errors", () => {
         expect(report.statuses.length).toBe(3);
     });
 
-    it("triggers syntax error", async () => {
+    it("all statuses trigger errors", async () => {
         expectErrorStatus(report.statuses[0], MissingContentImportException);
         expectErrorStatus(report.statuses[1], SyntaxError);
         expectErrorStatus(report.statuses[2], TypeError);
