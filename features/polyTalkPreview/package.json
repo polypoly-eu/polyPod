@@ -1,6 +1,6 @@
 {
   "name": "poly-talk-preview",
-  "description": "Preview for the Poly-Talk feature, a decentralized and secure communication platform.",
+  "description": "Preview for the polyTalk feature, a decentralized and secure communication platform.",
   "main": "src/index.jsx",
   "scripts": {
     "build": "rollup -c",

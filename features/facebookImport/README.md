@@ -23,4 +23,4 @@ submitted.
 
 > You need to make the repo-wide install from the root directory: `npm ci`
 
-Run `npm run doc` to generate documentation in the `docs` directory.
+Run `npm run doc` to generate documentation in the `docs/documentation` directory.

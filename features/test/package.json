@@ -4,15 +4,20 @@
     "eslint": "eslint src --ext .ts --ext .js",
     "lint": "npm run eslint",
     "test": "cypress run",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "build-downstream": "../../build.js build --start test-feature",
+    "watch": "rollup --watch -c"
   },
   "dependencies": {
     "@polypoly-eu/api": "file:../../platform/feature-api/api",
-    "@rdfjs/data-model": "^1.2.0"
+    "@rdfjs/data-model": "^1.2.0",
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0"
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "@types/chai": "^4.3.3",
     "@types/rdf-js": "^4.0.0"
   },
   "private": true

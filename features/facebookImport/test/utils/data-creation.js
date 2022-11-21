@@ -1,9 +1,7 @@
 import { ZipFileMock } from "@polypoly-eu/poly-import";
 
 export function createMockedZip(datasets) {
-    let zipFile = new ZipFileMock();
-    datasets.forEach(([path, dataset]) => zipFile.addJsonEntry(path, dataset));
-    return zipFile;
+    return new ZipFileMock(datasets);
 }
 
 export function zipWithWrongDatasetKey(filePath) {

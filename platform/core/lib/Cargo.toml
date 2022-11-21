@@ -12,6 +12,7 @@ once_cell = "1.9.0"
 io = { path = "../crates/io" }
 preferences = { path = "../crates/preferences" }
 user_session = { path = "../crates/user_session" }
+update_notification = { path = "../crates/update_notification" }
 core_failure = { path = "../crates/core_failure" }
 feature_categories = { path = "../crates/feature_categories" }
 common = { path = "../crates/common" }

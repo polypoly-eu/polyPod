@@ -1,4 +1,4 @@
-const polyPediaReportUrl = process.env.POLYPOD_POLYPEDIA_REPORT_URL;
+const polyPediaReportBaseUrl = process.env.POLYPOD_POLYPEDIA_REPORT_BASE_URL;
 const polyPediaReportAuth =
     process.env.POLYPOD_POLYPEDIA_REPORT_BASICAUTH_USERPASS_PLAINTEXT;
 
@@ -7,11 +7,11 @@ const fallbackAuth = "";
 
 export default {
     "polyPediaReport/facebook": {
-        url: polyPediaReportUrl || fallbackURL + "/facebook",
+        url: (polyPediaReportBaseUrl || fallbackURL) + "/facebook",
         auth: polyPediaReportAuth || fallbackAuth,
     },
     "polyPediaReport/google": {
-        url: polyPediaReportUrl || fallbackURL + "/google",
+        url: (polyPediaReportBaseUrl || fallbackURL) + "/google",
         auth: polyPediaReportAuth || fallbackAuth,
     },
     polyApiErrorReport: {

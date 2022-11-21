@@ -9,23 +9,33 @@ const othersId = "othersChip";
 const allId = "allChip";
 
 /**
+ * Callback for handling the click event on chip.
  *
+ * @callback onChipClickCallback
+ * @param {React.MouseEventHandler<HTMLDivElement>} clickEvent - chip onClick action.
+ */
+
+/**
  * Group of chips
- * @param { (string[] | Object[]) } chipsContent -  Content of the Chips
- * @param {Object} [chipsContent.id] - Id of the chip (if chipsContent is an array of strings they act as id)
- * @param {Object} [chipsContent.title] - Alternative for id of the chip (if chipsContent is an array of strings they act as id)
- * @param {Object} [chipsContent.translation] - Translation of the chip (if chipsContent is an array of strings they act as translation)
- * @param {string[]} [defaultActiveChips = []] - Chips that are active on load
- * @param {callback} onChipClick - Chips onClick function (id of clicked chip, all active chips ids)
- * @param {boolean} [exclusive = true] - Determines whether chips are active exclusively
- * @param {string} [theme] - Sets the theme in this component (preferably done in parent component)
- * @param {Object} [allChip] - Indicated whether an all chip exists (exclusive to the other chips, activates all)
- * @param {string} [allChip.translation = "All"] - Translation for chips text ("All")
- * @param {Object} [othersChip] - Indicated whether an others chip exists (groups multiple chips in "Others" chip)
- * @param {string} [othersChip.translation = "Others"] - Translation for chips text ("Others")
- * @param {string[]} [othersChip.ids] - Ids of the chips grouped by others
- * @param {boolean} [othersChip.exclusive] - Indicates whether the others chips is exclusive to the rest
- * @returns A `div` with the content
+ * It renders a list of chips, and when you click on a chip, it calls a callback function with the id
+ * of the chip that was clicked
+ * @component
+ * @param {Object} props
+ * @param {(Array.<string> | Array.<Object>)} props.chipsContent -  Content of the Chips
+ * @param {Object} props.chipsContent.id - Id of the chip (if chipsContent is an array of strings they act as id)
+ * @param {Object} props.chipsContent.title - Alternative for id of the chip (if chipsContent is an array of strings they act as id)
+ * @param {Object} props.chipsContent.translation - Translation of the chip (if chipsContent is an array of strings they act as translation)
+ * @param {Array.<string>} [props.defaultActiveChips = []] - Chips that are active on load
+ * @param {onChipClickCallback} props.onChipClick - Chips onClick function (id of clicked chip, all active chips ids)
+ * @param {boolean} [props.exclusive = true] - Determines whether chips are active exclusively
+ * @param {string} props.theme - Sets the theme in this component (preferably done in parent component)
+ * @param {Object} props.allChip - Indicated whether an all chip exists (exclusive to the other chips, activates all)
+ * @param {string} props.allChip.translation = "All" - Translation for chips text ("All")
+ * @param {Object} props.othersChip - Indicated whether an others chip exists (groups multiple chips in "Others" chip)
+ * @param {string} props.othersChip.translation = "Others" - Translation for chips text ("Others")
+ * @param {string[]} props.othersChip.ids - Ids of the chips grouped by others
+ * @param {boolean} props.othersChip.exclusive - Indicates whether the others chips is exclusive to the rest
+ * @returns  A function that returns a `div` component with the content
  */
 const FilterChips = ({
   chipsContent,

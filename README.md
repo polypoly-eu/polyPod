@@ -1,12 +1,17 @@
 # The polyPod
 
-The polyPod aims to become a personal data store and secure execution
-environment for privacy-conscious computations. The current iteration is
-essentially a runtime for _Features_; small, sandboxed JavaScript applications
-that can be launched from the polyPod app.
+The polyPod is a personal data store and privacy-preserving runtime environment
+for privacy-conscious computations. It executes _Features_; small, sandboxed
+JavaScript applications that can be launched by the user and interact with their
+personal data.
 
-But it will be much more than that. For more information please read the
-[polyPod whitepaper][1].
+It is still under heavy development, and some aspects are missing or
+unrefined. For more on the vision please read the [polyPod whitepaper][1].
+
+To better understand the architecture, have a look at
+[docs/architecture.md](docs/architecture.md), and to understand how we are
+planning to evolve the code base, see
+[docs/tech-roadmap.md](docs/tech-roadmap.md).
 
 ## Structure
 
@@ -92,6 +97,14 @@ sources for this configuration:
 
 * [`.editorconfig`](.editorconfig) for general editor configuration.
 * [`.eslintrc.cjs`](.eslintrc.cjs) for specific JS/TS linting rules.
+
+## Documentation
+
+To generate the source code documentation, run:
+
+    $ ./build.js doc
+
+For a complete overview, see [docs/README.md](docs/README.md).
 
 ## Branches
 

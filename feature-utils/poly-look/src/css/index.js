@@ -7,10 +7,13 @@ import "./font.css";
 import "./layout.css";
 import "./design-system-tokens/radius.css";
 import "./design-system-tokens/spacing.css";
+import "./design-system-tokens/colors.css";
+import "./design-system-tokens/icons.css";
 import "./utils.css";
 import "swiper/swiper-bundle.css";
 
 /**
- * Doesn't really do anything except being a place where css files are referenced so that they're bundled
+ * Doesn't really do anything except being a place where css files are referenced so that they're bundled.
+ * @callback cssBundler
  */
 export const cssBundler = () => {};

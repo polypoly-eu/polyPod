@@ -1,4 +1,4 @@
-name: polyPod Android integration test
+name: Android integration test
 on:
     push:
         paths:

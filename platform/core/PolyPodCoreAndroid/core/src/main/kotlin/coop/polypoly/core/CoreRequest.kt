@@ -4,12 +4,14 @@ import org.msgpack.value.Value
 
 data class BootstrapArgs(
     val languageCode: String,
-    val fsRoot: String
+    val fsRoot: String,
+    val updateNotificationId: Int,
 ) {
     fun asValue(): Value {
         return mapOf(
             "languageCode".asValue() to languageCode.asValue(),
-            "fsRoot".asValue() to fsRoot.asValue()
+            "fsRoot".asValue() to fsRoot.asValue(),
+            "updateNotificationId".asValue() to updateNotificationId.asValue()
         ).asValue()
     }
 }
@@ -27,6 +29,18 @@ data class LoadFeatureCategoriesArguments(
     }
 }
 
+data class SetPreferenceArguments(
+    val key: String,
+    val value: String
+) {
+    fun asValue(): Value {
+        return mapOf(
+            "key".asValue() to key.asValue(),
+            "value".asValue() to value.asValue()
+        ).asValue()
+    }
+}
+
 sealed class CoreRequest {
     class LoadFeatureCategories(
         val args: LoadFeatureCategoriesArguments
@@ -40,6 +54,14 @@ sealed class CoreRequest {
     class GetUserSessionTimeoutOptionsConfig() : CoreRequest()
     class ExecuteRdfQuery(val args: String) : CoreRequest()
     class ExecuteRdfUpdate(val args: String) : CoreRequest()
+    class HandleStartup : CoreRequest()
+    class HandleFirstRun : CoreRequest()
+    class HandleInAppNotificationSeen : CoreRequest()
+    class HandlePushNotificationSeen : CoreRequest()
+    class ShouldShowInAppNotification : CoreRequest()
+    class ShouldShowPushNotification : CoreRequest()
+    class ClearPreferences : CoreRequest()
+    class SetPreference(val args: SetPreferenceArguments) : CoreRequest()
 
     // TODO: Investigate the option of doing automatic encoding
     fun asValue(): Value {
@@ -67,6 +89,22 @@ sealed class CoreRequest {
             ).asValue()
             is CoreRequest.ExecuteRdfUpdate -> mapOf(
                 "executedRdfUpdate".asValue() to mapOf(
+                    "args".asValue() to args.asValue()
+                ).asValue()
+            ).asValue()
+            is HandleStartup -> "handleStartup".asValue()
+            is HandleFirstRun -> "handleFirstRun".asValue()
+            is HandleInAppNotificationSeen ->
+                "handleInAppNotificationSeen".asValue()
+            is HandlePushNotificationSeen ->
+                "handlePushNotificationSeen".asValue()
+            is ShouldShowInAppNotification ->
+                "shouldShowInAppNotification".asValue()
+            is ShouldShowPushNotification ->
+                "shouldShowPushNotification".asValue()
+            is ClearPreferences -> "clearPreferences".asValue()
+            is SetPreference -> mapOf(
+                "setPreference".asValue() to mapOf(
                     "args".asValue() to args.asValue()
                 ).asValue()
             ).asValue()

@@ -3,7 +3,8 @@
   "private": "true",
   "scripts": {
     "storybook:lit": "web-dev-server -c .storybook/lit/server.mjs",
-    "storybook:react": "start-storybook -p 6006 -c .storybook/react"
+    "storybook:react": "start-storybook -p 6006 -c .storybook/react",
+    "build-storybook": "build-storybook -c .storybook/react"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.4.19",

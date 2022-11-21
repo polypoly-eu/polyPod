@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import coop.polypoly.polypod.core.UpdateNotification
+import coop.polypoly.core.UpdateNotification
 
 private const val CHANNEL_ID = "coop.polypoly.polypod.update"
 private const val CHANNEL_NAME = "polyPod updates"
@@ -24,15 +24,15 @@ class PushNotificationWorker(
     private val context = appContext
 
     override fun doWork(): Result {
-        val notification = UpdateNotification(context)
-        if (!notification.showPush)
+        if (!UpdateNotification.showPush)
             return Result.success()
-        notification.handlePushSeen()
-        showPushNotification(notification)
+        UpdateNotification.handlePushSeen()
+        showPushNotification()
         return Result.success()
     }
 
-    private fun showPushNotification(notification: UpdateNotification) {
+    private fun showPushNotification() {
+        val data = UpdateNotificationData(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -55,15 +55,15 @@ class PushNotificationWorker(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
-                .setContentTitle(notification.title)
-                .setContentText(notification.text)
+                .setContentTitle(data.title)
+                .setContentText(data.text)
                 .setStyle(
-                    NotificationCompat.BigTextStyle().bigText(notification.text)
+                    NotificationCompat.BigTextStyle().bigText(data.text)
                 )
                 .setContentIntent(mainPendingIntent)
                 .build()
 
         NotificationManagerCompat.from(context)
-            .notify(notification.id, pushNotification)
+            .notify(data.id, pushNotification)
     }
 }

@@ -1,12 +1,7 @@
-import { DataFactorySpec } from "../../index";
 import { DataFactory } from "../index";
 import * as Foreign from "@rdfjs/data-model";
 
 const dataFactory = new DataFactory(true);
-
-describe("Spec", () => {
-    new DataFactorySpec(dataFactory).run();
-});
 
 describe("Strict", () => {
     it("Rejects foreign terms (quad)", () => {

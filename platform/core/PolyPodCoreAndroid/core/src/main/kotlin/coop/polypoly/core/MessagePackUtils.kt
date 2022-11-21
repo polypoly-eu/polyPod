@@ -93,3 +93,5 @@ fun <K : Value, V : Value> Map<K, V>.asValue(): Value {
 fun <E : Value> List<E>.asValue(): Value {
     return ValueFactory.newArray(this)
 }
+
+fun Int.asValue(): Value = ValueFactory.newInteger(this)

@@ -53,6 +53,30 @@ class UpdateNotificationTest: XCTestCase {
         assertInAppNotificationShown()
     }
 
+    func testSeenLastNotificationMigrated() {
+        app.launchWithArgs(mockNotificationId: 1, extraDefaults: [
+            "lastUpdateNotificationId": "1",
+            "lastUpdateNotificationState": "ALL_SEEN"
+        ])
+        assertInAppNotificationNotShown()
+    }
+
+    func testPartlySeenLastNotificationMigrated() {
+        app.launchWithArgs(mockNotificationId: 1, extraDefaults: [
+            "lastUpdateNotificationId": "1",
+            "lastUpdateNotificationState": "PUSH_SEEN"
+        ])
+        assertInAppNotificationShown()
+    }
+
+    func testUnseenLastNotificationMigrated() {
+        app.launchWithArgs(mockNotificationId: 1, extraDefaults: [
+            "lastUpdateNotificationId": "1",
+            "lastUpdateNotificationState": "NOT_SEEN"
+        ])
+        assertInAppNotificationShown()
+    }
+
     // TODO: Add tests that verify that the push notification shows up.
 
     private func assertInAppNotificationShown() {

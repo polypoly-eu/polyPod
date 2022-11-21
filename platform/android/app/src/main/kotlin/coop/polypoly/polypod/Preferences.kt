@@ -2,18 +2,44 @@ package coop.polypoly.polypod
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import coop.polypoly.core.Core
+import coop.polypoly.core.CoreRequest
+import coop.polypoly.core.SetPreferenceArguments
+import coop.polypoly.polypod.logging.LoggerFactory
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.reflect.KClass
+
+private data class MigratedPreference<T : Any>(
+    val androidKey: String,
+    val type: KClass<T>,
+    val coreKey: String
+)
 
 class Preferences {
     companion object {
         private const val firstRunKey = "firstRun"
-        private const val lastNotificationIdKey = "lastNotificationId"
-        private const val lastNotificationStateKey = "lastNotificationState"
         private const val biometricCheckKey = "biometricCheck"
         private const val biometricEnabledKey = "biometricEnabledKey"
         private const val userConfiguredAuth = "userConfiguredAuth"
         private const val fsKey = ""
+        private const val clearCorePreferencesKey = "clearCorePreferences"
+
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+
+        private val migratedPreferences = listOf(
+            MigratedPreference(
+                "lastNotificationId",
+                Int::class,
+                "lastUpdateNotificationId"
+            ),
+            MigratedPreference(
+                "lastNotificationState",
+                String::class,
+                "lastUpdateNotificationState"
+            )
+        )
 
         private fun getPrefs(context: Context) =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -24,20 +50,6 @@ class Preferences {
         fun setFirstRun(context: Context, firstRun: Boolean) {
             val edit = getPrefs(context).edit()
             edit.putBoolean(firstRunKey, firstRun)
-            edit.commit()
-        }
-
-        fun getLastNotification(context: Context) = getPrefs(context).let {
-            Pair(
-                it.getInt(lastNotificationIdKey, 0),
-                it.getString(lastNotificationStateKey, null)
-            )
-        }
-
-        fun setLastNotification(context: Context, id: Int, state: String) {
-            val edit = getPrefs(context).edit()
-            edit.putInt(lastNotificationIdKey, id)
-            edit.putString(lastNotificationStateKey, state)
             edit.commit()
         }
 
@@ -102,6 +114,41 @@ class Preferences {
                 outputMap[k] = list.toTypedArray()
             }
             return outputMap
+        }
+
+        fun setClearCorePreferences(context: Context, clear: Boolean) {
+            val edit = getPrefs(context).edit()
+            edit.putBoolean(clearCorePreferencesKey, clear)
+            edit.commit()
+        }
+
+        fun getClearCorePreferences(context: Context) =
+            getPrefs(context).getBoolean(clearCorePreferencesKey, false)
+
+        fun migrateToCore(context: Context) {
+            val prefs = getPrefs(context)
+            for (migratedPreference in migratedPreferences) {
+                val androidKey = migratedPreference.androidKey
+                val coreKey = migratedPreference.coreKey
+                val value = when (val type = migratedPreference.type) {
+                    String::class -> prefs.getString(androidKey, null)
+                    Int::class -> {
+                        val i = prefs.getInt(androidKey, -1)
+                        if (i == -1) null else i.toString()
+                    }
+                    else -> throw Exception(
+                        "Unsupported preference type: $type"
+                    )
+                } ?: return
+
+                Core.executeRequest(
+                    CoreRequest.SetPreference(
+                        SetPreferenceArguments(coreKey, value)
+                    )
+                )
+                prefs.edit().remove(androidKey).commit()
+                logger.info("Migrated preference $androidKey as $coreKey")
+            }
         }
     }
 }

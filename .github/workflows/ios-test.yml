@@ -1,4 +1,4 @@
-name: polyPod iOS test
+name: iOS unit and integration test
 on:
     push:
         paths:
