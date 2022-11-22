@@ -1,4 +1,4 @@
-# google Import
+# Google Feature
 
 A Feature that lets you import and explore your Google data.
 
