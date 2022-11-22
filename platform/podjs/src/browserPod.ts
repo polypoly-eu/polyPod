@@ -13,7 +13,7 @@ import type {
     Triplestore,
 } from "@polypoly-eu/api";
 import { v4 as uuidv4 } from "uuid";
-import { dataFactory } from "@polypoly-eu/api";
+import { DataFactory } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../assets/config/endpoints.json";
@@ -820,7 +820,7 @@ function createNavBarFrame(title: string): HTMLElement {
  * @classdesc It uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
-    public readonly dataFactory = dataFactory;
+    public readonly dataFactory = new DataFactory(false);
     public readonly polyIn = new BrowserPolyIn();
     public readonly polyOut = new BrowserPolyOut();
     public readonly polyNav = new BrowserPolyNav();

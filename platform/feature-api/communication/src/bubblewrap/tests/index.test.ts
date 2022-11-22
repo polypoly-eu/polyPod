@@ -1,7 +1,7 @@
 import fc, { Arbitrary } from "fast-check";
 import {
     gens,
-    dataFactory,
+    DataFactory,
     NamedNode,
     BlankNode,
     Literal,
@@ -92,6 +92,7 @@ type Types = {
     "@polypoly-eu/rdf.Quad": polyQuad;
 };
 
+const dataFactory = new DataFactory(false);
 const gen = gens(dataFactory);
 
 const infos: TypeInfos<Types> = {

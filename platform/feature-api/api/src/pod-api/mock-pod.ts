@@ -2,7 +2,7 @@ import { dataset } from "@rdfjs/dataset";
 import { IFs, Volume } from "memfs";
 import * as RDF from "rdf-js";
 import { v4 as uuidv4 } from "uuid";
-import { dataFactory } from "../rdf";
+import { DataFactory } from "../rdf";
 import {
     Endpoint,
     Info,
@@ -15,6 +15,8 @@ import {
     Triplestore,
 } from "./api";
 import { Entry } from ".";
+
+const dataFactory = new DataFactory(false);
 
 /**
  * A mock implementation of the [[PolyIn]] interface.
@@ -137,7 +139,8 @@ export class MockPod implements Pod {
     public static readonly INFO_RUNTIME = "mock-pod";
     public static readonly INFO_VERSION = "mock-pod-version";
 
-    public readonly dataFactory: RDF.DataFactory = dataFactory;
+    /** @inheritdoc */
+    public readonly dataFactory = dataFactory;
 
     /**
      * Creates a new [[MockPod]] instance.

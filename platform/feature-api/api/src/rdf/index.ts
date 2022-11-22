@@ -362,10 +362,3 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new Variable(value);
     }
 }
-
-/**
- * The default instance of [[DataFactory]].
- *
- * This instance does not perform strict validation of input.
- */
-export const dataFactory: DataFactory = new DataFactory(false);
