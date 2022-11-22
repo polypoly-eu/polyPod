@@ -6,6 +6,5 @@
  */
 
 export * from "./rdf-spec";
-export * from "./rdf-convert";
 export * from "./rdf";
 export * from "./pod-api";
