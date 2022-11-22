@@ -8,27 +8,25 @@ import { determineLocale, determineLanguage } from "./locale.js";
 import { L12n } from "./l12n.js";
 
 /**
- * Simple class for performing string translations, with simple templating capabilities
+ * Performs string translations, with simple templating capabilities.
  *
  * @class
  */
 export class I18n {
     /**
-     * Class constructor. The locale used will be auto-detected (by default)
-     * and stored as a private, read-only attribute.
+     * Create a new instance.
      *
-     * @param {string} language - two-letter language code, which should be a key in the translation hash.
-     *     If this key does not exist, `fallbackLanguage` will be used.
-     * @param {Object} translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
-     *     within every language. Only the language that's detected will be used.
-     * @param {string} [ fallbackLanguage = language ] - "default" language to use in case the one in `language`
-     *     is not a part of the `translations` hash.
-     *     It's an optional parameter, that defaults to the first key
-     *     in the `translations` hash, so you might want to use arrange it
-     *     bearing this in mind.
-     * @param {string} [ l12n = new L12n() ] - localization object, by default it will use the current locale string
-     *     as determined by the [[L12n]] function
-     * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
+     * @param {string} language - Two-letter language code, which should be a
+     * key in `translations`.
+     * @param {object} translations - Object containing all the translations. It
+     * has the format `language ⇒ namespace ⇒ key ⇒ string`.
+     * @param {string} [fallbackLanguage] - Language to use in case the one in
+     * `language` is not a part of `translations`. If not specified, the
+     * fallback language is the first one that appears in `translations`.
+     * @param {L12n} [l12n] - Localization object. If not specified, it will
+     * create one for the current locale as determined by {@link L12n}.
+     * @throws LanguageError - If `fallbackLanguage` does not exist in
+     * `translations`.
      */
     constructor(
         language,
@@ -48,38 +46,43 @@ export class I18n {
     }
 
     /**
-     * Sections present in the original trnslation hash
-     * @returns Array of strings, every one a section
+     * The sections present in the original translations object.
+     * @type {Array}
      */
     get sections() {
         return Object.keys(this._translations);
     }
 
     /**
-     * Returns the locale string
-     *
-     * @returns the locale string in the usual format
+     * The current locale.
+     * @type {string}
      */
     get locale() {
         return this._l12n.locale;
     }
 
     /**
-     * Returns the localization object
-     *
-     * @returns the localization object.
+     * The localization object.
+     * @type {L12n}
      */
     get l12n() {
         return this._l12n;
     }
 
     /**
-     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
+     * Obtains the translated string for a namespace and key defined in the
+     * translations object.
      *
-     * @param {string} key - the translation key in the `namespace:key` format
-     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash. If the value is a number, it will be converted to a string in a format of the current locale
-     * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
-     * @throws NonExistingSectionError - if the section/namespace does not exist
+     * @param {string} key - The translation key in the format `namespace:key`.
+     * @param {object} options - Values used to replace placeholders in the
+     * translated string. For example: `{{{example}}}` in the translated string
+     * will be substituted by the value of the _example_ property in
+     * `options`. If the value is a `number` or a `Date`, it will be formatted
+     * according to the current locale.
+     * @throws TranslationKeyError - If the translation key does not have the
+     * correct format or does not exist.
+     * @throws NonExistingSectionError - If the section/namespace does not
+     * exist.
      * @returns The translated string.
      */
     t(key, options = {}) {
@@ -114,17 +117,18 @@ export class I18n {
 }
 
 /**
- * A I18n translator specific to a section, instantiated with a specific namespace.
+ * A variant of {@link I18n} that is specific to a single section/namespace.
  *
  * @class
  */
 export class I18nSection extends I18n {
     /**
-     * Class constructor from a
+     * Create a new instance.
      *
-     * @param {I18n} i18n - Translation object, containing basic logic and data
-     * @param {string} section - First-level section this object will handle
-     * @throws NonExistingSectionError - if the `section` key is not included in the translations hash
+     * @param {I18n} i18n - The `I18n` instance that holds the desired section.
+     * @param {string} section - The name of the section.
+     * @throws NonExistingSectionError - If `section` is not included in
+     * `i18n`'s translations object.
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
@@ -140,12 +144,8 @@ export class I18nSection extends I18n {
     }
 
     /**
-     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
-     *
-     * @param {string} key - the translation key in the `key` format (implicit namespace)
-     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
-     * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
-     * @returns The translated string.
+     * Same usage as {@link I18n#t}, except that `key` should not include the
+     * namespace, since this instance is specific to a single section.
      */
     t(key, options = {}) {
         return super.t(`${this._section}:${key}`, options);

@@ -2,19 +2,18 @@ import { LanguageError } from "./errors.js";
 import { determineLocale } from "./locale.js";
 
 /**
- * Simple class for performing string translations, with simple templating capabilities
+ * Performs localization of dates and numbers.
  *
  * @class
  */
 export class L12n {
     /**
-     * Class constructor for the localization class. The locale used will be auto-detected (by default)
-     * and stored as a private, read-only attribute. This is going to essentially be an encapsulation of
-     * the existing locale, deferring all actual processing to the `Intl` standard library.
+     * Create a new instance.
      *
-     * @param {string} [ locale = determineLocale() ] - locale string, in the usual format xx[_YY],
-     *     by default locale determined using that function
-     * @throws LanguageError - if the provided language is incorrect in some way (inexistent, or incorrect string format)
+     * @param {string} [locale] - The locale string, in the usual format
+     * `xx[_YY]`. Determined automatically if not specified.
+     * @throws LanguageError - If the provided locale is incorrect or does not
+     * exist.
      */
     constructor(locale = determineLocale()) {
         let canonicalLocale;
@@ -45,19 +44,19 @@ export class L12n {
     }
 
     /**
-     * Returns the locale string.
-     *
-     * @returns locale string in the usual `xx-XX` format.
+     * The active locale.
+     * @type {string}
      */
     get locale() {
         return this._locale;
     }
 
     /**
-     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
+     * Converts the supplied value to a localized string.
      *
-     * @param object - What needs to be translated. For the time being, only translates numbers
-     * @returns The locale-formatted string.
+     * @param object - The value to localize. For the time being, only `number`
+     * and `Date` values are supported.
+     * @returns {string} The localized string.
      */
     t(object) {
         if (object instanceof Date) {
