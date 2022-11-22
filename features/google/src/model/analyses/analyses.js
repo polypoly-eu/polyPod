@@ -7,7 +7,7 @@ import AccessLogSummaryAnalysis from "./ministories/accesslog-file-summary.js";
 import AwakeningLocationAnalysis from "./ministories/awakening-location-analysis.js";
 import ReportActivities from "./ministories/report-activities.js";
 
-export const specificAnalyses = [
+export const analyses = [
     //PlaceVisitsAnalysis,
     //ActivitySegmentsAnalysis,
     //ActivityByProductAnalysis,
