@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FacebookContext } from "../context/facebook-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 import { SideSwiper, SideSheet } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
 import popUps from "./infoPopUps";

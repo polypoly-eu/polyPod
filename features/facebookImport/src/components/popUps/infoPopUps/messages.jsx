@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "!silly-i18n";
-import Infographic from "../../components/infographic/infographic.jsx";
+import Infographic from "../../infographic/infographic.jsx";
 
 const MessagesInfoPopUp = () => {
     return (

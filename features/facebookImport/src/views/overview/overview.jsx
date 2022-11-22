@@ -9,12 +9,14 @@ import {
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import i18n from "!silly-i18n";
+import { L12n } from "@polypoly-eu/silly-i18n";
 import { useHistory } from "react-router";
-import { formatTime } from "../../utils/formatTime.js";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
-import { specificAnalyses } from "../../model/analysis";
+import { analyses } from "../../model/analyses/analyses";
 
 import "./overview.css";
+
+const l12n = new L12n();
 
 const Overview = () => {
     const { files, account, handleRemoveFile } = useContext(PolyImportContext);
@@ -27,7 +29,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
-            specificAnalyses,
+            specificAnalyses: analyses,
         });
     }, [account]);
 
@@ -51,6 +53,16 @@ const Overview = () => {
     bubbleData.sort(function (a, b) {
         return b.value - a.value;
     });
+
+    const formatTime = (time) => {
+        try {
+            if (time instanceof Date) return l12n.t(time);
+            if (!isNaN(time)) return l12n.t(new Date(+time * 1000));
+            return l12n.t(new Date(time));
+        } catch {
+            return time;
+        }
+    };
 
     const formatSize = (size) => {
         const k = 1024;

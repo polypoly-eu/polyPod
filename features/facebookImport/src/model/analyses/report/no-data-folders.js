@@ -1,7 +1,7 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
-import { noDataFileName } from "../../../globals/index";
+import { NO_DATA_FILE_NAME } from "../../../constants";
 import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 export default class NoDataFoldersAnalysis extends ReportAnalysis {
@@ -19,7 +19,7 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
             const nameParts = entry.path.split("/");
             if (nameParts.length >= 2) {
                 for (const [i, part] of Object.entries(nameParts)) {
-                    if (part === noDataFileName) {
+                    if (part === NO_DATA_FILE_NAME) {
                         return nameParts[i - 1];
                     }
                 }

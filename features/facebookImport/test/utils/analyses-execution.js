@@ -1,5 +1,5 @@
 import { MockPod } from "@polypoly-eu/api/dist/pod-api/mock-pod";
-import { dataImporters } from "../../src/model/importer";
+import { importers } from "../../src/model/importers/importers";
 import {
     runAnalysis,
     analyzeZip,
@@ -7,7 +7,7 @@ import {
     MinistoriesStatusReport,
 } from "@polypoly-eu/poly-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
-import { specificAnalyses } from "../../src/model/analysis";
+import { analyses } from "../../src/model/analyses/analyses";
 import { ministories } from "../../src/views/ministories/ministories";
 import { reports } from "../../src/views/ministories/reports";
 
@@ -18,7 +18,7 @@ export async function runAnalysisForExport(
 ) {
     const facebookAccount = new FacebookAccount();
     await facebookAccount.import({
-        importers: dataImporters,
+        importers,
         zipFile,
         pod: new MockPod(),
     });
@@ -43,7 +43,7 @@ export async function runAnalysisForAccount(
 export async function runAnalysesForZip(zipFile) {
     const facebookAccount = new FacebookAccount();
     await facebookAccount.import({
-        importers: dataImporters,
+        importers,
         zipFile,
         pod: new MockPod(),
     });
@@ -51,7 +51,7 @@ export async function runAnalysesForZip(zipFile) {
         zipData: zipFile.enrichedFileData(),
         zipFile,
         dataAccount: facebookAccount,
-        specificAnalyses,
+        specificAnalyses: analyses,
         pod: new MockPod(),
     });
     return facebookAccount;

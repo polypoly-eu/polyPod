@@ -19,7 +19,7 @@ import {
     ErrorPopup,
     LoadingOverlay,
 } from "@polypoly-eu/poly-look";
-import { dataImporters } from "./model/importer.js";
+import { importers } from "./model/importers/importers.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
 import i18n from "!silly-i18n";
 
@@ -28,7 +28,7 @@ import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
 import ReportWrapper from "./views/report/reportWrapper.jsx";
-import BaseInfoPopUp from "./popUps/baseInfoPopUp.jsx";
+import BaseInfoPopUp from "./components/popUps/baseInfoPopUp.jsx";
 import "./styles.css";
 
 const FacebookImporter = () => {
@@ -110,7 +110,7 @@ const FacebookImporterApp = () => {
             <FacebookProvider>
                 <PolyImportProvider
                     parentContext={FacebookContext}
-                    dataImporters={dataImporters}
+                    dataImporters={importers}
                     DataAccount={FacebookAccount}
                 >
                     <div className="poly-nav-bar-separator-overlay" />
