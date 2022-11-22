@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import * as ReactDOM from "react-dom";
 import {
-    BrowserRouter as Router,
+    MemoryRouter as Router,
     Routes,
     Navigate,
     Route,
@@ -56,11 +56,15 @@ const Google = () => {
         // />
     }
 
+    useEffect(() => {
+        if (pod && files) determineRoute();
+    }, [pod, files]);
+
     return (
         <div className="google poly-theme poly-theme-dark">
             {pod && files && (
                 <Routes>
-                    <Route index element={determineRoute()} />
+                    <Route index />
                     <Route exact path="/overview" element={<Overview />} />
                     <Route exact path="/import" element={<ImportView />} />
                     <Route exact path="/explore" element={<ExploreView />} />
