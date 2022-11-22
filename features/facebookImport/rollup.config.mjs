@@ -17,7 +17,7 @@ const externalPackages = {
 
 export default (commandLineArgs) => {
     return {
-        input: "src/facebookImporter.jsx",
+        input: "src/facebook.jsx",
         output: {
             file: "dist/facebook-import.js",
             format: "iife",

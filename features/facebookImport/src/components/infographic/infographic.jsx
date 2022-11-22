@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import "./infographic.css";
 import * as d3 from "d3";
 
-import infographics from "../../infographics/infographics.js";
+import bubblesChartInfoScreen from "../../static/images/infographic/bubblesChartInfoScreen.svg";
+import activitiesBarChart from "../../static/images/infographic/activitiesBarChart.svg";
+import offFacebookBarChart from "../../static/images/infographic/offFacebookBarChart.svg";
+import messagesBarChart from "../../static/images/infographic/messagesBarChart.svg";
+import onOffFacebookChart from "../../static/images/infographic/onOffFacebookChart.svg";
 
 /* This component is used for displaying graphics (svg) with text that needs to be translated into different languages
    To introduce a new infographic you need to:
@@ -14,7 +18,13 @@ import infographics from "../../infographics/infographics.js";
 */
 
 const Infographic = ({ type, texts }) => {
-    const infographic = infographics[type];
+    const infographic = {
+        bubblesChartInfoScreen,
+        activitiesBarChart,
+        offFacebookBarChart,
+        messagesBarChart,
+        onOffFacebookChart,
+    }[type];
 
     function scaleFactor(viewBox, svg) {
         return Math.min(svg.width / viewBox.width, svg.height / viewBox.height);

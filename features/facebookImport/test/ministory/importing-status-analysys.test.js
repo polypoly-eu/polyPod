@@ -1,5 +1,5 @@
 import { DataImportingStatusAnalysis } from "@polypoly-eu/poly-analysis";
-import { NUMBER_OF_IMPORTERS } from "../../src/model/importer";
+import { importers } from "../../src/model/importers/importers";
 import DataImportingStatusReport from "../../src/views/ministories/dataImportingStatus";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
@@ -41,7 +41,7 @@ describe("Importing status analysis for empty zip", () => {
     });
 
     it("has correct number of importers", async () => {
-        expect(jsonReport.data.length).toBe(NUMBER_OF_IMPORTERS);
+        expect(jsonReport.data.length).toBe(importers.length);
     });
 });
 

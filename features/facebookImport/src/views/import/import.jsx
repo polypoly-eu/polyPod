@@ -5,7 +5,7 @@ import { PolyImportContext, ProgressBar, Screen } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
 import i18n from "!silly-i18n";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import { FBIMPORT_NAMESPACE } from "../../constants.js";
+import { FBIMPORT_NAMESPACE } from "../../constants";
 
 import "./import.css";
 
