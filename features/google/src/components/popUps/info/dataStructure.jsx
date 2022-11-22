@@ -1,7 +1,7 @@
 import React from "react";
 import { Infographic } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
-import svg from "../../static/images/infographic/packedCircleChart.svg";
+import svg from "../../../static/images/infographic/packedCircleChart.svg";
 const DataStructure = () => {
     return (
         <>

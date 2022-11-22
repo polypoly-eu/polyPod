@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GoogleContext } from "../context/google-context.jsx";
+import { GoogleContext } from "../../context/google-context.jsx";
 import popUps from "./";
 import BaseInfoPopUp from "./info/base.jsx";
 

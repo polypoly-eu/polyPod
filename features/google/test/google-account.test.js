@@ -1,4 +1,4 @@
-import GoogleAccount from "../src/model/google-account";
+import GoogleAccount from "../src/model/entities/google-account";
 
 describe("Basic account", () => {
     let googleAccount;
