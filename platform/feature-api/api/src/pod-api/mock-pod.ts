@@ -1,6 +1,7 @@
 import { dataset } from "@rdfjs/dataset";
 import { IFs, Volume } from "memfs";
 import * as RDF from "rdf-js";
+import { v4 as uuidv4 } from "uuid";
 import { dataFactory } from "../rdf";
 import {
     Endpoint,
@@ -13,7 +14,6 @@ import {
     Stats,
     Triplestore,
 } from "./api";
-import { isPolypodUri, PolyUri, PolyPodUriError } from "./uri";
 import { Entry } from ".";
 
 /**
@@ -66,6 +66,8 @@ export class MockPolyIn implements PolyIn {
  * A mock implementation of the [[PolyOut]] interface.
  */
 export class MockPolyOut implements PolyOut {
+    private static readonly PROTOCOL = "polypod://";
+
     /**
      * Creates a new instance of [[MockPolyOut]].
      * @param {IFs["promises"]} fs - The file system to use
@@ -111,10 +113,10 @@ export class MockPolyOut implements PolyOut {
     /** @inheritdoc */
     async importArchive(path: string, destUri?: string): Promise<string> {
         if (!destUri) {
-            destUri = new PolyUri().toString();
+            destUri = `${MockPolyOut.PROTOCOL}{uuidv4()}`;
         } else {
-            if (!isPolypodUri(destUri)) {
-                throw new PolyPodUriError(`${destUri} is not a polyPod URI`);
+            if (!destUri.startsWith(MockPolyOut.PROTOCOL)) {
+                throw new Error(`${destUri} is not a polyPod URI`);
             }
         }
         return destUri;

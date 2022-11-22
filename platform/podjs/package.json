@@ -24,9 +24,11 @@
     "fp-ts": "^2.8.2",
     "io-ts": "^2.2.16",
     "oxigraph": "^0.3.5",
-    "rdf-js": "^4.0.2"
+    "rdf-js": "^4.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "body-parser": "^1.19.0",
     "fast-check": "^2.11.0"
   },

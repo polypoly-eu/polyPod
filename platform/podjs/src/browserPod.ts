@@ -12,13 +12,16 @@ import type {
     SPARQLQueryResult,
     Triplestore,
 } from "@polypoly-eu/api";
-import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
+import { v4 as uuidv4 } from "uuid";
+import { dataFactory } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
 import oxigraphWasmModule from "oxigraph/web_bg.wasm";
+
+const URI_PROTOCOL = "polypod://";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
@@ -328,11 +331,12 @@ class BrowserPolyOut implements PolyOut {
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
-            if (destUrl && !isPolypodUri(destUrl)) {
-                reject(`${destUrl} is not a polypod:// URI`);
+            if (destUrl && !destUrl.startsWith(URI_PROTOCOL)) {
+                reject(`${destUrl} is not a polyPod URI`);
             }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || new PolyUri().toString();
+
+            const id = destUrl || `${URI_PROTOCOL}{uuidv4()}`;
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,

@@ -1,5 +1,4 @@
 import { MockPolyOut } from "../mock-pod";
-import { PolyPodUriError } from "../uri";
 
 describe("Mock polyOut", () => {
     let mockPolyOut: MockPolyOut;
@@ -9,6 +8,6 @@ describe("Mock polyOut", () => {
     it("should fail with bad URIs", async () => {
         await expect(
             mockPolyOut.importArchive("foo", "bar")
-        ).rejects.toThrowError(PolyPodUriError);
+        ).rejects.toThrowError(Error);
     });
 });
