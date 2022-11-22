@@ -5,6 +5,7 @@
         "build",
         "dev-utils/dummy-server",
         "dev-utils/poly-cli",
+        "dev-utils/rdf-spec",
         "dev-utils/rollup-plugin-copy-watch",
         "feature-utils/poly-analysis",
         "feature-utils/poly-import",

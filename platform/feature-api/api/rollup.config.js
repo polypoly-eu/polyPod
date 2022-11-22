@@ -19,7 +19,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["chai", "fast-check", "chai-as-promised", "uuid"],
     },
     // TODO: Include mock-pod.ts in dist/index*.js above
     {
@@ -40,13 +39,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: [
-            "chai",
-            "fast-check",
-            "chai-as-promised",
-            "memfs",
-            "@rdfjs/dataset",
-            "uuid",
-        ],
+        external: ["memfs", "@rdfjs/dataset", "uuid"],
     },
 ];

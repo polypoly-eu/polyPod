@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/api": "file:../api",
+    "@polypoly-eu/rdf-spec": "file:../../../dev-utils/rdf-spec",
     "@rdfjs/dataset": "^1.1.1",
     "@types/chai": "^4.3.0",
     "@types/chai-as-promised": "^7.1.5",

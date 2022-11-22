@@ -5,6 +5,5 @@
  * @packageDocumentation
  */
 
-export * from "./rdf-spec";
 export * from "./rdf";
 export * from "./pod-api";

@@ -1,6 +1,5 @@
 import fc, { Arbitrary } from "fast-check";
 import {
-    gens,
     DataFactory,
     NamedNode,
     BlankNode,
@@ -9,6 +8,7 @@ import {
     DefaultGraph,
     Quad as polyQuad,
 } from "@polypoly-eu/api";
+import { gens } from "@polypoly-eu/rdf-spec";
 import { Bubblewrap, Class, Classes, deserialize, serialize } from "../index";
 
 // TODO export spec
