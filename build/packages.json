@@ -16,7 +16,7 @@
         "features/cooperativeMembershipPreview",
         "features/demo",
         "features/example",
-        "features/facebookImport",
+        "features/facebook",
         "features/featureStorePreview",
         "features/gdprDataImporterPreview",
         "features/google",

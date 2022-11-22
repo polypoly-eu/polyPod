@@ -11,14 +11,13 @@
     "plugins": [ "plugins/markdown", "../../node_modules/better-docs/" ],
     "templates": {
       "better-docs": {
-        "name": "facebookImport documentation"
+        "name": "facebook documentation"
       }
     },
     "opts": {
       "template": "../../node_modules/better-docs",
-      "destination": "../../docs/documentation/features/facebookImport",
+      "destination": "../../docs/documentation/features/facebook",
       "recurse": true,
       "readme": "README.md"
     }
 }
-  

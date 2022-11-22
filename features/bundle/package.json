@@ -6,7 +6,7 @@
   "devDependencies": {
     "bestzip": "^2.2.0",
     "demo-feature": "file:../demo",
-    "facebook-import-feature": "file:../facebookImport",
+    "facebook-feature": "file:../facebook",
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
@@ -82,7 +82,7 @@
     },
     {
       "archiveName": "facebookImport",
-      "moduleName": "facebook-import-feature",
+      "moduleName": "facebook-feature",
       "artifactPath": "dist"
     },
     {

@@ -1,5 +1,5 @@
 {
-  "name": "facebook-import-feature",
+  "name": "facebook-feature",
   "scripts": {
     "eslint": "eslint src --ext .js --ext .jsx",
     "lint": "npm run eslint",

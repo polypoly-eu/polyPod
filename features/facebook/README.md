@@ -1,4 +1,4 @@
-# facebookImport
+# Facebook Feature
 
 A Feature that lets you import and explore your Facebook data.
 

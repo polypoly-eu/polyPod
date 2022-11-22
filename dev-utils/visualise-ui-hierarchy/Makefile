@@ -18,9 +18,9 @@ ensure-rch: react-component-hierarchy
 polyExplorer.txt: ensure-rch
 	$(call run-rch,polyExplorer,src/polyExplorer.jsx)
 
-.INTERMEDIATE: facebookImport.txt
-facebookImport.txt: ensure-rch
-	$(call run-rch,facebookImport,src/facebookImporter.jsx)
+.INTERMEDIATE: facebook.txt
+facebook.txt: ensure-rch
+	$(call run-rch,facebook,src/facebook.jsx)
 
 .INTERMEDIATE: google.txt
 google.txt: ensure-rch
@@ -34,7 +34,7 @@ google.txt: ensure-rch
 	fdp -T svg -o $@ $<
 
 .PHONY: all
-all: polyExplorer.svg facebookImport.svg google.svg
+all: polyExplorer.svg facebook.svg google.svg
 
 .PHONY: clean-files
 clean-files:
