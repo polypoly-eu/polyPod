@@ -1,4 +1,4 @@
-import { DataFactory } from "../index";
+import { DataFactory } from "../../rdf";
 import * as Foreign from "@rdfjs/data-model";
 
 const dataFactory = new DataFactory(true);

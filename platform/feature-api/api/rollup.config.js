@@ -22,14 +22,14 @@ export default [
     },
     // TODO: Include mock-pod.ts in dist/index*.js above
     {
-        input: "src/pod-api/mock-pod.ts",
+        input: "src/mock-pod.ts",
         output: [
             {
-                file: "dist/pod-api/mock-pod.es.js",
+                file: "dist/mock-pod.es.js",
                 format: "esm",
             },
             {
-                file: "dist/pod-api/mock-pod.js",
+                file: "dist/mock-pod.js",
                 format: "cjs",
             },
         ],

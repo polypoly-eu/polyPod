@@ -2,7 +2,7 @@ import { dataset } from "@rdfjs/dataset";
 import { IFs, Volume } from "memfs";
 import * as RDF from "rdf-js";
 import { v4 as uuidv4 } from "uuid";
-import { DataFactory } from "../rdf";
+import { DataFactory } from "./rdf";
 import {
     Endpoint,
     Info,

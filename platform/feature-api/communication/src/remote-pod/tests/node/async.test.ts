@@ -1,5 +1,5 @@
 import { DataFactory, Pod } from "@polypoly-eu/api";
-import { MockPod } from "@polypoly-eu/api/dist/pod-api/mock-pod";
+import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
 import { AsyncPod } from "../../async";
 
 describe("Async pod", () => {
