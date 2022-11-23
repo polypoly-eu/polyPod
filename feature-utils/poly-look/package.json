@@ -15,7 +15,7 @@
     "build-downstream": "../../build.js --start @polypoly-eu/poly-look",
     "doc": "npm run doc:jsdoc && npm run doc:storybook",
     "doc:jsdoc": "jsdoc -c jsdoc.conf.json",
-    "doc:storybook": "TARGET=../../docs/documentation/feature-utils/poly-look-preview rm -rf \"$TARGET\" && cd storybook && npm ci && npm run build-storybook && mv storybook-static \"../$TARGET\""
+    "doc:storybook": "TARGET=\"../../docs/documentation/feature-utils/poly-look-preview\" && rm -rf \"$TARGET\" && cd storybook && npm ci && npm run build-storybook && mv storybook-static \"../$TARGET\""
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../silly-i18n",
