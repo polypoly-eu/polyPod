@@ -1,5 +1,5 @@
-import { iframeInnerPort } from "../index";
 import { RDF } from "@polypoly-eu/api";
+import { iframeInnerPort } from "../port-authority";
 import { RemoteClientPod } from "./remote";
 import { AsyncPod } from "./async";
 

@@ -14,7 +14,7 @@ import {
     ServerResponse,
 } from "../procedure";
 import { ProcedureSpecLifecycle } from "../specs/procedure";
-import { Bubblewrap } from "../../index";
+import { Bubblewrap } from "../../bubblewrap";
 import { mapResource, Resource } from "../util";
 
 export const loopbackLifecycle: PortSpecLifecycle = async () => ({

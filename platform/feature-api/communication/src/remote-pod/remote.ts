@@ -15,6 +15,7 @@ import {
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
+import { Bubblewrap, Classes } from "../bubblewrap";
 import {
     ResponsePort,
     liftServer,
@@ -24,8 +25,8 @@ import {
     Port,
     liftClient,
     mapPort,
-    Bubblewrap,
-    Classes,
+} from "../port-authority";
+import {
     backendClient,
     ClientOf,
     ServerOf,
@@ -34,7 +35,7 @@ import {
     backendServer,
     ObjectBackendSpec,
     ValueBackendSpec,
-} from "../index";
+} from "../postoffice";
 
 import BlankNode = RDF.BlankNode;
 import DataFactory = RDF.DataFactory;
