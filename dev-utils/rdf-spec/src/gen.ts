@@ -5,17 +5,17 @@
  */
 
 import fc, { Arbitrary } from "fast-check";
-import * as RDF from "rdf-js";
+import * as RDFJS from "rdf-js";
 
 /**
  * @interface Gens
  */
-export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
-    namedNode: Arbitrary<RDF.NamedNode>;
-    blankNode: Arbitrary<RDF.BlankNode>;
-    literal: Arbitrary<RDF.Literal>;
-    variable?: Arbitrary<RDF.Variable>;
-    term: Arbitrary<Exclude<RDF.Term, RDF.BaseQuad>>;
+export interface Gens<Q extends RDFJS.BaseQuad = RDFJS.Quad> {
+    namedNode: Arbitrary<RDFJS.NamedNode>;
+    blankNode: Arbitrary<RDFJS.BlankNode>;
+    literal: Arbitrary<RDFJS.Literal>;
+    variable?: Arbitrary<RDFJS.Variable>;
+    term: Arbitrary<Exclude<RDFJS.Term, RDFJS.BaseQuad>>;
     triple: Arbitrary<Q>;
     quad: Arbitrary<Q>;
 }
@@ -30,13 +30,13 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
  *   side-effecting)
  * - literals are hexadecimal strings with the datatype being left undefined or a named node
  * - variables are hexadecimal strings and are only generated if the data factory supports them
- * 
- * @param {RDF.DataFactory<Q>} factory - specified data factory
+ *
+ * @param {RDFJS.DataFactory<Q>} factory - specified data factory
  * @returns {Gens.<Q>} - A Gens object generated based on the factory
 
  */
-export function gens<Q extends RDF.BaseQuad = RDF.Quad>(
-    factory: RDF.DataFactory<Q>
+export function gens<Q extends RDFJS.BaseQuad = RDFJS.Quad>(
+    factory: RDFJS.DataFactory<Q>
 ): Gens<Q> {
     const namedNode = fc.webUrl().map((url) => factory.namedNode(url));
 

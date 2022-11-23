@@ -7,4 +7,4 @@
 
 export * from "./api";
 export * from "./feature";
-export * from "./rdf";
+export * as RDF from "./rdf";

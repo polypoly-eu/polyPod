@@ -1,4 +1,4 @@
-import { DataFactory, Pod } from "@polypoly-eu/api";
+import { Pod, RDF } from "@polypoly-eu/api";
 import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
 import { AsyncPod } from "../../async";
 
@@ -10,10 +10,11 @@ describe("Async pod", () => {
     }
 
     const underlying = new MockPod();
+    const dataFactory = new RDF.DataFactory(false);
 
     it("Works with resolved promise", async () => {
         await assertValidPod(
-            new AsyncPod(Promise.resolve(underlying), new DataFactory(false))
+            new AsyncPod(Promise.resolve(underlying), dataFactory)
         );
     });
 
@@ -21,6 +22,6 @@ describe("Async pod", () => {
         const delayed = new Promise<Pod>((resolve) => {
             setTimeout(() => resolve(underlying), 500);
         });
-        await assertValidPod(new AsyncPod(delayed, new DataFactory(false)));
+        await assertValidPod(new AsyncPod(delayed, dataFactory));
     });
 });

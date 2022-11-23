@@ -13,8 +13,8 @@ import type {
     Triplestore,
 } from "@polypoly-eu/api";
 import { v4 as uuidv4 } from "uuid";
-import { DataFactory } from "@polypoly-eu/api";
-import * as RDF from "rdf-js";
+import { RDF } from "@polypoly-eu/api";
+import * as RDFJS from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
@@ -106,13 +106,13 @@ async function writeOxigraphStore(store: oxigraph.Store): Promise<void> {
  * @class IDBPolyIn
  */
 class BrowserPolyIn implements PolyIn {
-    private checkQuad(quad: RDF.Quad): void {
+    private checkQuad(quad: RDFJS.Quad): void {
         if (quad.graph.termType != "DefaultGraph")
             throw new Error("Only default graph allowed");
     }
 
     /** @inheritdoc */
-    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
+    async match(matcher: Partial<Matcher>): Promise<RDFJS.Quad[]> {
         return (await oxigraphStore).match(
             matcher.subject,
             matcher.predicate,
@@ -122,7 +122,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async add(quad: RDF.Quad): Promise<void> {
+    async add(quad: RDFJS.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         store.add(quad);
@@ -130,7 +130,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async delete(quad: RDF.Quad): Promise<void> {
+    async delete(quad: RDFJS.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         store.delete(quad);
@@ -138,7 +138,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async has(quad: RDF.Quad): Promise<boolean> {
+    async has(quad: RDFJS.Quad): Promise<boolean> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         return store.has(quad);
@@ -820,7 +820,7 @@ function createNavBarFrame(title: string): HTMLElement {
  * @classdesc It uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
-    public readonly dataFactory = new DataFactory(false);
+    public readonly dataFactory = new RDF.DataFactory(false);
     public readonly polyIn = new BrowserPolyIn();
     public readonly polyOut = new BrowserPolyOut();
     public readonly polyNav = new BrowserPolyNav();

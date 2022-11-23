@@ -1,23 +1,17 @@
 import {
+    Endpoint,
+    Entry,
+    ExternalFile,
+    Info,
+    Matcher,
     Pod,
     PolyIn,
-    PolyOut,
     PolyNav,
-    ExternalFile,
-    Stats,
-    Matcher,
-    Info,
-    Entry,
-    Endpoint,
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad as polyQuad,
-    DataFactory,
-    Triplestore,
+    PolyOut,
+    RDF,
     SPARQLQueryResult,
+    Stats,
+    Triplestore,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -41,6 +35,14 @@ import {
     ObjectBackendSpec,
     ValueBackendSpec,
 } from "../index";
+
+import BlankNode = RDF.BlankNode;
+import DataFactory = RDF.DataFactory;
+import DefaultGraph = RDF.DefaultGraph;
+import Literal = RDF.Literal;
+import NamedNode = RDF.NamedNode;
+import Variable = RDF.Variable;
+import polyQuad = RDF.Quad;
 
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;

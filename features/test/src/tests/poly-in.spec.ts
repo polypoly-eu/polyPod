@@ -1,16 +1,19 @@
 import { PolyIn } from "@polypoly-eu/api";
-import * as RDF from "rdf-js";
+import * as RDFJS from "rdf-js";
 
 import { assert, assertAsyncThrows } from "../assert";
 
 describe("polyIn", function () {
-    function findQuadIndex(quads: RDF.Quad[], quad: RDF.Quad): number {
+    function findQuadIndex(quads: RDFJS.Quad[], quad: RDFJS.Quad): number {
         for (let i = 0; i < quads.length; i++)
             if (quad.equals(quads[i])) return i;
         return -1;
     }
 
-    function assertQuadsEqual(expected: RDF.Quad[], actual: RDF.Quad[]): void {
+    function assertQuadsEqual(
+        expected: RDFJS.Quad[],
+        actual: RDFJS.Quad[]
+    ): void {
         assert.equal(expected.length, actual.length);
         for (const expectedQuad of expected) {
             const index = findQuadIndex(actual, expectedQuad);
@@ -25,7 +28,7 @@ describe("polyIn", function () {
         }
     }
 
-    const dataFactory: RDF.DataFactory = window.pod.dataFactory;
+    const dataFactory: RDFJS.DataFactory = window.pod.dataFactory;
     const polyIn: PolyIn = window.pod.polyIn;
 
     const testQuads = {
@@ -69,7 +72,7 @@ describe("polyIn", function () {
     };
 
     const quadBackupTimeout = 10000;
-    let savedQuads: RDF.Quad[];
+    let savedQuads: RDFJS.Quad[];
 
     // @ts-ignore - seems we're missing some types for Mocha
     before(async function () {

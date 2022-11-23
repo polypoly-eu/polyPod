@@ -1,12 +1,7 @@
 import { podBubblewrap } from "../../remote";
-import {
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad,
-} from "@polypoly-eu/api";
+import { RDF } from "@polypoly-eu/api";
+
+const { NamedNode, BlankNode, Literal, Variable, DefaultGraph, Quad } = RDF;
 
 const testInstances = [
     [NamedNode, "https://example.org/n"],

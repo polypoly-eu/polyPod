@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import * as RDF from "rdf-js";
+import * as RDFJS from "rdf-js";
 
 /**
  * Abstract superclass for all term types defined in this module. It should not be subclassed outside of this module.
@@ -24,10 +24,10 @@ export abstract class Model {
      * property of this term, if the property is a Model, compare it to the other term's property;
      * otherwise, if the other term's property is not equal to this term's property, return false;
      * otherwise, return true
-     * @param {RDF.Term | null} other - RDF.Term | null
+     * @param {RDFJS.Term | null} other - RDFJS.Term | null
      * @returns A boolean value.
      */
-    equals(other: RDF.Term | null): boolean {
+    equals(other: RDFJS.Term | null): boolean {
         if (
             other === null ||
             other === undefined ||
@@ -49,13 +49,13 @@ export abstract class Model {
 
 /**
  * @class `NamedNode`
- * @classdesc It is a class that represents an [[RDF.NamedNode]].
- * @implements RDF.NamedNode
+ * @classdesc It is a class that represents an [[RDFJS.NamedNode]].
+ * @implements RDFJS.NamedNode
  * @extends Model
  */
 export class NamedNode<Iri extends string = string>
     extends Model
-    implements RDF.NamedNode
+    implements RDFJS.NamedNode
 {
     termType: "NamedNode" = "NamedNode";
 
@@ -70,9 +70,9 @@ export class NamedNode<Iri extends string = string>
 }
 
 /**
- *  BlankNode is a class that implements the [[RDF.BlankNode]] interface
+ *  BlankNode is a class that implements the [[RDFJS.BlankNode]] interface
  */
-export class BlankNode extends Model implements RDF.BlankNode {
+export class BlankNode extends Model implements RDFJS.BlankNode {
     private static nextId = 0;
     termType: "BlankNode" = "BlankNode";
     value: string;
@@ -97,9 +97,9 @@ export class BlankNode extends Model implements RDF.BlankNode {
  * @class Literal
  * A representation of a string with an optional language tag or datatype
  */
-export class Literal extends Model implements RDF.Literal {
+export class Literal extends Model implements RDFJS.Literal {
     language: string;
-    datatype: RDF.NamedNode;
+    datatype: RDFJS.NamedNode;
     termType: "Literal" = "Literal";
 
     static readonly langStringDatatype = new NamedNode(
@@ -120,11 +120,11 @@ export class Literal extends Model implements RDF.Literal {
      * and the datatype property to the languageOrDatatype parameter or the string datatype if the languageOrDatatype
      * parameter is undefined.
      * @param {string} value - The value of the literal.
-     * @param {string | RDF.NamedNode} [languageOrDatatype] - string | RDF.NamedNode
+     * @param {string | RDFJS.NamedNode} [languageOrDatatype] - string | RDFJS.NamedNode
      */
     constructor(
         public value: string,
-        languageOrDatatype?: string | RDF.NamedNode
+        languageOrDatatype?: string | RDFJS.NamedNode
     ) {
         super();
 
@@ -148,9 +148,9 @@ export class Literal extends Model implements RDF.Literal {
 /**
  * A `Variable` @class is a `Model` that has a `termType` of `"Variable"` and a `value` that is a `string`
  * @extends `Model`
- * @implements RDF.Variable
+ * @implements RDFJS.Variable
  */
-export class Variable extends Model implements RDF.Variable {
+export class Variable extends Model implements RDFJS.Variable {
     termType: "Variable" = "Variable";
 
     /**
@@ -164,11 +164,11 @@ export class Variable extends Model implements RDF.Variable {
 }
 
 /**
- * `DefaultGraph` is a Singleton class that implements [[RDF.DefaultGraph]] interface
+ * `DefaultGraph` is a Singleton class that implements [[RDFJS.DefaultGraph]] interface
  * @extends Model
- * @implements RDF.DefaultGraph
+ * @implements RDFJS.DefaultGraph
  * */
-export class DefaultGraph extends Model implements RDF.DefaultGraph {
+export class DefaultGraph extends Model implements RDFJS.DefaultGraph {
     static readonly instance: DefaultGraph = new DefaultGraph();
     termType: "DefaultGraph" = "DefaultGraph";
     value: "" = "";
@@ -180,31 +180,31 @@ export class DefaultGraph extends Model implements RDF.DefaultGraph {
 }
 
 /**
- * `Quad` is a class that implements the [[RDF.Quad]] interface
- * @implements RDF.Quad
+ * `Quad` is a class that implements the [[RDFJS.Quad]] interface
+ * @implements RDFJS.Quad
  */
-export class Quad implements RDF.Quad {
+export class Quad implements RDFJS.Quad {
     termType: "Quad" = "Quad";
     value: "" = "";
 
     /**
      * It creates a new [[Quad]] instance.
-     * @param {RDF.Quad_Subject} subject - The subject of the quad.
-     * @param {RDF.Quad_Predicate} predicate - The predicate of the quad.
-     * @param {RDF.Quad_Object} object - RDF.Quad_Object
-     * @param {RDF.Quad_Graph} graph - The graph name of the quad.
+     * @param {RDFJS.Quad_Subject} subject - The subject of the quad.
+     * @param {RDFJS.Quad_Predicate} predicate - The predicate of the quad.
+     * @param {RDFJS.Quad_Object} object - RDFJS.Quad_Object
+     * @param {RDFJS.Quad_Graph} graph - The graph name of the quad.
      */
     constructor(
-        public subject: RDF.Quad_Subject,
-        public predicate: RDF.Quad_Predicate,
-        public object: RDF.Quad_Object,
-        public graph: RDF.Quad_Graph
+        public subject: RDFJS.Quad_Subject,
+        public predicate: RDFJS.Quad_Predicate,
+        public object: RDFJS.Quad_Object,
+        public graph: RDFJS.Quad_Graph
     ) {
         Object.freeze(this);
     }
 
     /** @inheritdoc */
-    equals(other: RDF.Term | null | undefined): boolean {
+    equals(other: RDFJS.Term | null | undefined): boolean {
         // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
         return (
             !!other &&
@@ -261,9 +261,9 @@ const prototypes = {
  *
  * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
  *
- * @implements RDF.DataFactory<Quad, Quad>
+ * @implements RDFJS.DataFactory<Quad, Quad>
  */
-export class DataFactory implements RDF.DataFactory<Quad, Quad> {
+export class DataFactory implements RDFJS.DataFactory<Quad, Quad> {
     /**
      * It creates a new [[DataFactory]] instance with value `strict`
      * @param {boolean} strict - boolean
@@ -324,10 +324,10 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
 
     /** @inheritdoc */
     quad(
-        subject: RDF.Quad_Subject,
-        predicate: RDF.Quad_Predicate,
-        object: RDF.Quad_Object,
-        graph?: RDF.Quad_Graph
+        subject: RDFJS.Quad_Subject,
+        predicate: RDFJS.Quad_Predicate,
+        object: RDFJS.Quad_Object,
+        graph?: RDFJS.Quad_Graph
     ): Quad {
         if (this.strict) {
             if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))

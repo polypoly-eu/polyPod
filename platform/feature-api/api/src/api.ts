@@ -5,16 +5,16 @@
  * @packageDocumentation
  */
 
-import * as RDF from "rdf-js";
+import * as RDFJS from "rdf-js";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
  */
 export interface Matcher {
-    graph: RDF.Quad_Graph;
-    subject: RDF.Quad_Subject;
-    predicate: RDF.Quad_Predicate;
-    object: RDF.Quad_Object;
+    graph: RDFJS.Quad_Graph;
+    subject: RDFJS.Quad_Subject;
+    predicate: RDFJS.Quad_Predicate;
+    object: RDFJS.Quad_Object;
 }
 
 /**
@@ -23,7 +23,10 @@ export interface Matcher {
  * for CONSTRUCT and ÐESCRIBE queries an array of quads, for ASK queries a boolean.
  * @alias SPARQLQueryResult
  */
-export type SPARQLQueryResult = Map<string, RDF.Term>[] | RDF.Quad[] | boolean;
+export type SPARQLQueryResult =
+    | Map<string, RDFJS.Term>[]
+    | RDFJS.Quad[]
+    | boolean;
 
 /**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
@@ -67,7 +70,7 @@ export interface PolyIn {
      * @param {Partial<Matcher>} matcher - a [[Matcher]] where any property may be left unspecified
      * @returns {Array.<Quad>} - A set of triples that conform to the specified [[Matcher]] as an array of [[Quad]]s.
      */
-    match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
+    match(matcher: Partial<Matcher>): Promise<RDFJS.Quad[]>;
 
     /**
      * It adds the [[QuadStore]] passed.
@@ -88,7 +91,7 @@ export interface PolyIn {
      * @param {Quad} quad - The quad triple that should be stored in the Pod
      * @returns {void}
      */
-    add(quad: RDF.Quad): Promise<void>;
+    add(quad: RDFJS.Quad): Promise<void>;
 
     /**
      * Deletes the indicated triples [Quad]].
@@ -96,7 +99,7 @@ export interface PolyIn {
      * @param  {Quad} quad - the triple [[Quad]] that should be removed from the Pod
      * @returns {void}
      */
-    delete(quad: RDF.Quad): Promise<void>;
+    delete(quad: RDFJS.Quad): Promise<void>;
 
     /**
      * Checks whether the set of triple (called quads because they include the graph or namespace)
@@ -105,7 +108,7 @@ export interface PolyIn {
      * @param {Quad} quad - the triple to check for in the Pod
      * @returns a Promise that will be resolved to a boolean.
      */
-    has(quad: RDF.Quad): Promise<boolean>;
+    has(quad: RDFJS.Quad): Promise<boolean>;
 }
 
 /*
@@ -346,7 +349,7 @@ export interface Pod {
      *
      * Pertaining to the last point, Features _must_ use the factory to create new RDF terms.
      */
-    readonly dataFactory: RDF.DataFactory;
+    readonly dataFactory: RDFJS.DataFactory;
 
     /**
      * `polyIn` is the interface to interact with the Pod store. Refer to [[PolyIn]] for its definition.

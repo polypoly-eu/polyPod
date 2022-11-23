@@ -1,6 +1,6 @@
 import { dataset } from "@rdfjs/dataset";
 import { IFs, Volume } from "memfs";
-import * as RDF from "rdf-js";
+import * as RDFJS from "rdf-js";
 import { v4 as uuidv4 } from "uuid";
 import { DataFactory } from "./rdf";
 import {
@@ -24,17 +24,17 @@ const dataFactory = new DataFactory(false);
 export class MockPolyIn implements PolyIn {
     /**
      * Creates a new instance of [[MockPolyIn]].
-     * @param {RDF.DatasetCore} store - The RDF store to use.
+     * @param {RDFJS.DatasetCore} store - The RDF store to use.
      */
-    constructor(public readonly store: RDF.DatasetCore = dataset()) {}
+    constructor(public readonly store: RDFJS.DatasetCore = dataset()) {}
 
-    private checkQuad(quad: RDF.Quad): void {
+    private checkQuad(quad: RDFJS.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
             throw new Error("Only default graph allowed");
     }
 
     /** @inheritdoc */
-    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
+    async match(matcher: Partial<Matcher>): Promise<RDFJS.Quad[]> {
         return Array.from(
             this.store.match(
                 matcher.subject,
@@ -46,19 +46,19 @@ export class MockPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async add(quad: RDF.Quad): Promise<void> {
+    async add(quad: RDFJS.Quad): Promise<void> {
         this.checkQuad(quad);
         this.store.add(quad);
     }
 
     /** @inheritdoc */
-    async delete(quad: RDF.Quad): Promise<void> {
+    async delete(quad: RDFJS.Quad): Promise<void> {
         this.checkQuad(quad);
         this.store.delete(quad);
     }
 
     /** @inheritdoc */
-    async has(quad: RDF.Quad): Promise<boolean> {
+    async has(quad: RDFJS.Quad): Promise<boolean> {
         this.checkQuad(quad);
         return this.store.has(quad);
     }
