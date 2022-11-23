@@ -37,14 +37,6 @@ import {
     ValueBackendSpec,
 } from "../postoffice";
 
-import BlankNode = RDF.BlankNode;
-import DataFactory = RDF.DataFactory;
-import DefaultGraph = RDF.DefaultGraph;
-import Literal = RDF.Literal;
-import NamedNode = RDF.NamedNode;
-import Variable = RDF.Variable;
-import polyQuad = RDF.Quad;
-
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
     add(quad: Quad): ValueBackendSpec<void>;
@@ -106,12 +98,12 @@ type PodBackend = ObjectBackendSpec<{
  * @const podBubblewrapClasses
  */
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/rdf.NamedNode": NamedNode,
-    "@polypoly-eu/rdf.BlankNode": BlankNode,
-    "@polypoly-eu/rdf.Literal": Literal,
-    "@polypoly-eu/rdf.Variable": Variable,
-    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph,
-    "@polypoly-eu/rdf.Quad": polyQuad,
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
+    "@polypoly-eu/rdf.Literal": RDF.Literal,
+    "@polypoly-eu/rdf.Variable": RDF.Variable,
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
+    "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
 /**
@@ -149,11 +141,13 @@ export class RemoteClientPod implements Pod {
     /**
      * It creates a [[RemoteClientPod]] object and initiates the rpc client connection to the port passed
      * @param {RequestPort<BackendRequest, BackendResponse>} clientPort - This is the port that the client will use to communicate with the backend.
-     * @param {DataFactory} dataFactory - DataFactory = new DataFactory(false)
+     * @param {RDF.DataFactory} dataFactory - DataFactory = new DataFactory(false)
      */
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = new DataFactory(false)
+        public readonly dataFactory: RDF.DataFactory = new RDF.DataFactory(
+            false
+        )
     ) {
         this.rpcClient = backendClient<PodBackend>(client(this.clientPort));
     }
