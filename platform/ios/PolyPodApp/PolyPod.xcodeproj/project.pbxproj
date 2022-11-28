@@ -817,6 +817,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		3B5487E427CE881400480CB5 /* Copy Endpoints */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -835,6 +836,7 @@
 		};
 		519ACE372835887C00D56462 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -849,10 +851,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./swiftlint.sh;
+			shellScript = "./swiftlint.sh\n";
 		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -871,6 +874,7 @@
 		};
 		E98F3756266F32AE00874FB9 /* Copy licenses and legal */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
