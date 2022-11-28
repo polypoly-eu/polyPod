@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const GoogleContext = React.createContext();
 
 function updatePodNavigation(pod, navigate, handleBack, location) {
-    console.log(navigate);
     pod.polyNav.actions = {
         back: () => handleBack(),
     };

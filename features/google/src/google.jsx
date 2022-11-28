@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
     Routes,
-    Navigate,
     Route,
     useNavigate,
 } from "react-router-dom";
@@ -20,7 +19,6 @@ import "./styles.css";
 import {
     PolyImportContext,
     PolyImportProvider,
-    INITIAL_HISTORY_STATE,
     LoadingOverlay,
 } from "@polypoly-eu/poly-look";
 import GoogleAccount from "./model/google-account.js";
@@ -28,7 +26,6 @@ import { dataImporters } from "./model/importer.js";
 import i18n from "!silly-i18n";
 import ExploreView from "./views/explore/explore.jsx";
 import DetailsView from "./views/explore/details.jsx";
-import ReportWrapper from "./views/report/reportWrapper.jsx";
 import BasePopUp from "./popUps/base.jsx";
 
 const Google = () => {
@@ -40,20 +37,7 @@ const Google = () => {
 
     function determineRoute() {
         if (files.length > 0) return navigate("/overview");
-        // <Route
-        //     render={() => (
-        //         <Navigate
-        //             to={{
-        //                 pathname: "/overview",
-        //                 state: INITIAL_HISTORY_STATE,
-        //             }}
-        //         />
-        //     )}
-        // />
         else return navigate("/import");
-        // <Route
-        //     render={() => <Navigate to={{ pathname: "/import" }} />}
-        // />
     }
 
     useEffect(() => {
@@ -73,7 +57,6 @@ const Google = () => {
                         path="/explore/details"
                         element={<DetailsView />}
                     />
-                    {/* <ReportWrapper /> */}
                 </Routes>
             )}
             {isLoading && (
