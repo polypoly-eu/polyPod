@@ -9,9 +9,6 @@ import coop.polypoly.polypod.api.polyNav.PolyNav
 import coop.polypoly.polypod.api.polyOut.PolyOut
 import coop.polypoly.polypod.api.triplestore.Triplestore
 import coop.polypoly.polypod.logging.LoggerFactory
-import eu.polypoly.pod.android.polyOut.FetchInit
-import org.msgpack.value.MapValue
-import org.msgpack.value.StringValue
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 
@@ -301,48 +298,5 @@ open class PodApi(
         val data = endpoint
             .get(endpointId, contentType, authorization)
         return ValueFactory.newString(data)
-    }
-
-    private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {
-        logger.debug(
-            "decodePolyOutFetchCallArgs(), args: '{}', args.type: '{}'",
-            args,
-            args.valueType
-        )
-        val argsMap = (args as MapValue).map()
-        val fetchInit = FetchInit()
-        for (key in argsMap.keys) {
-            logger.debug(
-                "Args contain, key[{}]: '{}', value[{}]: '{}'",
-                key.valueType,
-                key,
-                argsMap[key]!!.valueType,
-                argsMap[key]
-            )
-            when ((key as StringValue).toString()) {
-                "method" -> {
-                    // this has to be String
-                    fetchInit.method = argsMap[key]!!.toString()
-                }
-                "headers" -> {
-                    val headers = HashMap<String, String>()
-                    val value = argsMap[key]!! as MapValue
-                    value.entrySet()
-                        .map { (k, v) ->
-                            Pair(
-                                (k as StringValue).toString(),
-                                (v as StringValue).toString()
-                            )
-                        }
-                        .forEach { (k, v) -> headers[k] = v }
-                    fetchInit.headers = headers
-                }
-                "body" -> {
-                    // this has to be a String
-                    fetchInit.body = argsMap[key]!!.toString()
-                }
-            }
-        }
-        return fetchInit
     }
 }
