@@ -15,7 +15,6 @@ import coop.polypoly.core.CoreFailure
 import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.UpdateNotification
 import coop.polypoly.core.fromValue
-import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
 @ExperimentalUnsignedTypes

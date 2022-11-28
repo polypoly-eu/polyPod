@@ -7,9 +7,9 @@ import android.net.Uri
 import android.util.DisplayMetrics
 import androidx.compose.ui.graphics.Color
 import coop.polypoly.core.FeatureCategoryId
+import coop.polypoly.polypod.FeatureStorage
 import coop.polypoly.polypod.PDFBitmap
 import coop.polypoly.polypod.R
-import coop.polypoly.polypod.features.FeatureStorage
 import java.io.File
 
 data class SectionModel(
