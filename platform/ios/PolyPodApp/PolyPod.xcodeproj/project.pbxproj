@@ -27,12 +27,7 @@
 		1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */; };
 		1A4C21F724A63E4C006CC1FD /* Literal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */; };
 		1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57E65524A4C4110043E3AD /* Bubblewrap.swift */; };
-		1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
-		1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
-		1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77C2493774100ED4308 /* NetworkSession.swift */; };
 		1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77E249378E400ED4308 /* PolyOutTests.swift */; };
-		1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
-		1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77C2493774100ED4308 /* NetworkSession.swift */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */; };
@@ -42,12 +37,9 @@
 		1AB4F37E2508D64600E66BCC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AB4F37D2508D64600E66BCC /* Settings.bundle */; };
 		1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1ABADBCB24E2E06600369791 /* initIframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 1ABADBCA24E2E06600369791 /* initIframe.js */; };
-		1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
-		1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
 		1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
-		1ABADBD724EBC5F700369791 /* PolyOut+FS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */; };
+		1ABADBD724EBC5F700369791 /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut.swift */; };
 		1ABADBD824EBC5F900369791 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* Stats.swift */; };
-		1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */; };
 		1ABADBEF24ED282A00369791 /* PodApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A183E9124AF1E860025F6BB /* PodApiError.swift */; };
 		1ABADBF124EE6FB700369791 /* DataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABADBF024EE6FB700369791 /* DataFactory.swift */; };
 		1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABADBF024EE6FB700369791 /* DataFactory.swift */; };
@@ -76,11 +68,9 @@
 		1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */; };
 		1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178D24C174A00063EE37 /* Term+Additions.swift */; };
 		1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178F24C178990063EE37 /* Literal+Additions.swift */; };
-		1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */; };
-		1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */; };
+		1AF1179624C1A4A80063EE37 /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut.swift */; };
 		1AF46893241FBA7200E51B6D /* JSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */; };
 		1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
-		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
@@ -215,11 +205,8 @@
 		1A4C21EA24A63E4B006CC1FD /* Literal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A4C21EB24A63E4B006CC1FD /* Literal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A57E65524A4C4110043E3AD /* Bubblewrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubblewrap.swift; sourceTree = "<group>"; };
-		1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInit.swift; sourceTree = "<group>"; };
-		1A66F76A2490DFA000ED4308 /* FetchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResponse.swift; sourceTree = "<group>"; };
 		1A66F7722493743D00ED4308 /* PolyPodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A66F7762493743D00ED4308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A66F77C2493774100ED4308 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		1A66F77E249378E400ED4308 /* PolyOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOutTests.swift; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1AA6DE2F24191C94008DB1B2 /* PolyPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolyPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,11 +224,9 @@
 		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178D24C174A00063EE37 /* Term+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178F24C178990063EE37 /* Literal+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+Additions.swift"; sourceTree = "<group>"; };
-		1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyOut+Fetch.swift"; sourceTree = "<group>"; };
-		1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyOut+FS.swift"; sourceTree = "<group>"; };
+		1AF1179524C1A4A80063EE37 /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializationExtensions.swift; sourceTree = "<group>"; };
 		1AF468AF242A34CF00E51B6D /* PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyIn.swift; sourceTree = "<group>"; };
-		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		3B45E0B028BF94810005B8EF /* Triplestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triplestore.swift; sourceTree = "<group>"; };
@@ -349,10 +334,8 @@
 		1A66F76C2493715400ED4308 /* PolyOut */ = {
 			isa = PBXGroup;
 			children = (
-				1AF1179424C1A49A0063EE37 /* FS */,
-				1AF1179324C1A2630063EE37 /* Fetch */,
-				1AF468B1242A34D700E51B6D /* PolyOut.swift */,
-				1A66F77C2493774100ED4308 /* NetworkSession.swift */,
+				1AF1179524C1A4A80063EE37 /* PolyOut.swift */,
+				1AF1178524BE22D50063EE37 /* Stats.swift */,
 			);
 			path = PolyOut;
 			sourceTree = "<group>";
@@ -515,25 +498,6 @@
 				1ABADC0A24EFB80900369791 /* Models.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		1AF1179324C1A2630063EE37 /* Fetch */ = {
-			isa = PBXGroup;
-			children = (
-				1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */,
-				1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */,
-				1A66F76A2490DFA000ED4308 /* FetchResponse.swift */,
-			);
-			path = Fetch;
-			sourceTree = "<group>";
-		};
-		1AF1179424C1A49A0063EE37 /* FS */ = {
-			isa = PBXGroup;
-			children = (
-				1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */,
-				1AF1178524BE22D50063EE37 /* Stats.swift */,
-			);
-			path = FS;
 			sourceTree = "<group>";
 		};
 		3B45E0AF28BF946C0005B8EF /* Triplestore */ = {
@@ -926,7 +890,6 @@
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
 				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
 				E942C78928F84A5600C81A37 /* UpdateNotificationData.swift in Sources */,
-				1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */,
 				1ABADC0424EE710C00369791 /* Term+CoreDataProperties.swift in Sources */,
 				1ABADC0224EE710C00369791 /* Literal+Additions.swift in Sources */,
 				1ABADBFE24EE710B00369791 /* Variable+CoreDataClass.swift in Sources */,
@@ -938,7 +901,6 @@
 				904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */,
 				E989B354269DDE4A000EE977 /* PolyNav.swift in Sources */,
 				1ABADC0624EE712F00369791 /* PolyPodModel.xcdatamodeld in Sources */,
-				1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */,
 				E97B6E4428FEE0CD006D25AD /* UserDefaults+Keys.swift in Sources */,
 				1ABADBD824EBC5F900369791 /* Stats.swift in Sources */,
 				E942C78828F84A3700C81A37 /* Language.swift in Sources */,
@@ -959,7 +921,6 @@
 				1ABADBFB24EE710B00369791 /* Quad+CoreDataClass.swift in Sources */,
 				1ABADBFD24EE710B00369791 /* Quad+Additions.swift in Sources */,
 				1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */,
-				1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */,
 				3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */,
 				1ABADC0F24EFB9F300369791 /* Models.swift in Sources */,
 				1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */,
@@ -967,13 +928,11 @@
 				1ABADC0324EE710C00369791 /* Term+CoreDataClass.swift in Sources */,
 				1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */,
 				1ABADC0124EE710B00369791 /* Literal+CoreDataProperties.swift in Sources */,
-				1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */,
 				1ABADBEF24ED282A00369791 /* PodApiError.swift in Sources */,
-				1ABADBD724EBC5F700369791 /* PolyOut+FS.swift in Sources */,
+				1ABADBD724EBC5F700369791 /* PolyOut.swift in Sources */,
 				E97B6E4828FEE232006D25AD /* UserDefaults+Utils.swift in Sources */,
 				1ABADBF524EE710B00369791 /* DefaultGraph+CoreDataClass.swift in Sources */,
 				90716ACD283F7AFA00F7445A /* Array+Utils.swift in Sources */,
-				1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */,
 				3B45E0B228BF94810005B8EF /* Triplestore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -984,12 +943,9 @@
 			files = (
 				1A4C21EC24A63E4B006CC1FD /* DefaultGraph+CoreDataClass.swift in Sources */,
 				E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */,
-				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				9C8F6D2A285B49DD00D44B4E /* UIImage+Utils.swift in Sources */,
 				E9040D4726F0A30E00A88593 /* Info.swift in Sources */,
-				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
 				E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */,
-				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
 				5B8653022643FC310014208C /* PolyNav.swift in Sources */,
@@ -1036,7 +992,6 @@
 				1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */,
 				90716ACC283F7AFA00F7445A /* Array+Utils.swift in Sources */,
 				E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */,
-				1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */,
 				E97B6E4728FEE232006D25AD /* UserDefaults+Utils.swift in Sources */,
 				90E1CD2128D33692001937D3 /* OIDTokenStorage.swift in Sources */,
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
@@ -1055,12 +1010,11 @@
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
 				E93EC98C273D65D400E20512 /* Authentication.swift in Sources */,
-				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
+				1AF1179624C1A4A80063EE37 /* PolyOut.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
 				5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */,
-				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
 				9C8F6D27285B49D000D44B4E /* URL+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

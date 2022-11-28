@@ -217,8 +217,6 @@ extension PodApi {
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
-        case "fetch":
-            handlePolyOutFetch(args: args, completionHandler: completionHandler)
         case "stat":
             handlePolyOutStat(args: args, completionHandler: completionHandler)
         case "readFile":
@@ -233,33 +231,6 @@ extension PodApi {
             handlePolyOutRemoveArchive(args: args, completionHandler: completionHandler)
         default:
             Log.error("PolyOut method unknown: \(method)")
-        }
-    }
-    
-    private func handlePolyOutFetch(
-        args: [Any],
-        completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
-    ) {
-        let url = args[0] as! String
-        let requestInitData = args[1] as! [String: Any]
-        
-        let fetchRequestInit = FetchRequestInit(with: requestInitData)
-        
-        PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse, error in
-            if let error = error {
-                completionHandler(nil, createErrorResponse(#function, error))
-                return
-            }
-            guard let fetchResponse = fetchResponse else {
-                completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
-                return
-            }
-            
-            let object = fetchResponse.messagePackObject
-            
-            let packedData = pack(object)
-            
-            completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
     
