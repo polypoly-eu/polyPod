@@ -63,6 +63,6 @@ module provides a similar API that differs in some aspects, for example: Whereas
 messages in the browser are wrapped in a special DOM event, Node.js sends
 objects "as-is".
 
-This library provides a platform indepentend abstraction that works with both
+This library provides a platform independent abstraction that works with both
 Node.js' and browsers' messaging APIs, and supports _bubblewrap_ for the
 payloads.
