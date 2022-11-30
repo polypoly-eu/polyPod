@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FacebookContext } from "../../context/facebook-context.jsx";
 import {
     List,
@@ -47,7 +47,8 @@ const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(FacebookContext);
     const { account } = useContext(PolyImportContext);
 
-    const history = useHistory();
+    const navigate = useNavigate();
+    const location = useLocation();
     const exploreRef = useRef();
 
     const handleCloseReportResult = () => {
@@ -96,10 +97,12 @@ const ExploreView = () => {
                 </>
             );
 
+            console.log(ministory);
+
             return ministory.hasDetails() ? (
                 <RoutingWrapper
                     key={index}
-                    history={history}
+                    navigate={navigate}
                     route="/explore/details"
                     stateChange={{
                         activeStory: ministory,
@@ -127,7 +130,7 @@ const ExploreView = () => {
                     description={i18n.t("explore:reportCard.text")}
                     button={{
                         label: i18n.t("explore:reportCard.button"),
-                        history: history,
+                        navigate: navigate,
                         route: "/report",
                     }}
                 />
@@ -140,23 +143,20 @@ const ExploreView = () => {
         );
     };
 
-    const saveScrollingProgress = (e) => {
-        history.location.state.scrollingProgress = e.target.scrollTop;
-    };
+    // const saveScrollingProgress = (e) => {
+    //     location.state.scrollingProgress = e.target.scrollTop;
+    // };
 
     //on start-up
     useEffect(() => {
-        exploreRef.current.scrollTo(
-            0,
-            history.location?.state?.scrollingProgress || 0
-        );
+        exploreRef.current.scrollTo(0, location?.state?.scrollingProgress || 0);
     }, []);
 
     return (
         <Screen
             className="explore-view"
             layout="poly-standard-layout"
-            onScroll={saveScrollingProgress}
+            // onScroll={saveScrollingProgress}
             scrollingRef={exploreRef}
         >
             {renderReportResult()}

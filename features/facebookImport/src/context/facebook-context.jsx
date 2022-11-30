@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 import i18n from "!silly-i18n";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import popUps from "../popUps";
 
 export const FacebookContext = React.createContext();
 
-function updatePodNavigation(pod, history, handleBack, location) {
+function updatePodNavigation(pod, navigate, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    history.length > 1 &&
+    navigate > 1 &&
     location.pathname !== "/overview" &&
     location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
@@ -35,7 +35,7 @@ export const FacebookProvider = ({ children }) => {
     const [reportResult, setReportResult] = useState(null);
     const [popUp, setPopUp] = useState(null);
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     async function runWithLoadingScreen(task) {
@@ -54,7 +54,7 @@ export const FacebookProvider = ({ children }) => {
 
     function handleBack() {
         if (popUp) return setPopUp(null);
-        history.length > 1 && history.goBack();
+        navigate > 1 && navigate(-1);
     }
 
     const initPod = async () => await window.pod;
@@ -64,10 +64,10 @@ export const FacebookProvider = ({ children }) => {
         initPod().then((newPod) => setPod(newPod));
     }, []);
 
-    //on history change
+    //on navigate change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history, handleBack, location);
+        updatePodNavigation(pod, navigate, handleBack, location);
         updateTitle(pod, location, popUp);
     });
 

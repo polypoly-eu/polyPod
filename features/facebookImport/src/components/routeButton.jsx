@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FacebookContext } from "../context/facebook-context.jsx";
 
 const RouteButton = ({
@@ -11,7 +11,7 @@ const RouteButton = ({
 }) => {
     const { handleBack, changeNavigationState, navigationState } =
         useContext(FacebookContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     let changedNavigationState = navigationState;
 
@@ -21,7 +21,7 @@ const RouteButton = ({
             changedNavigationState = { ...navigationState, ...stateChange };
         if (route) {
             if (route == "back") handleBack();
-            else history.push(route, changedNavigationState);
+            else navigate(route, changedNavigationState);
         }
         changeNavigationState(changedNavigationState);
     };

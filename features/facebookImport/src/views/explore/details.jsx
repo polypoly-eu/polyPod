@@ -1,14 +1,16 @@
 import { Screen } from "@polypoly-eu/poly-look";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Story from "../../views/ministories/story.jsx";
 
 import "./details.css";
 
 const ExploreDetails = () => {
-    const history = useHistory();
+    const { state } = useLocation();
 
-    const { activeStory } = history.location.state;
+    console.log(state);
+
+    const { activeStory } = state;
     activeStory.mode = Story.MODES.DETAILS;
     return (
         <Screen className="details-view" layout="poly-standard-layout">
