@@ -21,7 +21,7 @@ echo
 echo "polycli - Access dev-utils/poly-cli, the command line utility for"
 echo "          generating new features, without having to specify its full"
 echo "          path"
-alias polycli="node '`dirname $script_path`/../dev-utils/poly-cli/index.js'"
+alias polycli="node '`dirname $script_path`/../../dev-utils/poly-cli/index.js'"
 
 echo
 echo "polyepoch - Generate the current poly epoch, used for polyPod version"
