@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { initializeClient } from "../model/matrixClient";
 import { Message } from "../model/message";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const MessagesContext = React.createContext();
 
-function updatePodNavigation(pod, history, handleBack) {
+function updatePodNavigation(pod, navigate, handleBack) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    history.length > 1
+    navigate > 1
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -20,16 +20,16 @@ export const MessagesContextProvider = ({ children }) => {
     const [activeRoom, setActiveRoom] = useState(null);
     const [activeMessageThread, setActiveMessageThread] = useState(null);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSelectRoom = (room) => {
         setActiveRoom(room);
         setActiveMessageThread(room.messages);
-        history.push("/room");
+        navigate("/room");
     };
 
     const handleBack = () => {
-        history.goBack();
+        navigate(-1);
     };
 
     const handleSendMessage = (message) => {
@@ -52,7 +52,7 @@ export const MessagesContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history, handleBack);
+        updatePodNavigation(pod, navigate, handleBack);
     });
 
     return (
