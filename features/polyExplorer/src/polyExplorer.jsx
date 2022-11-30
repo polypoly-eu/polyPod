@@ -27,7 +27,10 @@ const PolyExplorerApp = () => {
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
             <Routes>
-                <Route index />
+                <Route
+                    index
+                    to={{ pathname: "/main", state: navigationState }}
+                />
                 {/* <Redirect
                         to={{ pathname: "/main", state: navigationState }}
                     />
@@ -51,12 +54,9 @@ const PolyExplorerApp = () => {
                 <Route exact path="/search" element={<EntitySearchScreen />} />
                 <Route
                     exact
-                    path="/story/messenger-storyn"
+                    path="/story/messenger-story"
                     element={<MessengerStory />}
                 />
-                <Route exact path="/story/messenger-story">
-                    <MessengerStory />
-                </Route>
                 <Route
                     exact
                     path="/story/digital-giants-story"
@@ -64,7 +64,7 @@ const PolyExplorerApp = () => {
                 />
                 <Route
                     exact
-                    path="/story/example-storyn"
+                    path="/story/example-story"
                     element={<ExampleStory />}
                 />
             </Routes>
