@@ -100,10 +100,6 @@ sources for this configuration:
 
 ## Documentation
 
-To generate the source code documentation, run:
-
-    $ ./build.js doc
-
 For a complete overview, see [docs/README.md](docs/README.md).
 
 ## Branches

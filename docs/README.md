@@ -20,3 +20,8 @@ For our technical roadmap, see [tech-roadmap.md](tech-roadmap.md).
 
 Follow the instructions in [../README.md](../README.md). Afterwards, you will
 find it in [documentation](documentation).
+
+## Feature development
+
+For a brief guide on how to build a polyPod Feature, see
+[build-a-feature.md](build-a-feature.md).
