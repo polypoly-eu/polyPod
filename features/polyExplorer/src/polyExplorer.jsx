@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import {
     MemoryRouter as Router,
-    Switch,
-    Redirect,
+    Routes,
     Route,
-    useHistory,
+    useNavigate,
 } from "react-router-dom";
 import {
     ExplorerProvider,
@@ -27,37 +26,48 @@ const PolyExplorerApp = () => {
 
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
-            <Switch>
-                <Route exact path="/">
-                    <Redirect
+            <Routes>
+                <Route index />
+                {/* <Redirect
                         to={{ pathname: "/main", state: navigationState }}
                     />
-                </Route>
-                <Route exact path="/main">
-                    <MainScreen />
-                </Route>
-                <Route exact path="/entity-details">
-                    <EntityDetailsScreen />
-                </Route>
-                <Route exact path="/data-exploration">
-                    <DataExplorationScreen />
-                </Route>
-                <Route exact path="/entity-filters">
-                    <EntityFilterScreen />
-                </Route>
-                <Route exact path="/search">
-                    <EntitySearchScreen />
-                </Route>
+                </Route> */}
+                <Route exact path="/main" element={<MainScreen />} />
+                <Route
+                    exact
+                    path="/entity-details"
+                    element={<EntityDetailsScreen />}
+                />
+                <Route
+                    exact
+                    path="/data-exploratio"
+                    element={<DataExplorationScreen />}
+                />
+                <Route
+                    exact
+                    path="/entity-filters"
+                    element={<EntityFilterScreen />}
+                />
+                <Route exact path="/search" element={<EntitySearchScreen />} />
+                <Route
+                    exact
+                    path="/story/messenger-storyn"
+                    element={<MessengerStory />}
+                />
                 <Route exact path="/story/messenger-story">
                     <MessengerStory />
                 </Route>
-                <Route exact path="/story/digital-giants-story">
-                    <DigitalGiantsStory />
-                </Route>
-                <Route exact path="/story/example-story">
-                    <ExampleStory />
-                </Route>
-            </Switch>
+                <Route
+                    exact
+                    path="/story/digital-giants-story"
+                    element={<DigitalGiantsStory />}
+                />
+                <Route
+                    exact
+                    path="/story/example-storyn"
+                    element={<ExampleStory />}
+                />
+            </Routes>
             {popUp &&
                 popUp.component({
                     onClose: popUp.onClose,
@@ -70,10 +80,10 @@ const PolyExplorerApp = () => {
 
 const PolyExplorer = () => {
     //global history object
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
-        <Router history={history}>
+        <Router navigate={navigate}>
             <ExplorerProvider>
                 <PolyExplorerApp />
             </ExplorerProvider>

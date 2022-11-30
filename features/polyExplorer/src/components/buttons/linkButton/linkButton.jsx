@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
 const LinkButton = ({
@@ -11,7 +11,7 @@ const LinkButton = ({
 }) => {
     const { navigationState, changeNavigationState, handleBack } =
         useContext(ExplorerContext);
-    const history = useHistory();
+    const navigate = useNavigate();
     let changedNavigationState = navigationState;
 
     const onClickButton = () => {
@@ -19,7 +19,7 @@ const LinkButton = ({
         if (stateChange)
             changedNavigationState = { ...navigationState, ...stateChange };
         if (route == "back") return handleBack();
-        else history.push(route, changedNavigationState);
+        else navigate(route, changedNavigationState);
         changeNavigationState(changedNavigationState);
     };
 

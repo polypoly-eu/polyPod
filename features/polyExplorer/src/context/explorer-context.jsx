@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { pod } from "../fakePod.js";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import i18n from "!silly-i18n";
 
 //model
@@ -91,7 +91,7 @@ const routesToSkipOnBack = ["/search"];
 
 export const ExplorerProvider = ({ children }) => {
     //router hooks
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     //state
@@ -164,15 +164,15 @@ export const ExplorerProvider = ({ children }) => {
             }
         });
         const newNavState = { ...navigationState, ...changedState };
-        history.push(path, newNavState);
+        navigate(path, newNavState);
         setNavigationState(newNavState);
     }
 
     function handleBack() {
         if (popUp) return setPopUp(null);
         if (currentPath != "/") {
-            history.goBack();
-            const location = history.location;
+            navigate(-1);
+            const location = location;
             if (location.state) {
                 changeNavigationState(location.state);
             }
@@ -202,7 +202,7 @@ export const ExplorerProvider = ({ children }) => {
     function setPolyNavActions() {
         pod.polyNav.actions = {
             info: () => createPopUp({ type: "info-main" }),
-            search: () => history.push("/search"),
+            search: () => navigate("/search"),
             back: () => handleBack(),
         };
     }
