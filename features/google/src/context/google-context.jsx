@@ -9,9 +9,7 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    navigate > 1 &&
-    location.pathname !== "/overview" &&
-    location.pathname !== "/import"
+    navigate > 1 && location !== "/overview" && location !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -19,11 +17,11 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
 function updateTitle(pod, location) {
     let screenTitle;
     try {
-        screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
+        screenTitle = i18n.t(`navbarTitles:${location.substring(1)}`);
     } catch {
         screenTitle = i18n.t("navbarTitles:overview");
     }
-    pod.polyNav.setTitle(location.pathname === "/" ? "" : screenTitle);
+    pod.polyNav.setTitle(location === "/" ? "" : screenTitle);
 }
 
 export const GoogleContextProvider = ({ children }) => {
