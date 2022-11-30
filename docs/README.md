@@ -11,10 +11,11 @@ For our technical roadmap, see [tech-roadmap.md](tech-roadmap.md).
 
 ## Source code documentation
 
+At the moment, we've mostly just added doc strings for packages relevant to
+Feature developers, see:
+
 - [Feature API](https://polypoly-eu.github.io/polyPod/platform/feature-api/api)
-- [poly-look API](https://polypoly-eu.github.io/polyPod/feature-utils/poly-look)
-- [poly-look component preview](https://polypoly-eu.github.io/polyPod/feature-utils/poly-look-preview)
-- [silly-i18n API](https://polypoly-eu.github.io/polyPod/feature-utils/silly-i18n)
+- [Feature utilities](https://github.com/polypoly-eu/polyPod/tree/main/feature-utils/README.md)
 
 ### Generating the source code documentation locally
 

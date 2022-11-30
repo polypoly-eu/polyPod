@@ -11,6 +11,9 @@ component compatible with all kinds of front end applications no matter what
 framework it is encoded with. You can learn how to use litElement in the
 following [tutorials](https://lit.dev/docs/).
 
+To see the components in action, have a look at the
+[preview](https://polypoly-eu.github.io/polyPod/feature-utils/poly-look-preview).
+
 ## Quick guide:
 
 - **Run test**: `npm test`
