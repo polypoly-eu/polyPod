@@ -1,14 +1,20 @@
 /**
- * `Entry` is used to store filesystem directory entries in a (roughly)
- * platform independent way.
+ * A directory entry.
  */
 export interface Entry {
+    /**
+     * The ID for this entry, for usage with [[PolyOut]] APIs.
+     */
     id: string;
+
+    /**
+     * The relative path to this entry, for display and analysis purposes.
+     */
     path: string;
 }
 
 /**
- * @interface Stats about a file
+ * Information about a file or directory.
  */
 export interface Stats {
     id: string;
@@ -19,52 +25,65 @@ export interface Stats {
 }
 
 /**
- * `PolyOut` specifies the interaction of the Feature with the environment.
- * It is concerned with file system operations and HTTP requests.
+ * `PolyOut`, mysteriously named for historical reasons, allows Features to
+ * store data on a virtual file system not accessible to other Features.
  *
- * Both of these aspects are separated out into their own modules:
- * - [[FS]] for Node.js-style file-system access
+ * The API is loosely modelled after a subset of [Node.js'
+ * fsPromises](https://nodejs.org/api/fs.html#promises-api), with some polyPod
+ * specific functionality on top.
+ *
+ * Instead of POSIX paths, `PolyOut` deals with IDs - platform-specific,
+ * unambiguous references to files and directories. On some platforms, these may
+ * be POSIX paths, but it could also be URLs or file handles. Manipulating IDs
+ * directly is therefore discouraged.
+ *
+ * @see [[PolyIn]] for access to the polyPod's internal triplestore, which is
+ * the recommended way of storing most data.
  */
 export interface PolyOut {
     /**
-     * It reads the file of the `path` given and returns its buffer.
-     * @param {string} path - The path to the file to read.
-     * @returns A promise that resolves to an Uint8Array buffer.
+     * Reads the file with the given `id`.
+     * @param id - The ID of the file to read.
+     * @returns The contents of the file.
      */
-    readFile(path: string): Promise<Uint8Array>;
+    readFile(id: string): Promise<Uint8Array>;
+
     /**
-     * Writes the given content to the given file path.
-     * @param {string} path - The path to the file to write to.
-     * @param {string} content - The content to write to the file.
-     * @returns A promise that resolves to a file system object.
+     * Writes the supplied `content` to the file at `id`.
+     * @param id - The ID of the file to write to.
+     * @param content - The content to write to the file.
      */
-    writeFile(path: string, content: string): Promise<void>;
+    writeFile(id: string, content: string): Promise<void>;
+
     /**
-     * It returns the stats of the file's path given:
-     * id, size, time, name, and whether or not it's a directory
-     * @param {string} path - The path to the file or directory.
-     * @returns {Stats} A promise that resolves to a Stats object
+     * Returns information about a file or directory.
+     * @param id - The ID of the file or directory to analyze.
+     * @returns Information about the file or directory.
      */
-    stat(path: string): Promise<Stats>;
+    stat(id: string): Promise<Stats>;
+
     /**
-     * It imports an archive of the passed url into the destUrl specified.
-     * @param {string} url - The URL of the archive to import.
-     * @param {string} [destUrl] - The destination URL of the archive. If not specified, the archive will
-     * be imported to the root of the file system.
-     * @returns The URL of the imported archive.
+     * Imports an archive stored outside the polyPod into the Feature's virtual
+     * file system.
+     * @param url - The URL of the archive to import.
+     * @param destId - The desired destination ID the imported archive's
+     * contents in the virtual file system. Will be generated if not specified.
+     * @returns The ID of the imported archive's contents - same as `destId` if
+     * specified.
      */
-    importArchive(url: string, destUrl?: string): Promise<string>;
+    importArchive(url: string, destId?: string): Promise<string>;
+
     /**
-     * It removes an archive.
-     * @param {string} fileId - The id of the file to be removed.
+     * Removes a previously imported archive.
+     * @param id - The ID of the archive to be removed.
      * @returns A promise that resolves to a value of type `void`.
      */
-    removeArchive(fileId: string): Promise<void>;
+    removeArchive(id: string): Promise<void>;
+
     /**
-     * It reads the directory at the given path, and returns a
-     * promise that resolves to an array of [[Entry]] objects
-     * @param {string} pathToDir The system-dependent path to read.
-     * @returns A promise with id-path pairs [[Entry]] as payload.
+     * Reads the directory at the given ID recursively and returns all entries.
+     * @param id - The ID of the directory to read.
+     * @returns A list of all entries within the supplied directory.
      */
-    readDir(pathToDir: string): Promise<Entry[]>;
+    readDir(id: string): Promise<Entry[]>;
 }
