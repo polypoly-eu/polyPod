@@ -1,33 +1,37 @@
 import * as RDFJS from "rdf-js";
 
 /**
- * For SELECT queries an array of Map objects which keys are the
- * bound variables and values are the values the result is bound to,
- * for CONSTRUCT and ÐESCRIBE queries an array of quads, for ASK queries a boolean.
- * @alias SPARQLQueryResult
+ * For SELECT queries, an array of Map objects whose keys are the
+ * bound variables and whose values are the values the result is bound to.
+ * For CONSTRUCT and DESCRIBE queries, an array of quads.
+ * For ASK queries, a boolean.
  */
 export type SPARQLQueryResult =
     | Map<string, RDFJS.Term>[]
     | RDFJS.Quad[]
     | boolean;
 
-/*
- * `Triplestore` is used to access the features own RDF-SPARQL database and get the interface to operate on it
+/**
+ * `Triplestore`, an experimental replacement for [[PolyIn]], allows Features to
+ * access the polyPod's internal triplestore via SPARQL queries.
+ *
+ * For the time being, the underlying stores of `PolyIn` and `Triplestore` are
+ * separate, so these two APIs are not able to operate on the same data.
+ * Being experimental, we strongly recommend to use `PolyIn` instead.
+ *
+ * @experimental
  */
 export interface Triplestore {
     /**
-     * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query given
-     * and returns the answer as a [[SPARQLQueryResult]] object.
-     * @param {string} query - The query to execute.
-     * @returns {SPARQLQueryResult} A promise that will be resolved with the result of the query.
+     * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query.
+     * @param query - The query to execute.
+     * @returns The result of the query.
      */
     query(query: string): Promise<SPARQLQueryResult>;
 
     /**
      * Executes a SPARQL 1.1 UPDATE query.
-     * @param {string} query - The query to execute.
-     * @returns A promise that will be resolved with undefined when the changes
-     * have been applied and written to disk.
+     * @param query - The query to execute.
      */
     update(query: string): Promise<void>;
 }
