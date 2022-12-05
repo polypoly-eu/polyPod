@@ -1,5 +1,5 @@
 /**
- * @interface ExternalFile holds info of an external file
+ * A reference to a file that exists outside the polyPod.
  */
 export interface ExternalFile {
     name: string;
@@ -8,33 +8,67 @@ export interface ExternalFile {
 }
 
 /**
- * `PolyNav` specifies the interaction of the Feature with the host container. It is concerned with
- * user interactions with the container.
+ * `PolyNav` allows Features to interact with the user outside the confines of
+ * its container.
  */
 export interface PolyNav {
     /**
-     * A way for features to display the contents of a web page for the given URL.
-     * @param {string} url - The URL to open.
-     * @returns void
+     * Callbacks for actions the polyPod can trigger in the Feature.
+     *
+     * Some common actions the user can take in a Feature are understood by the
+     * polyPod, and can therefore be triggered by its native user interface,
+     * which will then invoke the appropriate callback.
+     *
+     * @see [[setActiveActions]] To set the actions that can be triggered.
+     */
+    actions?: {
+        /**
+         * Callback invoked for back navigation.
+         */
+        back?: () => void;
+
+        /**
+         * Callback invoked for searching in the current context.
+         */
+        search?: () => void;
+
+        /**
+         * Callback invoked for showing information in the current context.
+         */
+        info?: () => void;
+    };
+
+    /**
+     * Opens a URL in an external browser - usually the user's default browser.
+     * @param url - The URL to open.
      */
     openUrl(url: string): Promise<void>;
+
     /**
-     * Describe which actions are possible within the pod when a feature is loaded
-     * @param {string[]} actions - A list of actions that the user can take.
-     * @returns void
+     * Sets the list of actions that the polyPod can trigger in the Feature, see
+     * [[actions]]. Typically called regularly to enable and disable actions
+     * depending on the current state of the Feature.
+     *
+     * @param actions - All actions that can be triggered, can be empty.
      */
     setActiveActions(actions: string[]): Promise<void>;
+
     /**
-     * Set a title in a Pod
-     * @param {string} title - The title to set
-     * @returns void
+     * Sets the current title. Typically called regularly to show the user where
+     * they are in the Feature.
+     * @param title - The new title.
      */
     setTitle(title: string): Promise<void>;
+
     /**
-     * Asks the user to pick a file and returns it.
-     * @param {string} [type] - The type of file the user selects, as a valid MIME type string. If no type is passed, the user can chose any type of file.
-     * @throws if an unsupported MIME type was passed as the type argument.
-     * @return A promise that resolves to an ExternalFile Object or `null` if the user cancelled.
+     * Asks the user to pick a file outside the polyPod.
+     *
+     * @param type - The MIME type of the file the user should select. If
+     * not specified, the user can select any file.
+     * @throws Error If an unsupported MIME type was passed as the type
+     * argument.
+     * @returns A reference to the file the user selected, or `null` if they
+     * cancelled.
      */
     pickFile(type?: string): Promise<ExternalFile | null>;
 }
