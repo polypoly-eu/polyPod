@@ -13,7 +13,7 @@ import {
     PolyOut,
     Stats,
     Triplestore,
-} from "./api";
+} from ".";
 import { Entry } from ".";
 
 const dataFactory = new DataFactory(false);

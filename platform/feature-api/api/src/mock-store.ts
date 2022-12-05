@@ -1,4 +1,4 @@
-import { SPARQLQueryResult } from "./api";
+import { SPARQLQueryResult } from ".";
 
 export interface MockStore {
     update(query: string): Promise<void>;
