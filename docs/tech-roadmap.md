@@ -23,15 +23,13 @@ leading to a number of technical issues we plan to address:
 1. Improve test coverage - we recently started to build a dedicated _test_
    Feature that aims to exercise the entire API, but many code paths are still
    tested in platform-specific code, or not at all.
-2. Improve documentation - for historical reasons, a lot of the types that show
-   up in the documentation are irrelevant for Feature developers.
-3. Rename APIs for consistency and easier understanding. For example: For
+2. Rename APIs for consistency and easier understanding. For example: For
    historical reasons, the API used to interact with the triplestore is called
    _polyIn_, whereas the API used to interact with the file system is called
    _polyOut_. Better names would be _triplestore_ and _fs_.
-4. Add SPARQL support for the polyIn/triplestore API - the RDF/JS interface is
+3. Add SPARQL support for the polyIn/triplestore API - the RDF/JS interface is
    too cumbersome to use for non-trivial data structures.
-5. Add Feature-internal namespaces to the triplestore, allowing Features to
+4. Add Feature-internal namespaces to the triplestore, allowing Features to
    store data other Features are not meant to access.
 
 ### Core
