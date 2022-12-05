@@ -1,17 +1,15 @@
 /**
- * `Info` allows the Feature to read information about
- * the polyPod instance it is being executed in.
+ * `Info` allows Features to read information about the polyPod instance they
+ * are being executed in.
  */
 export interface Info {
     /**
-     * A way for features to read the polyPod runtime identification
-     * @returns {string} The runtime name as a string.
+     * @returns The name of the polyPod runtime.
      */
     getRuntime(): Promise<string>;
 
     /**
-     * A way for features to read the user visible polyPod version
-     * @returns {string} A string of the version number.
+     * @returns The version of the polyPod runtime.
      */
     getVersion(): Promise<string>;
 }
