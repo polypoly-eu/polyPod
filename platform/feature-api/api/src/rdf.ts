@@ -219,7 +219,7 @@ const prototypes = {
 
 /**
  * A spec-compliant implementation of RDF/JS' `DataFactory` that supports
- * variables.
+ * variables. Used in conjunction with [[PolyIn]].
  */
 export class DataFactory implements RDFJS.DataFactory<Quad, Quad> {
     /**

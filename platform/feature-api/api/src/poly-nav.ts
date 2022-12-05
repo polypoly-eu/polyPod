@@ -9,7 +9,7 @@ export interface ExternalFile {
 
 /**
  * `PolyNav` allows Features to interact with the user outside the confines of
- * its container.
+ * their container.
  */
 export interface PolyNav {
     /**
