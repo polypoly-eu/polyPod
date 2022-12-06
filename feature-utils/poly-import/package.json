@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "jest --coverage"
+    "build-downstream": "../../build.js --start @polypoly-eu/poly-import",
+    "test": "jest --coverage",
+    "doc": "jsdoc -c jsdoc.conf.json"
   }
 }

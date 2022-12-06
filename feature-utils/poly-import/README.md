@@ -1,16 +1,22 @@
-# Feature File Storage
+# polyImport
 
-Module used to access the polypods file system API (polyOut). Has implementation for getting stored file
-meta-data and Zip-File access.
+A library used to parse and pre-process raw data - usually in conjunction with
+[../poly-analysis](../poly-analysis).
 
-## Install and build
+## Building
 
-Run `npm ci` for installing and `npm run build`
+First, follow the instructions in [the top-level README](../../README.md). Then,
+you can rebuild polyLook after making changes by running:
+
+    npm run build
+
+Please note that if you want to test changes in a Feature, you will also have to
+rebuild that one. To automatically rebuild polyImport and all packages (mainly
+Features) depending on it, run:
+
+    npm run build-downstream
 
 ## Usage
 
-Create an instance of FeatureFileStorage after pod has loaded. With it you can use a changeListener, refreshingFiles etc.
-
-For dealing with ZipFiles this includes a ZipFile storing implementation.
-
-Create an instance of Importer in the Feature's local importer file to manage the importers, import files from a ZipFile and load them to a Feature account (e.g. FacebookAccount).
+This part is unfortunately not well documented yet. You can have a look at the
+[Google](../../features/google) Feature to figure it out.

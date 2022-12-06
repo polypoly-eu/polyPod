@@ -1,6 +1,6 @@
 # silly-i18n
 
-A simple i18n module, following the format and API of
+A simple i18n library, following the format and API of
 [i18next](https://www.i18next.com/).
 
 ## Testing
