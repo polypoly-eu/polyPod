@@ -32,7 +32,7 @@ export class FeatureFileStorage {
     }
 }
 
-export class ZipFileEntry {
+class ZipFileEntry {
     constructor(pod, zipFile, id, path) {
         this._pod = pod;
         this._zipFile = zipFile;
