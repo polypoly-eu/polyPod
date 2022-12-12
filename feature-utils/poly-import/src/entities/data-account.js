@@ -1,6 +1,6 @@
 import { runImporter } from "../importer";
 
-export default class DataAccount {
+export class DataAccount {
     constructor() {
         this.importingReports = [];
         this.importedFileNames = [];
