@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "build-downstream": "../../build.js --start @polypoly-eu/poly-import",
+    "lint": "eslint src test",
     "test": "jest --coverage",
     "doc": "jsdoc -c jsdoc.conf.json"
   }
