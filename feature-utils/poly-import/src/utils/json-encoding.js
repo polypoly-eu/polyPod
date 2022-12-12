@@ -4,7 +4,7 @@ function jsonStringEscapeUtfCharacters(jsonString) {
     });
 }
 
-/**
+/*
  * Take a object and convert it to a JSON string by:
  * - encoding multi-byte Unicode string into utf-8 multiple single-byte characters
  *   (BMP / basic multilingual plane only). Chars in range U+0080 - U+07FF are encoded
@@ -17,7 +17,7 @@ function jsonStringEscapeUtfCharacters(jsonString) {
  *
  * In the Facebook export we get multiple encoded single-byte characters.
  */
-function jsonStringifyWithUtfEscape(jsonData) {
+export function jsonStringifyWithUtfEscape(jsonData) {
     const serializedString = JSON.stringify(jsonData, (key, value) => {
         if (typeof value === "string") {
             return unescape(encodeURIComponent(value));
@@ -26,5 +26,3 @@ function jsonStringifyWithUtfEscape(jsonData) {
     });
     return jsonStringEscapeUtfCharacters(serializedString);
 }
-
-export { jsonStringEscapeUtfCharacters, jsonStringifyWithUtfEscape };

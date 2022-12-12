@@ -1,7 +1,16 @@
-import { Status, statusTypes } from "../utils/status";
-import { Telemetry } from "../utils/performance-telemetry";
+import { Status, statusTypes } from "./utils/status";
+import { Telemetry } from "./utils/performance-telemetry";
 
+/**
+ * Base class for data importers.
+ */
 export class Importer {
+    /**
+     * Imports data from the supplied ZIP archive into the supplied account
+     * object.
+     * @param zipFile - The ZIP archive to read data from.
+     * @param dataAccount {DataAccount} - The account to store data in.
+     */
     async import({ zipFile, dataAccount }) {
         throw new Error(
             `Calling abstract base class with ${zipFile}, ${dataAccount}`
@@ -63,6 +72,14 @@ class ImporterExecutionReport {
     }
 }
 
+/**
+ * Runs a single importer on the supplied ZIP archive.
+ * @param importerClass {Importer} - The importer to use; a class with the same
+ * interface as {@link Importer}.
+ * @param zipFile {ZipFile} - The ZIP archive to import data from.
+ * @param pod - The polyPod API object, e.g. `window.pod`.
+ * @param account {DataAccount} - The account to store data in.
+ */
 export async function runImporter({ importerClass, zipFile, pod, account }) {
     const importer = new importerClass();
 
@@ -101,6 +118,14 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
     }
 }
 
+/**
+ * Runs multiple importers on the supplied ZIP archive.
+ * @param importerClasses {Importer[]} - An array of importers to run, where
+ * each importer is a class with the same interface as {@link Importer}.
+ * @param zipFile {ZipFile} - The ZIP archive to import data from.
+ * @param account {DataAccount} - The account to store data in.
+ * @param pod - The polyPod API object, e.g. `window.pod`.
+ */
 export async function runImporters({ importerClasses, zipFile, account, pod }) {
     return await Promise.all(
         importerClasses.map(async (importerClass) => {
@@ -109,7 +134,10 @@ export async function runImporters({ importerClasses, zipFile, account, pod }) {
     );
 }
 
-//We need this to support the tests for the previous importer model
+/**
+ * Like {@link runImporter}, but for the previous importer model.
+ * @deprecated
+ */
 export async function runOutdatedImporter(
     importerClass,
     zipFile,
@@ -143,6 +171,10 @@ export async function runOutdatedImporter(
     }
 }
 
+/**
+ * Like {@link runImporters}, but for the previous importer model.
+ * @deprecated
+ */
 export async function runOutdatedImporters(
     importerClasses,
     zipFile,

@@ -1,7 +1,13 @@
 import { jsonStringifyWithUtfEscape } from "./json-encoding";
 
-//The minimum size of a .ZIP file is 22 bytes
+/**
+ * The minimum size of a ZIP archive.
+ */
 export const MINIMUM_FILE_SIZE = 22;
+
+/**
+ * Mock of {@link ZipFileEntry} for testing.
+ */
 export class ZipFileEntryMock {
     constructor(id, path, content) {
         this._id = id;
@@ -32,6 +38,9 @@ export class ZipFileEntryMock {
     }
 }
 
+/**
+ * Mock of {@link ZipFile} for testing.
+ */
 export class ZipFileMock {
     constructor(
         dataFilePairs = [["foo.json", { foo: "bar" }]],

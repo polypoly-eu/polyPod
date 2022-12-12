@@ -5,6 +5,7 @@ class PolyImportError extends Error {
     }
 }
 
+/** Indicates an error where an archive could not be extracted. */
 export class FileImportError extends PolyImportError {
     constructor(cause) {
         super("import", cause);
@@ -12,6 +13,7 @@ export class FileImportError extends PolyImportError {
     }
 }
 
+/** Indicates an error where the user selected an invalid file. */
 export class FileSelectionError extends PolyImportError {
     constructor(cause) {
         super("select", cause);
@@ -19,6 +21,7 @@ export class FileSelectionError extends PolyImportError {
     }
 }
 
+/** Indicates an error where {@link ZipFile#refreshFiles} failed. */
 export class RefreshFilesError extends PolyImportError {
     constructor(cause) {
         super("refresh", cause);
