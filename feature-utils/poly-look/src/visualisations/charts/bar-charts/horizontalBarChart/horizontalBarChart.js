@@ -25,10 +25,16 @@ const defaultBarLabelColor = "black";
 const fontSizeAboveBar = "14px";
 const fontSizeInBar = "12px";
 
+class ScaleContainer {
+  constructor({ scale, id }) {
+    this.scale = scale;
+    this.id = id;
+  }
+}
+
 /**
+ * Visualizes data as a bar chart with horizontally arrranged bars.
  *
- * @class
- * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param {Object[]} data - The data to be visualized as a bar chart
  * @param {string} data[].title - The title/name the bar has
@@ -41,14 +47,6 @@ const fontSizeInBar = "12px";
  * @param {string} [barValueColor] - The color the values are shown in (default = no values shown)
  * @param {string} [barLabelColor] - The color the labels are shown in (default = "black")
  */
-
-class ScaleContainer {
-  constructor({ scale, id }) {
-    this.scale = scale;
-    this.id = id;
-  }
-}
-
 export class HorizontalBarChart extends Chart {
   constructor({
     selector,

@@ -3,6 +3,8 @@ import * as d3 from "d3";
 /**
  * Wraps d3-texts on whitespaces.
  * To be called like so: textSelection.call(wrapTexts)
+ *
+ * @ignore
  * @param {d3-text-selection} texts
  */
 export function wrapTexts(texts) {

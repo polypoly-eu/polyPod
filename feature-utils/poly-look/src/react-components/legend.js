@@ -4,7 +4,16 @@ class IncorrectLegendEntry extends Error {
   }
 }
 
+/**
+ * A legend entry.
+ */
 class LegendEntry {
+  /**
+   * Creates a new instance.
+   *
+   * @param description - The text of the entry.
+   * @param color - The color code of the entry.
+   */
   constructor(description, color) {
     this._description = description;
     if (!color.match(/^#[0-9a-fA-F]{6}$/)) {
@@ -16,10 +25,16 @@ class LegendEntry {
     this._color = color;
   }
 
+  /**
+   * The description of the entry.
+   */
   get description() {
     return this._description;
   }
 
+  /**
+   * The color of the entry.
+   */
   get color() {
     return this._color;
   }

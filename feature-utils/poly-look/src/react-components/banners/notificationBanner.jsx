@@ -7,6 +7,13 @@ import success from "../../static/images/icons/xmark-success.svg";
 import error from "../../static/images/icons/xmark-error.svg";
 import warning from "../../static/images/icons/xmark-warning.svg";
 
+/**
+ * Possible notification types for {@link NotificationBanner}.
+ * @property standard
+ * @property success
+ * @property error
+ * @property warning
+ */
 export const notificationTypes = {
   standard: "standard",
   success: "success",
@@ -26,8 +33,7 @@ export const notificationTypes = {
  * @component
  * @param {Object} props
  * @param {JSX} [props.children] JSX elements displayed inside the banner as a notification message.
- * @param {String} [props.notificationType] The notification type defines the styles and icon used in the component.
- * There are currently four notification options: standard, success, error and warning.
+ * @param {String} [props.notificationType] The notification type defines the styles and icon used in the component, see {@link notificationTypes} for possible values.
  * @param {notificationCallback} [props.handleCloseNotification] onClick function to close the notification.
  * @returns {JSX.Element}
  */
