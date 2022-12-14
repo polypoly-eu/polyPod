@@ -12,6 +12,7 @@ import type {
     SPARQLQueryResult,
     Triplestore,
 } from "@polypoly-eu/api";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { v4 as uuidv4 } from "uuid";
 import { RDF } from "@polypoly-eu/api";
 import * as RDFJS from "rdf-js";

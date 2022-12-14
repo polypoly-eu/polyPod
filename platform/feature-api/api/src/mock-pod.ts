@@ -1,6 +1,7 @@
 import { dataset } from "@rdfjs/dataset";
 import { IFs, Volume } from "memfs";
 import * as RDFJS from "rdf-js";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { v4 as uuidv4 } from "uuid";
 import { DataFactory } from "./rdf";
 import {
