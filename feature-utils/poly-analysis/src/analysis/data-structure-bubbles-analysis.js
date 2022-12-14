@@ -1,6 +1,10 @@
 import RootAnalysis from "./root-analysis";
 
-export default class DataStructureBubblesAnalysis extends RootAnalysis {
+/**
+ * An analysis that constructs data for a bubble chart from the previously
+ * determined groups (or areas) of data in the account object.
+ */
+class DataStructureBubblesAnalysis extends RootAnalysis {
     async analyze({ dataAccount }) {
         let bubblesData = dataAccount.dataGroups.filter(
             ({ count }) => count > 0
@@ -10,3 +14,5 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         }
     }
 }
+
+export default DataStructureBubblesAnalysis;
