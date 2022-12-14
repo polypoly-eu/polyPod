@@ -62,7 +62,10 @@ into Core. The major ideas are to:
 
 1. Improve test coverage - at the time of writing, our Feature utils are mostly
    tested along with Features that use them, not in isolation.
-2. Improve source code documentation.
+2. Reduce coupling between poly-look, poly-import and poly-analysis - while
+   poly-look works pretty well on its own, the other libraries only really make
+   sense at the moment if you use all three, because they depend on each other
+   in peculiar ways.
 3. Make poly-cli more powerful - Feature development is still fairly manual,
    quite far from the development workflows offered by Rails and other
    frameworks.
