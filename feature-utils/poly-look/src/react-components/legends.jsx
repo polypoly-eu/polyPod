@@ -21,13 +21,13 @@ const legendComponent = (type, legends) => {
 };
 
 /**
-  * A legend element that shows entries with colored rectangles.
-  *
-  * @function
-  * @param props
-  * @param props.legends {LegendEntry[]}
-  * @returns {JSX.Element}
-  */
+ * A legend element that shows entries with colored rectangles.
+ *
+ * @function
+ * @param props
+ * @param props.legends {LegendEntry[]}
+ * @returns {JSX.Element}
+ */
 export const BlockLegend = ({ legends }) => legendComponent("block", legends);
 
 /**

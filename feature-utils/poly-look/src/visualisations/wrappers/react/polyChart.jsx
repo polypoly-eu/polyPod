@@ -27,7 +27,7 @@ const charts = {
  * @param {Object} props - The props for the chart.
  * @param {string} props.type - The type of the chart,
  * e.g. `vertical-bar-chart`.
-  * @returns {JSX.Element} JSX element that renders the specified chart.
+ * @returns {JSX.Element} JSX element that renders the specified chart.
  */
 export const PolyChart = (props) => {
   const chartRef = useRef();
