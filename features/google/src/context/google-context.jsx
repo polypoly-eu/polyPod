@@ -15,13 +15,14 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
 }
 
 function updateTitle(pod, location) {
+    const path = location.pathname;
     let screenTitle;
     try {
-        screenTitle = i18n.t(`navbarTitles:${location.substring(1)}`);
+        screenTitle = i18n.t(`navbarTitles:${path.substring(1)}`);
     } catch {
         screenTitle = i18n.t("navbarTitles:overview");
     }
-    pod.polyNav.setTitle(location === "/" ? "" : screenTitle);
+    pod.polyNav.setTitle(path === "/" ? "" : screenTitle);
 }
 
 export const GoogleContextProvider = ({ children }) => {
