@@ -1,7 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { HistoryStub } from "../../utils/history-stub";
 import { Banner } from "../../../src/react-components";
 
 /**
@@ -22,13 +21,13 @@ it("Banner renders correctly", () => {
 });
 
 it("Clicking the button leads to the correct route", () => {
-  const history = new HistoryStub();
+  const navigate = jest.fn();
   const label = "Label";
   const mockedRoute = "/route";
 
   const { getByText } = render(
-    <Banner button={{ label: label, route: mockedRoute, history: history }} />
+    <Banner button={{ label: label, route: mockedRoute, navigate: navigate }} />
   );
   fireEvent.click(getByText(label));
-  expect(history.route).toBe(mockedRoute);
+  expect(navigate.mock.calls.at(-1)[0]).toBe(mockedRoute);
 });
