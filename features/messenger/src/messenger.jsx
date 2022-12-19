@@ -1,6 +1,11 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
-import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
+import {
+    MemoryRouter as Router,
+    Navigate,
+    Routes,
+    Route,
+} from "react-router-dom";
 import Home from "./views/home.jsx";
 import "./styles.css";
 import { MessagesContextProvider } from "./context/messages.jsx";
@@ -10,7 +15,7 @@ const Messenger = () => {
     return (
         <div className="poly-talk poly-theme poly-theme-dark">
             <Routes>
-                <Route index />
+                <Route index element={<Navigate to="/home" replace />} />
                 <Route exact path="/home" element={<Home />} />
                 <Route exact path="/room" element={<Room />} />
             </Routes>

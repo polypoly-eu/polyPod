@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { initializeClient } from "../model/matrixClient";
 import { Message } from "../model/message";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const MessagesContext = React.createContext();
 
-function updatePodNavigation(pod, navigate, handleBack) {
+function updatePodNavigation(pod, location, handleBack) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    navigate > 1
-        ? pod.polyNav.setActiveActions(["back"])
-        : pod.polyNav.setActiveActions([]);
+    pod.polyNav.setActiveActions(location.pathname === "/home" ? [] : ["back"]);
 }
 
 export const MessagesContextProvider = ({ children }) => {
@@ -20,6 +18,7 @@ export const MessagesContextProvider = ({ children }) => {
     const [activeRoom, setActiveRoom] = useState(null);
     const [activeMessageThread, setActiveMessageThread] = useState(null);
 
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleSelectRoom = (room) => {
@@ -52,8 +51,8 @@ export const MessagesContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, navigate, handleBack);
-    });
+        updatePodNavigation(pod, location, handleBack);
+    }, [location]);
 
     return (
         <MessagesContext.Provider
