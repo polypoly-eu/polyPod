@@ -34,7 +34,7 @@ import BasePopUp from "./popUps/base.jsx";
 const Google = () => {
     const { pod, isLoading, popUp } = useContext(GoogleContext);
     const { account, files } = useContext(PolyImportContext);
-    const determineRoute = () => (files.length > 0 ? "/overview" : "/import");
+    const initialRoute = files?.length > 0 ? "/overview" : "/import";
     const reportStories = computeReportStories(account);
     return (
         <div className="google poly-theme poly-theme-dark">
@@ -42,7 +42,7 @@ const Google = () => {
                 <Routes>
                     <Route
                         index
-                        element={<Navigate to={determineRoute()} replace />}
+                        element={<Navigate to={initialRoute} replace />}
                     />
                     <Route exact path="/overview" element={<Overview />} />
                     <Route exact path="/import" element={<ImportView />} />
