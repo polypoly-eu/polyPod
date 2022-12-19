@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import {
     List,
     Card,
@@ -15,13 +15,14 @@ import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
     const { reportIsSent, handleReportSent } = useContext(GoogleContext);
 
+    const location = useLocation();
     const navigate = useNavigate();
     const exploreRef = useRef();
 
@@ -100,20 +101,20 @@ const ExploreView = () => {
         );
     };
 
-    // const saveScrollingProgress = (e) => {
-    //     location.state.scrollingProgress = e.target.scrollTop;
-    // };
+    const saveScrollingProgress = (e) => {
+        location.state.scrollingProgress = e.target.scrollTop;
+    };
 
     //on start-up
-    // useEffect(() => {
-    //     exploreRef.current.scrollTo(0, location?.state?.scrollingProgress || 0);
-    // }, []);
+    useEffect(() => {
+        exploreRef.current.scrollTo(0, location?.state?.scrollingProgress || 0);
+    }, []);
 
     return (
         <Screen
             className="explore-view"
             layout="poly-standard-layout"
-            // onScroll={saveScrollingProgress}
+            onScroll={saveScrollingProgress}
             scrollingRef={exploreRef}
         >
             {renderReportResult()}

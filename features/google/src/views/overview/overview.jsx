@@ -98,7 +98,7 @@ const Overview = () => {
                 bubbleColor={BUBBLE_LIGHT_COLOR}
                 textColor={BUBBLE_LIGHT_COLOR}
                 onBubbleClick={() =>
-                    navigate("/explore", INITIAL_HISTORY_STATE)
+                    navigate("/explore", { state: INITIAL_HISTORY_STATE })
                 }
             />
             {files && files?.[0] && (

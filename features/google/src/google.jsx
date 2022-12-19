@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
+    Navigate,
     Routes,
     Route,
-    useNavigate,
 } from "react-router-dom";
 
 import {
@@ -26,29 +26,24 @@ import { dataImporters } from "./model/importer.js";
 import i18n from "!silly-i18n";
 import ExploreView from "./views/explore/explore.jsx";
 import DetailsView from "./views/explore/details.jsx";
+import computeReportStories from "./views/report/compute-stories.js";
+import ReportView from "./views/report/report.jsx";
+import ReportDetails from "./views/report/details.jsx";
 import BasePopUp from "./popUps/base.jsx";
 
 const Google = () => {
     const { pod, isLoading, popUp } = useContext(GoogleContext);
-
-    const { files } = useContext(PolyImportContext);
-
-    const navigate = useNavigate();
-
-    function determineRoute() {
-        if (files.length > 0) return navigate("/overview");
-        else return navigate("/import");
-    }
-
-    useEffect(() => {
-        if (pod && files) determineRoute();
-    }, [pod, files]);
-
+    const { account, files } = useContext(PolyImportContext);
+    const determineRoute = () => (files.length > 0 ? "/overview" : "/import");
+    const reportStories = computeReportStories(account);
     return (
         <div className="google poly-theme poly-theme-dark">
             {pod && files && (
                 <Routes>
-                    <Route index />
+                    <Route
+                        index
+                        element={<Navigate to={determineRoute()} replace />}
+                    />
                     <Route exact path="/overview" element={<Overview />} />
                     <Route exact path="/import" element={<ImportView />} />
                     <Route exact path="/explore" element={<ExploreView />} />
@@ -56,6 +51,18 @@ const Google = () => {
                         exact
                         path="/explore/details"
                         element={<DetailsView />}
+                    />
+                    <Route
+                        exact
+                        path="/report"
+                        element={<ReportView reportStories={reportStories} />}
+                    />
+                    <Route
+                        exact
+                        path="/report/details"
+                        element={
+                            <ReportDetails reportStories={reportStories} />
+                        }
                     />
                 </Routes>
             )}

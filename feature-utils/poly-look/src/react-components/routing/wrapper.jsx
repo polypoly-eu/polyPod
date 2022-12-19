@@ -19,7 +19,8 @@ import { INITIAL_HISTORY_STATE } from "../../constants";
 const RoutingWrapper = ({ children, navigate, route, stateChange }) => {
   const onRoute = () => {
     if (route == "back") navigate(-1);
-    else navigate(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
+    else
+      navigate(route, { state: { ...INITIAL_HISTORY_STATE, ...stateChange } });
   };
   const generateOnClick = (child) => {
     if (!child.props.onClick) return onRoute;

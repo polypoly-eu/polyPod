@@ -9,9 +9,9 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    navigate > 1 && location !== "/overview" && location !== "/import"
-        ? pod.polyNav.setActiveActions(["back"])
-        : pod.polyNav.setActiveActions([]);
+    pod.polyNav.setActiveActions(
+        ["/import", "/overview"].includes(location.pathname) ? [] : ["back"]
+    );
 }
 
 function updateTitle(pod, location) {
@@ -39,8 +39,11 @@ export const GoogleContextProvider = ({ children }) => {
     };
 
     function handleBack() {
-        if (popUp?.name) return closePopUp();
-        navigate > 1 && navigate(-1);
+        if (popUp?.name) {
+            closePopUp();
+            return;
+        }
+        navigate(-1);
     }
 
     async function runWithLoadingScreen(task) {
@@ -62,12 +65,12 @@ export const GoogleContextProvider = ({ children }) => {
         });
     }, []);
 
-    //on navigate change
+    //on location change
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, navigate, handleBack, location);
         updateTitle(pod, location);
-    });
+    }, [location]);
 
     //for popUp sideSheet
     useEffect(() => {
