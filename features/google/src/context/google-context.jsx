@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export const GoogleContext = React.createContext();
 
-function updatePodNavigation(pod, navigate, handleBack, location) {
+function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
@@ -68,7 +68,7 @@ export const GoogleContextProvider = ({ children }) => {
     //on location change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, navigate, handleBack, location);
+        updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location);
     }, [location, popUp]);
 
