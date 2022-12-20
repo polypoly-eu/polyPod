@@ -17,8 +17,8 @@ const RouteButton = ({
         if (!route) return;
 
         onClick();
-        if (route == "back" && navigate > 1) navigate(-1);
-        else navigate(route, newNavigateState);
+        if (route == "back") navigate(-1);
+        else navigate(route, { state: newNavigateState });
     };
 
     return (

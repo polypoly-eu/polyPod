@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
+    Navigate,
     Routes,
     Route,
-    useNavigate,
 } from "react-router-dom";
 
 import {
@@ -12,7 +12,6 @@ import {
     FacebookContext,
 } from "./context/facebook-context.jsx";
 import {
-    INITIAL_HISTORY_STATE,
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
@@ -26,27 +25,18 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
+import computeReportStories from "./views/report/compute-stories.js";
+import ReportView from "./views/report/report.jsx";
+import ReportDetails from "./views/report/details.jsx";
 
 import "./styles.css";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(FacebookContext);
-
-    const { files } = useContext(PolyImportContext);
-
-    const navigate = useNavigate();
-
-    function determineRoute() {
-        if (files.length > 0)
-            return navigate("/overview", { state: INITIAL_HISTORY_STATE });
-        else return navigate("/import");
-    }
-
-    useEffect(() => {
-        if (pod && files) determineRoute();
-    }, [pod, files]);
-
+    const { account, files } = useContext(PolyImportContext);
+    const initialRoute = files?.length > 0 ? "/overview" : "/import";
+    const reportStories = computeReportStories(account);
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
             {isLoading && (
@@ -57,7 +47,10 @@ const FacebookImporter = () => {
             )}
             {pod && files && (
                 <Routes>
-                    <Route index />
+                    <Route
+                        index
+                        element={<Navigate to={initialRoute} replace />}
+                    />
                     <Route exact path="/overview" element={<Overview />} />
                     <Route exact path="/import" element={<ImportView />} />
                     <Route exact path="/explore" element={<ExploreView />} />
@@ -65,6 +58,18 @@ const FacebookImporter = () => {
                         exact
                         path="/explore/details"
                         element={<ExploreDetails />}
+                    />
+                    <Route
+                        exact
+                        path="/report"
+                        element={<ReportView reportStories={reportStories} />}
+                    />
+                    <Route
+                        exact
+                        path="/report/details"
+                        element={
+                            <ReportDetails reportStories={reportStories} />
+                        }
                     />
                 </Routes>
             )}
@@ -96,7 +101,6 @@ const FacebookImporter = () => {
 
 //Router and context
 const FacebookImporterApp = () => {
-    //global navigate object
     return (
         <Router>
             <FacebookProvider>

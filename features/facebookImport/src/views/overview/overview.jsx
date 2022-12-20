@@ -86,7 +86,7 @@ const Overview = () => {
                     height={bubbleVizHeight}
                     bubbleColor={dataBubblesLightColor}
                     onBubbleClick={() =>
-                        navigate("/explore", INITIAL_HISTORY_STATE)
+                        navigate("/explore", { state: INITIAL_HISTORY_STATE })
                     }
                     text=""
                 />

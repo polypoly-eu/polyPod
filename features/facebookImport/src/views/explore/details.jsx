@@ -6,11 +6,8 @@ import Story from "../../views/ministories/story.jsx";
 import "./details.css";
 
 const ExploreDetails = () => {
-    const { state } = useLocation();
-
-    console.log(state);
-
-    const { activeStory } = state;
+    const location = useLocation();
+    const { activeStory } = location.state;
     activeStory.mode = Story.MODES.DETAILS;
     return (
         <Screen className="details-view" layout="poly-standard-layout">

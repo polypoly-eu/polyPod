@@ -7,15 +7,13 @@ import popUps from "../popUps";
 
 export const FacebookContext = React.createContext();
 
-function updatePodNavigation(pod, navigate, handleBack, location) {
+function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    navigate > 1 &&
-    location.pathname !== "/overview" &&
-    location.pathname !== "/import"
-        ? pod.polyNav.setActiveActions(["back"])
-        : pod.polyNav.setActiveActions([]);
+    pod.polyNav.setActiveActions(
+        ["/import", "/overview"].includes(location.pathname) ? [] : ["back"]
+    );
 }
 
 function updateTitle(pod, location, popUp) {
@@ -54,7 +52,7 @@ export const FacebookProvider = ({ children }) => {
 
     function handleBack() {
         if (popUp) return setPopUp(null);
-        navigate > 1 && navigate(-1);
+        navigate(-1);
     }
 
     const initPod = async () => await window.pod;
@@ -64,12 +62,12 @@ export const FacebookProvider = ({ children }) => {
         initPod().then((newPod) => setPod(newPod));
     }, []);
 
-    //on navigate change
+    //on location change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, navigate, handleBack, location);
+        updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location, popUp);
-    });
+    }, [location]);
 
     return (
         <FacebookContext.Provider

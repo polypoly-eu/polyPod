@@ -97,8 +97,6 @@ const ExploreView = () => {
                 </>
             );
 
-            console.log(ministory);
-
             return ministory.hasDetails() ? (
                 <RoutingWrapper
                     key={index}
@@ -130,7 +128,7 @@ const ExploreView = () => {
                     description={i18n.t("explore:reportCard.text")}
                     button={{
                         label: i18n.t("explore:reportCard.button"),
-                        navigate: navigate,
+                        navigate,
                         route: "/report",
                     }}
                 />
@@ -143,9 +141,9 @@ const ExploreView = () => {
         );
     };
 
-    // const saveScrollingProgress = (e) => {
-    //     location.state.scrollingProgress = e.target.scrollTop;
-    // };
+    const saveScrollingProgress = (e) => {
+        location.state.scrollingProgress = e.target.scrollTop;
+    };
 
     //on start-up
     useEffect(() => {
@@ -156,7 +154,7 @@ const ExploreView = () => {
         <Screen
             className="explore-view"
             layout="poly-standard-layout"
-            // onScroll={saveScrollingProgress}
+            onScroll={saveScrollingProgress}
             scrollingRef={exploreRef}
         >
             {renderReportResult()}
