@@ -67,7 +67,7 @@ export const FacebookProvider = ({ children }) => {
         if (!pod) return;
         updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location, popUp);
-    }, [location]);
+    }, [location, popUp]);
 
     return (
         <FacebookContext.Provider

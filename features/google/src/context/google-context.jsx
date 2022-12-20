@@ -70,7 +70,7 @@ export const GoogleContextProvider = ({ children }) => {
         if (!pod) return;
         updatePodNavigation(pod, navigate, handleBack, location);
         updateTitle(pod, location);
-    }, [location]);
+    }, [location, popUp]);
 
     //for popUp sideSheet
     useEffect(() => {
