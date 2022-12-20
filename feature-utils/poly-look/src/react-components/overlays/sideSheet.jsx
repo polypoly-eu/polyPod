@@ -48,12 +48,8 @@ const SideSheet = ({
 
       {children}
 
-      <div className="button-holder">
-        <PolyButton
-          className="poly-self-centered"
-          label={okLabel}
-          onClick={onClose}
-        />
+      <div className="button-holder poly-theme-light">
+        <PolyButton label={okLabel} onClick={onClose} />
       </div>
     </div>
   );

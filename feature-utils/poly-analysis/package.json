@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "build-downstream": "../../build.js --start @polypoly-eu/poly-analysis",
+    "lint": "eslint src test",
+    "doc": "jsdoc -c jsdoc.conf.json"
   },
   "dependencies": {
     "react": "^17.0.2",

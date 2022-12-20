@@ -1,13 +1,23 @@
-# Storybook for polyLook
+# polyLook Storybook
 
-This directory contains the necessary setup for using the [storybook framework](https://storybook.js.org/) for our `polyLook` components.
-## How to use
+This module contains an interactive preview for polyLook based on
+[Storybook](https://storybook.js.org).
 
-- Run `npm install`
+## Requirements
 
-- Depending on what type of component you are working, run one of the following:  
-  - **For LitElement**: `npm run storybook:lit`
-  - **For React**: `npm run storybook:react`
--
-### Note
-For the LitElements we use [@web/dev-server-storybook](https://github.com/modernweb-dev/web/tree/master/packages/dev-server-storybook) because it replaces `webpack` with `rollup` and `rollup` is the bundler that we use in `polyLook`. However it has no current support for `React`, so the React component stories are bundled using `webapck`. While that shouldn't cause issues, it's something to keep in mind. 
+First, build polyLook as described [here](../README.md).
+
+Then, install the dependencies of this module:
+
+    npm ci
+
+## Running
+
+You will most likely want to run see the Storybook for the production
+(mostly React) components:
+
+    npm run storybook
+
+To run it for the experimental LitElement components instead:
+
+    npm run storybook:lit

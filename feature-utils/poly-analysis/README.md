@@ -1,11 +1,22 @@
-# Feature File Storage
+# polyAnalysis
 
-Module used to analyse, process and provide metadata on files from a data-account.
+A library used to analyse and enrich data - usually in conjunction with
+[../poly-import](../poly-import).
 
-## Install and build
+## Building
 
-Run `npm ci` for installing and `npm run build`
+First, follow the instructions in [the top-level README](../../README.md). Then,
+you can rebuild polyLook after making changes by running:
+
+    npm run build
+
+Please note that if you want to test changes in a Feature, you will also have to
+rebuild that one. To automatically rebuild polyAnalysis and all packages (mainly
+Features) depending on it, run:
+
+    npm run build-downstream
 
 ## Usage
 
-Import analysis functions from package and use them on the specific data being processed from the data-account.
+This part is unfortunately not well documented yet. You can have a look at the
+[Google](../../features/google) Feature to figure it out.

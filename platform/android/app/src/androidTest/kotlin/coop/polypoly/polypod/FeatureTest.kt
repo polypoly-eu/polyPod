@@ -13,7 +13,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import coop.polypoly.core.FeatureCategoryId
-import coop.polypoly.polypod.features.FeatureStorage
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -61,7 +60,7 @@ class FeatureTest {
         }
 
         onFeature()
-            .withElement(DriverAtoms.findElement(Locator.ID, "runAll"))
+            .withElement(DriverAtoms.findElement(Locator.ID, "run-all"))
             .perform(DriverAtoms.webClick())
 
         val successStatus = "All OK"

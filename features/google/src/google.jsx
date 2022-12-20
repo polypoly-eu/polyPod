@@ -21,15 +21,15 @@ import {
     PolyImportProvider,
     LoadingOverlay,
 } from "@polypoly-eu/poly-look";
-import GoogleAccount from "./model/google-account.js";
-import { dataImporters } from "./model/importer.js";
+import GoogleAccount from "./model/entities/google-account.js";
+import { importers } from "./model/importers/importers.js";
 import i18n from "!silly-i18n";
 import ExploreView from "./views/explore/explore.jsx";
 import DetailsView from "./views/explore/details.jsx";
 import computeReportStories from "./views/report/compute-stories.js";
 import ReportView from "./views/report/report.jsx";
 import ReportDetails from "./views/report/details.jsx";
-import BasePopUp from "./popUps/base.jsx";
+import BasePopUp from "./components/popUps/base.jsx";
 
 const Google = () => {
     const { pod, isLoading, popUp } = useContext(GoogleContext);
@@ -84,7 +84,7 @@ const GoogleApp = () => {
             <GoogleContextProvider>
                 <PolyImportProvider
                     parentContext={GoogleContext}
-                    dataImporters={dataImporters}
+                    dataImporters={importers}
                     DataAccount={GoogleAccount}
                 >
                     <div className="poly-nav-bar-separator-overlay" />

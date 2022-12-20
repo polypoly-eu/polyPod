@@ -1,14 +1,14 @@
 /**
  * Exception class for errors related to the language that is
- * requested for the translation object
+ * requested for the translation object.
  *
  * @class
  */
 export class LanguageError extends Error {
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param message - Actual message included in the error
+     * @param message - Message to include in the error.
      */
     constructor(message) {
         super(message);
@@ -17,15 +17,15 @@ export class LanguageError extends Error {
 }
 
 /**
- * Exception class to use when the section/namespace does not exist
+ * Exception class to use when the section/namespace does not exist.
  *
  * @class
  */
 export class NonExistingSectionError extends Error {
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param message - Message to include in the error
+     * @param message - Message to include in the error.
      */
     constructor(message) {
         super(message);
@@ -41,9 +41,9 @@ export class NonExistingSectionError extends Error {
  */
 export class TranslationKeyError extends Error {
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param message - Message to include in the error
+     * @param message - Message to include in the error.
      */
     constructor(message) {
         super(message);

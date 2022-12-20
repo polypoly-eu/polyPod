@@ -5,7 +5,8 @@ import "./banner.css";
 
 /**
  * Banner component.
- * @callback Banner
+ *
+ * @function Banner
  * @param {Object} props
  * @param {string} props.icon Displays an icon next to the title if passed
  * @param {string} props.title Title of the banner

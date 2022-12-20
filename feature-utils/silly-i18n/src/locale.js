@@ -1,14 +1,17 @@
 /**
- * Determines the environment locale in a platform-independent way
+ * Determine the environment's locale.
  *
- * @returns a standard name for the language, such as 'en-US'. The first code corresponds to the language
+ * @function
+ * @returns {string} The current locale, e.g. `en-US`.
  */
 export const determineLocale = () =>
     Intl.DateTimeFormat().resolvedOptions().locale;
 
 /**
- * Determines the environment language
+ * Determine the environment's language.
  *
- * @returns a two-character standard name for the language, such as 'en'
+ * @function
+ * @return {string} - The two-character standard name for the language,
+ * e.g. 'en'.
  */
 export const determineLanguage = () => determineLocale().split("-")[0];

@@ -8,6 +8,11 @@ personal data.
 It is still under heavy development, and some aspects are missing or
 unrefined. For more on the vision please read the [polyPod whitepaper][1].
 
+To better understand the architecture, have a look at
+[docs/architecture.md](docs/architecture.md), and to understand how we are
+planning to evolve the code base, see
+[docs/tech-roadmap.md](docs/tech-roadmap.md).
+
 ## Structure
 
 - [platform](platform): The polyPod platform
@@ -16,9 +21,6 @@ unrefined. For more on the vision please read the [polyPod whitepaper][1].
 - [assets](assets): Assets shared across the polyPod and Features
 - [build](build): The build logic
 - [dev-utils](dev-utils): Utilities used at build time
-
-To better understand the architecture, have a look at
-[docs/architecture.md](docs/architecture.md).
 
 ## Requirements
 
@@ -97,10 +99,6 @@ sources for this configuration:
 * [`.eslintrc.cjs`](.eslintrc.cjs) for specific JS/TS linting rules.
 
 ## Documentation
-
-To generate the source code documentation, run:
-
-    $ ./build.js doc
 
 For a complete overview, see [docs/README.md](docs/README.md).
 

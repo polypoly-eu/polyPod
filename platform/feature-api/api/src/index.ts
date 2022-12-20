@@ -1,11 +1,8 @@
-/**
- * Entrypoint re-exporting everything from the constituent modules.
- *
- * For more information, refer to the module documentations.
- * @packageDocumentation
- */
-
-export * from "./rdf-spec";
-export * from "./rdf-convert";
-export * from "./rdf";
-export * from "./pod-api";
+export * as RDF from "./rdf";
+export * from "./endpoint";
+export * from "./info";
+export * from "./pod";
+export * from "./poly-in";
+export * from "./poly-nav";
+export * from "./poly-out";
+export * from "./triplestore";

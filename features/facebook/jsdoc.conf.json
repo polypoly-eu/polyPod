@@ -1,0 +1,23 @@
+{
+    "tags": {
+      "allowUnknownTags": true,
+      "dictionaries": ["jsdoc", "closure"]
+    },
+    "source": {
+      "include": ["./src"],
+      "includePattern": "\\.(jsx|js|ts|tsx)$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [ "plugins/markdown", "../../node_modules/better-docs/" ],
+    "templates": {
+      "better-docs": {
+        "name": "facebook documentation"
+      }
+    },
+    "opts": {
+      "template": "../../node_modules/better-docs",
+      "destination": "../../docs/documentation/features/facebook",
+      "recurse": true,
+      "readme": "README.md"
+    }
+}

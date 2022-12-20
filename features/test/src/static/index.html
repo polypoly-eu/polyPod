@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
+            charset="UTF-8"
+        />
+        <link rel="stylesheet" href="mocha.css" />
+        <style>
+            .test-controls {
+                padding: 16px;
+                border-bottom: 1px solid darkgray;
+            }
+
+            .test-controls>span {
+                margin-left: 8px;
+            }
+
+            /* Workaround for pod.js not supporting position: fixed well */
+
+            #mocha {
+                position: relative;
+            }
+
+            #mocha-stats {
+                position: absolute;
+                top: -45px;
+            }
+        </style>
+        <script src="pod.js"></script>
+    </head>
+    <body>
+        <div class="test-controls">
+            <button id="reset">Reset</button>
+            <button id="run-all">Run all</button>
+            <span></span>
+        </div>
+        <div id="mocha"></div>
+        <script src="chai.js"></script>
+        <script src="mocha.js"></script>
+        <script>
+            mocha.setup("bdd");
+            mocha.checkLeaks();
+        </script>
+        <script src="test.js"></script>
+        <script>
+            testFeature.initControls(document.querySelector(".test-controls"));
+        </script>
+    </body>
+</html>

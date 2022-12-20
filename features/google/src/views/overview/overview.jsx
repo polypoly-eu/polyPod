@@ -13,7 +13,7 @@ import { L12n } from "@polypoly-eu/silly-i18n";
 import { useNavigate } from "react-router-dom";
 import i18n from "!silly-i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
-import { specificAnalyses } from "../../model/analyses/analyses";
+import { analyses } from "../../model/analyses/analyses";
 import {
     BUBBLE_VIZ_WIDTH,
     BUBBLE_VIZ_HEIGHT,
@@ -41,7 +41,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
-            specificAnalyses,
+            specificAnalyses: analyses,
         });
     }, [account]);
 

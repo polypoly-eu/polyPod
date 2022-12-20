@@ -20,7 +20,32 @@ const legendComponent = (type, legends) => {
   );
 };
 
-const BlockLegend = ({ legend }) => legendComponent("block", legend);
-const LineLegend = ({ legend }) => legendComponent("line", legend);
-const CircleLegend = ({ legend }) => legendComponent("circle", legend);
-export { BlockLegend, LineLegend, CircleLegend };
+/**
+ * A legend element that shows entries with colored rectangles.
+ *
+ * @function
+ * @param props
+ * @param props.legend {LegendEntry[]}
+ * @returns {JSX.Element}
+ */
+export const BlockLegend = ({ legend }) => legendComponent("block", legend);
+
+/**
+ * A legend element that shows entries with colored lines.
+ *
+ * @function
+ * @param props
+ * @param props.legend {LegendEntry[]}
+ * @returns {JSX.Element}
+ */
+export const LineLegend = ({ legend }) => legendComponent("line", legend);
+
+/**
+ * A legend element that shows entries with colored circles.
+ *
+ * @function
+ * @param props
+ * @param props.legend {LegendEntry[]}
+ * @returns {JSX.Element}
+ */
+export const CircleLegend = ({ legend }) => legendComponent("circle", legend);

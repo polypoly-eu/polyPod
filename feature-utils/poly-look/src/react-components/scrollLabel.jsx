@@ -2,7 +2,16 @@ import React, { useState } from "react";
 
 import "./scrollLabel.css";
 
-const ScrollLabel = ({ scrollRef, scrollLabelText, colors, img }) => {
+/**
+ * A label nudging the user to scroll down.
+ *
+ * @function
+ * @param props
+ * @param props.scrollRef - The scrollable element.
+ * @param props.scrollLabelText - The text of the label.
+ * @param props.img - The image rendered on the label.
+ */
+const ScrollLabel = ({ scrollRef, scrollLabelText, img }) => {
   const [scrollingPosition, setScrollingPosition] = useState(0);
 
   const setUpScrollingListener = () => {
@@ -13,7 +22,7 @@ const ScrollLabel = ({ scrollRef, scrollLabelText, colors, img }) => {
   };
 
   return scrollingPosition < 100 ? (
-    <div className={`scroll-button ${colors}`} onLoad={setUpScrollingListener}>
+    <div className={"scroll-button"} onLoad={setUpScrollingListener}>
       <img src={img} /> <p>{scrollLabelText}</p>
     </div>
   ) : (

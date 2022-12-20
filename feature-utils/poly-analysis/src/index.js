@@ -13,16 +13,16 @@ import DataImportingStatusAnalysis from "./report/data-importing-status-report";
 import DataStructureBubblesAnalysis from "./analysis/data-structure-bubbles-analysis";
 
 export {
-    analyzeZip,
-    runAnalysis,
-    analyzeFile,
-    jsonDataEntities,
-    relevantZipEntries,
-    RootAnalysis,
-    ReportStories,
-    ReportAnalysis,
-    MinistoriesStatusReport,
     DataImportingStatusAnalysis,
     DataStructureBubblesAnalysis,
+    MinistoriesStatusReport,
+    ReportAnalysis,
+    ReportStories,
+    RootAnalysis,
+    analyzeFile,
+    analyzeZip,
     groupActivitiesByTime,
+    jsonDataEntities,
+    relevantZipEntries,
+    runAnalysis,
 };

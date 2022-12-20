@@ -26,7 +26,7 @@ If, for whatever reason, you only want the dot file, you can use:
     make polyExplorer.dot
 
 And so on and so forth; use `make` for all available targets (including
-`google.svg` and `facebookImport.svg` right now).
+`google.svg` and `facebook.svg` right now).
 
 ## Known issues
 
@@ -46,8 +46,8 @@ but we could at least filter those.
 ### Incomplete hierarchy
 
 Even with fhd's improvements, the react-component-hierarchy tool can't seem to
-handle all edge cases, e.g. the analysis views in the facebookImport Feature are
-not detected.
+handle all edge cases, e.g. the analysis views in the facebook Feature are not
+detected.
 
 ### Merged hierarchy
 

@@ -1,9 +1,9 @@
-package coop.polypoly.polypod.polyNav
+package coop.polypoly.polypod.api.polyNav
 
 import android.content.Context
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
-import coop.polypoly.polypod.polyOut.PolyOut
+import coop.polypoly.polypod.api.polyOut.PolyOut
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream

@@ -12,13 +12,17 @@ import type {
     SPARQLQueryResult,
     Triplestore,
 } from "@polypoly-eu/api";
-import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
-import * as RDF from "rdf-js";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { v4 as uuidv4 } from "uuid";
+import { RDF } from "@polypoly-eu/api";
+import * as RDFJS from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
 import oxigraphWasmModule from "oxigraph/web_bg.wasm";
+
+const URI_PROTOCOL = "polypod://";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
@@ -103,13 +107,13 @@ async function writeOxigraphStore(store: oxigraph.Store): Promise<void> {
  * @class IDBPolyIn
  */
 class BrowserPolyIn implements PolyIn {
-    private checkQuad(quad: RDF.Quad): void {
+    private checkQuad(quad: RDFJS.Quad): void {
         if (quad.graph.termType != "DefaultGraph")
             throw new Error("Only default graph allowed");
     }
 
     /** @inheritdoc */
-    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
+    async match(matcher: Partial<Matcher>): Promise<RDFJS.Quad[]> {
         return (await oxigraphStore).match(
             matcher.subject,
             matcher.predicate,
@@ -119,7 +123,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async add(quad: RDF.Quad): Promise<void> {
+    async add(quad: RDFJS.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         store.add(quad);
@@ -127,7 +131,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async delete(quad: RDF.Quad): Promise<void> {
+    async delete(quad: RDFJS.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         store.delete(quad);
@@ -135,7 +139,7 @@ class BrowserPolyIn implements PolyIn {
     }
 
     /** @inheritdoc */
-    async has(quad: RDF.Quad): Promise<boolean> {
+    async has(quad: RDFJS.Quad): Promise<boolean> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
         return store.has(quad);
@@ -328,11 +332,12 @@ class BrowserPolyOut implements PolyOut {
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
-            if (destUrl && !isPolypodUri(destUrl)) {
-                reject(`${destUrl} is not a polypod:// URI`);
+            if (destUrl && !destUrl.startsWith(URI_PROTOCOL)) {
+                reject(`${destUrl} is not a polyPod URI`);
             }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || new PolyUri().toString();
+
+            const id = destUrl || `${URI_PROTOCOL}{uuidv4()}`;
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,
@@ -789,18 +794,19 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
+    frame.style.border = "none";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);
     const source = `
     <html>
-        <body style="background-color: ${navBarColors.bg}">
+        <body style="background-color: ${navBarColors.bg}; overflow: hidden">
             <script>
                 window.addEventListener("message", (event) => {
                     document.getElementById("title").textContent = event.data;
                 });
             </script>
-            <h1 id="title" style="color: ${navBarColors.fg}">${title}<h1>
+            <h1 id="title" style="color: ${navBarColors.fg}">${title}</h1>
         </body>
     </html>
     `;
@@ -815,7 +821,7 @@ function createNavBarFrame(title: string): HTMLElement {
  * @classdesc It uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
-    public readonly dataFactory = dataFactory;
+    public readonly dataFactory = new RDF.DataFactory(false);
     public readonly polyIn = new BrowserPolyIn();
     public readonly polyOut = new BrowserPolyOut();
     public readonly polyNav = new BrowserPolyNav();

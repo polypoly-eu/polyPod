@@ -16,13 +16,14 @@ polypod-feedback@polypoly.coop\
 
 /**
  * It renders a popup with an error message and instructions on how to report the error
+ *
  * @param {Object} props
  * @param {Error} [props.error] the error raised
  * @param {buttonCallback} [props.onClose] Button callback.
  * @param {String} [props.text] The text popup message.
  * @returns A React component.
  */
-export default function ErrorPopup({ error, onClose, text }) {
+function ErrorPopup({ error, onClose, text }) {
   return (
     <div className="error-popup">
       <h1>{text.title}</h1>
@@ -42,3 +43,5 @@ export default function ErrorPopup({ error, onClose, text }) {
     </div>
   );
 }
+
+export default ErrorPopup;

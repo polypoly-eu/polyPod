@@ -1,0 +1,54 @@
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+            node-version: 16
+            cache: "npm"
+            cache-dependency-path: "**/package-lock.json"
+
+      # Unfortunately currently necessary to build the poly-look storybook
+      - name: Build prerequisites
+        # Would be nicer if build.js had an option for only building a specific
+        # package and its dependencies.
+        run: ./build.js
+        env:
+          # Skip prerequisites for Android/iOS
+          POLYPOD_BUILD_PLATFORMS: ''
+
+      - name: Build documentation
+        run: ./build.js doc
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'docs/documentation'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

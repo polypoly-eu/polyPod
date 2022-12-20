@@ -16,6 +16,27 @@ const xTickSizes = {
   big: 8,
 };
 
+/**
+ * Visualizes data on a timeline.
+ *
+ * @param {CSS-selector} selector - A CSS selector of the element to
+ * attach the chart to.
+ * @param {Object[]} data - The data to visualise; multiple series.
+ * @param {string} data[].id - The unique identifier of this series.
+ * @param {Object[]} data[].dataPoints - The data points of this series.
+ * @param {string} data[].dataPoints[].id - The unique identifier of
+ * this data point.
+ * @param {Date} data[].dataPoints[].date - The time of this data point.
+ * @param {number} data[].dataPoints[].value - The value of this data point.
+ * @param {number} [width] - The width of the chart.
+ * @param {number} [height] - The height of the chart.
+ * @param {string|function} [lineColor] - A colour string or function
+ * determining the colour of each line.
+ * @param {string|function} [areaColor] - A colour string or function
+ * determining the colour of the area under each line.
+ * @param {Object[]} [gradients] - A list of gradients `areaColor` can
+ * refer to.
+ */
 export class TimeLineChart extends Chart {
   constructor({
     selector,

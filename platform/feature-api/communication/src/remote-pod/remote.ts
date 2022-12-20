@@ -1,26 +1,21 @@
 import {
+    Endpoint,
+    Entry,
+    ExternalFile,
+    Info,
+    Matcher,
     Pod,
     PolyIn,
-    PolyOut,
     PolyNav,
-    ExternalFile,
-    Stats,
-    Matcher,
-    Info,
-    Entry,
-    Endpoint,
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad as polyQuad,
-    DataFactory,
-    Triplestore,
+    PolyOut,
+    RDF,
     SPARQLQueryResult,
+    Stats,
+    Triplestore,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
+import { Bubblewrap, Classes } from "../bubblewrap";
 import {
     ResponsePort,
     liftServer,
@@ -30,8 +25,8 @@ import {
     Port,
     liftClient,
     mapPort,
-    Bubblewrap,
-    Classes,
+} from "../port-authority";
+import {
     backendClient,
     ClientOf,
     ServerOf,
@@ -40,7 +35,7 @@ import {
     backendServer,
     ObjectBackendSpec,
     ValueBackendSpec,
-} from "../index";
+} from "../postoffice";
 
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
@@ -103,12 +98,12 @@ type PodBackend = ObjectBackendSpec<{
  * @const podBubblewrapClasses
  */
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/rdf.NamedNode": NamedNode,
-    "@polypoly-eu/rdf.BlankNode": BlankNode,
-    "@polypoly-eu/rdf.Literal": Literal,
-    "@polypoly-eu/rdf.Variable": Variable,
-    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph,
-    "@polypoly-eu/rdf.Quad": polyQuad,
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
+    "@polypoly-eu/rdf.Literal": RDF.Literal,
+    "@polypoly-eu/rdf.Variable": RDF.Variable,
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
+    "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
 /**
@@ -146,11 +141,13 @@ export class RemoteClientPod implements Pod {
     /**
      * It creates a [[RemoteClientPod]] object and initiates the rpc client connection to the port passed
      * @param {RequestPort<BackendRequest, BackendResponse>} clientPort - This is the port that the client will use to communicate with the backend.
-     * @param {DataFactory} dataFactory - DataFactory = new DataFactory(false)
+     * @param {RDF.DataFactory} dataFactory - DataFactory = new DataFactory(false)
      */
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = new DataFactory(false)
+        public readonly dataFactory: RDF.DataFactory = new RDF.DataFactory(
+            false
+        )
     ) {
         this.rpcClient = backendClient<PodBackend>(client(this.clientPort));
     }

@@ -1,15 +1,15 @@
 import fc, { Arbitrary } from "fast-check";
-import {
-    gens,
-    dataFactory,
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad as polyQuad,
-} from "@polypoly-eu/api";
+import { RDF } from "@polypoly-eu/api";
+import { gens } from "@polypoly-eu/rdf-spec";
 import { Bubblewrap, Class, Classes, deserialize, serialize } from "../index";
+
+import BlankNode = RDF.BlankNode;
+import DataFactory = RDF.DataFactory;
+import DefaultGraph = RDF.DefaultGraph;
+import Literal = RDF.Literal;
+import NamedNode = RDF.NamedNode;
+import Quad = RDF.Quad;
+import Variable = RDF.Variable;
 
 // TODO export spec
 type TypeInfo<T> = [Class<T>, Arbitrary<T>];
@@ -89,9 +89,10 @@ type Types = {
     "@polypoly-eu/rdf.Literal": Literal;
     "@polypoly-eu/rdf.Variable": Variable;
     "@polypoly-eu/rdf.DefaultGraph": DefaultGraph;
-    "@polypoly-eu/rdf.Quad": polyQuad;
+    "@polypoly-eu/rdf.Quad": Quad;
 };
 
+const dataFactory = new DataFactory(false);
 const gen = gens(dataFactory);
 
 const infos: TypeInfos<Types> = {
@@ -112,7 +113,7 @@ const infos: TypeInfos<Types> = {
         DefaultGraph,
         fc.constant(dataFactory.defaultGraph()),
     ],
-    "@polypoly-eu/rdf.Quad": [polyQuad, gen.quad],
+    "@polypoly-eu/rdf.Quad": [Quad, gen.quad],
 };
 
 describe("Bubblewrap", () => {

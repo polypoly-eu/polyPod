@@ -2,8 +2,8 @@
   "name": "@polypoly-eu/storybook",
   "private": "true",
   "scripts": {
+    "storybook": "start-storybook -p 6006 -c .storybook/react",
     "storybook:lit": "web-dev-server -c .storybook/lit/server.mjs",
-    "storybook:react": "start-storybook -p 6006 -c .storybook/react",
     "build-storybook": "build-storybook -c .storybook/react"
   },
   "devDependencies": {

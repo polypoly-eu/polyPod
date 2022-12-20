@@ -13,7 +13,7 @@ import { INITIAL_HISTORY_STATE } from "../../constants";
  * @param {JSX.Element} props.children - React children in jsx format
  * @param {Object} props.history - React router dom history
  * @param {string} props.route - String to route to ("back" leads back)
- * @param {Object} props.stateChange - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
+ * @param {Object} props.stateChange - Initial state overriding {@link INITIAL_HISTORY_STATE} property to which it defaults
  * @returns A React component that takes in children, history, route, and stateChange as props.
  */
 const RoutingWrapper = ({ children, navigate, route, stateChange }) => {

@@ -1,34 +1,55 @@
 # silly-i18n
 
-A simple i18n module, following the format and API of
-[i18next](https://www.i18next.com/). It takes a language and an hash with
-language as primary keys, namespaces as secondary keys, and string names as
-tertiary keys.
+A simple i18n library, following the format and API of
+[i18next](https://www.i18next.com/).
 
-It includes a function to detect the system language, which should work on the
-browser as well as elsewhere.
+## Testing
 
-## Install and test
-
-Run `npm ci` for installing, `npm run test` for carrying out tests.
+    npm run test
 
 ## Usage
 
-It includes very basic translation and templating capabilities. Check out
-documentation (should be generated in the `docs` directory) for more info.
+### Using the Rollup plugin
 
-## Documentation
+We typically use the Rollup plugin to reduce boilerplate code. Just import it in
+your Rollup config:
 
-You can run `npm run doc` to generate documentation. Documentation will appear
-in the `docs` directory.
+    import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 
-> Please bear in mind that some versions of `cypress` will try to bundle the JS
-> found in that directory. If it takes too long or provokes errors just delele them.
+And then add it to the `plugins` section:
 
-Type
+    plugins: [
+        sillyI18n(),
+        ...
+    ]
 
-```shell
-npm run
-```
+The plugin will look for a directory called _locales_ and bundle its contents.
 
-for all commands available.
+Then you can import it like this:
+
+    import i18n from "!silly-i18n";
+
+This will give you an instance of the `I18n` class, with language and locale
+automatically determined.
+
+### Manual integration
+
+Simply create an instance of the `I18n` class and use it across your
+project. You will need to pass the language, as well as an object with all of
+your translations, retrieved by your means of choice.
+
+To get automatic language detection, use `determineLanguage()`.
+
+### Using the i18n object
+
+The basic usage to retrieve a translated string is:
+
+    i18n.t("namespace:key")
+
+For more use cases, e.g. placeholder replacement, see the documentation.
+
+### Using the l12n object
+
+For simple number and date formatting, you can use `L12n`, for example:
+
+    i18n.l12n.t(new Date())

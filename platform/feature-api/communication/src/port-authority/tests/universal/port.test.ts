@@ -4,7 +4,7 @@ import {
     forwardLifecycle,
     loopbackLifecycle,
 } from "../_lifecycles";
-import { Bubblewrap } from "../../../index";
+import { Bubblewrap } from "../../../bubblewrap";
 import { receiveSingle } from "../../port";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";

@@ -3,16 +3,16 @@ import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
 
 export default {
-    input: "src/test.ts",
+    input: "src/index.ts",
     output: {
-        dir: "dist",
+        file: "dist/test.js",
         format: "iife",
         name: "testFeature",
     },
     plugins: [
         genPodjs({
             build_dir: "./dist",
-            manifestPath: "./src/manifest.json",
+            manifestPath: "./src/static/manifest.json",
         }),
         copy({
             targets: [
@@ -22,11 +22,7 @@ export default {
             ],
         }),
         copy({
-            targets: [
-                { src: "src/index.html", dest: "dist" },
-                { src: "src/manifest.json", dest: "dist" },
-                { src: "src/images/*", dest: "dist/images" },
-            ],
+            targets: [{ src: "src/static/*", dest: "dist" }],
         }),
         sucrase({
             exclude: ["node_modules/**"],

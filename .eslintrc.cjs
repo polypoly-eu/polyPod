@@ -35,6 +35,7 @@ module.exports = {
         "**/build/*",
         "PolyPodApp/",
         "platform/core/tools",
+        "**/cypress/support",
     ],
     rules: {
         semi: 2,

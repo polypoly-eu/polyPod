@@ -1,16 +1,28 @@
 # poly-cli
 
-Generates stuff for us. Currently only generates the structure for a Feature.
+A command line utility to generate polyPod Features.
 
-## Use
+It's still in its infancy. The vision for this tool is to be something that
+doesn't just generate initial scaffolds for a variety of typical Features, but
+also aids development beyond that point, similar to the Ruby on Rails command
+line utility.
 
-First, install with `npm ci`
+## Usage
 
-Run inside `features/` folder, which is needed since the paths to the polyPod modules are hard-coded:
+At the moment, it only works if you run it from the `features/` directory,
+because the paths to the local Feature utilities are hard coded.
 
-```shell
-node ../dev-utils/poly-cli/index.js create feature feature-name --type preview
-```
+So to generate an empty feature:
 
-There are 3 types: `empty`, `preview`, and `importer`. `empty` is the default
-(and the only one implemented for the time being)
+    cd features
+    node ../dev-utils/poly-cli/index.js create feature feature-name
+
+Other than `empty` (the default), there are templates for `preview` Features and
+`importer` Features, which you can specify with the `--type` option.
+
+To make the command line shorter, you can source [env.sh](../scripts/env.sh),
+e.g.:
+
+    cd features
+    . ../dev-utils/scripts/env.sh
+    polycli create feature feature-name
