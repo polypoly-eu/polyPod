@@ -73,11 +73,10 @@ const EntitySearchScreen = () => {
                             {" "}
                             {featuredEntities.map((entity, index) => (
                                 <LinkButton
-                                    route="entity-details"
+                                    route={`entity-details/${encodeURIComponent(
+                                        entity.ppid
+                                    )}`}
                                     key={index}
-                                    stateChange={{
-                                        selectedEntity: entity.ppid,
-                                    }}
                                 >
                                     {entity.name}
                                 </LinkButton>
@@ -102,11 +101,9 @@ const EntitySearchScreen = () => {
                                         {featuredEntities.map(
                                             (entity, index) => (
                                                 <LinkButton
-                                                    route="entity-details"
-                                                    stateChange={{
-                                                        selectedEntity:
-                                                            entity.ppid,
-                                                    }}
+                                                    route={`entity-details/${encodeURIComponent(
+                                                        entity.ppid
+                                                    )}`}
                                                     key={index}
                                                 >
                                                     {entity.name}
@@ -120,10 +117,9 @@ const EntitySearchScreen = () => {
                             <div>
                                 {shownEntities.map((entity, index) => (
                                     <LinkButton
-                                        route="entity-details"
-                                        stateChange={{
-                                            selectedEntity: entity.ppid,
-                                        }}
+                                        route={`entity-details/${encodeURIComponent(
+                                            entity.ppid
+                                        )}`}
                                         key={index}
                                     >
                                         {entity.name}

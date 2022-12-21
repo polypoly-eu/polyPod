@@ -11,11 +11,12 @@ const DataSharingSection = ({
     max,
     average,
     stateChange,
+    ppid,
 }) => (
     <LinkButton
         className={`data-sharing-section ${sharingType}-shared`}
         stateChange={stateChange}
-        route="/data-exploration"
+        route={`/data-exploration/${encodeURIComponent(ppid)}`}
     >
         <h1>{i18n.t(`common:sharing.prefix.${sharingType}`)}</h1>
         <DataSharingGauge
@@ -61,6 +62,7 @@ const FeaturedEntity = () => {
                         count={count[section]}
                         max={featuredEntityMaxValues[section]}
                         average={featuredEntityAverageValues[section]}
+                        ppid={selectedEntityObject.ppid}
                         stateChange={{
                             explorationState: {
                                 section: section,

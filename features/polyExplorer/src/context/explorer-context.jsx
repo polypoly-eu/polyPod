@@ -87,22 +87,24 @@ const loadStoriesMetadata = () => {
     };
 };
 
+function extractPpid(path) {
+    const results = path.match(
+        /\/(search\/entity-details|entity-details|data-exploration)\/(.*)/
+    );
+    if (!results) return null;
+    return decodeURIComponent(results[2]);
+}
+
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const navigate = useNavigate();
     const location = useLocation();
 
     //state
-    const navigationStates = [
-        "firstRun",
-        "showClusters",
-        "selectedEntity",
-        "explorationState",
-    ];
+    const navigationStates = ["firstRun", "showClusters", "explorationState"];
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
         showClusters: true,
-        selectedEntity: null,
         explorationState: {
             section: null,
             index: null,
@@ -120,9 +122,9 @@ export const ExplorerProvider = ({ children }) => {
         a.compareNames(b)
     );
     const featuredEntities = entitiesList.filter((company) => company.featured);
-    const selectedEntity = navigationState.selectedEntity;
-    const selectedEntityObject = entities[selectedEntity];
-    const dataRecipients = entities[selectedEntity]?.dataRecipients?.map(
+    const selectedEntityPpid = extractPpid(location.pathname);
+    const selectedEntityObject = entities[selectedEntityPpid];
+    const dataRecipients = selectedEntityObject?.dataRecipients?.map(
         (ppid) => entities[ppid]
     );
     const currentPath = location.pathname;
@@ -212,11 +214,9 @@ export const ExplorerProvider = ({ children }) => {
         if (currentPath === "/") return;
 
         if (
-            [
-                "/data-exploration",
-                "/entity-details",
-                "/search/entity-details",
-            ].includes(currentPath)
+            currentPath.startsWith("/data-exploration/") ||
+            currentPath.startsWith("/entity-details/") ||
+            currentPath.startsWith("/search/entity-details/")
         ) {
             pod.polyNav.setTitle(selectedEntityObject.name);
             return;

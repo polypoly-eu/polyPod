@@ -268,7 +268,9 @@ const EntityDetails = () => {
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
-                                route="/data-exploration"
+                                route={`/data-exploration/${encodeURIComponent(
+                                    selectedEntityObject.ppid
+                                )}`}
                                 stateChange={{
                                     explorationState: {
                                         section: "dataTypes",
@@ -366,7 +368,9 @@ const EntityDetails = () => {
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
-                                route="/data-exploration"
+                                route={`/data-exploration/${encodeURIComponent(
+                                    selectedEntityObject.ppid
+                                )}`}
                                 stateChange={{
                                     explorationState: {
                                         section: "dataTypes",

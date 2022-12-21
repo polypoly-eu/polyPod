@@ -31,17 +31,17 @@ const PolyExplorerApp = () => {
                 <Route exact path="/main" element={<MainScreen />} />
                 <Route
                     exact
-                    path="/entity-details"
+                    path="/entity-details/:ppid"
                     element={<EntityDetailsScreen />}
                 />
                 <Route
                     exact
-                    path="/search/entity-details"
+                    path="/search/entity-details/:ppid"
                     element={<EntityDetailsScreen />}
                 />
                 <Route
                     exact
-                    path="/data-exploration"
+                    path="/data-exploration/:ppid"
                     element={<DataExplorationScreen />}
                 />
                 <Route
