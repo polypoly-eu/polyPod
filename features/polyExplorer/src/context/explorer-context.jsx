@@ -87,8 +87,6 @@ const loadStoriesMetadata = () => {
     };
 };
 
-const routesToSkipOnBack = ["/search"];
-
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const navigate = useNavigate();
@@ -164,20 +162,17 @@ export const ExplorerProvider = ({ children }) => {
             }
         });
         const newNavState = { ...navigationState, ...changedState };
-        navigate(path, newNavState);
+        navigate(path, { state: newNavState });
         setNavigationState(newNavState);
     }
 
     function handleBack() {
         if (popUp) return setPopUp(null);
-        if (currentPath != "/") {
-            navigate(-1);
-            const location = location;
+        if (currentPath !== "/main") {
+            navigate(currentPath === "/search/entity-details" ? -2 : -1);
             if (location.state) {
                 changeNavigationState(location.state);
             }
-            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
-                handleBack();
         }
     }
 
@@ -214,14 +209,20 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function changePolyNavScreenTitle() {
-        if (currentPath == "/")
-            pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
-        else if (
-            currentPath == "/data-exploration" ||
-            currentPath == "/entity-details"
-        )
+        if (currentPath === "/") return;
+
+        if (
+            [
+                "/data-exploration",
+                "/entity-details",
+                "/search/entity-details",
+            ].includes(currentPath)
+        ) {
             pod.polyNav.setTitle(selectedEntityObject.name);
-        else if (currentPath.startsWith("/story/"))
+            return;
+        }
+
+        if (currentPath.startsWith("/story/")) {
             pod.polyNav.setTitle(
                 i18n.t(
                     `clusterStoriesPreview:${
@@ -230,10 +231,12 @@ export const ExplorerProvider = ({ children }) => {
                     }`
                 )
             );
-        else
-            pod.polyNav.setTitle(
-                i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
-            );
+            return;
+        }
+
+        pod.polyNav.setTitle(
+            i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
+        );
     }
 
     function updatePodNavigation() {

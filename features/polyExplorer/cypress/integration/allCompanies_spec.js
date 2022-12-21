@@ -5,8 +5,7 @@ describe("All companies", () => {
         startWithCompanies();
     });
 
-    // TODO: Reactivate once routing is fixed
-    it.skip(`should show the companies that pass the filters`, () => {
+    it(`should show the companies that pass the filters`, () => {
         cy.get(".filter-button")
             .click()
             .then(() => {

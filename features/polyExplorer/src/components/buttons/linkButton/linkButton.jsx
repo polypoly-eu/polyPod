@@ -19,7 +19,7 @@ const LinkButton = ({
         if (stateChange)
             changedNavigationState = { ...navigationState, ...stateChange };
         if (route == "back") return handleBack();
-        else navigate(route, changedNavigationState);
+        else navigate(route, { state: changedNavigationState });
         changeNavigationState(changedNavigationState);
     };
 

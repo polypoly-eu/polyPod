@@ -23,7 +23,6 @@ import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
-import { useNavigate } from "react-router-dom";
 
 const DataExplorationScreen = () => {
     const {
@@ -37,7 +36,6 @@ const DataExplorationScreen = () => {
     const startSection = navigationState.explorationState.section;
     const startIndex = navigationState.explorationState.index;
     const maxCompanies = featuredEntityMaxValues.companies;
-    const navigate = useNavigate();
 
     if (entity.dataRecipients.length == 0) return <Screen></Screen>;
 
@@ -58,7 +56,9 @@ const DataExplorationScreen = () => {
     // the -1 is because in the moment of click the activeindex is increased by swiper
     // these problems will solve themselves when switching to scrollytelling
     const saveActiveIndex = () => {
-        navigate[navigate - 2].state.explorationState.index = activeIndex;
+        // TODO: This workaroud no longer works without access to the history
+        //       stack - but maybe it isn't even necessary.
+        // navigate[navigate - 2].state.explorationState.index = activeIndex;
     };
 
     const companyIndustryMap = useMemo(() => {

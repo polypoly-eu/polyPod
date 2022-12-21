@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import {
     MemoryRouter as Router,
+    Navigate,
     Routes,
     Route,
-    useNavigate,
 } from "react-router-dom";
 import {
     ExplorerProvider,
@@ -22,20 +22,14 @@ import ExampleStory from "./screens/stories/exampleStory.jsx";
 import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
-    const { navigationState, popUp } = useContext(ExplorerContext);
+    const { popUp } = useContext(ExplorerContext);
 
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
             <Routes>
-                <Route
-                    index
-                    to={{ pathname: "/main", state: navigationState }}
-                />
-                {/* <Redirect
-                        to={{ pathname: "/main", state: navigationState }}
-                    />
-                </Route> */}
+                <Route index element={<Navigate to="/main" replace />} />
                 <Route exact path="/main" element={<MainScreen />} />
+                {/* TODO: Figure out how to merge the following two */}
                 <Route
                     exact
                     path="/entity-details"
@@ -43,7 +37,12 @@ const PolyExplorerApp = () => {
                 />
                 <Route
                     exact
-                    path="/data-exploratio"
+                    path="/search/entity-details"
+                    element={<EntityDetailsScreen />}
+                />
+                <Route
+                    exact
+                    path="/data-exploration"
                     element={<DataExplorationScreen />}
                 />
                 <Route
@@ -79,11 +78,8 @@ const PolyExplorerApp = () => {
 };
 
 const PolyExplorer = () => {
-    //global history object
-    const navigate = useNavigate();
-
     return (
-        <Router navigate={navigate}>
+        <Router>
             <ExplorerProvider>
                 <PolyExplorerApp />
             </ExplorerProvider>
