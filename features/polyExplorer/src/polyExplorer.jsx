@@ -29,7 +29,6 @@ const PolyExplorerApp = () => {
             <Routes>
                 <Route index element={<Navigate to="/main" replace />} />
                 <Route exact path="/main" element={<MainScreen />} />
-                {/* TODO: Figure out how to merge the following two */}
                 <Route
                     exact
                     path="/entity-details"
