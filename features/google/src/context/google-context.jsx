@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import i18n from "!silly-i18n";
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const GoogleContext = React.createContext();
 
-function updatePodNavigation(pod, history, handleBack, location) {
+function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    history.length > 1 &&
-    location.pathname !== "/overview" &&
-    location.pathname !== "/import"
-        ? pod.polyNav.setActiveActions(["back"])
-        : pod.polyNav.setActiveActions([]);
+    pod.polyNav.setActiveActions(
+        ["/import", "/overview"].includes(location.pathname) ? [] : ["back"]
+    );
 }
 
 function updateTitle(pod, location) {
@@ -34,15 +32,18 @@ export const GoogleContextProvider = ({ children }) => {
     const [reportIsSent, setReportIsSent] = useState(null);
 
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const closePopUp = () => {
         setPopUp({});
     };
 
     function handleBack() {
-        if (popUp?.name) return closePopUp();
-        history.length > 1 && history.goBack();
+        if (popUp?.name) {
+            closePopUp();
+            return;
+        }
+        navigate(-1);
     }
 
     async function runWithLoadingScreen(task) {
@@ -64,12 +65,12 @@ export const GoogleContextProvider = ({ children }) => {
         });
     }, []);
 
-    //on history change
+    //on location change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history, handleBack, location);
+        updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location);
-    });
+    }, [location, popUp]);
 
     //for popUp sideSheet
     useEffect(() => {

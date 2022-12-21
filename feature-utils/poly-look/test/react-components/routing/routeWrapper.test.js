@@ -2,7 +2,6 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { RoutingWrapper } from "../../../src/react-components";
-import { HistoryStub } from "../../utils/history-stub";
 import { INITIAL_HISTORY_STATE } from "../../../src/constants";
 
 let onClickTestVar;
@@ -14,11 +13,11 @@ const testStateChange = {
   scrollingProgress: 200,
 };
 
-const history = new HistoryStub();
+const navigate = jest.fn();
 const divTestId = "divTestId";
 const testRouteWrapper = (
   <RoutingWrapper
-    history={history}
+    navigate={navigate}
     route={testRoute}
     stateChange={testStateChange}
   >
@@ -28,7 +27,7 @@ const testRouteWrapper = (
 
 const testonClickRouteWrapper = (
   <RoutingWrapper
-    history={history}
+    navigate={navigate}
     route={testRoute}
     stateChange={testStateChange}
   >
@@ -37,7 +36,7 @@ const testonClickRouteWrapper = (
 );
 
 const testNoStateChangeRouteWrapper = (
-  <RoutingWrapper history={history} route={testRoute}>
+  <RoutingWrapper navigate={navigate} route={testRoute}>
     <div data-testid={divTestId}></div>
   </RoutingWrapper>
 );
@@ -50,8 +49,9 @@ describe("RoutingWrapper", () => {
   it("manipulates history correctly without onClick of children", () => {
     const { getByTestId } = render(testRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
-    expect(history.route).toBe(testRoute);
-    expect(history.state).toStrictEqual({
+    const [route, options] = navigate.mock.calls.at(-1);
+    expect(route).toBe(testRoute);
+    expect(options.state).toStrictEqual({
       ...INITIAL_HISTORY_STATE,
       ...testStateChange,
     });
@@ -60,8 +60,9 @@ describe("RoutingWrapper", () => {
   it("manipulates history correctly and clicks onClick of children", () => {
     const { getByTestId } = render(testonClickRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
-    expect(history.route).toBe(testRoute);
-    expect(history.state).toStrictEqual({
+    const [route, options] = navigate.mock.calls.at(-1);
+    expect(route).toBe(testRoute);
+    expect(options.state).toStrictEqual({
       ...INITIAL_HISTORY_STATE,
       ...testStateChange,
     });
@@ -71,7 +72,8 @@ describe("RoutingWrapper", () => {
   it("manipulates history correctly and clicks onClick of children", () => {
     const { getByTestId } = render(testNoStateChangeRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
-    expect(history.route).toBe(testRoute);
-    expect(history.state).toStrictEqual(INITIAL_HISTORY_STATE);
+    const [route, options] = navigate.mock.calls.at(-1);
+    expect(route).toBe(testRoute);
+    expect(options.state).toStrictEqual(INITIAL_HISTORY_STATE);
   });
 });

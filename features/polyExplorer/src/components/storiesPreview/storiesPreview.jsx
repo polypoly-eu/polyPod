@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ClickableCard, List, RoutingWrapper } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
 import { I18nSection } from "@polypoly-eu/silly-i18n";
@@ -9,14 +9,14 @@ import "./storiesPreview.css";
 const i18nP = new I18nSection(i18n, "clusterStoriesPreview");
 
 const StoriesPreview = ({ storiesMetadata }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
         <List className="poly-theme-light stories-preview">
             {Object.values(storiesMetadata).map((story, index) => (
                 <RoutingWrapper
                     key={index}
-                    history={history}
+                    navigate={navigate}
                     route={story.route}
                 >
                     <ClickableCard

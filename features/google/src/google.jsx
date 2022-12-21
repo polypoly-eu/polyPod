@@ -2,10 +2,9 @@ import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
-    Switch,
-    Redirect,
+    Navigate,
+    Routes,
     Route,
-    useHistory,
 } from "react-router-dom";
 
 import {
@@ -20,7 +19,6 @@ import "./styles.css";
 import {
     PolyImportContext,
     PolyImportProvider,
-    INITIAL_HISTORY_STATE,
     LoadingOverlay,
 } from "@polypoly-eu/poly-look";
 import GoogleAccount from "./model/entities/google-account.js";
@@ -28,48 +26,45 @@ import { importers } from "./model/importers/importers.js";
 import i18n from "!silly-i18n";
 import ExploreView from "./views/explore/explore.jsx";
 import DetailsView from "./views/explore/details.jsx";
-import ReportWrapper from "./views/report/reportWrapper.jsx";
+import computeReportStories from "./views/report/compute-stories.js";
+import ReportView from "./views/report/report.jsx";
+import ReportDetails from "./views/report/details.jsx";
 import BasePopUp from "./components/popUps/base.jsx";
 
 const Google = () => {
     const { pod, isLoading, popUp } = useContext(GoogleContext);
-
-    const { files } = useContext(PolyImportContext);
-
-    function determineRoute() {
-        if (files.length > 0)
-            return (
-                <Redirect
-                    to={{
-                        pathname: "/overview",
-                        state: INITIAL_HISTORY_STATE,
-                    }}
-                />
-            );
-        else return <Redirect to={{ pathname: "/import" }} />;
-    }
-
+    const { account, files } = useContext(PolyImportContext);
+    const initialRoute = files?.length > 0 ? "/overview" : "/import";
+    const reportStories = computeReportStories(account);
     return (
         <div className="google poly-theme poly-theme-dark">
             {pod && files && (
-                <Switch>
-                    <Route exact path="/">
-                        {determineRoute()}
-                    </Route>
-                    <Route exact path="/overview">
-                        <Overview />
-                    </Route>
-                    <Route exact path="/import">
-                        <ImportView />
-                    </Route>
-                    <Route exact path="/explore">
-                        <ExploreView />
-                    </Route>
-                    <Route exact path="/explore/details">
-                        <DetailsView />
-                    </Route>
-                    <ReportWrapper />
-                </Switch>
+                <Routes>
+                    <Route
+                        index
+                        element={<Navigate to={initialRoute} replace />}
+                    />
+                    <Route exact path="/overview" element={<Overview />} />
+                    <Route exact path="/import" element={<ImportView />} />
+                    <Route exact path="/explore" element={<ExploreView />} />
+                    <Route
+                        exact
+                        path="/explore/details"
+                        element={<DetailsView />}
+                    />
+                    <Route
+                        exact
+                        path="/report"
+                        element={<ReportView reportStories={reportStories} />}
+                    />
+                    <Route
+                        exact
+                        path="/report/details"
+                        element={
+                            <ReportDetails reportStories={reportStories} />
+                        }
+                    />
+                </Routes>
             )}
             {isLoading && (
                 <LoadingOverlay
@@ -84,11 +79,8 @@ const Google = () => {
 
 //Router and context
 const GoogleApp = () => {
-    //global history object
-    const history = useHistory();
-
     return (
-        <Router history={history}>
+        <Router>
             <GoogleContextProvider>
                 <PolyImportProvider
                     parentContext={GoogleContext}

@@ -1,12 +1,12 @@
 import { PolyImportContext, Screen } from "@polypoly-eu/poly-look";
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Story from "../ministories/story.jsx";
 
 const DetailsView = () => {
-    const history = useHistory();
+    const location = useLocation();
     const { account } = useContext(PolyImportContext);
-    const story = new history.location.state.ActiveStoryClass({
+    const story = new location.state.ActiveStoryClass({
         account,
         mode: Story.MODES.DETAILS,
     });

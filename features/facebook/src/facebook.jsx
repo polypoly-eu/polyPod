@@ -2,10 +2,9 @@ import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
-    Switch,
-    Redirect,
+    Navigate,
+    Routes,
     Route,
-    useHistory,
 } from "react-router-dom";
 
 import {
@@ -13,7 +12,6 @@ import {
     FacebookContext,
 } from "./context/facebook-context.jsx";
 import {
-    INITIAL_HISTORY_STATE,
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
@@ -27,28 +25,19 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import ReportWrapper from "./views/report/reportWrapper.jsx";
+import computeReportStories from "./views/report/compute-stories.js";
+import ReportView from "./views/report/report.jsx";
+import ReportDetails from "./views/report/details.jsx";
 import BaseInfoPopUp from "./components/popUps/baseInfoPopUp.jsx";
+
 import "./styles.css";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp } =
         useContext(FacebookContext);
-
-    const { files } = useContext(PolyImportContext);
-
-    function determineRoute() {
-        if (files.length > 0)
-            return (
-                <Redirect
-                    to={{
-                        pathname: "/overview",
-                        state: INITIAL_HISTORY_STATE,
-                    }}
-                />
-            );
-        else return <Redirect to={{ pathname: "/import" }} />;
-    }
+    const { account, files } = useContext(PolyImportContext);
+    const initialRoute = files?.length > 0 ? "/overview" : "/import";
+    const reportStories = computeReportStories(account);
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
             {isLoading && (
@@ -58,24 +47,32 @@ const FacebookImporter = () => {
                 ></LoadingOverlay>
             )}
             {pod && files && (
-                <Switch>
-                    <Route exact path="/">
-                        {determineRoute()}
-                    </Route>
-                    <Route exact path="/overview">
-                        <Overview />
-                    </Route>
-                    <Route exact path="/import">
-                        <ImportView />
-                    </Route>
-                    <Route exact path="/explore">
-                        <ExploreView />
-                    </Route>
-                    <Route exact path="/explore/details">
-                        <ExploreDetails />
-                    </Route>
-                    <ReportWrapper />
-                </Switch>
+                <Routes>
+                    <Route
+                        index
+                        element={<Navigate to={initialRoute} replace />}
+                    />
+                    <Route exact path="/overview" element={<Overview />} />
+                    <Route exact path="/import" element={<ImportView />} />
+                    <Route exact path="/explore" element={<ExploreView />} />
+                    <Route
+                        exact
+                        path="/explore/details"
+                        element={<ExploreDetails />}
+                    />
+                    <Route
+                        exact
+                        path="/report"
+                        element={<ReportView reportStories={reportStories} />}
+                    />
+                    <Route
+                        exact
+                        path="/report/details"
+                        element={
+                            <ReportDetails reportStories={reportStories} />
+                        }
+                    />
+                </Routes>
             )}
             {popUp && <BaseInfoPopUp />}
             {globalError && (
@@ -102,11 +99,8 @@ const FacebookImporter = () => {
 
 //Router and context
 const FacebookImporterApp = () => {
-    //global history object
-    const history = useHistory();
-
     return (
-        <Router history={history}>
+        <Router>
             <FacebookProvider>
                 <PolyImportProvider
                     parentContext={FacebookContext}

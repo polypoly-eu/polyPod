@@ -33,9 +33,8 @@ const EntityShortInfo = ({ entity }) => {
 
     return (
         <LinkButton
-            stateChange={{ selectedEntity: entity.ppid }}
             className="entity-short-info"
-            route="/entity-details"
+            route={`/entity-details/${encodeURIComponent(entity.ppid)}`}
         >
             <>
                 {entityIcon()}

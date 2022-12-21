@@ -16,10 +16,11 @@ import { INITIAL_HISTORY_STATE } from "../../constants";
  * @param {Object} props.stateChange - Initial state overriding {@link INITIAL_HISTORY_STATE} property to which it defaults
  * @returns A React component that takes in children, history, route, and stateChange as props.
  */
-const RoutingWrapper = ({ children, history, route, stateChange }) => {
+const RoutingWrapper = ({ children, navigate, route, stateChange }) => {
   const onRoute = () => {
-    if (route == "back") history.goBack();
-    else history.push(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
+    if (route == "back") navigate(-1);
+    else
+      navigate(route, { state: { ...INITIAL_HISTORY_STATE, ...stateChange } });
   };
   const generateOnClick = (child) => {
     if (!child.props.onClick) return onRoute;

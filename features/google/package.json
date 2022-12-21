@@ -15,6 +15,7 @@
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "@rollup/plugin-json": "*",
+    "react-router-dom": "^6.4.2",
     "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,
@@ -26,8 +27,7 @@
     "d3": "^7.6.1",
     "dayjs": "^1.11.5",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0"
+    "react-dom": "^17.0.2"
   },
   "type": "module",
   "jest": {

@@ -26,7 +26,7 @@ export const Banner = ({ icon, title, description, button }) => {
       </div>
       <p className="banner-description">{description}</p>
       {button && (
-        <RoutingWrapper route={button.route} history={button.history}>
+        <RoutingWrapper route={button.route} navigate={button.navigate}>
           <PolyButton label={button.label} className="banner-button" />
         </RoutingWrapper>
       )}

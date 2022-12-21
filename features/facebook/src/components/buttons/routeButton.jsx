@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
 
 const RouteButton = ({
@@ -9,16 +9,16 @@ const RouteButton = ({
     children,
     onClick = () => {},
 }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const newHistoryState = { ...INITIAL_HISTORY_STATE, ...stateChange };
+    const newNavigateState = { ...INITIAL_HISTORY_STATE, ...stateChange };
 
     const onClickButton = () => {
         if (!route) return;
 
         onClick();
-        if (route == "back" && history.length > 1) history.goBack();
-        else history.push(route, newHistoryState);
+        if (route == "back") navigate(-1);
+        else navigate(route, { state: newNavigateState });
     };
 
     return (

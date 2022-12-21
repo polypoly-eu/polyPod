@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 import i18n from "!silly-i18n";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const FacebookContext = React.createContext();
 
-function updatePodNavigation(pod, history, handleBack, location) {
+function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    history.length > 1 &&
-    location.pathname !== "/overview" &&
-    location.pathname !== "/import"
-        ? pod.polyNav.setActiveActions(["back"])
-        : pod.polyNav.setActiveActions([]);
+    pod.polyNav.setActiveActions(
+        ["/import", "/overview"].includes(location.pathname) ? [] : ["back"]
+    );
 }
 
 function updateTitle(pod, location, popUp) {
@@ -32,7 +30,7 @@ export const FacebookProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [popUp, setPopUp] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     async function runWithLoadingScreen(task) {
@@ -43,9 +41,10 @@ export const FacebookProvider = ({ children }) => {
 
     function handleBack() {
         if (popUp) {
-            return setPopUp(null);
+            setPopUp(null);
+            return;
         }
-        history.length > 1 && history.goBack();
+        navigate(-1);
     }
 
     const initPod = async () => await window.pod;
@@ -55,12 +54,12 @@ export const FacebookProvider = ({ children }) => {
         initPod().then((newPod) => setPod(newPod));
     }, []);
 
-    //on history change
+    //on location change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history, handleBack, location);
+        updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location, popUp);
-    });
+    }, [location, popUp]);
 
     useEffect(() => {
         document.body.style.overflowY = popUp ? "hidden" : "unset";
