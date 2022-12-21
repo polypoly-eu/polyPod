@@ -51,16 +51,6 @@ const DataExplorationScreen = () => {
         return total;
     };
 
-    //This is horrible but we need to put the activeIndex in the old state that gets reloaded
-    // but the routing is faster than this so we need to edit the old state here
-    // the -1 is because in the moment of click the activeindex is increased by swiper
-    // these problems will solve themselves when switching to scrollytelling
-    const saveActiveIndex = () => {
-        // TODO: This workaroud no longer works without access to the history
-        //       stack - but maybe it isn't even necessary.
-        // navigate[navigate - 2].state.explorationState.index = activeIndex;
-    };
-
     const companyIndustryMap = useMemo(() => {
         const map = {};
         for (let company of dataRecipients) {
@@ -611,7 +601,6 @@ const DataExplorationScreen = () => {
                                             },
                                         })
                                     }
-                                    saveActiveIndex={saveActiveIndex}
                                 />
                                 <div className="purpose-extra-margin">
                                     <SourceInfoButton
@@ -656,7 +645,6 @@ const DataExplorationScreen = () => {
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
-                                    onClick={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
@@ -673,9 +661,7 @@ const DataExplorationScreen = () => {
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <DataRegionsLegend
-                                    saveActiveIndex={saveActiveIndex}
-                                />
+                                <DataRegionsLegend />
                                 <SourceInfoButton
                                     source={i18n.t("common:source.polyPedia")}
                                     infoScreen="jurisdiction-info"
