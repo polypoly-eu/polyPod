@@ -73,9 +73,10 @@ const EntitySearchScreen = () => {
                             {" "}
                             {featuredEntities.map((entity, index) => (
                                 <LinkButton
-                                    route={`entity-details/${encodeURIComponent(
+                                    route={`/entity-details/${encodeURIComponent(
                                         entity.ppid
                                     )}`}
+                                    options={{ replace: true }}
                                     key={index}
                                 >
                                     {entity.name}
@@ -101,9 +102,10 @@ const EntitySearchScreen = () => {
                                         {featuredEntities.map(
                                             (entity, index) => (
                                                 <LinkButton
-                                                    route={`entity-details/${encodeURIComponent(
+                                                    route={`/entity-details/${encodeURIComponent(
                                                         entity.ppid
                                                     )}`}
+                                                    options={{ replace: true }}
                                                     key={index}
                                                 >
                                                     {entity.name}
@@ -117,9 +119,10 @@ const EntitySearchScreen = () => {
                             <div>
                                 {shownEntities.map((entity, index) => (
                                     <LinkButton
-                                        route={`entity-details/${encodeURIComponent(
+                                        route={`/entity-details/${encodeURIComponent(
                                             entity.ppid
                                         )}`}
+                                        options={{ replace: true }}
                                         key={index}
                                     >
                                         {entity.name}

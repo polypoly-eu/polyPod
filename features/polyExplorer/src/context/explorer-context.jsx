@@ -88,9 +88,7 @@ const loadStoriesMetadata = () => {
 };
 
 function extractPpid(path) {
-    const results = path.match(
-        /\/(search\/entity-details|entity-details|data-exploration)\/(.*)/
-    );
+    const results = path.match(/\/(entity-details|data-exploration)\/(.*)/);
     if (!results) return null;
     return decodeURIComponent(results[2]);
 }
@@ -171,7 +169,7 @@ export const ExplorerProvider = ({ children }) => {
     function handleBack() {
         if (popUp) return setPopUp(null);
         if (currentPath !== "/main") {
-            navigate(currentPath === "/search/entity-details" ? -2 : -1);
+            navigate(-1);
             if (location.state) {
                 changeNavigationState(location.state);
             }
@@ -215,8 +213,7 @@ export const ExplorerProvider = ({ children }) => {
 
         if (
             currentPath.startsWith("/data-exploration/") ||
-            currentPath.startsWith("/entity-details/") ||
-            currentPath.startsWith("/search/entity-details/")
+            currentPath.startsWith("/entity-details/")
         ) {
             pod.polyNav.setTitle(selectedEntityObject.name);
             return;
