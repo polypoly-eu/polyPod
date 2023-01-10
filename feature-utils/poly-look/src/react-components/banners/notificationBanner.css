@@ -9,21 +9,21 @@
 }
 
 .notification-container .standard {
-    background-color: var(--color-gray-100);
-    color: var(--color-gray-900);
+    background-color: var(--color-accent-neutral-100);
+    color: var(--color-accent-neutral-200);
 }
 
 .notification-container .error {
-    background-color: var(--color-red-200);
-    color: var(--color-red-900);
+    background-color: var(--color-accent-error-100);
+    color: var(--color-accent-error-200);
 }
 
 .notification-container .success {
-    background-color: var(--color-green-200);
-    color: var(--color-green-950);
+    background-color: var(--color-accent-success-100);
+    color: var(--color-accent-success-200);
 }
 
 .notification-container .warning {
-    background-color: var(--color-yellow-200);
-    color: var(--color-yellow-800);
+    background-color: var(--color-accent-warning-100);
+    color: var(--color-accent-warning-200);
 }
