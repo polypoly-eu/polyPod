@@ -415,7 +415,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         fun reportError(error: String) {
             logger.warn(
                 "Uncaught error from " +
-                    FeatureStorage.activeFeatureId + ": " + error
+                    FeatureStorage.activeFeatureId + ": " + error.replace("\n", " ")
             )
             errorHandler(error)
         }

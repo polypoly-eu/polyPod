@@ -13,7 +13,7 @@ class AndroidLogger(val tag: String) : Logger {
 
     override fun warn(msg: String) {
         if (isWarnEnabled)
-            Log.w(tag, msg)
+            Log.w(tag, msg.replace("\n", " "))
     }
 
     override fun warn(format: String, arg: Any) {
